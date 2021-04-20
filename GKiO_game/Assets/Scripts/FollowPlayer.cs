@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Skrypt dla kamery, ¿eby pod¹¿a³a za graczem.
+ * Kamera znajduje siê ca³y czas w takim po³o¿eniu wzglêdem gracza, w jakim jest ustawion a na pocz¹tku
+ */
 public class FollowPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject player;

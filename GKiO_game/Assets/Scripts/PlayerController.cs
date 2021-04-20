@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
         SetAnimation();
         if (JumpKeyDown() && isGrounded)
         {
-            //isGrounded = false;
             isJump = true;
         }
         if (SwordKeyDown() && !isAttack)
@@ -84,17 +83,17 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateVelocity()
     {
-        float zVelocity = playerSpeed * horizontalInput;
-        playerRigidBody.velocity = new Vector3(playerRigidBody.velocity.x, playerRigidBody.velocity.y, zVelocity);
+        float xVelocity = playerSpeed * horizontalInput;
+        playerRigidBody.velocity = new Vector3(xVelocity, playerRigidBody.velocity.y, playerRigidBody.velocity.z);
     }
     private void TurnPlayer()
     {
         if(horizontalInput > 0)
         {
-            playerRigidBody.rotation = Quaternion.LookRotation(Vector3.forward);
+            playerRigidBody.rotation = Quaternion.LookRotation(Vector3.right);
         }
         else if(horizontalInput < 0){
-            playerRigidBody.rotation = Quaternion.LookRotation(Vector3.back);
+            playerRigidBody.rotation = Quaternion.LookRotation(Vector3.left);
         }
     }
 
@@ -117,7 +116,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isGrounded)
             {
-                if (Math.Abs(playerRigidBody.velocity.z) > 0.01)
+                if (Math.Abs(horizontalInput) > 0.01)
                 {
                     playerAnimator.Play("Male_Walk");
                 }
