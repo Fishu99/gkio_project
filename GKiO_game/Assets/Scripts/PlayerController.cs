@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 1000f;
     private bool isGrounded = true;
     private bool isJump = false;
+    private bool isAttack = false;
     private Vector3 startPosition;
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,6 @@ public class PlayerController : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         startPosition = transform.position;
-        //transform.rotation.SetRotation();
     }
 
     // Update is called once per frame
@@ -28,35 +28,72 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         SetAnimation();
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (JumpKeyDown() && isGrounded)
         {
-            isGrounded = false;
+            //isGrounded = false;
             isJump = true;
         }
+        if (SwordKeyDown() && !isAttack)
+        {
+            isAttack = true;
+            Invoke("AttackEnd", 1.1f);
+        }
         
+    }
+
+    private void AttackEnd()
+    {
+        isAttack = false;
+    }
+
+    private bool JumpKeyDown()
+    {
+        return Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W);
+    }
+
+    private bool SwordKeyDown()
+    {
+        return Input.GetKeyDown(KeyCode.Space);
     }
 
     private void FixedUpdate()
     {
         TurnPlayer();
-        float zVelocity = playerSpeed * horizontalInput;
-        playerRigidBody.velocity = new Vector3(playerRigidBody.velocity.x, playerRigidBody.velocity.y, zVelocity);
+        CheckIfGrounded();
+        CalculateVelocity();
         CheckAndJump();
+    }
+
+    private void CheckIfGrounded()
+    {
+        Debug.DrawRay(transform.position, Vector3.down, Color.white);
+        if(Physics.Raycast(transform.position + Vector3.up * 0.04f, Vector3.down, 0.08f))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        isGrounded = true;
+        //isGrounded = true;
+    }
+
+    private void CalculateVelocity()
+    {
+        float zVelocity = playerSpeed * horizontalInput;
+        playerRigidBody.velocity = new Vector3(playerRigidBody.velocity.x, playerRigidBody.velocity.y, zVelocity);
     }
     private void TurnPlayer()
     {
         if(horizontalInput > 0)
         {
-            //playerRigidBody.rotation.SetLookRotation(Vector3.forward);
             playerRigidBody.rotation = Quaternion.LookRotation(Vector3.forward);
         }
         else if(horizontalInput < 0){
-            //playerRigidBody.rotation.SetLookRotation(Vector3.back);
             playerRigidBody.rotation = Quaternion.LookRotation(Vector3.back);
         }
     }
@@ -72,24 +109,32 @@ public class PlayerController : MonoBehaviour
 
     private void SetAnimation()
     {
-        if (isGrounded)
+        if (isAttack)
         {
-            if (Math.Abs(playerRigidBody.velocity.z) > 0.01)
-            {
-                playerAnimator.Play("Male_Walk");
-            }
-            else
-            {
-                playerAnimator.Play("Male Idle");
-            }
+            playerAnimator.Play("Male Attack 1");
         }
         else
         {
-            if(playerRigidBody.velocity.y >= 0)
-                playerAnimator.Play("Male Jump Up");
+            if (isGrounded)
+            {
+                if (Math.Abs(playerRigidBody.velocity.z) > 0.01)
+                {
+                    playerAnimator.Play("Male_Walk");
+                }
+                else
+                {
+                    playerAnimator.Play("Male Idle");
+                }
+            }
             else
-                playerAnimator.Play("Male Fall");
+            {
+                if (playerRigidBody.velocity.y >= 0)
+                    playerAnimator.Play("Male Jump Up");
+                else
+                    playerAnimator.Play("Male Fall");
+            }
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)
