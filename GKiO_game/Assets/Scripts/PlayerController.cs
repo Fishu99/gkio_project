@@ -9,12 +9,21 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRigidBody;
     private Animator playerAnimator;
     public float horizontalInput = 0f;
-    [SerializeField] private readonly float playerSpeed = 2f;
-    [SerializeField] private float jumpForce = 1000f;
-    private bool isGrounded = true;
-    private bool isJump = false;
-    private bool isAttack = false;
+    [SerializeField] private readonly float playerSpeed = 5f;
+    [SerializeField] private readonly float playerSprintMultiplier = 1.5f;
+    [SerializeField] private float jumpForce = 1000f;    
     private Vector3 startPosition;
+
+    // Animator variables
+    private bool isGrounded = true;
+    private bool isAttacking = false;
+    private bool isEnemyNoticed = false;
+    private bool isFalling = false;
+    private bool isJumping = false;
+    private bool isSprinting = false;
+    private bool isWalking = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,53 +36,17 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        SetAnimation();
-        if (JumpKeyDown() && isGrounded)
-        {
-            isJump = true;
-        }
-        if (SwordKeyDown() && !isAttack)
-        {
-            isAttack = true;
-            Invoke("AttackEnd", 1.1f);
-        }
-        
-    }
-
-    private void AttackEnd()
-    {
-        isAttack = false;
-    }
-
-    private bool JumpKeyDown()
-    {
-        return Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W);
-    }
-
-    private bool SwordKeyDown()
-    {
-        return Input.GetKeyDown(KeyCode.Space);
+        CheckIfGrounded();
+        CheckPlayerStatus();        
+        CheckInput();
     }
 
     private void FixedUpdate()
     {
         TurnPlayer();
-        CheckIfGrounded();
         CalculateVelocity();
         CheckAndJump();
-    }
-
-    private void CheckIfGrounded()
-    {
-        Debug.DrawRay(transform.position, Vector3.down, Color.white);
-        if(Physics.Raycast(transform.position + Vector3.up * 0.04f, Vector3.down, 0.08f))
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
+        SetAnimationVariables();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -81,11 +54,57 @@ public class PlayerController : MonoBehaviour
         //isGrounded = true;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 8)
+        {
+            transform.position = startPosition;
+        }
+    }
+
+    private void CheckInput()
+    {
+        // Jump 
+        if (JumpKeyDown() && isGrounded)
+            isJumping = true;
+
+        // Sword
+        if (SwordKeyDown())
+            isAttacking = true;
+        else
+            isAttacking = false;
+
+        // Sprint
+        if (SprintKeyDown() && isGrounded)
+            isSprinting = true;
+        else
+            isSprinting = false;
+    }
+
+    private void CheckIfGrounded()
+    {
+        Debug.DrawRay(transform.position, Vector3.down, Color.white);
+        if (Physics.Raycast(transform.position + Vector3.up * 0.04f, Vector3.down, 0.08f))
+        {
+            isGrounded = true;
+            isFalling = false;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+    }
+
     private void CalculateVelocity()
     {
         float xVelocity = playerSpeed * horizontalInput;
+        if (isSprinting)
+        {
+            xVelocity *= playerSprintMultiplier;
+        }
         playerRigidBody.velocity = new Vector3(xVelocity, playerRigidBody.velocity.y, playerRigidBody.velocity.z);
     }
+    
     private void TurnPlayer()
     {
         if(horizontalInput > 0)
@@ -96,52 +115,76 @@ public class PlayerController : MonoBehaviour
             playerRigidBody.rotation = Quaternion.LookRotation(Vector3.left);
         }
     }
-
+    
     private void CheckAndJump()
     {
-        if (isJump)
+        if (isJumping)
         {
-            isJump = false;
-            playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if(isGrounded)
+                playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            else if(playerRigidBody.velocity.y <= 0)
+                isJumping = false;
         }
     }
-
-    private void SetAnimation()
+    
+    private void CheckPlayerStatus()
     {
-        if (isAttack)
+        if (isGrounded)
         {
-            playerAnimator.Play("Male Attack 1");
-        }
-        else
-        {
-            if (isGrounded)
+            if (Math.Abs(horizontalInput) > 0.01)
             {
-                if (Math.Abs(horizontalInput) > 0.01)
-                {
-                    playerAnimator.Play("Male_Walk");
-                }
-                else
-                {
-                    playerAnimator.Play("Male Idle");
-                }
+                isWalking = true;
             }
             else
             {
-                if (playerRigidBody.velocity.y >= 0)
-                    playerAnimator.Play("Male Jump Up");
-                else
-                    playerAnimator.Play("Male Fall");
+                isWalking = false;
             }
         }
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.layer == 8)
+        else
         {
-            transform.position = startPosition;
-        }
+            if (playerRigidBody.velocity.y < 0)
+            {
+                isFalling = true;
+            }
+            else
+            {
+                isFalling = false;
+            }
+        } 
     }
-
+    
+    private void SetAnimationVariables()
+    {
+        //isAttacking
+        playerAnimator.SetBool("isAttacking", isAttacking);
+        //isEnemyNoticed
+        playerAnimator.SetBool("isEnemyNoticed", isEnemyNoticed);        
+        //isFalling
+        playerAnimator.SetBool("isFalling", isFalling);
+        //isGrounded
+        playerAnimator.SetBool("isGrounded", isGrounded);
+        //isJumping
+        playerAnimator.SetBool("isJumping", isJumping);
+        //isWalking
+        playerAnimator.SetBool("isWalking", isWalking);
+        //isSprinting
+        playerAnimator.SetBool("isSprinting", isSprinting);
+    }
+    
+    private bool JumpKeyDown()
+    {
+        return Input.GetKeyDown(KeyCode.Space);
+    }
+    
+    private bool SwordKeyDown()
+    {
+        //return Input.GetKeyDown(KeyCode.Space);
+        //return Input.GetKey(KeyCode.Space);
+        return Input.GetKey(KeyCode.Mouse0);
+    }
+   
+    private bool SprintKeyDown()
+    {
+        return Input.GetKey(KeyCode.LeftShift);
+    }
 }
