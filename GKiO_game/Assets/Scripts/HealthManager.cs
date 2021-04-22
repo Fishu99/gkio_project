@@ -58,4 +58,9 @@ public class HealthManager : MonoBehaviour
     {
         health = 0;
     }
+
+    public bool IsAlive()
+    {
+        return health > 0;
+    }
 }

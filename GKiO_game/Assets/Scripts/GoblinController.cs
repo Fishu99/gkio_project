@@ -10,6 +10,7 @@ public class GoblinController : MonoBehaviour
 {
     private Rigidbody goblinRigidBody;
     private Animation goblinAnimation;
+    private HealthManager healthManager;
     //Prêdkoœæ goblina
     [SerializeField] private float goblinSpeed = 4f;
     [SerializeField] private float walkRange = 10f;
@@ -23,11 +24,14 @@ public class GoblinController : MonoBehaviour
     //Czas, jaki goblin czeka na koñcu swoojego obszaru przed zawróceniem
     private float endWaitingTime = 2;
     // Start is called before the first frame update
+    private bool wasAlive = true;
     void Start()
     {
         goblinRigidBody = GetComponent<Rigidbody>();
         goblinAnimation = GetComponent<Animation>();
+        healthManager = GetComponent<HealthManager>();
         startPosition = transform.position;
+        goblinAnimation["death"].wrapMode = WrapMode.Once;
         goblinAnimation.Play("walk");
         RotateByDirection();
     }
@@ -35,14 +39,34 @@ public class GoblinController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isOnEnd)
+        if (wasAlive)
         {
-            goblinAnimation.Play("idle");
+            if (isOnEnd)
+            {
+                goblinAnimation.Play("idle");
+            }
+            else
+            {
+                goblinAnimation.Play("walk");
+            }
+            CheckIfAlive();
         }
-        else
+    }
+
+    private void CheckIfAlive()
+    {
+        if (!healthManager.IsAlive())
         {
-            goblinAnimation.Play("walk");
+            wasAlive = false;
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        goblinAnimation.Play("death");
+        goblinRigidBody.velocity = new Vector3(0, 0, 0);
+
     }
 
     private void RotateByDirection()
@@ -59,17 +83,20 @@ public class GoblinController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
-        if (isOnEnd)
+        if (healthManager.IsAlive())
         {
-            FixedUpdateOnEnd();
-        }
-        else
-        {
-            CalculateVelocity();
-            CheckIfOnEnd();
+            if (isOnEnd)
+            {
+                FixedUpdateOnEnd();
+            }
+            else
+            {
+                CalculateVelocity();
+                CheckIfOnEnd();
+            }
         }
     }
+
 
     private void FixedUpdateOnEnd()
     {

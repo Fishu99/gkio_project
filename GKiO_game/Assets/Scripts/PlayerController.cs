@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        
+        GetComponent<SwordAttack>().Attack();
 
     }
 
@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour
     {
         //return Input.GetKeyDown(KeyCode.Space);
         //return Input.GetKey(KeyCode.Space);
-        return Input.GetKey(KeyCode.Mouse0);
+        return Input.GetKeyDown(KeyCode.Mouse0);
     }
    
     private bool SprintKeyDown()
