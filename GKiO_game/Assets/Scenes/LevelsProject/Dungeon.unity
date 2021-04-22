@@ -8787,22 +8787,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4528567705204222046, guid: a117f7388b83625439b6e6c71d17c095, type: 3}
   m_PrefabInstance: {fileID: 2007831307}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &659069156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659069155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea33db71a9f35e949a8e5019537205f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swordLength: 1
-  swordDamage: 30
-  swordDelay: 0.5
-  layerToHit: 9
 --- !u!1 &664664782
 GameObject:
   m_ObjectHideFlags: 0
