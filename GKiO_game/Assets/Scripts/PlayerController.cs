@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRigidBody;
     private Animator playerAnimator;
+    private CapsuleCollider playerCollider;
     public float horizontalInput = 0f;
     [SerializeField] private readonly float playerSpeed = 5f;
     [SerializeField] private readonly float playerSprintMultiplier = 1.5f;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRigidBody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
+        playerCollider = GetComponent<CapsuleCollider>();
         startPosition = transform.position;
     }
 
@@ -84,8 +86,11 @@ public class PlayerController : MonoBehaviour
 
     private void CheckIfGrounded()
     {
-        Debug.DrawRay(transform.position, Vector3.down, Color.white);
-        if (Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f))
+        float colliderRadius = playerCollider.radius;
+        Vector3 colliderSphereCenter = playerCollider.bounds.min + new Vector3(colliderRadius, colliderRadius, colliderRadius);
+        int playerMask = ~(1 << 6);
+        //Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f)
+        if (Physics.CheckSphere(colliderSphereCenter, colliderRadius + 0.1f, playerMask))
         {
             isGrounded = true;
             isFalling = false;
@@ -142,7 +147,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (playerRigidBody.velocity.y < 0)
+            if (playerRigidBody.velocity.y < 0 && !isGrounded)
             {
                 isFalling = true;
             }
@@ -151,7 +156,7 @@ public class PlayerController : MonoBehaviour
                 isFalling = false;
             }
 
-            if (playerRigidBody.velocity.y > 0)
+            if (playerRigidBody.velocity.y > 0 && !isGrounded)
             {
                 isJumping = true;
             }
