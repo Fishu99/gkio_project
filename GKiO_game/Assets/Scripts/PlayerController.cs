@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput = 0f;
     [SerializeField] private readonly float playerSpeed = 5f;
     [SerializeField] private readonly float playerSprintMultiplier = 1.5f;
-    [SerializeField] private float jumpForce = 1000f;    
+    [SerializeField] private float jumpForce = 1000f;
     private Vector3 startPosition;
 
     // Animator variables
@@ -73,7 +73,10 @@ public class PlayerController : MonoBehaviour
 
         // Sword
         if (SwordKeyDown())
+        {
             isAttacking = true;
+            Attack();
+        }
         else
             isAttacking = false;
 
@@ -82,6 +85,12 @@ public class PlayerController : MonoBehaviour
             isSprinting = true;
         else
             isSprinting = false;
+    }
+
+    private void Attack()
+    {
+        
+
     }
 
     private void CheckIfGrounded()
