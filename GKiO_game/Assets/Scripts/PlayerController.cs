@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private bool isEnemyNoticed = false;
     private bool isFalling = false;
     private bool isJumping = false;
+    private bool isGoingToJump = false;
     private bool isSprinting = false;
     private bool isWalking = false;
 
@@ -66,7 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         // Jump 
         if (JumpKeyDown() && isGrounded)
-            isJumping = true;
+            isGoingToJump = true;
 
         // Sword
         if (SwordKeyDown())
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
     private void CheckIfGrounded()
     {
         Debug.DrawRay(transform.position, Vector3.down, Color.white);
-        if (Physics.Raycast(transform.position + Vector3.up * 0.04f, Vector3.down, 0.08f))
+        if (Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f))
         {
             isGrounded = true;
             isFalling = false;
@@ -118,12 +119,11 @@ public class PlayerController : MonoBehaviour
     
     private void CheckAndJump()
     {
-        if (isJumping)
+        if (isGoingToJump)
         {
             if(isGrounded)
                 playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            else if(playerRigidBody.velocity.y <= 0)
-                isJumping = false;
+            isGoingToJump = false;
         }
     }
     
@@ -149,6 +149,15 @@ public class PlayerController : MonoBehaviour
             else
             {
                 isFalling = false;
+            }
+
+            if (playerRigidBody.velocity.y > 0)
+            {
+                isJumping = true;
+            }
+            else
+            {
+                isJumping = false;
             }
         } 
     }
