@@ -35,6 +35,7 @@ public class SwordAttack : MonoBehaviour
     {
         isAttacking = false;
         bool wasHit = checkHit(out RaycastHit hitinfo);
+        Debug.Log(wasHit);
         if (wasHit)
         {
             DamageHealth(hitinfo);
