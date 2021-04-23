@@ -9,11 +9,13 @@ public class SwordAttack : MonoBehaviour
     public float swordDamage = 30;
     public float swordDelay = 0.5f;
     public int layerToHit = 9;
-    bool isAttacking = false;
+    private bool isAttacking = false;
+    private float sphereCastRadius;
     // Start is called before the first frame update
     void Start()
     {
         objectCollider = GetComponent<Collider>();
+        sphereCastRadius = objectCollider.bounds.extents.z;
     }
 
     // Update is called once per frame
@@ -35,6 +37,7 @@ public class SwordAttack : MonoBehaviour
     {
         isAttacking = false;
         bool wasHit = checkHit(out RaycastHit hitinfo);
+        Debug.Log(wasHit);
         if (wasHit)
         {
             DamageHealth(hitinfo);
@@ -46,8 +49,7 @@ public class SwordAttack : MonoBehaviour
         Vector3 origin = objectCollider.bounds.center;
         float rayLength = objectCollider.bounds.extents.z + swordLength;
         int layerMask = 1 << layerToHit;
-        Debug.DrawRay(origin, transform.forward);
-        return Physics.Raycast(origin, transform.forward, out hitinfo, rayLength, layerMask);
+        return Physics.SphereCast(origin, sphereCastRadius, transform.forward, out hitinfo, rayLength, layerMask);
     }
 
     private void DamageHealth(RaycastHit hitinfo)

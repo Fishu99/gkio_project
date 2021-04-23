@@ -887,6 +887,7 @@ GameObject:
   - component: {fileID: 4529715196073533901}
   - component: {fileID: 4529715196073534001}
   - component: {fileID: 659069156}
+  - component: {fileID: 1253086929286041}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -1035,6 +1036,20 @@ MonoBehaviour:
   swordDamage: 30
   swordDelay: 0.5
   layerToHit: 9
+--- !u!114 &1253086929286041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4528567705204222046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b609f491fa90a2d469e7117a9f7afd5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 100
 --- !u!1 &4528569770650734894
 GameObject:
   m_ObjectHideFlags: 0

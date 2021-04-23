@@ -10,66 +10,87 @@ public class GoblinController : MonoBehaviour
 {
     private Rigidbody goblinRigidBody;
     private Animation goblinAnimation;
+    private CapsuleCollider goblinCollider;
     private HealthManager healthManager;
+    private SwordAttack swordAttack;
     //Prêdkoœæ goblina
-    [SerializeField] private float goblinSpeed = 4f;
-    [SerializeField] private float walkRange = 10f;
+    [SerializeField]
+    private float goblinSpeed = 4f;
+    [SerializeField]
+    private float walkRange = 10f;
+    [SerializeField]
+    private float playerNearDistance = 5f;
+    [SerializeField]
+    private float attackPeriod = 4f;
     //Pocz¹tkowa pozycja goblina pobierana na starcie
     private Vector3 startPosition;
     private float direction = 1f;
-    //Czy goblin jest na koñcu swojego obszaru
-    private bool isOnEnd = false;
-    //Czas, kiedy goblin doszed³ do koñca swojego terenu
-    private float beginReturnTime = 0;
-    //Czas, jaki goblin czeka na koñcu swoojego obszaru przed zawróceniem
-    private float endWaitingTime = 2;
-    // Start is called before the first frame update
-    private bool wasAlive = true;
+    public bool IsWalking { get; private set; } = false;
+    public bool IsPlayerNear { get; private set; }
+    private GameObject attackedPlayer = null;
+
+    private GoblinState currentState;
+    public GoblinPatrolWalkState PatrolWalkState { get; private set; }
+    public GoblinPatrolEndState PatrolEndState { get; private set; }
+    public GoblinPlayerNoticedState PlayerNoticedState { get; private set; }
+    public GoblinPlayerAttackState PlayerAttackState { get; private set; }
+    public GoblinDeadState DeadState { get; private set; }
+
     void Start()
     {
         goblinRigidBody = GetComponent<Rigidbody>();
         goblinAnimation = GetComponent<Animation>();
         healthManager = GetComponent<HealthManager>();
+        goblinCollider = GetComponent<CapsuleCollider>();
+        swordAttack = GetComponent<SwordAttack>();
+        CreateStates();
         startPosition = transform.position;
+        goblinAnimation["attack1"].wrapMode = WrapMode.Once;
+        goblinAnimation["attack2"].wrapMode = WrapMode.Once;
+        goblinAnimation["attack3"].wrapMode = WrapMode.Once;
+        goblinAnimation["walk"].wrapMode = WrapMode.Loop;
         goblinAnimation["death"].wrapMode = WrapMode.Once;
-        goblinAnimation.Play("walk");
+        StartCoroutine("InvokeCheckIfPlayerIsNear");
+        ChangeState(PatrolWalkState);
+    }
+
+
+    private void CreateStates()
+    {
+        PatrolWalkState = new GoblinPatrolWalkState(this);
+        PatrolEndState = new GoblinPatrolEndState(this);
+        PlayerNoticedState = new GoblinPlayerNoticedState(this);
+        PlayerAttackState = new GoblinPlayerAttackState(this);
+        DeadState = new GoblinDeadState(this);
+    }
+
+    void Update()
+    {
+        currentState.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdate();
+    }
+
+    
+
+    public void ChangeState(GoblinState newState)
+    {
+        if(currentState != null)
+            currentState.Exit();
+        currentState = newState;
+        currentState.Enter();
+    }
+
+    public void WalkInCurrentDirection()
+    {
+        SetVelocityByDirection();
         RotateByDirection();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (wasAlive)
-        {
-            if (isOnEnd)
-            {
-                goblinAnimation.Play("idle");
-            }
-            else
-            {
-                goblinAnimation.Play("walk");
-            }
-            CheckIfAlive();
-        }
-    }
-
-    private void CheckIfAlive()
-    {
-        if (!healthManager.IsAlive())
-        {
-            wasAlive = false;
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        goblinAnimation.Play("death");
-        goblinRigidBody.velocity = new Vector3(0, 0, 0);
-
-    }
-
-    private void RotateByDirection()
+    public void RotateByDirection()
     {
         if(direction > 0)
         {
@@ -81,73 +102,106 @@ public class GoblinController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void TurnBack()
     {
-        if (healthManager.IsAlive())
-        {
-            if (isOnEnd)
-            {
-                FixedUpdateOnEnd();
-            }
-            else
-            {
-                CalculateVelocity();
-                CheckIfOnEnd();
-            }
-        }
+        direction *= -1;
     }
 
-
-    private void FixedUpdateOnEnd()
-    {
-        float currentTime = Time.time;
-        if(currentTime - beginReturnTime > endWaitingTime)
-        {
-            SetDirectionOnEnd();
-            RotateByDirection();
-            isOnEnd = false;
-        }
-    }
-
-    private void CheckIfOnEnd()
-    {
-        if(WalkedToLeftEnd() || WalkedToRightEnd())
-        {
-            BeginReturn();
-        }
-    }
-
-    private void BeginReturn()
-    {
-        isOnEnd = true;
-        beginReturnTime = Time.time;
-    }
-
-    private void SetDirectionOnEnd()
-    {
-        if (WalkedToRightEnd())
-        {
-            direction = -1f;
-        }
-        else if (WalkedToLeftEnd())
-        {
-            direction = 1f;
-        }
-    }
-
-    private bool WalkedToLeftEnd()
+    
+    public bool WalkedToLeftEnd()
     {
         return direction < 0 && goblinRigidBody.position.x < startPosition.x;
     }
 
-    private bool WalkedToRightEnd()
+    public bool WalkedToRightEnd()
     {
         return direction > 0 && goblinRigidBody.position.x > startPosition.x + walkRange;
     }
 
-    private void CalculateVelocity()
+    public bool WalkedToEnd()
+    {
+        return WalkedToLeftEnd() || WalkedToRightEnd();
+    }
+
+    public void SetVelocityByDirection()
     {
         float xVelocity = goblinSpeed * direction;
         goblinRigidBody.velocity = new Vector3(xVelocity, goblinRigidBody.velocity.y, goblinRigidBody.velocity.z);
+        IsWalking = true;
+    }
+
+    public void SetVelocityToZero()
+    {
+        goblinRigidBody.velocity = new Vector3(0, goblinRigidBody.velocity.y, goblinRigidBody.velocity.z);
+        IsWalking = false;
+    }
+
+    private IEnumerator InvokeCheckIfPlayerIsNear()
+    {
+        while (healthManager.IsAlive())
+        {
+            CheckIfPlayerIsNear();
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+
+    private void CheckIfPlayerIsNear()
+    {
+        int playerMask = 1 << 6;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, playerNearDistance, playerMask);
+        if(colliders.Length > 0)
+        {
+            IsPlayerNear = true;
+            attackedPlayer = colliders[0].gameObject;
+        }
+        else
+        {
+            IsPlayerNear = false;
+        }
+    }
+
+    public void CalculateVelocityToFollowPlayer()
+    {
+        
+        Collider playerCollider = attackedPlayer.GetComponent<Collider>();
+        if(playerCollider.bounds.min.x > goblinCollider.bounds.max.x)
+        {
+            direction = 1;
+            WalkInCurrentDirection();
+        }
+        else if (goblinCollider.bounds.min.x > playerCollider.bounds.max.x)
+        {
+            direction = -1;
+            WalkInCurrentDirection();
+        }
+        else
+        {
+            SetVelocityToZero();
+        }
+
+        if (WalkedToEnd())
+        {
+            SetVelocityToZero();
+        }
+    }
+
+    public void Attack()
+    {
+        swordAttack.Attack();
+    }
+
+    public IEnumerator AttackPeriodically()
+    {
+        while (true)
+        {
+            swordAttack.Attack();
+            yield return new WaitForSeconds(attackPeriod);
+        }
+    }
+
+    private IEnumerator DeathSequence()
+    {
+        yield return new WaitForSeconds(4);
+        Destroy(gameObject);
     }
 }

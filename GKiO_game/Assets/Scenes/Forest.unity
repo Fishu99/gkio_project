@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -274,8 +274,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63421066}
-  m_LocalRotation: {x: 0.10957736, y: -0.01577248, z: -0.0016475392, w: -0.9938518}
-  m_LocalPosition: {x: 156.87463, y: 21.232857, z: 59.29213}
+  m_LocalRotation: {x: -0.33518904, y: 0.031083679, z: 0.011065124, w: 0.941573}
+  m_LocalPosition: {x: 160.98997, y: 22.832676, z: 74.387375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -425,8 +425,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143141533}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 149.97, y: 26.65, z: 75.66}
+  m_LocalRotation: {x: -0.14166506, y: 0.069727995, z: 0.010003036, w: 0.9874052}
+  m_LocalPosition: {x: 162.1605, y: 26.066551, z: 75.04788}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1297,10 +1297,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4579895901621641744, guid: a117f7388b83625439b6e6c71d17c095, type: 3}
-      propertyPath: m_UpdateMode
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a117f7388b83625439b6e6c71d17c095, type: 3}
 --- !u!1001 &5405744982194778655
@@ -1316,7 +1312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5405744982478325714, guid: 44aa3cd6523e038499bdbeda5aafb856, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 162.27835
+      value: 162.96
       objectReference: {fileID: 0}
     - target: {fileID: 5405744982478325714, guid: 44aa3cd6523e038499bdbeda5aafb856, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1324,7 +1320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5405744982478325714, guid: 44aa3cd6523e038499bdbeda5aafb856, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 79.62347
+      value: 80.08
       objectReference: {fileID: 0}
     - target: {fileID: 5405744982478325714, guid: 44aa3cd6523e038499bdbeda5aafb856, type: 3}
       propertyPath: m_LocalRotation.w
