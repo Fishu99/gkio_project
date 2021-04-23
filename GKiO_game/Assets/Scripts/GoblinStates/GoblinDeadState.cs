@@ -9,7 +9,7 @@ public class GoblinDeadState : GoblinState
 
     public override void Enter()
     {
-        goblinAnimation.Play("death");
+        goblinAnimation.CrossFade("death");
         goblinController.StartCoroutine("DeathSequence");
     }
 

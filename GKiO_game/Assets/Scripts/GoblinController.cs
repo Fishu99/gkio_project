@@ -25,8 +25,7 @@ public class GoblinController : MonoBehaviour
     //Pocz¹tkowa pozycja goblina pobierana na starcie
     private Vector3 startPosition;
     private float direction = 1f;
-    private bool isAttacking = false;
-
+    public bool IsWalking { get; private set; } = false;
     public bool IsPlayerNear { get; private set; }
     private GameObject attackedPlayer = null;
 
@@ -34,6 +33,7 @@ public class GoblinController : MonoBehaviour
     public GoblinPatrolWalkState PatrolWalkState { get; private set; }
     public GoblinPatrolEndState PatrolEndState { get; private set; }
     public GoblinPlayerNoticedState PlayerNoticedState { get; private set; }
+    public GoblinPlayerAttackState PlayerAttackState { get; private set; }
     public GoblinDeadState DeadState { get; private set; }
 
     void Start()
@@ -60,6 +60,7 @@ public class GoblinController : MonoBehaviour
         PatrolWalkState = new GoblinPatrolWalkState(this);
         PatrolEndState = new GoblinPatrolEndState(this);
         PlayerNoticedState = new GoblinPlayerNoticedState(this);
+        PlayerAttackState = new GoblinPlayerAttackState(this);
         DeadState = new GoblinDeadState(this);
     }
 
@@ -126,11 +127,13 @@ public class GoblinController : MonoBehaviour
     {
         float xVelocity = goblinSpeed * direction;
         goblinRigidBody.velocity = new Vector3(xVelocity, goblinRigidBody.velocity.y, goblinRigidBody.velocity.z);
+        IsWalking = true;
     }
 
     public void SetVelocityToZero()
     {
         goblinRigidBody.velocity = new Vector3(0, goblinRigidBody.velocity.y, goblinRigidBody.velocity.z);
+        IsWalking = false;
     }
 
     private IEnumerator InvokeCheckIfPlayerIsNear()
@@ -159,28 +162,32 @@ public class GoblinController : MonoBehaviour
 
     public void CalculateVelocityToFollowPlayer()
     {
-        if(WalkedToEnd() || isAttacking)
+        
+        Collider playerCollider = attackedPlayer.GetComponent<Collider>();
+        if(playerCollider.bounds.min.x > goblinCollider.bounds.max.x)
         {
-            SetVelocityToZero();
+            direction = 1;
+            WalkInCurrentDirection();
+        }
+        else if (goblinCollider.bounds.min.x > playerCollider.bounds.max.x)
+        {
+            direction = -1;
+            WalkInCurrentDirection();
         }
         else
         {
-            Collider playerCollider = attackedPlayer.GetComponent<Collider>();
-            if(playerCollider.bounds.min.x > goblinCollider.bounds.max.x)
-            {
-                direction = 1;
-                WalkInCurrentDirection();
-            }
-            else if (goblinCollider.bounds.min.x > playerCollider.bounds.max.x)
-            {
-                direction = -1;
-                WalkInCurrentDirection();
-            }
-            else
-            {
-                SetVelocityToZero();
-            }
+            SetVelocityToZero();
         }
+
+        if (WalkedToEnd())
+        {
+            SetVelocityToZero();
+        }
+    }
+
+    public void Attack()
+    {
+        swordAttack.Attack();
     }
 
     public IEnumerator AttackPeriodically()
@@ -188,10 +195,6 @@ public class GoblinController : MonoBehaviour
         while (true)
         {
             swordAttack.Attack();
-            goblinAnimation.Play("attack3");
-            isAttacking = true;
-            yield return new WaitForSeconds(goblinAnimation["attack3"].length);
-            isAttacking = false;
             yield return new WaitForSeconds(attackPeriod);
         }
     }

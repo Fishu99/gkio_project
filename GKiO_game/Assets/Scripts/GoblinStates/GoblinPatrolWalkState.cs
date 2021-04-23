@@ -9,7 +9,7 @@ public class GoblinPatrolWalkState : GoblinState
 
     public override void Enter()
     {
-        goblinAnimation.Play("walk");
+        goblinAnimation.CrossFade("walk");
     }
 
     public override void Exit()

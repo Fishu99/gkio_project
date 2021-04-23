@@ -3,19 +3,18 @@ using UnityEngine;
 
 public class GoblinPlayerNoticedState : GoblinState
 {
-    IEnumerator attackCoroutine;
     public GoblinPlayerNoticedState(GoblinController goblinController) : base(goblinController) { }
+    private float timeEntered;
+    private float timeWhenAttack = 3;
 
     public override void Enter()
     {
-        goblinAnimation.Play("walk");
-        attackCoroutine = goblinController.AttackPeriodically();
-        goblinController.StartCoroutine(attackCoroutine);
+        goblinAnimation.CrossFade("walk");
+        timeEntered = Time.time;
     }
 
     public override void Exit()
     {
-        goblinController.StopCoroutine(attackCoroutine);
     }
 
     public override void FixedUpdate()
@@ -32,6 +31,17 @@ public class GoblinPlayerNoticedState : GoblinState
         else if (!goblinController.IsPlayerNear)
         {
             goblinController.ChangeState(goblinController.PatrolWalkState);
+        }
+        else if(Time.time - timeEntered > timeWhenAttack)
+        {
+            goblinController.ChangeState(goblinController.PlayerAttackState);
+        }
+        else
+        {
+            if(goblinController.IsWalking)
+                goblinAnimation.CrossFade("walk");
+            else
+                goblinAnimation.CrossFade("idle");
         }
 
     }
