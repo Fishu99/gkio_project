@@ -6,24 +6,37 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody playerRigidBody;
-    private Animator playerAnimator;
-    private CapsuleCollider playerCollider;
+    //Class init
+    Animator playerAnimator;
+    Rigidbody playerRigidBody;
+    CapsuleCollider playerCollider;
+
+    //Variables and constants
     public float horizontalInput = 0f;
     [SerializeField] private readonly float playerSpeed = 5f;
     [SerializeField] private readonly float playerSprintMultiplier = 1.5f;
     [SerializeField] private float jumpForce = 1000f;
     private Vector3 startPosition;
+    private float comboTime = 0.75f;
 
-    // Animator variables
+    //Player states/statuses
     private bool isGrounded = true;
-    private bool isAttacking = false;
+    private bool comboStatus = false;
+    private float comboActiveTime = 0f;
+
+
+    //Animator variables
+    //--- booleans
     private bool isEnemyNoticed = false;
-    private bool isFalling = false;
-    private bool isJumping = false;
-    private bool isGoingToJump = false;
     private bool isSprinting = false;
     private bool isWalking = false;
+    private bool isFalling = false;
+    private bool isComboEnded = true;
+    private bool isHavingSword = true;
+
+    //--- triggers
+    private bool isGoingToJump = false;
+    private bool isGoingToAttack = false;
 
 
     // Start is called before the first frame update
@@ -38,6 +51,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (comboStatus)
+        {
+            comboActiveTime -= Time.deltaTime;
+            if (comboActiveTime <= 0f)
+            {
+                comboActiveTime = 0f;
+                comboStatus = false;
+                isComboEnded = true;
+            }
+        }
         horizontalInput = Input.GetAxis("Horizontal");
         CheckIfGrounded();
         CheckPlayerStatus();        
@@ -52,11 +75,6 @@ public class PlayerController : MonoBehaviour
         SetAnimationVariables();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        //isGrounded = true;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 8)
@@ -67,30 +85,41 @@ public class PlayerController : MonoBehaviour
 
     private void CheckInput()
     {
-        // Jump 
-        if (JumpKeyDown() && isGrounded)
-            isGoingToJump = true;
-
-        // Sword
-        if (SwordKeyDown())
+        //Jump
+        if (JumpKey() && isGrounded)
         {
-            isAttacking = true;
-            Attack();
+            isGoingToJump = true;
+        }
+
+        //Sword
+        if (AttackSwordKey())
+        {
+            //AnimatorStateInfo animState = playerAnimator.GetCurrentAnimatorStateInfo(0);
+            //float middleOfAnimation = 0.5f; 
+            //if(animState.IsTag("Attack"))
+            //{
+            //    isGoingToAttack = (animState.normalizedTime >= middleOfAnimation);
+            //}
+            //else
+            //{
+                isGoingToAttack = true;
+            //}             
+        }
+
+        //Sprint
+        if (SprintKey() && isGrounded)
+        {
+            isSprinting = true;
         }
         else
-            isAttacking = false;
-
-        // Sprint
-        if (SprintKeyDown() && isGrounded)
-            isSprinting = true;
-        else
+        {
             isSprinting = false;
+        }
     }
 
     private void Attack()
     {
         GetComponent<SwordAttack>().Attack();
-
     }
 
     private void CheckIfGrounded()
@@ -137,7 +166,6 @@ public class PlayerController : MonoBehaviour
         {
             if(isGrounded)
                 playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGoingToJump = false;
         }
     }
     
@@ -145,7 +173,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-            if (Math.Abs(horizontalInput) > 0.01)
+            if (Math.Abs(horizontalInput) > 0.01f)
             {
                 isWalking = true;
             }
@@ -156,7 +184,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (playerRigidBody.velocity.y < 0 && !isGrounded)
+            if (playerRigidBody.velocity.y < 0)
             {
                 isFalling = true;
             }
@@ -165,13 +193,13 @@ public class PlayerController : MonoBehaviour
                 isFalling = false;
             }
 
-            if (playerRigidBody.velocity.y > 0 && !isGrounded)
+            if (playerRigidBody.velocity.y > 0)
             {
-                isJumping = true;
+                isGoingToJump = true;
             }
             else
             {
-                isJumping = false;
+                isGoingToJump = false;
             }
         } 
     }
@@ -179,34 +207,50 @@ public class PlayerController : MonoBehaviour
     private void SetAnimationVariables()
     {
         //isAttacking
-        playerAnimator.SetBool("isAttacking", isAttacking);
+        if (isGoingToAttack)
+        {
+            playerAnimator.SetTrigger("Attack");
+            Attack();
+            isGoingToAttack = false;
+            comboActiveTime = comboTime;
+            comboStatus = true;
+            isComboEnded = false;
+        }
+        //isJumping
+        if (isGoingToJump)
+        {
+            playerAnimator.SetTrigger("Jump");
+        }
+
         //isEnemyNoticed
-        playerAnimator.SetBool("isEnemyNoticed", isEnemyNoticed);        
+        playerAnimator.SetBool("isEnemyNoticed", isEnemyNoticed);
         //isFalling
         playerAnimator.SetBool("isFalling", isFalling);
         //isGrounded
-        playerAnimator.SetBool("isGrounded", isGrounded);
-        //isJumping
-        playerAnimator.SetBool("isJumping", isJumping);
+        //playerAnimator.SetBool("isGrounded", isGrounded);
         //isWalking
         playerAnimator.SetBool("isWalking", isWalking);
         //isSprinting
         playerAnimator.SetBool("isSprinting", isSprinting);
+        //isHavingSword
+        playerAnimator.SetBool("isHavingSword", isHavingSword);
+        //isComboEnded
+        playerAnimator.SetBool("isComboEnded", isComboEnded);
     }
-    
-    private bool JumpKeyDown()
+
+    //KeyBindings
+
+    private bool JumpKey()
     {
         return Input.GetKeyDown(KeyCode.Space);
     }
-    
-    private bool SwordKeyDown()
+
+    private bool AttackSwordKey()
     {
-        //return Input.GetKeyDown(KeyCode.Space);
-        //return Input.GetKey(KeyCode.Space);
         return Input.GetKeyDown(KeyCode.Mouse0);
     }
-   
-    private bool SprintKeyDown()
+
+    private bool SprintKey()
     {
         return Input.GetKey(KeyCode.LeftShift);
     }
