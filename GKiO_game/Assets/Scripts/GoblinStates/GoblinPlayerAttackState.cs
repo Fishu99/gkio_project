@@ -1,5 +1,8 @@
 using UnityEngine;
 
+//Stan, w którym goblin atakuje gracza.
+//Goblin w tym czasie stoi w miejscu i wykonuje animacjê ataku.
+//Po zakoñczeniu ataku goblin powraca do GoblinPlayerNoticedState
 public class GoblinPlayerAttackState : GoblinState
 {
     private float timeWhenStartedAttacking;

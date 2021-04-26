@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Stan, kiedy goblin patroluje teren i jest na koñcu patrolowanego obszaru. Goblin czeka wtedy 2s, po czym zawraca.
 public class GoblinPatrolEndState : GoblinState
 {
     private float timeWhenStartedWaiting;

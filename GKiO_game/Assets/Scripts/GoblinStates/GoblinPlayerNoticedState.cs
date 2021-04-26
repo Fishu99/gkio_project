@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
+//Stan, w którym goblin pod¹¿a za zauwa¿onym graczem
+//Goblin pozostaje w tym stanie czas timeWhenAttack, po czym przechodzi do stanu ataku
+//Oznacza to, ¿e goblin atakuje na oœlep co okreœlony czas bez sprawdzenia, czy gracz jest w zasiêgu ataku.
 public class GoblinPlayerNoticedState : GoblinState
 {
     public GoblinPlayerNoticedState(GoblinController goblinController) : base(goblinController) { }

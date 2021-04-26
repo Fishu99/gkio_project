@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Stan, kiedy goblin jest martwy
 public class GoblinDeadState : GoblinState
 {
     public GoblinDeadState(GoblinController goblinController) : base(goblinController)

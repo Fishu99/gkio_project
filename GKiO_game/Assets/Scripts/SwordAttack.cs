@@ -8,22 +8,23 @@ public class SwordAttack : MonoBehaviour
     public float swordLength = 0.5f;
     public float swordDamage = 30;
     public float swordDelay = 0.5f;
+    //Warstwa, na której znajduj¹ siê atakowane obiekty
     public int layerToHit = 9;
+    //Zmienna informuje, czy aktualnie wykonywany jest atak
     private bool isAttacking = false;
     private float sphereCastRadius;
-    // Start is called before the first frame update
     void Start()
     {
         objectCollider = GetComponent<Collider>();
         sphereCastRadius = objectCollider.bounds.extents.z;
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
-
+    
+    //Wykonuje atak po czasie okreœlonym przez swordDelay.
     public void Attack()
     {
         if (!isAttacking)
@@ -33,6 +34,8 @@ public class SwordAttack : MonoBehaviour
         }
     }
 
+    //Sprawdza, czy jakiœ obiekt znajduje siê przed atakuj¹cym obiektem.
+    //Je¿eli tak, odbiera mu zdrowie
     private void HitAndDamage()
     {
         isAttacking = false;
@@ -44,6 +47,7 @@ public class SwordAttack : MonoBehaviour
         }
     }
 
+    //Funkcja sprawdza, czy przed obiektem w odleg³oœci swordLength znajduje siê jakiœ obiekt na atakowanej warstwie
     private bool checkHit(out RaycastHit hitinfo)
     {
         Vector3 origin = objectCollider.bounds.center;
@@ -52,6 +56,7 @@ public class SwordAttack : MonoBehaviour
         return Physics.SphereCast(origin, sphereCastRadius, transform.forward, out hitinfo, rayLength, layerMask);
     }
 
+    //Funkcja odbiera obiektowi zdrowie w iloœci okreœlonej przez swordDamage
     private void DamageHealth(RaycastHit hitinfo)
     {
         HealthManager healthManager = hitinfo.collider.GetComponent<HealthManager>();
