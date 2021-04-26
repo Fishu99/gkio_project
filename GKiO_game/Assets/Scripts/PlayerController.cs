@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = true;
     private bool comboStatus = false;
     private float comboActiveTime = 0f;
+    private bool isGoingToJump = false;
 
 
     //Animator variables
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
     private bool isHavingSword = true;
 
     //--- triggers
-    private bool isGoingToJump = false;
+    private bool isJumping = false;
     private bool isGoingToAttack = false;
 
 
@@ -188,6 +189,7 @@ public class PlayerController : MonoBehaviour
         {
             if(isGrounded)
                 playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isGoingToJump = false;
         }
     }
     
@@ -214,14 +216,14 @@ public class PlayerController : MonoBehaviour
             {
                 isFalling = false;
             }
-
+            
             if (playerRigidBody.velocity.y > 0)
             {
-                isGoingToJump = true;
+                isJumping = true;
             }
             else
             {
-                isGoingToJump = false;
+                isJumping = false;
             }
         } 
     }
@@ -239,7 +241,7 @@ public class PlayerController : MonoBehaviour
             isComboEnded = false;
         }
         //isJumping
-        if (isGoingToJump)
+        if (isJumping)
         {
             playerAnimator.SetTrigger("Jump");
         }
