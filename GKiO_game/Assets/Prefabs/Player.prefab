@@ -1018,8 +1018,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe7e4806211b754aa72cad771bc08fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
   horizontalInput: 0
   jumpForce: 500
+  arrowPrefab: {fileID: 4941945707699202289, guid: 0b07a4186d0cb8247a06544e48276420, type: 3}
 --- !u!114 &659069156
 MonoBehaviour:
   m_ObjectHideFlags: 0

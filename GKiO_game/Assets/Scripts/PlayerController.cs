@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     Animator playerAnimator;
     Rigidbody playerRigidBody;
     CapsuleCollider playerCollider;
+    public Camera playerCamera;
 
     //Variables and constants
     public float horizontalInput = 0f;
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 1000f;
     private Vector3 startPosition;
     private float comboTime = 0.75f;
+    [SerializeField] private GameObject arrowPrefab;
+    private float arrowOriginRadius = 1.3f;
 
     //Player states/statuses
     private bool isGrounded = true;
@@ -37,6 +40,8 @@ public class PlayerController : MonoBehaviour
     //--- triggers
     private bool isGoingToJump = false;
     private bool isGoingToAttack = false;
+
+
 
 
     // Start is called before the first frame update
@@ -106,6 +111,11 @@ public class PlayerController : MonoBehaviour
             //}             
         }
 
+        if (ShootKey())
+        {
+            Shoot();
+        }
+
         //Sprint
         if (SprintKey() && isGrounded)
         {
@@ -115,6 +125,18 @@ public class PlayerController : MonoBehaviour
         {
             isSprinting = false;
         }
+    }
+
+    private void Shoot()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 center = playerCollider.bounds.center;
+        Vector3 screenPlayerPosition = playerCamera.WorldToScreenPoint(center);
+        Quaternion arrowRotation = Quaternion.FromToRotation(Vector3.up, mousePosition-screenPlayerPosition);
+        Vector3 radius = Vector3.up * arrowOriginRadius;
+        Vector3 arrowPosition = center + arrowRotation * radius;
+        GameObject arrow = Instantiate(arrowPrefab, arrowPosition, arrowRotation);
+        arrow.GetComponent<ArrowController>().Shoot();
     }
 
     private void Attack()
@@ -248,6 +270,11 @@ public class PlayerController : MonoBehaviour
     private bool AttackSwordKey()
     {
         return Input.GetKeyDown(KeyCode.Mouse0);
+    }
+
+    private bool ShootKey()
+    {
+        return Input.GetKeyDown(KeyCode.Mouse1);
     }
 
     private bool SprintKey()

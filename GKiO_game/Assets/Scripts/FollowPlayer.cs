@@ -14,6 +14,7 @@ public class FollowPlayer : MonoBehaviour
     void Start()
     {
         cameraOffset = transform.position - player.transform.position;
+        player.GetComponent<PlayerController>().playerCamera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
