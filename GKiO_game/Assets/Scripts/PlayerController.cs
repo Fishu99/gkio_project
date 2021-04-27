@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
 
     //Variables and constants
     public float horizontalInput = 0f;
-    [SerializeField] private float playerSpeed = 5f;
-    [SerializeField] private float playerSprintMultiplier = 2.0f;
+    [SerializeField] private readonly float playerSpeed = 5f;
+    [SerializeField] private readonly float playerSprintMultiplier = 1.5f;
     [SerializeField] private float jumpForce = 1000f;
     private Vector3 startPosition;
     private float comboTime = 0.75f;
@@ -27,9 +27,6 @@ public class PlayerController : MonoBehaviour
     private bool comboStatus = false;
     private float comboActiveTime = 0f;
     private bool isGoingToJump = false;
-    private bool isCrouching = false;
-    private float massDefaultValue;
-    private float massCrouchMultiplier = 4.0f;
 
 
     //Animator variables
@@ -54,7 +51,6 @@ public class PlayerController : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
-        massDefaultValue = playerRigidBody.mass;
         startPosition = transform.position;
     }
 
@@ -80,8 +76,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         TurnPlayer();
-        CheckAndJump();
         CalculateVelocity();
+        CheckAndJump();
         SetAnimationVariables();
     }
 
@@ -101,22 +97,6 @@ public class PlayerController : MonoBehaviour
             isGoingToJump = true;
         }
 
-        //Crouch
-        if (CrouchKey())
-        {
-            if (!isCrouching)
-            {
-                isCrouching = true;
-            }        
-        }
-        else
-        {
-            if (isCrouching)
-            {
-                isCrouching = false;
-            }
-        }
-
         //Sword
         if (AttackSwordKey())
         {
@@ -132,7 +112,6 @@ public class PlayerController : MonoBehaviour
             //}             
         }
 
-        //Bow&Arrow
         if (ShootKey())
         {
             Shoot();
@@ -190,12 +169,7 @@ public class PlayerController : MonoBehaviour
         {
             xVelocity *= playerSprintMultiplier;
         }
-        if (isCrouching && !isGrounded)
-        {
-            playerRigidBody.velocity = new Vector3(xVelocity, Vector3.up.y * Physics.gravity.y,0);
-        }
-        else 
-            playerRigidBody.velocity = new Vector3(xVelocity, playerRigidBody.velocity.y, playerRigidBody.velocity.z);
+        playerRigidBody.velocity = new Vector3(xVelocity, playerRigidBody.velocity.y, playerRigidBody.velocity.z);
     }
     
     private void TurnPlayer()
@@ -278,8 +252,6 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isFalling", isFalling);
         //isGrounded
         //playerAnimator.SetBool("isGrounded", isGrounded);
-        //isCrouching
-        playerAnimator.SetBool("isCrouching", isCrouching);
         //isWalking
         playerAnimator.SetBool("isWalking", isWalking);
         //isSprinting
@@ -295,11 +267,6 @@ public class PlayerController : MonoBehaviour
     private bool JumpKey()
     {
         return Input.GetKeyDown(KeyCode.Space);
-    }
-
-    private bool CrouchKey()
-    {
-        return Input.GetKey(KeyCode.LeftControl);
     }
 
     private bool AttackSwordKey()
