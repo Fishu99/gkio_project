@@ -28,8 +28,7 @@ public class PlayerController : MonoBehaviour
     private float comboActiveTime = 0f;
     private bool isGoingToJump = false;
     private bool isCrouching = false;
-    private float massDefaultValue;
-    private float massCrouchMultiplier = 4.0f;
+    private int playerScore = 0;
 
 
     //Animator variables
@@ -54,7 +53,6 @@ public class PlayerController : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
-        massDefaultValue = playerRigidBody.mass;
         startPosition = transform.position;
     }
 
@@ -90,6 +88,12 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             transform.position = startPosition;
+        }
+        if (other.gameObject.CompareTag("Collectibles"))
+        {
+            Destroy(other.gameObject);
+            playerScore++;
+            Debug.Log("Player score is: " + playerScore.ToString());
         }
     }
 
