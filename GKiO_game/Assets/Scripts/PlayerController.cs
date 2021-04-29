@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     //--- triggers
     private bool isJumping = false;
     private bool isGoingToAttack = false;
-
+    private bool isGoingToShoot = false;
 
 
 
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
         //Bow&Arrow
         if (ShootKey())
         {
-            Shoot();
+            isGoingToShoot= true;
         }
 
         //Sprint
@@ -269,6 +269,13 @@ public class PlayerController : MonoBehaviour
             comboActiveTime = comboTime;
             comboStatus = true;
             isComboEnded = false;
+        }
+        //isShooting
+        if (isGoingToShoot)
+        {
+            playerAnimator.SetTrigger("Shoot");
+            Shoot();
+            isGoingToShoot = false;
         }
         //isJumping
         if (isJumping)
