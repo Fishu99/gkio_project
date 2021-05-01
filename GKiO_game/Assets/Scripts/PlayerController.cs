@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     private bool isGoingToShoot = false;
 
     private  GameObject sword;
+    private GameObject bow;
 
     private GameObject setup;
     private GameObject target;
@@ -61,7 +62,9 @@ public class PlayerController : MonoBehaviour
         startPosition = transform.position;
 
         sword = GameObject.Find("Sword_1");
-        sword.SetActive(false);
+        bow = GameObject.Find("Wooden Bow");
+
+        ChangeWeaponToBow();
 
         setup = GameObject.Find("Rig");
         var rig = setup.GetComponent<Rig>();
@@ -296,6 +299,7 @@ public class PlayerController : MonoBehaviour
         //isAttacking
         if (isGoingToAttack)
         {
+            ChangeWeaponToSword();
             playerAnimator.SetTrigger("Attack");
             Attack();
             isGoingToAttack = false;
@@ -306,6 +310,7 @@ public class PlayerController : MonoBehaviour
         //isShooting
         if (isGoingToShoot)
         {
+            ChangeWeaponToBow();
             playerAnimator.SetTrigger("Shoot");
             isGoingToShoot = false;
             isShooting = true;
@@ -334,6 +339,18 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isComboEnded", isComboEnded);
         //isShooting
         playerAnimator.SetBool("isShooting", isShooting);
+    }
+
+    private void ChangeWeaponToSword()
+    {
+        sword.SetActive(true);
+        bow.SetActive(false);
+    }
+
+    private void ChangeWeaponToBow()
+    {
+        sword.SetActive(false);
+        bow.SetActive(true);
     }
 
     //KeyBindings
