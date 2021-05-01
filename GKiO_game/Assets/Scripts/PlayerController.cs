@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class PlayerController : MonoBehaviour
 {
@@ -39,13 +40,17 @@ public class PlayerController : MonoBehaviour
     private bool isFalling = false;
     private bool isComboEnded = true;
     private bool isHavingSword = true;
+    private bool isShooting = false;
 
     //--- triggers
     private bool isJumping = false;
     private bool isGoingToAttack = false;
     private bool isGoingToShoot = false;
 
+    private  GameObject sword;
 
+    private GameObject setup;
+    private GameObject target;
 
     // Start is called before the first frame update
     void Start()
@@ -54,11 +59,37 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
         startPosition = transform.position;
+
+        sword = GameObject.Find("Sword_1");
+        sword.SetActive(false);
+
+        setup = GameObject.Find("Rig");
+        var rig = setup.GetComponent<Rig>();
+        rig.weight = 0.0f;
+
+        target = GameObject.Find("Target");
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(isShooting)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            Vector3 center = playerCollider.bounds.center;
+            Vector3 screenPlayerPosition = playerCamera.WorldToScreenPoint(center);
+            Quaternion rotation = Quaternion.FromToRotation(Vector3.up, mousePosition - screenPlayerPosition);
+            Vector3 radius = Vector3.up * arrowOriginRadius;
+            Vector3 position = center + rotation * radius;
+            target.transform.SetPositionAndRotation(position, rotation);
+            var rig = setup.GetComponent<Rig>();
+            rig.weight = 0.9f;
+        }
+        else
+        {
+            var rig = setup.GetComponent<Rig>();
+            rig.weight = 0.0f;
+        }
         if (comboStatus)
         {
             comboActiveTime -= Time.deltaTime;
@@ -163,6 +194,8 @@ public class PlayerController : MonoBehaviour
         Vector3 arrowPosition = center + arrowRotation * radius;
         GameObject arrow = Instantiate(arrowPrefab, arrowPosition, arrowRotation);
         arrow.GetComponent<ArrowController>().Shoot();
+        target.transform.SetPositionAndRotation(arrowPosition, arrowRotation);
+        isShooting = false;
     }
 
     private void Attack()
@@ -274,8 +307,8 @@ public class PlayerController : MonoBehaviour
         if (isGoingToShoot)
         {
             playerAnimator.SetTrigger("Shoot");
-            Shoot();
             isGoingToShoot = false;
+            isShooting = true;
         }
         //isJumping
         if (isJumping)
@@ -299,6 +332,8 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isHavingSword", isHavingSword);
         //isComboEnded
         playerAnimator.SetBool("isComboEnded", isComboEnded);
+        //isShooting
+        playerAnimator.SetBool("isShooting", isShooting);
     }
 
     //KeyBindings
