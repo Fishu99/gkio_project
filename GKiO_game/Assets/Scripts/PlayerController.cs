@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     //Class init
     Animator playerAnimator;
+    Animator bowAnimator;
     Rigidbody playerRigidBody;
     CapsuleCollider playerCollider;
     public Camera playerCamera;
@@ -53,6 +54,9 @@ public class PlayerController : MonoBehaviour
     private GameObject setup;
     private GameObject target;
 
+    GameObject ARROW;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +75,11 @@ public class PlayerController : MonoBehaviour
         rig.weight = 0.0f;
 
         target = GameObject.Find("Target");
+
+        ARROW = GameObject.Find("Arrow");
+        ARROW.SetActive(false);
+
+        bowAnimator = bow.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -174,6 +183,7 @@ public class PlayerController : MonoBehaviour
         if (ShootKey())
         {
             isGoingToShoot= true;
+            ARROW.SetActive(true);
         }
 
         //Sprint
@@ -195,9 +205,9 @@ public class PlayerController : MonoBehaviour
         Quaternion arrowRotation = Quaternion.FromToRotation(Vector3.up, mousePosition-screenPlayerPosition);
         Vector3 radius = Vector3.up * arrowOriginRadius;
         Vector3 arrowPosition = center + arrowRotation * radius;
+        ARROW.SetActive(false);
         GameObject arrow = Instantiate(arrowPrefab, arrowPosition, arrowRotation);
         arrow.GetComponent<ArrowController>().Shoot();
-        target.transform.SetPositionAndRotation(arrowPosition, arrowRotation);
         isShooting = false;
     }
 
@@ -312,6 +322,7 @@ public class PlayerController : MonoBehaviour
         {
             ChangeWeaponToBow();
             playerAnimator.SetTrigger("Shoot");
+            bowAnimator.SetTrigger("Shoot");
             isGoingToShoot = false;
             isShooting = true;
         }
