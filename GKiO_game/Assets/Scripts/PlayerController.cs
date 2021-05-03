@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     Animator bowAnimator;
     Rigidbody playerRigidBody;
     CapsuleCollider playerCollider;
+    AudioManager audioManager;
     public Camera playerCamera;
 
     //Variables and constants
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 1000f;
     private Vector3 startPosition;
     private float comboTime = 0.75f;
+    private int comboNumber = 0;
     [SerializeField] private GameObject arrowPrefab;
     private float arrowOriginRadius = 1.3f;
 
@@ -32,6 +34,10 @@ public class PlayerController : MonoBehaviour
     private bool didPlayerJustJumped = false;
     private bool isCrouching = false;
     private int playerScore = 0;
+
+    //For audio
+    private int stepNumber = 1;
+    private int stepPreviousNumber = 4;
 
 
     //Animator variables
@@ -64,6 +70,7 @@ public class PlayerController : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
+        audioManager = FindObjectOfType<AudioManager>();
         startPosition = transform.position;
 
         sword = GameObject.Find("Sword_1");
@@ -110,6 +117,7 @@ public class PlayerController : MonoBehaviour
             {
                 comboActiveTime = 0f;
                 comboStatus = false;
+                comboNumber = 0;
                 isComboEnded = true;
             }
         }
@@ -215,6 +223,16 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         GetComponent<SwordAttack>().Attack();
+        if (comboNumber.Equals(0))
+            audioManager.Play("PlayerSwordAttack1");
+        else if (comboNumber.Equals(1))
+            audioManager.Play("PlayerSwordAttack2");
+        else if (comboNumber.Equals(2))
+            audioManager.Play("PlayerSwordAttack3");
+
+        comboNumber++;
+        if (comboNumber.Equals(3))
+            comboNumber = 0;
     }
 
     private void CheckIfGrounded()
@@ -266,6 +284,7 @@ public class PlayerController : MonoBehaviour
         {
             if(isGrounded)
             {
+                audioManager.Play("PlayerJump"); 
                 playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 didPlayerJustJumped = true;
             }
@@ -281,10 +300,23 @@ public class PlayerController : MonoBehaviour
             if (Math.Abs(horizontalInput) > 0.01f)
             {
                 isWalking = true;
+                bool itIsPlaying = audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString());
+                if (!itIsPlaying)
+                {
+                    audioManager.Play("Player_Step" + stepNumber.ToString());
+                    stepPreviousNumber = stepNumber;
+                    stepNumber++;
+                    if (stepNumber > 4)
+                        stepNumber = 1;
+                }
             }
             else
             {
                 isWalking = false;
+                if (audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString()))
+                    audioManager.Stop("Player_Step" + stepPreviousNumber.ToString());
+                else if (audioManager.CheckIfIsPlaying("Player_Step" + stepNumber.ToString()))
+                    audioManager.Stop("Player_Step" + stepNumber.ToString());
             }
         }
         else
@@ -328,6 +360,7 @@ public class PlayerController : MonoBehaviour
             ChangeWeaponToBow();
             playerAnimator.SetTrigger("Shoot");
             bowAnimator.SetTrigger("Shoot");
+            audioManager.Play("ArrowShoot");
             isGoingToShoot = false;
             isShooting = true;
         }
@@ -371,7 +404,6 @@ public class PlayerController : MonoBehaviour
     }
 
     //KeyBindings
-
     private bool JumpKey()
     {
         return Input.GetKeyDown(KeyCode.Space);
