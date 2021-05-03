@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private bool comboStatus = false;
     private float comboActiveTime = 0f;
     private bool isGoingToJump = false;
+    private bool didPlayerJustJumped = false;
     private bool isCrouching = false;
     private int playerScore = 0;
 
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
     private bool isGoingToAttack = false;
     private bool isGoingToShoot = false;
 
-    private  GameObject sword;
+    private GameObject sword;
     private GameObject bow;
 
     private GameObject setup;
@@ -264,7 +265,11 @@ public class PlayerController : MonoBehaviour
         if (isGoingToJump)
         {
             if(isGrounded)
+            {
                 playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                didPlayerJustJumped = true;
+            }
+
             isGoingToJump = false;
         }
     }
@@ -327,9 +332,10 @@ public class PlayerController : MonoBehaviour
             isShooting = true;
         }
         //isJumping
-        if (isJumping)
+        if (isJumping && didPlayerJustJumped)
         {
             playerAnimator.SetTrigger("Jump");
+            didPlayerJustJumped = false;
         }
 
         //isEnemyNoticed
@@ -337,7 +343,7 @@ public class PlayerController : MonoBehaviour
         //isFalling
         playerAnimator.SetBool("isFalling", isFalling);
         //isGrounded
-        //playerAnimator.SetBool("isGrounded", isGrounded);
+        playerAnimator.SetBool("isGrounded", isGrounded);
         //isCrouching
         playerAnimator.SetBool("isCrouching", isCrouching);
         //isWalking
