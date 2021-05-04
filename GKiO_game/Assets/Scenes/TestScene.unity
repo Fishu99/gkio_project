@@ -3737,116 +3737,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3530272551231612510, guid: 43828c9a05e8d488f96095d31e6b3898, type: 3}
   m_PrefabInstance: {fileID: 1928362090}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1443715421
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1443715423}
-  - component: {fileID: 1443715422}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1443715422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443715421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5f80e96c6fe43c46a725fc76ea002e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: PlayerDeath
-    clip: {fileID: 8300000, guid: ad6d56fac74005c4c89d1c89d9b7e4df, type: 3}
-    volume: 1
-    pitch: 0.1
-    loop: 0
-    source: {fileID: 0}
-  - name: PlayerSwordAttack1
-    clip: {fileID: 8300000, guid: a8b336ab832e79341ba71b93711f4490, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: PlayerSwordAttack2
-    clip: {fileID: 8300000, guid: abbc6f1b48c22b54d893fe0e31eb2023, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: PlayerSwordAttack3
-    clip: {fileID: 8300000, guid: 74c1413f37d1f3e478b214c340db603c, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Player_Step1
-    clip: {fileID: 8300000, guid: 320d223c5241e674fb461faa4277ec8d, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Player_Step2
-    clip: {fileID: 8300000, guid: 931c4bfc95b6a4648b7d332f7e9f6ff1, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Player_Step3
-    clip: {fileID: 8300000, guid: 663d87f5fb96c2a4aa8601b7d510ff50, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Player_Step4
-    clip: {fileID: 8300000, guid: 139e7fb4113b7f94e87f49d83a77001c, type: 3}
-    volume: 0.5
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: PlayerJump
-    clip: {fileID: 8300000, guid: 1f659e5ac1e17d840a999acda1aeb8a0, type: 3}
-    volume: 0.2
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: ArrowShoot
-    clip: {fileID: 8300000, guid: aa55217e294f5424aa923b80bb2afd7f, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: GoblinDeath
-    clip: {fileID: 8300000, guid: f58ac96f9b6da674db2ac0cd768898ba, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
---- !u!4 &1443715423
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443715421}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.925887, y: 8.597247, z: 5.9211683}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1457750342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5515,3 +5405,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43828c9a05e8d488f96095d31e6b3898, type: 3}
+--- !u!1001 &3796236724373805749
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3796236722931139560, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.925887
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.597247
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.9211683
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796236722931139562, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8212841e14ba21a45b11c07af2aaa444, type: 3}
