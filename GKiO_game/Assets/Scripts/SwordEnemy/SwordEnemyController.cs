@@ -3,49 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /**
- * Goblin chodzi od punktu, w którym siê go wstawi,
- * do punktu znajduj¹ cego siê w odleg³oœci walkRange na prawo od punktu wstawienia goblina
+ * Kontroler do przeciwnika, który patroluje i atakuje przy u¿yciu miecza lub innej broni bia³ej
  */
-public class GoblinController : MonoBehaviour
+public class SwordEnemyController : MonoBehaviour
 {
-    private Rigidbody goblinRigidBody;
-    //private Animation goblinAnimation;
-    private Animator goblinAnimator;
-    private CapsuleCollider goblinCollider;
-    private HealthManager healthManager;
-    private SwordAttack swordAttack;
-    //Prêdkoœæ goblina
-    [SerializeField]
-    private float goblinSpeed = 4f;
-    [SerializeField]
-    private float walkRange = 10f;
-    [SerializeField]
-    private float playerNearDistance = 5f;
-    [SerializeField]
-    private float attackPeriod = 4f;
-    //Pocz¹tkowa pozycja goblina pobierana na starcie
+    
+    //Prêdkoœæ chodzenia przeciwnika
+    public float walkSpeed = 4f;
+
+    //Zakres poruszanie siê przeciwnika (najwiêksza odleg³oœæ w osi x od pocz¹tkowego po³o¿enia)
+    public float walkRange = 10f;
+
+    //Odleg³oœæ od gracza przy której przeciwnik zaczyna go œledziæ
+    public float playerNearDistance = 5f;
+    
+    //Czas jaki przeciwnik czeka na koñcu
+    public float waitOnEndTime = 2f;
+
+    public float attackInterval = 3f;
+
+    public float attackTime = 1f;
+
+
+    //Pocz¹tkowa pozycja przeciwnika jest pobierana na starcie na podstawie po³o¿enia na scenie
     private Vector3 startPosition;
     private float direction = 1f;
     public bool IsWalking { get; private set; } = false;
     public bool IsPlayerNear { get; private set; }
     private GameObject attackedPlayer = null;
 
-    private GoblinState currentState;
-    public GoblinPatrolWalkState PatrolWalkState { get; private set; }
-    public GoblinPatrolEndState PatrolEndState { get; private set; }
-    public GoblinPlayerNoticedState PlayerNoticedState { get; private set; }
-    public GoblinPlayerAttackState PlayerAttackState { get; private set; }
-    public GoblinDeadState DeadState { get; private set; }
+    //Komponenty
+    private Rigidbody enemyRigidBody;
+    private CapsuleCollider goblinCollider;
+    private HealthManager healthManager;
+    private SwordAttack swordAttack;
+    //Adapter animacji
+    private SwordEnemyAnimationAdapter animationAdapter;
+
+    //Stany
+    private SwordEnemyState currentState;
+    public SwordEnemyPatrolWalkState PatrolWalkState { get; private set; }
+    public SwordEnemyPatrolEndState PatrolEndState { get; private set; }
+    public SwordEnemyPlayerNoticedState PlayerNoticedState { get; private set; }
+    public SwordEnemyPlayerAttackState PlayerAttackState { get; private set; }
+    public SwordEnemyDeadState DeadState { get; private set; }
 
     void Start()
     {
-        goblinRigidBody = GetComponent<Rigidbody>();
+        enemyRigidBody = GetComponent<Rigidbody>();
         healthManager = GetComponent<HealthManager>();
         goblinCollider = GetComponent<CapsuleCollider>();
-        goblinAnimator = GetComponent<Animator>();
         swordAttack = GetComponent<SwordAttack>();
+
+        animationAdapter = GetComponent<SwordEnemyAnimationAdapter>();
         CreateStates();
-        goblinAnimator.SetBool("isWalking", false);
         startPosition = transform.position;
         StartCoroutine("InvokeCheckIfPlayerIsNear");
         ChangeState(PatrolWalkState);
@@ -54,11 +65,11 @@ public class GoblinController : MonoBehaviour
 
     private void CreateStates()
     {
-        PatrolWalkState = new GoblinPatrolWalkState(this);
-        PatrolEndState = new GoblinPatrolEndState(this);
-        PlayerNoticedState = new GoblinPlayerNoticedState(this);
-        PlayerAttackState = new GoblinPlayerAttackState(this);
-        DeadState = new GoblinDeadState(this);
+        PatrolWalkState = new SwordEnemyPatrolWalkState(this);
+        PatrolEndState = new SwordEnemyPatrolEndState(this);
+        PlayerNoticedState = new SwordEnemyPlayerNoticedState(this);
+        PlayerAttackState = new SwordEnemyPlayerAttackState(this);
+        DeadState = new SwordEnemyDeadState(this);
     }
 
     void Update()
@@ -71,9 +82,13 @@ public class GoblinController : MonoBehaviour
         currentState.FixedUpdate();
     }
 
+    private void SetAnimationVariables()
+    {
+        
+    }
     
 
-    public void ChangeState(GoblinState newState)
+    public void ChangeState(SwordEnemyState newState)
     {
         if(currentState != null)
             currentState.Exit();
@@ -91,11 +106,11 @@ public class GoblinController : MonoBehaviour
     {
         if(direction > 0)
         {
-            goblinRigidBody.rotation = Quaternion.LookRotation(Vector3.right);
+            enemyRigidBody.rotation = Quaternion.LookRotation(Vector3.right);
         }
         else if(direction < 0)
         {
-            goblinRigidBody.rotation = Quaternion.LookRotation(Vector3.left);
+            enemyRigidBody.rotation = Quaternion.LookRotation(Vector3.left);
         }
     }
 
@@ -107,12 +122,12 @@ public class GoblinController : MonoBehaviour
     
     public bool WalkedToLeftEnd()
     {
-        return direction < 0 && goblinRigidBody.position.x < startPosition.x;
+        return direction < 0 && enemyRigidBody.position.x < startPosition.x;
     }
 
     public bool WalkedToRightEnd()
     {
-        return direction > 0 && goblinRigidBody.position.x > startPosition.x + walkRange;
+        return direction > 0 && enemyRigidBody.position.x > startPosition.x + walkRange;
     }
 
     public bool WalkedToEnd()
@@ -122,14 +137,14 @@ public class GoblinController : MonoBehaviour
 
     public void SetVelocityByDirection()
     {
-        float xVelocity = goblinSpeed * direction;
-        goblinRigidBody.velocity = new Vector3(xVelocity, goblinRigidBody.velocity.y, goblinRigidBody.velocity.z);
+        float xVelocity = walkSpeed * direction;
+        enemyRigidBody.velocity = new Vector3(xVelocity, enemyRigidBody.velocity.y, enemyRigidBody.velocity.z);
         IsWalking = true;
     }
 
     public void SetVelocityToZero()
     {
-        goblinRigidBody.velocity = new Vector3(0, goblinRigidBody.velocity.y, goblinRigidBody.velocity.z);
+        enemyRigidBody.velocity = new Vector3(0, enemyRigidBody.velocity.y, enemyRigidBody.velocity.z);
         IsWalking = false;
     }
 
@@ -185,20 +200,20 @@ public class GoblinController : MonoBehaviour
     public void Attack()
     {
         swordAttack.Attack();
-    }
-
-    public IEnumerator AttackPeriodically()
-    {
-        while (true)
-        {
-            swordAttack.Attack();
-            yield return new WaitForSeconds(attackPeriod);
-        }
+        animationAdapter.Attack();
     }
 
     private IEnumerator DeathSequence()
     {
+        animationAdapter.Die();
         yield return new WaitForSeconds(4);
         Destroy(gameObject);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        Gizmos.DrawWireSphere(transform.position, playerNearDistance);
     }
 }
