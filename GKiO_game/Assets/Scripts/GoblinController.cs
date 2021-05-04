@@ -9,7 +9,8 @@ using UnityEngine;
 public class GoblinController : MonoBehaviour
 {
     private Rigidbody goblinRigidBody;
-    private Animation goblinAnimation;
+    //private Animation goblinAnimation;
+    private Animator goblinAnimator;
     private CapsuleCollider goblinCollider;
     private HealthManager healthManager;
     private SwordAttack swordAttack;
@@ -39,17 +40,13 @@ public class GoblinController : MonoBehaviour
     void Start()
     {
         goblinRigidBody = GetComponent<Rigidbody>();
-        goblinAnimation = GetComponent<Animation>();
         healthManager = GetComponent<HealthManager>();
         goblinCollider = GetComponent<CapsuleCollider>();
+        goblinAnimator = GetComponent<Animator>();
         swordAttack = GetComponent<SwordAttack>();
         CreateStates();
+        goblinAnimator.SetBool("isWalking", false);
         startPosition = transform.position;
-        goblinAnimation["attack1"].wrapMode = WrapMode.Once;
-        goblinAnimation["attack2"].wrapMode = WrapMode.Once;
-        goblinAnimation["attack3"].wrapMode = WrapMode.Once;
-        goblinAnimation["walk"].wrapMode = WrapMode.Loop;
-        goblinAnimation["death"].wrapMode = WrapMode.Once;
         StartCoroutine("InvokeCheckIfPlayerIsNear");
         ChangeState(PatrolWalkState);
     }

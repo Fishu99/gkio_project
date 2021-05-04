@@ -6,7 +6,7 @@ using UnityEngine;
 public class GoblinPlayerAttackState : GoblinState
 {
     private float timeWhenStartedAttacking;
-    private float attackTime;
+    private float attackTime = 1;
 
     public GoblinPlayerAttackState(GoblinController goblinController) : base(goblinController)
     {
@@ -15,9 +15,8 @@ public class GoblinPlayerAttackState : GoblinState
 
     public override void Enter()
     {
-        attackTime = goblinAnimation["attack3"].length;
         timeWhenStartedAttacking = Time.time;
-        goblinAnimation.CrossFade("attack3", 0.1f);
+        goblinAnimator.SetTrigger("attack");
         goblinController.Attack();
     }
 

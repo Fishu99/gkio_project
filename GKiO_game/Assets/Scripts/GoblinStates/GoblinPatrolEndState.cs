@@ -9,7 +9,7 @@ public class GoblinPatrolEndState : GoblinState
 
     public override void Enter()
     {
-        goblinAnimation.CrossFade("idle");
+        goblinAnimator.SetBool("isWalking", false);
         goblinController.SetVelocityToZero();
         timeWhenStartedWaiting = Time.time;
     }

@@ -12,7 +12,7 @@ public class GoblinPlayerNoticedState : GoblinState
 
     public override void Enter()
     {
-        goblinAnimation.CrossFade("walk");
+        goblinAnimator.SetBool("isWalking", true);
         timeEntered = Time.time;
     }
 
@@ -42,9 +42,9 @@ public class GoblinPlayerNoticedState : GoblinState
         else
         {
             if(goblinController.IsWalking)
-                goblinAnimation.CrossFade("walk");
+                goblinAnimator.SetBool("isWalking", true);
             else
-                goblinAnimation.CrossFade("idle");
+                goblinAnimator.SetBool("isWalking", false);
         }
 
     }

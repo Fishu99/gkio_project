@@ -11,7 +11,7 @@ public class GoblinPatrolWalkState : GoblinState
 
     public override void Enter()
     {
-        goblinAnimation.CrossFade("walk");
+        goblinAnimator.SetBool("isWalking", true);
     }
 
     public override void Exit()
