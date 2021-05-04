@@ -79,8 +79,8 @@ public class PlayerController : MonoBehaviour
         ChangeWeaponToBow();
 
         setup = GameObject.Find("Rig");
-        var rig = setup.GetComponent<Rig>();
-        rig.weight = 0.0f;
+        var builder = FindObjectOfType<RigBuilder>();
+        builder.enabled = false;
 
         target = GameObject.Find("Target");
 
@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
         if(isShooting)
         {
             Vector3 mousePosition = Input.mousePosition;
-            Vector3 center = playerCollider.bounds.center;
+            Vector3 center = playerCollider.bounds.center + Vector3.up / 2;
             Vector3 screenPlayerPosition = playerCamera.WorldToScreenPoint(center);
             Quaternion rotation = Quaternion.FromToRotation(Vector3.up, mousePosition - screenPlayerPosition);
             Vector3 radius = Vector3.up * arrowOriginRadius;
@@ -104,11 +104,13 @@ public class PlayerController : MonoBehaviour
             target.transform.SetPositionAndRotation(position, rotation);
             var rig = setup.GetComponent<Rig>();
             rig.weight = 0.9f;
+            var builder = FindObjectOfType<RigBuilder>();
+            builder.enabled = true;
         }
         else
         {
-            var rig = setup.GetComponent<Rig>();
-            rig.weight = 0.0f;
+            var builder = FindObjectOfType<RigBuilder>();
+            builder.enabled = false;
         }
         if (comboStatus)
         {
