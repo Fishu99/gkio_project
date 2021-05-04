@@ -19,14 +19,15 @@ public class SwordEnemyController : MonoBehaviour
     
     //Czas jaki przeciwnik czeka na koñcu
     public float waitOnEndTime = 2f;
-
+    //Odstêp pomiêdzy atakami
     public float attackInterval = 3f;
-
+    //Czas trwania ataku
     public float attackTime = 1f;
 
 
-    //Pocz¹tkowa pozycja przeciwnika jest pobierana na starcie na podstawie po³o¿enia na scenie
+    //Pocz¹tkowa pozycja przeciwnika. Jest pobierana na starcie na podstawie po³o¿enia na scenie
     private Vector3 startPosition;
+
     private float direction = 1f;
     public bool IsWalking { get; private set; } = false;
     public bool IsPlayerNear { get; private set; }
@@ -34,7 +35,7 @@ public class SwordEnemyController : MonoBehaviour
 
     //Komponenty
     private Rigidbody enemyRigidBody;
-    private CapsuleCollider goblinCollider;
+    private CapsuleCollider enemyCollider;
     private HealthManager healthManager;
     private SwordAttack swordAttack;
     //Adapter animacji
@@ -50,18 +51,26 @@ public class SwordEnemyController : MonoBehaviour
 
     void Start()
     {
-        enemyRigidBody = GetComponent<Rigidbody>();
-        healthManager = GetComponent<HealthManager>();
-        goblinCollider = GetComponent<CapsuleCollider>();
-        swordAttack = GetComponent<SwordAttack>();
-
-        animationAdapter = GetComponent<SwordEnemyAnimationAdapter>();
+        GetTheComponents();
+        GetStartPosition();
         CreateStates();
-        startPosition = transform.position;
         StartCoroutine("InvokeCheckIfPlayerIsNear");
         ChangeState(PatrolWalkState);
     }
 
+    private void GetTheComponents()
+    {
+        enemyRigidBody = GetComponent<Rigidbody>();
+        healthManager = GetComponent<HealthManager>();
+        enemyCollider = GetComponent<CapsuleCollider>();
+        swordAttack = GetComponent<SwordAttack>();
+        animationAdapter = GetComponent<SwordEnemyAnimationAdapter>();
+    }
+
+    private void GetStartPosition()
+    {
+        startPosition = transform.position;
+    }
 
     private void CreateStates()
     {
@@ -176,12 +185,12 @@ public class SwordEnemyController : MonoBehaviour
     {
         
         Collider playerCollider = attackedPlayer.GetComponent<Collider>();
-        if(playerCollider.bounds.min.x > goblinCollider.bounds.max.x)
+        if(playerCollider.bounds.min.x > enemyCollider.bounds.max.x)
         {
             direction = 1;
             WalkInCurrentDirection();
         }
-        else if (goblinCollider.bounds.min.x > playerCollider.bounds.max.x)
+        else if (enemyCollider.bounds.min.x > playerCollider.bounds.max.x)
         {
             direction = -1;
             WalkInCurrentDirection();
@@ -212,8 +221,31 @@ public class SwordEnemyController : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        
+        if (!Application.isPlaying)
+        {
+            GetTheComponents();
+            GetStartPosition();
+        }
+        DrawPlayerNearDistanceSphere();
+        DrawWalkRange();
+    }
+
+    
+
+    private void DrawPlayerNearDistanceSphere()
+    {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
         Gizmos.DrawWireSphere(transform.position, playerNearDistance);
+    }
+
+    private void DrawWalkRange()
+    {
+        if (startPosition != null && enemyCollider != null)
+        {
+            Gizmos.color = new Color(1, 1, 0, 1);
+            Vector3 endPosition = startPosition + new Vector3(walkRange, 0, 0);
+            Vector3 offsetY = Vector3.up * enemyCollider.bounds.extents.y;
+            Gizmos.DrawLine(startPosition + offsetY, endPosition + offsetY);
+        }
     }
 }
