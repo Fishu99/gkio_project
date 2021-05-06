@@ -50,10 +50,13 @@ public class SwordAttack : MonoBehaviour
     //Funkcja sprawdza, czy przed obiektem w odleg³oœci swordLength znajduje siê jakiœ obiekt na atakowanej warstwie
     private bool checkHit(out RaycastHit hitinfo)
     {
+        const float xMargin = 0.05f;
         Vector3 origin = objectCollider.bounds.center;
-        float rayLength = objectCollider.bounds.extents.z + swordLength;
+        float rayLength = objectCollider.bounds.extents.z + swordLength + xMargin;
         int layerMask = 1 << layerToHit;
-        return Physics.SphereCast(origin, sphereCastRadius, transform.forward, out hitinfo, rayLength, layerMask);
+        //xMargin trzeba odj¹æ, bo inaczej Unity nie wykryje kolizji kiedy dwa obiekty siê stykaj¹
+        Vector3 boxExtents = objectCollider.bounds.extents - new Vector3(xMargin, 0 ,0);
+        return Physics.BoxCast(origin, boxExtents, transform.forward, out hitinfo, Quaternion.identity, rayLength, layerMask);
     }
 
     //Funkcja odbiera obiektowi zdrowie w iloœci okreœlonej przez swordDamage

@@ -1219,7 +1219,7 @@ GameObject:
   - component: {fileID: 2090079832657171620}
   - component: {fileID: 2090079832657171621}
   m_Layer: 9
-  m_Name: SKELETON
+  m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1332,7 +1332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea33db71a9f35e949a8e5019537205f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordLength: 0.5
+  swordLength: 1.6
   swordDamage: 20
   swordDelay: 0.5
   layerToHit: 6
