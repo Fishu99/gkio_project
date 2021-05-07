@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody playerRigidBody;
     CapsuleCollider playerCollider;
     AudioManager audioManager;
+    HealthManager healthManager;
     public Camera playerCamera;
 
     //Variables and constants
@@ -24,9 +25,11 @@ public class PlayerController : MonoBehaviour
     private float comboTime = 0.75f;
     private int comboNumber = 0;
     [SerializeField] private GameObject arrowPrefab;
+    private GameObject lastCheckpoint;
     private float arrowOriginRadius = 1.3f;
 
     //Player states/statuses
+    public int lives = 3;
     private bool isGrounded = true;
     private bool comboStatus = false;
     private float comboActiveTime = 0f;
@@ -49,6 +52,7 @@ public class PlayerController : MonoBehaviour
     private bool isComboEnded = true;
     private bool isHavingSword = true;
     private bool isShooting = false;
+    private bool isDead = false;
 
     //--- triggers
     private bool isJumping = false;
@@ -70,6 +74,7 @@ public class PlayerController : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
+        healthManager = GetComponent<HealthManager>();
         audioManager = FindObjectOfType<AudioManager>();
         startPosition = transform.position;
 
@@ -93,7 +98,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isShooting)
+        CheckHealth();
+        if (isDead)
+            return;
+
+        if (isShooting)
         {
             Vector3 mousePosition = Input.mousePosition;
             Vector3 center = playerCollider.bounds.center + Vector3.up / 2;
@@ -141,13 +150,17 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.layer == 8)
         {
-            transform.position = startPosition;
+            DieOfDeadZone();
         }
         if (other.gameObject.CompareTag("Collectibles"))
         {
             Destroy(other.gameObject);
             playerScore++;
             Debug.Log("Player score is: " + playerScore.ToString());
+        }
+        if(other.gameObject.layer == LayerMask.NameToLayer("Checkpoint"))
+        {
+            lastCheckpoint = other.gameObject;
         }
     }
 
@@ -342,6 +355,14 @@ public class PlayerController : MonoBehaviour
             }
         } 
     }
+
+    private void CheckHealth()
+    {
+        if(!isDead && healthManager.Health == 0)
+        {
+            DieOfNoHealth();
+        }
+    }
     
     private void SetAnimationVariables()
     {
@@ -403,6 +424,56 @@ public class PlayerController : MonoBehaviour
     {
         sword.SetActive(false);
         bow.SetActive(true);
+    }
+
+    private void DieOfNoHealth()
+    {
+        playerAnimator.SetTrigger("Die");
+        isDead = true;
+        Invoke("RespawnOrGameOver", 3);
+    }
+
+    private void DieOfDeadZone()
+    {
+        playerAnimator.SetTrigger("Die");
+        isDead = true;
+        healthManager.SetZero();
+        RespawnOrGameOver();
+        //Invoke("RespawnOrGameOver", 0.5f);
+    }
+
+    private void RespawnOrGameOver()
+    {
+        lives--;
+        if(lives > 0)
+        {
+            Respawn();
+        }
+        else
+        {
+            Debug.Log("Game over!");
+        }
+        
+    }
+
+    private void Respawn()
+    {
+        isDead = false;
+        playerAnimator.SetTrigger("Respawn");
+        ReturnToCheckpoint();
+        healthManager.SetMax();
+    }
+
+    private void ReturnToCheckpoint()
+    {
+        if(lastCheckpoint == null)
+        {
+            transform.position = startPosition;
+        }
+        else
+        {
+            transform.position = lastCheckpoint.transform.position;
+        }
     }
 
     //KeyBindings
