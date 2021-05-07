@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordAttack : EnemyAttack
+public class SwordAttack : WeaponAttack
 {
     private Collider objectCollider;
     public float swordLength = 0.5f;

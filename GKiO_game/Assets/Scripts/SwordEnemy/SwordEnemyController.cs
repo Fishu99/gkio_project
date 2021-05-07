@@ -37,7 +37,7 @@ public class SwordEnemyController : MonoBehaviour
     private Rigidbody enemyRigidBody;
     private CapsuleCollider enemyCollider;
     private HealthManager healthManager;
-    private EnemyAttack enemyAttack;
+    private WeaponAttack enemyAttack;
     //Adapter animacji
     private SwordEnemyAnimationAdapter animationAdapter;
 
@@ -63,7 +63,7 @@ public class SwordEnemyController : MonoBehaviour
         enemyRigidBody = GetComponent<Rigidbody>();
         healthManager = GetComponent<HealthManager>();
         enemyCollider = GetComponent<CapsuleCollider>();
-        enemyAttack = GetComponent<EnemyAttack>();
+        enemyAttack = GetComponent<WeaponAttack>();
         animationAdapter = GetComponent<SwordEnemyAnimationAdapter>();
     }
 

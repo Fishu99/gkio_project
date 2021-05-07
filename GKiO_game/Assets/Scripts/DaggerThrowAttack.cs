@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DaggerThrowAttack : EnemyAttack
+public class DaggerThrowAttack : WeaponAttack
 {
     public GameObject dagger;
     private GameObject releasedDagger;
