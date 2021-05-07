@@ -37,7 +37,7 @@ public class SwordEnemyController : MonoBehaviour
     private Rigidbody enemyRigidBody;
     private CapsuleCollider enemyCollider;
     private HealthManager healthManager;
-    private SwordAttack swordAttack;
+    private EnemyAttack enemyAttack;
     //Adapter animacji
     private SwordEnemyAnimationAdapter animationAdapter;
 
@@ -63,7 +63,7 @@ public class SwordEnemyController : MonoBehaviour
         enemyRigidBody = GetComponent<Rigidbody>();
         healthManager = GetComponent<HealthManager>();
         enemyCollider = GetComponent<CapsuleCollider>();
-        swordAttack = GetComponent<SwordAttack>();
+        enemyAttack = GetComponent<EnemyAttack>();
         animationAdapter = GetComponent<SwordEnemyAnimationAdapter>();
     }
 
@@ -208,7 +208,8 @@ public class SwordEnemyController : MonoBehaviour
 
     public void Attack()
     {
-        swordAttack.Attack();
+        enemyAttack.Aim = attackedPlayer;
+        enemyAttack.Attack();
         animationAdapter.Attack();
     }
 

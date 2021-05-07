@@ -1,20 +1,33 @@
 using UnityEngine;
 
-public class SkeletonAnimationAdapter : SwordEnemyAnimationAdapter
+public class SkeletonDaggerAnimationAdapter : SwordEnemyAnimationAdapter
 {
     private Animator skeletonAnimator;
     private SwordEnemyController enemyController;
     private float speedh = 0;
     private float maxSpeedh;
     private float endAcceleration = 2f;
-    private readonly float attackAnimationLength = 1.333f;
+    private readonly float throwAnimationLength = 1.333f;
+    private readonly float daggerReleaseTime = 0.57f;
+
+    public float ActualReleaseTime
+    {
+        get => enemyController.attackTime / throwAnimationLength * daggerReleaseTime;
+    }
+
+    public float ActualReplaceTime
+    {
+        get => enemyController.attackTime / throwAnimationLength * throwAnimationLength;
+    }
+
+
     void Start()
     {
         skeletonAnimator = GetComponent<Animator>();
         enemyController = GetComponent<SwordEnemyController>();
     }
 
-    
+
     void Update()
     {
         SetSpeedh();
@@ -34,11 +47,13 @@ public class SkeletonAnimationAdapter : SwordEnemyAnimationAdapter
         skeletonAnimator.SetFloat("speedh", speedh);
     }
 
+    
+
     public override void Attack()
     {
-        float attackSpeedMultiplier = attackAnimationLength / enemyController.attackTime;
-        skeletonAnimator.SetFloat("attackSpeedMultiplier", attackSpeedMultiplier);
-        skeletonAnimator.SetTrigger("Attack1h1");
+        float attackSpeedMultiplier = throwAnimationLength / enemyController.attackTime;
+        skeletonAnimator.SetFloat("throwSpeedMultiplier", attackSpeedMultiplier);
+        skeletonAnimator.SetTrigger("Throw");
     }
 
     public override void Die()

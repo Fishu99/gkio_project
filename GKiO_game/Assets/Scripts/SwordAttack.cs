@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordAttack : MonoBehaviour
+public class SwordAttack : EnemyAttack
 {
     private Collider objectCollider;
     public float swordLength = 0.5f;
@@ -12,11 +12,9 @@ public class SwordAttack : MonoBehaviour
     public int layerToHit = 9;
     //Zmienna informuje, czy aktualnie wykonywany jest atak
     private bool isAttacking = false;
-    private float sphereCastRadius;
     void Start()
     {
         objectCollider = GetComponent<Collider>();
-        sphereCastRadius = objectCollider.bounds.extents.z;
     }
 
     void Update()
@@ -25,7 +23,7 @@ public class SwordAttack : MonoBehaviour
     }
     
     //Wykonuje atak po czasie okreœlonym przez swordDelay.
-    public void Attack()
+    public override void Attack()
     {
         if (!isAttacking)
         {
