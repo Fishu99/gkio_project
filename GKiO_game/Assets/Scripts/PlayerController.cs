@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private bool didPlayerJustJumped = false;
     private bool isCrouching = false;
     private int playerScore = 0;
+    public bool IsInDeadZone { get; private set; } = false;
 
     //For audio
     private int stepNumber = 1;
@@ -140,9 +141,16 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        TurnPlayer();
-        CheckAndJump();
-        CalculateVelocity();
+        if (isDead)
+        {
+            StopPlayer();
+        }
+        else
+        {
+            TurnPlayer();
+            CheckAndJump();
+            CalculateVelocity();
+        }
         SetAnimationVariables();
     }
 
@@ -219,6 +227,11 @@ public class PlayerController : MonoBehaviour
         {
             isSprinting = false;
         }
+    }
+
+    private void StopPlayer()
+    {
+        playerRigidBody.velocity = new Vector3(0, playerRigidBody.velocity.y, playerRigidBody.velocity.z);
     }
 
     private void Shoot()
@@ -436,10 +449,11 @@ public class PlayerController : MonoBehaviour
     private void DieOfDeadZone()
     {
         playerAnimator.SetTrigger("Die");
+        IsInDeadZone = true;
         isDead = true;
         healthManager.SetZero();
-        RespawnOrGameOver();
-        //Invoke("RespawnOrGameOver", 0.5f);
+        //RespawnOrGameOver();
+        Invoke("RespawnOrGameOver", 1f);
     }
 
     private void RespawnOrGameOver()
@@ -459,6 +473,7 @@ public class PlayerController : MonoBehaviour
     private void Respawn()
     {
         isDead = false;
+        IsInDeadZone = false;
         playerAnimator.SetTrigger("Respawn");
         ReturnToCheckpoint();
         healthManager.SetMax();
