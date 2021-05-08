@@ -44,7 +44,5 @@ public class FollowPlayer : MonoBehaviour
         Vector3 playerFollowedPoint = player.transform.position + new Vector3(cameraOffset.x, cameraOffset.y, 0);
         Vector3 playerDirection = playerFollowedPoint - transform.position;
         transform.rotation = Quaternion.LookRotation(playerDirection);
-        //transform.rotation.SetLookRotation(playerDirection);
-        //transform.rotation.SetFromToRotation(transform.forward, playerDirection);
     }
 }

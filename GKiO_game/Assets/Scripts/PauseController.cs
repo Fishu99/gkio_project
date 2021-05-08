@@ -7,9 +7,10 @@ public class PauseController : MonoBehaviour
 {
     public bool IsPaused { get; private set; } = false;
     [SerializeField] private GameObject pauseMenu;
-    private readonly string mainMenuName = "mainMenu";
+    private GameManager gameManager;
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         pauseMenu.SetActive(false);
     }
 
@@ -44,6 +45,6 @@ public class PauseController : MonoBehaviour
         IsPaused = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
-        SceneManager.LoadScene(mainMenuName);
+        gameManager.ReturnToMainMenu();
     }
 }

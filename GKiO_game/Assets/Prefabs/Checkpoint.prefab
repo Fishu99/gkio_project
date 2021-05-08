@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3266346816373549932}
   m_Layer: 10
   m_Name: Checkpoint
-  m_TagString: Untagged
+  m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,3 +57,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd99653e8da24145a1e6dbecc16c275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gizmoColor: {r: 0, g: 0, b: 1, a: 0.3}

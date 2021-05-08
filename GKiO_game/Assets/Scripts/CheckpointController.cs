@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckpointController : MonoBehaviour
 {
-    private Color gizmoColor = new Color(0, 0, 1, 0.3f);
+    [SerializeField] private Color gizmoColor = new Color(0, 0, 1, 0.3f);
     // Start is called before the first frame update
     void Start()
     {

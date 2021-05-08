@@ -30,14 +30,16 @@ public class PlayerController : MonoBehaviour
 
     //Player states/statuses
     public int lives = 3;
+    public int playerScore = 0;
     private bool isGrounded = true;
     private bool comboStatus = false;
     private float comboActiveTime = 0f;
     private bool isGoingToJump = false;
     private bool didPlayerJustJumped = false;
     private bool isCrouching = false;
-    private int playerScore = 0;
+    
     public bool IsInDeadZone { get; private set; } = false;
+    public bool HasFinishedLevel { get; private set; } = false;
 
     //For audio
     private int stepNumber = 1;
@@ -168,7 +170,10 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.layer == LayerMask.NameToLayer("Checkpoint"))
         {
-            lastCheckpoint = other.gameObject;
+            if (other.gameObject.CompareTag("Checkpoint"))
+                lastCheckpoint = other.gameObject;
+            else if (other.gameObject.CompareTag("FinishZone"))
+                HasFinishedLevel = true;
         }
     }
 
