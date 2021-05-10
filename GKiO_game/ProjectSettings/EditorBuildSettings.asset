@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 184d538739ab49d4dbe36ebdadbb9a8c
   - enabled: 1
+    path: Assets/Scenes/MainMenu2.unity
+    guid: 8dc2c63c59c2c7242bae67e4f14ce36b
+  - enabled: 1
+    path: Assets/Scenes/DifficultySelect.unity
+    guid: bc71e7e49ba382546afd3fa07878b76c
+  - enabled: 1
     path: Assets/Scenes/LevelsProject/Dungeon2.unity
     guid: 5f55e13e37daf5d4aa57c393dd565e71
   - enabled: 1
@@ -17,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DBTests/DBForest.unity
     guid: 6e377fcaa094f5c44814f8730a97b03d
+  - enabled: 1
+    path: Assets/Scenes/DBTests/WinScene.unity
+    guid: 33896d05e4431ba478bb8d0075e5c76a
   m_configObjects: {}

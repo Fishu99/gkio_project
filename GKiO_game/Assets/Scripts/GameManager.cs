@@ -66,6 +66,17 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void LoadDifficultySelect()
+    {
+        SceneManager.LoadScene("DifficultySelect");
+    }
+
+    public void SelectDifficultyAndGoNext(Difficulty difficulty)
+    {
+        CurrentDifficulty = difficulty;
+        LoadFirstLevel();
+    }
+
     public void FinishLevel()
     {
         if (!IsLevelFinished)
@@ -98,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu2");
     }
 
     public void LoadFirstLevel()
