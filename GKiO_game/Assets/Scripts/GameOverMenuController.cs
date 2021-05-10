@@ -9,7 +9,7 @@ public class GameOverMenuController : MonoBehaviour
     private bool active = false;
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         gameOverPanel.SetActive(false);
         active = false;
     }

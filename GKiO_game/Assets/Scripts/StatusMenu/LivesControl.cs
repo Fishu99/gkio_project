@@ -9,7 +9,7 @@ public class LivesControl : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         textMesh = GetComponent<TMP_Text>();
     }
 

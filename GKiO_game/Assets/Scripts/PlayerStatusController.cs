@@ -17,7 +17,7 @@ public class PlayerStatusController : MonoBehaviour
 
     private void GetComponents()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         playerController = GetComponent<PlayerController>();
         healthManager = GetComponent<HealthManager>();
     }
@@ -43,10 +43,17 @@ public class PlayerStatusController : MonoBehaviour
         if (gameManager != null)
         {
             SetStatusInGameManager();
-            if (playerController.HasFinishedLevel)
+            /*
+            if (playerController.HasFinishedLevel && !gameManager.IsLevelFinished)
             {
+                Debug.Log("Detected level finish");
                 gameManager.FinishLevel();
-            }
+            }*/
         }
+    }
+    public void FinishLevel()
+    {
+        Debug.Log("Detected level finish");
+        gameManager.FinishLevel();
     }
 }

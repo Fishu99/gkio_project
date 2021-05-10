@@ -9,7 +9,7 @@ public class MoneyControl : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         textMesh = GetComponent<TMP_Text>();
         CheckMoney();
         DisplayMoney();

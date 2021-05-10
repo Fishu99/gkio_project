@@ -9,7 +9,7 @@ public class LevelFinishedMenuController : MonoBehaviour
     private bool active = false;
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         levelFinishedPanel.SetActive(false);
         active = false;
     }
@@ -22,12 +22,6 @@ public class LevelFinishedMenuController : MonoBehaviour
             Time.timeScale = 0;
             active = true;
             levelFinishedPanel.SetActive(true);
-        }
-        if (active && !gameManager.IsLevelFinished)
-        {
-            Time.timeScale = 1;
-            active = false;
-            levelFinishedPanel.SetActive(false);
         }
     }
 

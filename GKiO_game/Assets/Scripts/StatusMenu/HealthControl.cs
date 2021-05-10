@@ -9,7 +9,7 @@ public class HealthControl : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         healthTextMesh = GetComponent<TMP_Text>();
     }
 

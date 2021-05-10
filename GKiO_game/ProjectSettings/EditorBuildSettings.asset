@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelsProject/Dungeon2.unity
     guid: 5f55e13e37daf5d4aa57c393dd565e71
+  - enabled: 1
+    path: Assets/Scenes/DBTests/DBDungeon.unity
+    guid: 077dd6bebde88ca4ba22afba204ec136
+  - enabled: 1
+    path: Assets/Scenes/DBTests/DBForest.unity
+    guid: 6e377fcaa094f5c44814f8730a97b03d
   m_configObjects: {}

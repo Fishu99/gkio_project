@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
     }
 
     public void StartGame()

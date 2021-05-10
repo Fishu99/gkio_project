@@ -72,12 +72,13 @@ public class GameManager : MonoBehaviour
         {
             IsLevelFinished = true;
             Debug.Log("Level finished");
-
+            
         }
     }
 
     public void LoadNextLevel()
     {
+        
         currentLevel++;
         if(currentLevel < levelNames.Length)
         {
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
         {
             LoadWinScene();
         }
+        IsLevelFinished = false;
     }
 
     private void LoadCurrentLevel()
@@ -115,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadWinScene()
     {
-
+        SceneManager.LoadScene("WinScene");
     }
 
     private void ConfigureForCurrentDifficulty()

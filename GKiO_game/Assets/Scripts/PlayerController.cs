@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider playerCollider;
     AudioManager audioManager;
     HealthManager healthManager;
+    PlayerStatusController statusController;
     public Camera playerCamera;
 
     //Variables and constants
@@ -39,7 +40,6 @@ public class PlayerController : MonoBehaviour
     private bool isCrouching = false;
     
     public bool IsInDeadZone { get; private set; } = false;
-    public bool HasFinishedLevel { get; private set; } = false;
 
     //For audio
     private int stepNumber = 1;
@@ -78,9 +78,9 @@ public class PlayerController : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
         healthManager = GetComponent<HealthManager>();
-        audioManager = FindObjectOfType<AudioManager>();
+        statusController = GetComponent<PlayerStatusController>();
+        audioManager = AudioManager.instance;
         startPosition = transform.position;
-
         sword = GameObject.Find("Sword_1");
         bow = GameObject.Find("Wooden Bow");
 
@@ -173,7 +173,9 @@ public class PlayerController : MonoBehaviour
             if (other.gameObject.CompareTag("Checkpoint"))
                 lastCheckpoint = other.gameObject;
             else if (other.gameObject.CompareTag("FinishZone"))
-                HasFinishedLevel = true;
+            {
+                statusController.FinishLevel();
+            }
         }
     }
 

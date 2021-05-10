@@ -10,7 +10,7 @@ public class PauseController : MonoBehaviour
     private GameManager gameManager;
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance;
         pauseMenu.SetActive(false);
     }
 
