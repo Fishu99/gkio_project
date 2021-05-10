@@ -175,6 +175,7 @@ public class PlayerController : MonoBehaviour
                 lastCheckpoint = other.gameObject;
             else if (other.gameObject.CompareTag("FinishZone"))
             {
+                StopPlayer();
                 statusController.FinishLevel();
             }
         }
@@ -401,6 +402,7 @@ public class PlayerController : MonoBehaviour
         //isShooting
         if (isGoingToShoot)
         {
+            RotatePlayerForShooting();
             ChangeWeaponToBow();
             playerAnimator.SetTrigger("Shoot");
             bowAnimator.SetTrigger("Shoot");
@@ -433,6 +435,21 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isComboEnded", isComboEnded);
         //isShooting
         playerAnimator.SetBool("isShooting", isShooting);
+    }
+
+    private void RotatePlayerForShooting()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 center = playerCollider.bounds.center;
+        Vector3 screenPlayerPosition = playerCamera.WorldToScreenPoint(center);
+        if(mousePosition.x - screenPlayerPosition.x > 0)
+        {
+            playerRigidBody.rotation = Quaternion.LookRotation(Vector3.right);
+        }
+        else
+        {
+            playerRigidBody.rotation = Quaternion.LookRotation(Vector3.left);
+        }
     }
 
     private void ChangeWeaponToSword()

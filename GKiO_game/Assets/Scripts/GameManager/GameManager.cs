@@ -28,13 +28,19 @@ public class GameManager : MonoBehaviour
     public float PlayerMaxHealth { get; private set; }
     public int PlayerLives { get; set; }
     public int PlayerMoney { get; set; }
-    public int Score { get; set; }
+    public FeatureUpgrade<float> SwordDamageUpgrade;
+
+    public ScoreCounter ScoreCounter { get; set; }
     public bool IsGameOver {
         get => PlayerLives == 0;
     }
     public bool IsLevelFinished { get; private set; } = false;
     private int currentLevel = 0;
-    private string[] levelNames = new string[] {"DBDungeon", "DBForest" };
+    private SceneData[] sceneData = new SceneData[]
+    {
+        new SceneData { SceneName = "DBDungeon", LevelName = "Dungeon", ExpectedTime = 120 },
+        new SceneData { SceneName = "DBForest", LevelName = "Forest", ExpectedTime = 90 }
+    };
 
     private void Awake()
     {
@@ -53,6 +59,48 @@ public class GameManager : MonoBehaviour
     {
         ResetPlayerStatus();
         currentLevel = 0;
+        ScoreCounter = new ScoreCounter();
+        CheckFirstScene();
+    }
+
+    private void InitializeUpgrades()
+    {
+        var swordDamageUpgradeLevels = new FeatureLevel<float>[]
+        {
+            new FeatureLevel<float> { FeatureValue = 20, Cost = 5},
+            new FeatureLevel<float> { FeatureValue = 30, Cost = 8},
+            new FeatureLevel<float> { FeatureValue = 50, Cost = 12},
+            new FeatureLevel<float> { FeatureValue = 80, Cost = 20}
+        };
+        SwordDamageUpgrade = new FeatureUpgrade<float>(swordDamageUpgradeLevels);
+    }
+
+    private void CheckFirstScene()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        int index = System.Array.FindIndex(sceneData, s => s.SceneName == sceneName);
+        if (index != -1)
+        {
+            currentLevel = index;
+            IsLevelFinished = false;
+            ScoreCounter.NewGame();
+            ScoreCounter.CurrentDifficulty = CurrentDifficulty;
+            ScoreCounter.NewScene(sceneData[index]);
+            ResetPlayerStatus();
+        }
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (System.Array.Exists(sceneData, s => s.SceneName == scene.name))
+        {
+            ScoreCounter.StartTimeCount();
+        }
     }
 
     void Start()
@@ -65,6 +113,8 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    
 
     public void LoadDifficultySelect()
     {
@@ -81,6 +131,8 @@ public class GameManager : MonoBehaviour
     {
         if (!IsLevelFinished)
         {
+            ScoreCounter.StopTimeCount();
+            ScoreCounter.AddSceneScoreToTotalScore();
             IsLevelFinished = true;
             Debug.Log("Level finished");
             
@@ -91,7 +143,7 @@ public class GameManager : MonoBehaviour
     {
         
         currentLevel++;
-        if(currentLevel < levelNames.Length)
+        if(currentLevel < sceneData.Length)
         {
             LoadCurrentLevel();
         }
@@ -104,7 +156,9 @@ public class GameManager : MonoBehaviour
 
     private void LoadCurrentLevel()
     {
-        SceneManager.LoadScene(levelNames[currentLevel]);
+        SceneData newSceneData = sceneData[currentLevel];
+        ScoreCounter.NewScene(newSceneData);
+        SceneManager.LoadScene(newSceneData.SceneName);
     }
 
     public void ReturnToMainMenu()
@@ -114,6 +168,8 @@ public class GameManager : MonoBehaviour
 
     public void LoadFirstLevel()
     {
+        ScoreCounter.NewGame();
+        ScoreCounter.CurrentDifficulty = CurrentDifficulty;
         ResetPlayerStatus();
         currentLevel = 0;
         LoadCurrentLevel();
@@ -122,7 +178,6 @@ public class GameManager : MonoBehaviour
     private void ResetPlayerStatus()
     {
         PlayerMoney = 0;
-        Score = 0;
         ConfigureForCurrentDifficulty();
     }
 
@@ -149,5 +204,16 @@ public class GameManager : MonoBehaviour
                 break;
         }
         PlayerHealth = PlayerMaxHealth;
+    }
+
+    public void AddCollectedMoney(int money)
+    {
+        PlayerMoney += money;
+        ScoreCounter.AddCollectedMoney(money);
+    }
+
+    public void AddKilledEnemy(int enemyValue = 1)
+    {
+        ScoreCounter.AddKilledEnemy(enemyValue);
     }
 }

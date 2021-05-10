@@ -1145,6 +1145,7 @@ MonoBehaviour:
   waitOnEndTime: 2
   attackInterval: 3
   attackTime: 1
+  enemyKillValue: 1
 --- !u!114 &2090079832657171621
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,6 +23,8 @@ public class SwordEnemyController : MonoBehaviour
     public float attackInterval = 3f;
     //Czas trwania ataku
     public float attackTime = 1f;
+    //Liczba punktów za zabicie przeciwnika
+    public int enemyKillValue;
 
 
     //Pocz¹tkowa pozycja przeciwnika. Jest pobierana na starcie na podstawie po³o¿enia na scenie
@@ -40,6 +42,7 @@ public class SwordEnemyController : MonoBehaviour
     private WeaponAttack enemyAttack;
     //Adapter animacji
     private SwordEnemyAnimationAdapter animationAdapter;
+    private GameManager gameManager;
 
     //Stany
     private SwordEnemyState currentState;
@@ -65,6 +68,7 @@ public class SwordEnemyController : MonoBehaviour
         enemyCollider = GetComponent<CapsuleCollider>();
         enemyAttack = GetComponent<WeaponAttack>();
         animationAdapter = GetComponent<SwordEnemyAnimationAdapter>();
+        gameManager = GameManager.instance;
     }
 
     private void GetStartPosition()
@@ -215,9 +219,22 @@ public class SwordEnemyController : MonoBehaviour
 
     private IEnumerator DeathSequence()
     {
+        ReportKilling();
+        DisablePhysics();
         animationAdapter.Die();
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
+    }
+
+    private void DisablePhysics()
+    {
+        enemyRigidBody.isKinematic = true;
+        enemyRigidBody.detectCollisions = false;
+    }
+
+    private void ReportKilling()
+    {
+        gameManager?.AddKilledEnemy(enemyKillValue);
     }
 
     void OnDrawGizmosSelected()

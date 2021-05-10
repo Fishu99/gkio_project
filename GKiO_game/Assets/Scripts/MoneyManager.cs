@@ -5,10 +5,11 @@ using UnityEngine;
 public class MoneyManager : MonoBehaviour
 {
     public int Money { get; set; } = 0;
+    private GameManager gameManager;
 
     void Start()
     {
-        
+        gameManager = GameManager.instance;
     }
 
     // Update is called once per frame
@@ -22,7 +23,9 @@ public class MoneyManager : MonoBehaviour
         Collectible collectible = other.GetComponent<Collectible>();
         if(collectible != null)
         {
-            Money += collectible.Collect();
+            int collectedMoney = collectible.Collect();
+            Money += collectedMoney;
+            gameManager.AddCollectedMoney(collectedMoney);
         }
     }
 }
