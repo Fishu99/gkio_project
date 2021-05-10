@@ -6,6 +6,7 @@ public class PlayerStatusController : MonoBehaviour
     GameManager gameManager;
     PlayerController playerController;
     HealthManager healthManager;
+    MoneyManager moneyManager;
     void Start()
     {
         GetComponents();
@@ -20,20 +21,21 @@ public class PlayerStatusController : MonoBehaviour
         gameManager = GameManager.instance;
         playerController = GetComponent<PlayerController>();
         healthManager = GetComponent<HealthManager>();
+        moneyManager = GetComponent<MoneyManager>();
     }
 
     private void GetStatusFromGameManager()
     {
         healthManager.MaxHealth = gameManager.PlayerMaxHealth;
         healthManager.Health = gameManager.PlayerHealth;
-        playerController.playerScore = gameManager.PlayerMoney;
+        moneyManager.Money = gameManager.PlayerMoney;
         playerController.lives = gameManager.PlayerLives;
     }
 
     private void SetStatusInGameManager()
     {
         gameManager.PlayerHealth = healthManager.Health;
-        gameManager.PlayerMoney = playerController.playerScore;
+        gameManager.PlayerMoney = moneyManager.Money;
         gameManager.PlayerLives = playerController.lives;
     }
 

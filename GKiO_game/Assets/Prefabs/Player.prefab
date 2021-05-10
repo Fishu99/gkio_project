@@ -2377,6 +2377,7 @@ GameObject:
   - component: {fileID: 8905176523138102305}
   - component: {fileID: 4992606484151209716}
   - component: {fileID: 4993716316082234761}
+  - component: {fileID: 5453894427973222552}
   - component: {fileID: 1253086929286042}
   m_Layer: 6
   m_Name: Player
@@ -2515,7 +2516,6 @@ MonoBehaviour:
   jumpForce: 500
   arrowPrefab: {fileID: 4941945707699202289, guid: 0b07a4186d0cb8247a06544e48276420, type: 3}
   lives: 3
-  playerScore: 0
 --- !u!114 &4992606484151209716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2546,6 +2546,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   health: 100
+--- !u!114 &5453894427973222552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8904172200713354830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11433f98797abcd419a8b237497a25f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1253086929286042
 MonoBehaviour:
   m_ObjectHideFlags: 0

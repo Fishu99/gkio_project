@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     //Player states/statuses
     public int lives = 3;
-    public int playerScore = 0;
+    //public int playerScore = 0;
     private bool isGrounded = true;
     private bool comboStatus = false;
     private float comboActiveTime = 0f;
@@ -162,12 +162,13 @@ public class PlayerController : MonoBehaviour
         {
             DieOfDeadZone();
         }
+        /*
         if (other.gameObject.CompareTag("Collectibles"))
         {
             Destroy(other.gameObject);
             playerScore++;
             Debug.Log("Player score is: " + playerScore.ToString());
-        }
+        }*/
         if(other.gameObject.layer == LayerMask.NameToLayer("Checkpoint"))
         {
             if (other.gameObject.CompareTag("Checkpoint"))
