@@ -1,6 +1,6 @@
 
-public class FeatureLevel<T>
+public class FeatureLevel
 {
-    public T FeatureValue { get; set; }
+    public float FeatureValue { get; set; }
     public int Cost { get; set; }
 }

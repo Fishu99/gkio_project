@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FeatureUpgrade<T>
+public class FeatureUpgrade
 {
-    private FeatureLevel<T>[] levels;
+    private FeatureLevel[] levels;
     int levelIndex = 0;
 
-    public T CurrentFeatureValue
+    public float CurrentFeatureValue
     {
         get => levels[levelIndex].FeatureValue;
+    }
+
+    public float NextFeatureValue
+    {
+        get => levels[levelIndex+1].FeatureValue;
     }
 
     public int UpgradeCost
@@ -22,7 +27,7 @@ public class FeatureUpgrade<T>
         get => levelIndex + 1 < levels.Length;
     }
 
-    public FeatureUpgrade(FeatureLevel<T>[] levels)
+    public FeatureUpgrade(FeatureLevel[] levels)
     {
         this.levels = levels;
     }
@@ -35,5 +40,11 @@ public class FeatureUpgrade<T>
         }
     }
 
+    public void Reset()
+    {
+        levelIndex = 0;
+    }
+
 
 }
+

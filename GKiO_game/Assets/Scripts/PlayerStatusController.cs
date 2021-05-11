@@ -7,6 +7,7 @@ public class PlayerStatusController : MonoBehaviour
     PlayerController playerController;
     HealthManager healthManager;
     MoneyManager moneyManager;
+    SwordAttack swordAttack;
     void Start()
     {
         GetComponents();
@@ -22,6 +23,7 @@ public class PlayerStatusController : MonoBehaviour
         playerController = GetComponent<PlayerController>();
         healthManager = GetComponent<HealthManager>();
         moneyManager = GetComponent<MoneyManager>();
+        swordAttack = GetComponent<SwordAttack>();
     }
 
     private void GetStatusFromGameManager()
@@ -30,6 +32,7 @@ public class PlayerStatusController : MonoBehaviour
         healthManager.Health = gameManager.PlayerHealth;
         moneyManager.Money = gameManager.PlayerMoney;
         playerController.lives = gameManager.PlayerLives;
+        swordAttack.swordDamage = gameManager.PlayerSwordDamage;
     }
 
     private void SetStatusInGameManager()

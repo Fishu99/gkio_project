@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/**
+ * Poziomy trudnoœci gry
+ */
 public enum Difficulty
 {
     Easy,
@@ -28,7 +31,11 @@ public class GameManager : MonoBehaviour
     public float PlayerMaxHealth { get; private set; }
     public int PlayerLives { get; set; }
     public int PlayerMoney { get; set; }
-    public FeatureUpgrade<float> SwordDamageUpgrade;
+    public float PlayerSwordDamage
+    {
+        get => SwordDamageUpgrade.CurrentFeatureValue;
+    }
+    public FeatureUpgrade SwordDamageUpgrade;
 
     public ScoreCounter ScoreCounter { get; set; }
     public bool IsGameOver {
@@ -55,26 +62,39 @@ public class GameManager : MonoBehaviour
         Initialize();
     }
 
+    /**
+     * Inicjalizacja gameManagera po uruchomieniu
+     * 
+     */
     private void Initialize()
-    {
-        ResetPlayerStatus();
+    { 
         currentLevel = 0;
         ScoreCounter = new ScoreCounter();
+        InitializeUpgrades();
         CheckFirstScene();
+        ResetPlayerStatus();
     }
 
+    /**
+     * W tej metodzie s¹ tworzone obiekty klasy FeatureUpgrade, które opisuj¹ kolejne poziomy ulepszeñ.
+     */
     private void InitializeUpgrades()
     {
-        var swordDamageUpgradeLevels = new FeatureLevel<float>[]
+        var swordDamageUpgradeLevels = new FeatureLevel[]
         {
-            new FeatureLevel<float> { FeatureValue = 20, Cost = 5},
-            new FeatureLevel<float> { FeatureValue = 30, Cost = 8},
-            new FeatureLevel<float> { FeatureValue = 50, Cost = 12},
-            new FeatureLevel<float> { FeatureValue = 80, Cost = 20}
+            new FeatureLevel { FeatureValue = 30, Cost = 0}, //FeatureValue pierwszego elementu to pocz¹tkowa wartoœæ swordDamage
+            new FeatureLevel { FeatureValue = 40, Cost = 1},
+            new FeatureLevel { FeatureValue = 60, Cost = 2},
+            new FeatureLevel { FeatureValue = 80, Cost = 3}
         };
-        SwordDamageUpgrade = new FeatureUpgrade<float>(swordDamageUpgradeLevels);
+        SwordDamageUpgrade = new FeatureUpgrade(swordDamageUpgradeLevels);
     }
 
+    /**
+     * Ta funkcja pozwala za³adowaæ odpowiednie wartoœci ró¿nych parametrów
+     * je¿eli gra nie zosta³a uruchomiona w menu g³ównym, ale na jakimœ z poziomów.
+     * Dziêki temu mo¿na wygodnie testowaæ poziomy
+     */
     private void CheckFirstScene()
     {
         string sceneName = SceneManager.GetActiveScene().name;
@@ -95,6 +115,10 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    /**
+     * Po za³adowaniu sceny w³¹czany jest licznik czasu
+     * odmierzaj¹cy czas przejœcia poziomu
+     */
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (System.Array.Exists(sceneData, s => s.SceneName == scene.name))
@@ -127,6 +151,9 @@ public class GameManager : MonoBehaviour
         LoadFirstLevel();
     }
 
+    /**
+     * Czynnoœci wykonywane po tym, jak gracz dojdzie do koñca poziomu
+     */
     public void FinishLevel()
     {
         if (!IsLevelFinished)
@@ -175,9 +202,15 @@ public class GameManager : MonoBehaviour
         LoadCurrentLevel();
     }
 
+    public void LoadWorkshop()
+    {
+        SceneManager.LoadScene("Workshop");
+    }
+
     private void ResetPlayerStatus()
     {
         PlayerMoney = 0;
+        SwordDamageUpgrade.Reset();
         ConfigureForCurrentDifficulty();
     }
 
@@ -186,6 +219,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("WinScene");
     }
 
+    /**
+     * Ustawia ró¿ne parametry gracza w zale¿noœci od aktualnego poziomu trudnoœci
+     */
     private void ConfigureForCurrentDifficulty()
     {
         switch (currentDifficulty)
@@ -206,14 +242,36 @@ public class GameManager : MonoBehaviour
         PlayerHealth = PlayerMaxHealth;
     }
 
+    /**
+     * Dodaje zebrane pieni¹dze do pieniêdzy gracza i do wyniku.
+     */
     public void AddCollectedMoney(int money)
     {
         PlayerMoney += money;
         ScoreCounter.AddCollectedMoney(money);
     }
 
+    /**
+     * Dodaje zabitego gracza do wyniku.
+     */
     public void AddKilledEnemy(int enemyValue = 1)
     {
         ScoreCounter.AddKilledEnemy(enemyValue);
+    }
+
+    /**
+     * Kupuje wskazane ulepszenie, je¿eli dan¹ wartoœæ mo¿na jeszcze ulepszyæ i jeœli gracza na to staæ.
+     */
+    public void BuyUpgrade(FeatureUpgrade featureUpgrade)
+    {
+        if (featureUpgrade.IsUpgradePossible)
+        {
+            int cost = featureUpgrade.UpgradeCost;
+            if (cost <= PlayerMoney)
+            {
+                PlayerMoney -= cost;
+                featureUpgrade.Upgrade();
+            }
+        }
     }
 }

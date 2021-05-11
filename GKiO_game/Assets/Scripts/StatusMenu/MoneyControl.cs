@@ -32,7 +32,7 @@ public class MoneyControl : MonoBehaviour
 
     private void DisplayMoney()
     {
-        textMesh.text = "Money: " + displayedMoney;
+        textMesh.text = displayedMoney.ToString();
     }
 
 
