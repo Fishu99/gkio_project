@@ -8,16 +8,6 @@ public class Collectible : MonoBehaviour
     public int Value {
         get => value;
     }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public int Collect()
     {
