@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
+    private AudioManager audioManager;
     [SerializeField]
     private float maxHealth = 100f;
     public float MaxHealth {
@@ -30,7 +31,7 @@ public class HealthManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        audioManager = AudioManager.instance;
     }
 
     // Update is called once per frame
@@ -41,6 +42,8 @@ public class HealthManager : MonoBehaviour
 
     public void Damage(float points)
     {
+        if (gameObject.CompareTag("Player"))
+            audioManager.Play("PlayerHurt");
         Health -= points;
     }
 

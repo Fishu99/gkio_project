@@ -47,7 +47,10 @@ public class SwordAttack : WeaponAttack
         Debug.Log(wasHit);
         if (wasHit)
         {
-            audioManager.Play("PlayerSwordHit");
+            if (hitinfo.transform.gameObject.CompareTag("Enemy"))
+                audioManager.Play("PlayerSwordHit");
+            else if (hitinfo.transform.gameObject.CompareTag("Player"))
+                audioManager.Play("PlayerHitBySword");
             DamageHealth(hitinfo);
         }
     }

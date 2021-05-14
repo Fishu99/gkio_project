@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DaggerController : MonoBehaviour
 {
+    private AudioManager audioManager;
     //Informuje o tym, czy sztylet jest niebezpieczny. 
     //Strza³a jest niebezpieczna od wywo³ania funkcji Shoot do trafienia strza³y w dowoln¹ przeszkodê
     private bool isHarmful = false;
@@ -13,6 +14,7 @@ public class DaggerController : MonoBehaviour
     public int layerToHit = 6;
     private void Awake()
     {
+        audioManager = AudioManager.instance;
         daggerRigidBody = GetComponent<Rigidbody>();
         DisablePhysics();
     }
@@ -45,6 +47,8 @@ public class DaggerController : MonoBehaviour
     {
         if (isHarmful)
         {
+            if (collision.gameObject.CompareTag("Player"))
+                audioManager.Play("PlayerHitByDagger");
             DamageHealth(collision);
         }
         daggerRigidBody.constraints = RigidbodyConstraints.FreezeAll;
