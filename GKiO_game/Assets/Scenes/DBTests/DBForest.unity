@@ -276,7 +276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63421066}
   m_LocalRotation: {x: 0.1460285, y: 0.099832386, z: 0.014814216, w: -0.9841188}
-  m_LocalPosition: {x: 154.08412, y: 21.341606, z: 60.848495}
+  m_LocalPosition: {x: 186.29405, y: 23.195343, z: 74.02222}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1772,7 +1772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2090079832657171623, guid: 34b1dc5ad594da04abdb677beed2cd58, type: 3}
       propertyPath: playerNearY
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2091288171558864631, guid: 34b1dc5ad594da04abdb677beed2cd58, type: 3}
       propertyPath: m_Name
@@ -1788,7 +1788,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2094733871303522123, guid: 34b1dc5ad594da04abdb677beed2cd58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30.06
+      value: 30.022
       objectReference: {fileID: 0}
     - target: {fileID: 2094733871303522123, guid: 34b1dc5ad594da04abdb677beed2cd58, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2114,7 +2114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2090079832657171623, guid: 68eea8a4aad4bce409a3ae076682ff31, type: 3}
       propertyPath: attackInterval
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2090079832657171623, guid: 68eea8a4aad4bce409a3ae076682ff31, type: 3}
       propertyPath: playerNearDistance

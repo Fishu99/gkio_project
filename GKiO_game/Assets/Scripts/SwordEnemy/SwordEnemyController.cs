@@ -24,8 +24,10 @@ public class SwordEnemyController : MonoBehaviour
     //Czas jaki przeciwnik czeka na koñcu
     public float waitOnEndTime = 2f;
     //Czas pomiêdzy wejœciem gracza w obszar ataku, a rozpoczêciem pierwszego ataku
+    [Tooltip("The time between the player enetring attack range and the first attack made by the enemy")]
     public float firstAttackDelay = 0.3f;
     //Odstêp pomiêdzy kolejnymi atakami je¿eli gracz ca³y czas znajduje siê w polu ataku
+    [Tooltip("The interval between the attacks if player stays within attack range")]
     public float attackInterval = 0.5f;
     //Czas trwania ataku
     public float attackTime = 1f;
