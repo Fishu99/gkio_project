@@ -4431,7 +4431,7 @@ GameObject:
   - component: {fileID: 1478885194}
   m_Layer: 9
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4497,6 +4497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba17da0f32fb8443934cdc5a4933d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfEnemy: Goblin
   walkSpeed: 1
   walkRange: 4
   playerNearDistance: 5

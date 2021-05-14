@@ -7,6 +7,7 @@ TagManager:
   - Collectibles
   - FinishZone
   - Checkpoint
+  - Enemy
   layers:
   - Default
   - TransparentFX

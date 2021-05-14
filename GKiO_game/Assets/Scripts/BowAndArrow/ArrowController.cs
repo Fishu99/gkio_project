@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
+    private AudioManager audioManager;
+
     //Informuje o tym, czy strza³a jest niebezpieczna. 
     //Strza³a jest niebezpieczna od wywo³ania funkcji Shoot do trafienia strza³y w dowoln¹ przeszkodê
     private bool isHarmful = false;
@@ -13,6 +15,7 @@ public class ArrowController : MonoBehaviour
     
     void Start()
     {
+        audioManager = AudioManager.instance;
         arrowRigidBody = GetComponent<Rigidbody>();
     }
 
@@ -63,9 +66,12 @@ public class ArrowController : MonoBehaviour
             HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
             if (healthManager != null)
             {
+                audioManager.Play("PlayerArrowHit");
                 healthManager.Damage(arrowDamage);
             }
         }
+        else
+            audioManager.Play("ArrowHitObstacle");
     }
 
     private void DestroyAfterCollision()

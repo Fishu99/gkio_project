@@ -84,4 +84,29 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Stop();
     }
+
+    public void PlayWithRandomPitch(string name, int minRange, int maxRange)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
+
+        //Checking values range
+        if (minRange > maxRange)
+            maxRange = minRange;
+        if (minRange < 0)
+            minRange = 0;
+        if (maxRange > 1)
+            maxRange = 1;
+
+        //Generate random pitch value
+        int randomPercentage = UnityEngine.Random.Range(minRange, maxRange);
+        float pitchValueGenerated = randomPercentage * (3.0f - 0.1f) / 100; //Pitch has values from 0.1f to 3.0f
+
+        s.pitch = pitchValueGenerated;
+        s.source.Play();
+    }
 }

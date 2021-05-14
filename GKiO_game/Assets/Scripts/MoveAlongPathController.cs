@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveAlongPathController : MonoBehaviour
 {
-    public int currentPathIndex = 0;
+    private int currentPathIndex = 0;
     [SerializeField] private Vector3[] setPaths;
     [SerializeField] private float[] setWaitTimes;
     [SerializeField] private float speed = 1.0f;
@@ -22,7 +22,7 @@ public class MoveAlongPathController : MonoBehaviour
     private bool isWaiting = false;
     private bool isLooping = false;
     private float waitTime;
-    public float timeLeft;
+    private float timeLeft;
 
     private void OnValidate()
     {

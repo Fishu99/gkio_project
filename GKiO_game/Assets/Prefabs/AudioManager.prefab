@@ -47,24 +47,24 @@ MonoBehaviour:
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: ad6d56fac74005c4c89d1c89d9b7e4df, type: 3}
     volume: 1
-    pitch: 0.1
+    pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlayerSwordAttack1
     clip: {fileID: 8300000, guid: a8b336ab832e79341ba71b93711f4490, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlayerSwordAttack2
     clip: {fileID: 8300000, guid: abbc6f1b48c22b54d893fe0e31eb2023, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PlayerSwordAttack3
     clip: {fileID: 8300000, guid: 74c1413f37d1f3e478b214c340db603c, type: 3}
-    volume: 1
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -108,5 +108,53 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f58ac96f9b6da674db2ac0cd768898ba, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CollectiblePickup
+    clip: {fileID: 8300000, guid: 32017559206ee924db0b26030ecf4f9e, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SkeletonDeath
+    clip: {fileID: 8300000, guid: bf7c2d832f7abce4fa55ac9721fdda3f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerArrowHit
+    clip: {fileID: 8300000, guid: fff753472e33e8940973542709c0dcb3, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerSwordHit
+    clip: {fileID: 8300000, guid: 43a2a90b678de9e4c9ad44e13594b1b5, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerHitByDagger
+    clip: {fileID: 8300000, guid: f6296f1d55ef0614ea50215e009652b5, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerHitBySword
+    clip: {fileID: 8300000, guid: a063da20f6449fa4d9e274a9fe4d9479, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PlayerHurt
+    clip: {fileID: 8300000, guid: af40183aeb93b46418bd3b02b40c05f0, type: 3}
+    volume: 0.25
+    pitch: 1.5
+    loop: 0
+    source: {fileID: 0}
+  - name: ArrowHitObstacle
+    clip: {fileID: 8300000, guid: 8a38551618c16b649ad9e9afa017465d, type: 3}
+    volume: 0.25
+    pitch: 1.5
     loop: 0
     source: {fileID: 0}

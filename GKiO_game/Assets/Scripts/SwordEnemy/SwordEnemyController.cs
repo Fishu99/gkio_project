@@ -7,7 +7,8 @@ using UnityEngine;
  */
 public class SwordEnemyController : MonoBehaviour
 {
-    
+    [SerializeField] private string typeOfEnemy;
+
     //Prêdkoœæ chodzenia przeciwnika
     public float walkSpeed = 4f;
 
@@ -53,6 +54,7 @@ public class SwordEnemyController : MonoBehaviour
     private CapsuleCollider enemyCollider;
     private HealthManager healthManager;
     private WeaponAttack enemyAttack;
+    private AudioManager audioManager;
     //Adapter animacji
     private SwordEnemyAnimationAdapter animationAdapter;
     private GameManager gameManager;
@@ -82,6 +84,7 @@ public class SwordEnemyController : MonoBehaviour
         enemyCollider = GetComponent<CapsuleCollider>();
         enemyAttack = GetComponent<WeaponAttack>();
         animationAdapter = GetComponent<SwordEnemyAnimationAdapter>();
+        audioManager = AudioManager.instance;
         gameManager = GameManager.instance;
     }
 
@@ -247,6 +250,7 @@ public class SwordEnemyController : MonoBehaviour
 
     private IEnumerator DeathSequence()
     {
+        PlayDeathSound();
         ReportKilling();
         DisablePhysics();
         animationAdapter.Die();
@@ -295,4 +299,13 @@ public class SwordEnemyController : MonoBehaviour
             Gizmos.DrawLine(startPosition + offsetY, endPosition + offsetY);
         }
     }
+
+    private void PlayDeathSound()
+    {
+        if (typeOfEnemy.Equals("Goblin"))
+            audioManager.Play("GoblinDeath");
+        else if (typeOfEnemy.Equals("Skeleton"))
+            audioManager.Play("SkeletonDeath");
+    }
+
 }
