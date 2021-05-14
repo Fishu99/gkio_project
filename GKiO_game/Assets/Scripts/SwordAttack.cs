@@ -33,6 +33,10 @@ public class SwordAttack : WeaponAttack
             Invoke("HitAndDamage", swordDelay);
         }
     }
+    public override bool IsAimInAttackRange()
+    {
+        return checkHit(out RaycastHit hitinfo);
+    }
 
     public override bool IsAimInAttackRange()
     {

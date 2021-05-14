@@ -23,8 +23,10 @@ public class SwordEnemyController : MonoBehaviour
 
     //Czas jaki przeciwnik czeka na koñcu
     public float waitOnEndTime = 2f;
-    //Odstêp pomiêdzy atakami
-    public float attackInterval = 3f;
+    //Czas pomiêdzy wejœciem gracza w obszar ataku, a rozpoczêciem pierwszego ataku
+    public float firstAttackDelay = 0.3f;
+    //Odstêp pomiêdzy kolejnymi atakami je¿eli gracz ca³y czas znajduje siê w polu ataku
+    public float attackInterval = 0.5f;
     //Czas trwania ataku
     public float attackTime = 1f;
     //Liczba punktów za zabicie przeciwnika
@@ -58,6 +60,7 @@ public class SwordEnemyController : MonoBehaviour
     public SwordEnemyPatrolWalkState PatrolWalkState { get; private set; }
     public SwordEnemyPatrolEndState PatrolEndState { get; private set; }
     public SwordEnemyPlayerNoticedState PlayerNoticedState { get; private set; }
+    public SwordEnemyPlayerInAttackRangeState PlayerInAttackRangeState { get; private set; }
     public SwordEnemyPlayerAttackState PlayerAttackState { get; private set; }
     public SwordEnemyDeadState DeadState { get; private set; }
 
@@ -90,6 +93,7 @@ public class SwordEnemyController : MonoBehaviour
         PatrolWalkState = new SwordEnemyPatrolWalkState(this);
         PatrolEndState = new SwordEnemyPatrolEndState(this);
         PlayerNoticedState = new SwordEnemyPlayerNoticedState(this);
+        PlayerInAttackRangeState = new SwordEnemyPlayerInAttackRangeState(this);
         PlayerAttackState = new SwordEnemyPlayerAttackState(this);
         DeadState = new SwordEnemyDeadState(this);
     }
@@ -113,6 +117,7 @@ public class SwordEnemyController : MonoBehaviour
     private void Walk()
     {
         transform.Translate(velocity * Time.deltaTime, Space.World);
+        transform.position = new Vector3(transform.position.x, startPosition.y, startPosition.z);
     }
     
 
@@ -224,6 +229,11 @@ public class SwordEnemyController : MonoBehaviour
         {
             SetVelocityToZero();
         }
+    }
+
+    public bool IsPlayerInAttackRange()
+    {
+        return enemyAttack.IsAimInAttackRange();
     }
 
     public void Attack()

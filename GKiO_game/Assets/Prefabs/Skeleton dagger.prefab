@@ -1145,7 +1145,8 @@ MonoBehaviour:
   playerNearX: 5
   playerNearY: 5
   waitOnEndTime: 2
-  attackInterval: 3
+  firstAttackDelay: 0.5
+  attackInterval: 4
   attackTime: 1
   enemyKillValue: 1
   playerMargin: 0.5

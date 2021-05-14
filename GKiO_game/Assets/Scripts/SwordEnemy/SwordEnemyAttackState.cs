@@ -29,7 +29,7 @@ public class SwordEnemyPlayerAttackState : SwordEnemyState
 
     public override void FixedUpdate()
     {
-
+        enemyController.CalculateVelocityToFollowPlayer();
     }
 
     public override void Update()
@@ -40,7 +40,7 @@ public class SwordEnemyPlayerAttackState : SwordEnemyState
         }
         else if (Time.time - timeWhenStartedAttacking > attackTime)
         {
-            enemyController.ChangeState(enemyController.PlayerNoticedState);
+            enemyController.ChangeState(enemyController.PlayerInAttackRangeState);
         }
 
     }
