@@ -38,11 +38,6 @@ public class SwordAttack : WeaponAttack
         return checkHit(out RaycastHit hitinfo);
     }
 
-    public override bool IsAimInAttackRange()
-    {
-        return checkHit(out RaycastHit hitinfo);
-    }
-
     //Sprawdza, czy jakiœ obiekt znajduje siê przed atakuj¹cym obiektem.
     //Je¿eli tak, odbiera mu zdrowie
     private void HitAndDamage()
