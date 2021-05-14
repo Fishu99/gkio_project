@@ -16,7 +16,11 @@ public class SwordEnemyController : MonoBehaviour
 
     //Odleg³oœæ od gracza przy której przeciwnik zaczyna go œledziæ
     public float playerNearDistance = 5f;
-    
+
+    //Odleg³oœæ od gracza przy której przeciwnik zaczyna go œledziæ
+    public float playerNearX = 5f;
+    public float playerNearY = 5f;
+
     //Czas jaki przeciwnik czeka na koñcu
     public float waitOnEndTime = 2f;
     //Odstêp pomiêdzy atakami
@@ -173,8 +177,10 @@ public class SwordEnemyController : MonoBehaviour
     private void CheckIfPlayerIsNear()
     {
         int playerMask = 1 << 6;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, playerNearDistance, playerMask);
-        if(colliders.Length > 0)
+        //Collider[] colliders = Physics.OverlapSphere(transform.position, playerNearDistance, playerMask);
+        Vector3 halfExtents = new Vector3(playerNearX, playerNearY, 2);
+        Collider[] colliders = Physics.OverlapBox(transform.position, halfExtents, Quaternion.identity, playerMask);
+        if (colliders.Length > 0)
         {
             IsPlayerNear = true;
             attackedPlayer = colliders[0].gameObject;
@@ -253,7 +259,9 @@ public class SwordEnemyController : MonoBehaviour
     private void DrawPlayerNearDistanceSphere()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        Gizmos.DrawWireSphere(transform.position, playerNearDistance);
+        //Gizmos.DrawWireSphere(transform.position, playerNearDistance);
+        Vector3 size = 2 * new Vector3(playerNearX, playerNearY, 2);
+        Gizmos.DrawWireCube(transform.position, size);
     }
 
     private void DrawWalkRange()
