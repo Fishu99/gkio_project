@@ -30,10 +30,15 @@ public class SwordEnemyController : MonoBehaviour
     //Liczba punktów za zabicie przeciwnika
     public int enemyKillValue;
 
+    //Odleg³oœæ pomiêdzy colliderami gracza i przeciwnika, przy której przciwnik nie podchodzi ju¿ wiêcej do gracza.
+    //Jest to po to, aby zapobiegaæ przypadkowemu przesuwaniu gracza przez przciwnika.
+    public float playerMargin = 0.2f;
+
 
     //Pocz¹tkowa pozycja przeciwnika. Jest pobierana na starcie na podstawie po³o¿enia na scenie
     private Vector3 startPosition;
-
+    
+    private Vector3 velocity = Vector3.zero;
     private float direction = 1f;
     public bool IsWalking { get; private set; } = false;
     public bool IsPlayerNear { get; private set; }
@@ -92,6 +97,7 @@ public class SwordEnemyController : MonoBehaviour
     void Update()
     {
         currentState.Update();
+        Walk();
     }
 
     private void FixedUpdate()
@@ -102,6 +108,11 @@ public class SwordEnemyController : MonoBehaviour
     private void SetAnimationVariables()
     {
         
+    }
+
+    private void Walk()
+    {
+        transform.Translate(velocity * Time.deltaTime, Space.World);
     }
     
 
@@ -123,11 +134,11 @@ public class SwordEnemyController : MonoBehaviour
     {
         if(direction > 0)
         {
-            enemyRigidBody.rotation = Quaternion.LookRotation(Vector3.right);
+            transform.rotation = Quaternion.LookRotation(Vector3.right);
         }
         else if(direction < 0)
         {
-            enemyRigidBody.rotation = Quaternion.LookRotation(Vector3.left);
+            transform.rotation = Quaternion.LookRotation(Vector3.left);
         }
     }
 
@@ -139,12 +150,12 @@ public class SwordEnemyController : MonoBehaviour
     
     public bool WalkedToLeftEnd()
     {
-        return direction < 0 && enemyRigidBody.position.x < startPosition.x;
+        return direction < 0 && transform.position.x < startPosition.x;
     }
 
     public bool WalkedToRightEnd()
     {
-        return direction > 0 && enemyRigidBody.position.x > startPosition.x + walkRange;
+        return direction > 0 && transform.position.x > startPosition.x + walkRange;
     }
 
     public bool WalkedToEnd()
@@ -155,13 +166,13 @@ public class SwordEnemyController : MonoBehaviour
     public void SetVelocityByDirection()
     {
         float xVelocity = walkSpeed * direction;
-        enemyRigidBody.velocity = new Vector3(xVelocity, enemyRigidBody.velocity.y, enemyRigidBody.velocity.z);
+        velocity = new Vector3(xVelocity, 0, 0);
         IsWalking = true;
     }
 
     public void SetVelocityToZero()
     {
-        enemyRigidBody.velocity = new Vector3(0, enemyRigidBody.velocity.y, enemyRigidBody.velocity.z);
+        velocity = Vector3.zero;
         IsWalking = false;
     }
 
@@ -177,7 +188,6 @@ public class SwordEnemyController : MonoBehaviour
     private void CheckIfPlayerIsNear()
     {
         int playerMask = 1 << 6;
-        //Collider[] colliders = Physics.OverlapSphere(transform.position, playerNearDistance, playerMask);
         Vector3 halfExtents = new Vector3(playerNearX, playerNearY, 2);
         Collider[] colliders = Physics.OverlapBox(transform.position, halfExtents, Quaternion.identity, playerMask);
         if (colliders.Length > 0)
@@ -195,12 +205,12 @@ public class SwordEnemyController : MonoBehaviour
     {
         
         Collider playerCollider = attackedPlayer.GetComponent<Collider>();
-        if(playerCollider.bounds.min.x > enemyCollider.bounds.max.x)
+        if(playerCollider.bounds.min.x > enemyCollider.bounds.max.x + playerMargin)
         {
             direction = 1;
             WalkInCurrentDirection();
         }
-        else if (enemyCollider.bounds.min.x > playerCollider.bounds.max.x)
+        else if (enemyCollider.bounds.min.x > playerCollider.bounds.max.x + playerMargin)
         {
             direction = -1;
             WalkInCurrentDirection();
@@ -259,7 +269,6 @@ public class SwordEnemyController : MonoBehaviour
     private void DrawPlayerNearDistanceSphere()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        //Gizmos.DrawWireSphere(transform.position, playerNearDistance);
         Vector3 size = 2 * new Vector3(playerNearX, playerNearY, 2);
         Gizmos.DrawWireCube(transform.position, size);
     }
