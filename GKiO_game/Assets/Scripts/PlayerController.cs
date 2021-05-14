@@ -382,6 +382,7 @@ public class PlayerController : MonoBehaviour
     {
         if(!isDead && healthManager.Health == 0)
         {
+            audioManager.Play("PlayerDeath");
             DieOfNoHealth();
         }
     }
@@ -474,6 +475,7 @@ public class PlayerController : MonoBehaviour
     private void DieOfDeadZone()
     {
         playerAnimator.SetTrigger("Die");
+        audioManager.Play("PlayerDeath");
         IsInDeadZone = true;
         isDead = true;
         healthManager.SetZero();

@@ -6,10 +6,12 @@ public class MoneyManager : MonoBehaviour
 {
     public int Money { get; set; } = 0;
     private GameManager gameManager;
+    private AudioManager audioManager;
 
     void Start()
     {
         gameManager = GameManager.instance;
+        audioManager = AudioManager.instance;
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class MoneyManager : MonoBehaviour
         if(collectible != null)
         {
             int collectedMoney = collectible.Collect();
+            audioManager.PlayWithRandomPitch("CollectiblePickup", 20, 70);
             Money += collectedMoney;
             gameManager.AddCollectedMoney(collectedMoney);
         }

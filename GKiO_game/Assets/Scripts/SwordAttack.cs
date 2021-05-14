@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwordAttack : WeaponAttack
 {
+    private AudioManager audioManager;
     private Collider objectCollider;
     public float swordLength = 0.5f;
     public float swordDamage = 30;
@@ -15,6 +16,7 @@ public class SwordAttack : WeaponAttack
     void Start()
     {
         objectCollider = GetComponent<Collider>();
+        audioManager = AudioManager.instance;
     }
 
     void Update()
@@ -32,6 +34,11 @@ public class SwordAttack : WeaponAttack
         }
     }
 
+    public override bool IsAimInAttackRange()
+    {
+        return checkHit(out RaycastHit hitinfo);
+    }
+
     //Sprawdza, czy jakiœ obiekt znajduje siê przed atakuj¹cym obiektem.
     //Je¿eli tak, odbiera mu zdrowie
     private void HitAndDamage()
@@ -41,6 +48,7 @@ public class SwordAttack : WeaponAttack
         Debug.Log(wasHit);
         if (wasHit)
         {
+            audioManager.Play("PlayerSwordHit");
             DamageHealth(hitinfo);
         }
     }
