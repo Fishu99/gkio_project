@@ -60,6 +60,7 @@ public class DaggerThrowAttack : WeaponAttack
         releasedDagger = Instantiate(dagger, dagger.transform.parent);
         releasedDagger.transform.SetParent(null);
         releasedDagger.transform.position = daggerPosition;
+        releasedDagger.transform.rotation = Quaternion.FromToRotation(releasedDagger.transform.up, Vector3.back);
         Physics.IgnoreCollision(releasedDagger.GetComponent<Collider>(), GetComponent<Collider>());
         dagger.SetActive(false);
     }
