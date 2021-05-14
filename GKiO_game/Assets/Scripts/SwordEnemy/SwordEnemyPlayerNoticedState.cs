@@ -33,13 +33,14 @@ public class SwordEnemyPlayerNoticedState : SwordEnemyState
         {
             enemyController.ChangeState(enemyController.DeadState);
         }
+        else if (enemyController.IsPlayerInAttackRange())
+        {
+            enemyController.PlayerInAttackRangeState.FirstAttack = true;
+            enemyController.ChangeState(enemyController.PlayerInAttackRangeState);
+        }
         else if (!enemyController.IsPlayerNear)
         {
             enemyController.ChangeState(enemyController.PatrolWalkState);
-        }
-        else if(Time.time - timeEntered > attackInterval)
-        {
-            enemyController.ChangeState(enemyController.PlayerAttackState);
         }
 
     }

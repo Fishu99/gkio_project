@@ -6,4 +6,5 @@ public abstract class WeaponAttack : MonoBehaviour
 {
     public GameObject Aim { get; set; }
     public abstract void Attack();
+    public abstract bool IsAimInAttackRange();
 }

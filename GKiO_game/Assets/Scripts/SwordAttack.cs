@@ -31,6 +31,10 @@ public class SwordAttack : WeaponAttack
             Invoke("HitAndDamage", swordDelay);
         }
     }
+    public override bool IsAimInAttackRange()
+    {
+        return checkHit(out RaycastHit hitinfo);
+    }
 
     //Sprawdza, czy jakiœ obiekt znajduje siê przed atakuj¹cym obiektem.
     //Je¿eli tak, odbiera mu zdrowie

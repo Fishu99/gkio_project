@@ -44,6 +44,11 @@ public class DaggerThrowAttack : WeaponAttack
         }
     }
 
+    public override bool IsAimInAttackRange()
+    {
+        return true;
+    }
+
     private void ConfigureTimes()
     {
         var adapter = GetComponent<SkeletonDaggerAnimationAdapter>();
@@ -78,4 +83,6 @@ public class DaggerThrowAttack : WeaponAttack
         dagger.SetActive(true);
         isAttacking = false;
     }
+
+    
 }
