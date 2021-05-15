@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 5
+  typeOfCollectible: Diamond
 --- !u!1 &7280269858358917956
 GameObject:
   m_ObjectHideFlags: 0

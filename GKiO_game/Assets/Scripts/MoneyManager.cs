@@ -7,11 +7,14 @@ public class MoneyManager : MonoBehaviour
     public int Money { get; set; } = 0;
     private GameManager gameManager;
     private AudioManager audioManager;
+    private ParticleSystem particle;
 
     void Start()
     {
         gameManager = GameManager.instance;
         audioManager = AudioManager.instance;
+        particle = GetComponent<ParticleSystem>();
+        particle.Stop();
     }
 
     // Update is called once per frame
@@ -25,7 +28,17 @@ public class MoneyManager : MonoBehaviour
         Collectible collectible = other.GetComponent<Collectible>();
         if(collectible != null)
         {
+
             int collectedMoney = collectible.Collect();
+            if(collectible.TypeOfCollectible.Equals("Coin"))
+            {
+                particle.startColor = Color.yellow;
+            }
+            else if (collectible.TypeOfCollectible.Equals("Diamond"))
+            {
+                particle.startColor = Color.cyan;
+            }
+            particle.Play();
             audioManager.PlayWithRandomPitch("CollectiblePickup", 20, 70);
             Money += collectedMoney;
             gameManager.AddCollectedMoney(collectedMoney);
