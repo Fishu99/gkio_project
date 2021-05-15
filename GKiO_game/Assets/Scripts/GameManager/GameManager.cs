@@ -36,12 +36,12 @@ public class GameManager : MonoBehaviour
     {
         get => SwordDamageUpgrade.CurrentFeatureValue;
     }
-    public float PlayerArrowDamage
+    public float BowArrowDamage
     {
-        get => ArrowDamageUpgrade.CurrentFeatureValue;
+        get => BowDamageUpgrade.CurrentFeatureValue;
     }
     public FeatureUpgrade SwordDamageUpgrade;
-    public FeatureUpgrade ArrowDamageUpgrade;
+    public FeatureUpgrade BowDamageUpgrade;
 
     public ScoreCounter ScoreCounter { get; set; }
     public bool IsGameOver {
@@ -98,11 +98,11 @@ public class GameManager : MonoBehaviour
         var bowDamageUpgradeLevels = new FeatureLevel[]
         {
             new FeatureLevel { FeatureValue = 30, Cost = 0},
-            new FeatureLevel { FeatureValue = 45, Cost = 3},
-            new FeatureLevel { FeatureValue = 60, Cost = 6},
-            new FeatureLevel { FeatureValue = 80, Cost = 10}
+            new FeatureLevel { FeatureValue = 45, Cost = 2},
+            new FeatureLevel { FeatureValue = 60, Cost = 3},
+            new FeatureLevel { FeatureValue = 80, Cost = 4}
         };
-        ArrowDamageUpgrade = new FeatureUpgrade(bowDamageUpgradeLevels);
+        BowDamageUpgrade = new FeatureUpgrade(bowDamageUpgradeLevels);
     }
 
     /**
@@ -224,7 +224,7 @@ public class GameManager : MonoBehaviour
 
     private void ResetPlayerStatus()
     {
-        PlayerMoney = 0;
+        PlayerMoney = 50;
         SwordDamageUpgrade.Reset();
         ConfigureForCurrentDifficulty();
     }
@@ -277,19 +277,4 @@ public class GameManager : MonoBehaviour
         ScoreCounter.AddKilledEnemy(enemyValue);
     }
 
-    /**
-     * Kupuje wskazane ulepszenie, je¿eli dan¹ wartoœæ mo¿na jeszcze ulepszyæ i jeœli gracza na to staæ.
-     */
-    public void BuyUpgrade(FeatureUpgrade featureUpgrade)
-    {
-        if (featureUpgrade.IsUpgradePossible)
-        {
-            int cost = featureUpgrade.UpgradeCost;
-            if (cost <= PlayerMoney)
-            {
-                PlayerMoney -= cost;
-                featureUpgrade.Upgrade();
-            }
-        }
-    }
 }

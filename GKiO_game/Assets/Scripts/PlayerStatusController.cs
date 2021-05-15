@@ -33,7 +33,7 @@ public class PlayerStatusController : MonoBehaviour
         moneyManager.Money = gameManager.PlayerMoney;
         playerController.lives = gameManager.PlayerLives;
         swordAttack.swordDamage = gameManager.PlayerSwordDamage;
-        playerController.arrowDamage = gameManager.PlayerArrowDamage;
+        playerController.arrowDamage = gameManager.BowArrowDamage;
         playerController.arrows = gameManager.PlayerArrows;
     }
 

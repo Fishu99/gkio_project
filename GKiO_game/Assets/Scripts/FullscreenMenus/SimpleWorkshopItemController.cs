@@ -40,6 +40,14 @@ public class SimpleWorkshopItemController : MonoBehaviour
     {
         CheckIfAffordable();
         SetPrice(purchase.Price);
+        if (purchase.Subtitle != null)
+            SetSubtitle(purchase.Subtitle);
+        if (!purchase.IsAvailable)
+        {
+            ShowUnavailableMessage();
+            if(purchase.UnavailableReason != null)
+                SetUnavailableMessage(purchase.UnavailableReason);
+        }
     }
 
     void CheckIfAffordable()
@@ -71,6 +79,7 @@ public class SimpleWorkshopItemController : MonoBehaviour
 
     public void BuyItem()
     {
+        Debug.Log("Buy!");
         purchase.Buy();
         RefreshItem();
     }
