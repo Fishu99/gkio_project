@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  typeOfCollectible: Coin
 --- !u!95 &6230278378191054808
 Animator:
   serializedVersion: 3
