@@ -31,11 +31,17 @@ public class GameManager : MonoBehaviour
     public float PlayerMaxHealth { get; private set; }
     public int PlayerLives { get; set; }
     public int PlayerMoney { get; set; }
+    public int PlayerArrows { get; set; }
     public float PlayerSwordDamage
     {
         get => SwordDamageUpgrade.CurrentFeatureValue;
     }
+    public float PlayerArrowDamage
+    {
+        get => ArrowDamageUpgrade.CurrentFeatureValue;
+    }
     public FeatureUpgrade SwordDamageUpgrade;
+    public FeatureUpgrade ArrowDamageUpgrade;
 
     public ScoreCounter ScoreCounter { get; set; }
     public bool IsGameOver {
@@ -88,6 +94,15 @@ public class GameManager : MonoBehaviour
             new FeatureLevel { FeatureValue = 80, Cost = 3}
         };
         SwordDamageUpgrade = new FeatureUpgrade(swordDamageUpgradeLevels);
+
+        var bowDamageUpgradeLevels = new FeatureLevel[]
+        {
+            new FeatureLevel { FeatureValue = 30, Cost = 0},
+            new FeatureLevel { FeatureValue = 45, Cost = 3},
+            new FeatureLevel { FeatureValue = 60, Cost = 6},
+            new FeatureLevel { FeatureValue = 80, Cost = 10}
+        };
+        ArrowDamageUpgrade = new FeatureUpgrade(bowDamageUpgradeLevels);
     }
 
     /**
@@ -229,14 +244,17 @@ public class GameManager : MonoBehaviour
             case Difficulty.Easy:
                 PlayerMaxHealth = 200;
                 PlayerLives = 10;
+                PlayerArrows = 50;
                 break;
             case Difficulty.Medium:
                 PlayerMaxHealth = 200;
                 PlayerLives = 5;
+                PlayerArrows = 30;
                 break;
             case Difficulty.Hard:
                 PlayerMaxHealth = 100;
                 PlayerLives = 3;
+                PlayerArrows = 20;
                 break;
         }
         PlayerHealth = PlayerMaxHealth;

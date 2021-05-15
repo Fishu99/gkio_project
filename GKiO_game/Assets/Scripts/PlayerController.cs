@@ -26,10 +26,12 @@ public class PlayerController : MonoBehaviour
     private float comboTime = 0.75f;
     private int comboNumber = 0;
     [SerializeField] private GameObject arrowPrefab;
+    public float arrowDamage = 30f;
     private GameObject lastCheckpoint;
     private float arrowOriginRadius = 1.3f;
 
     //Player states/statuses
+    public int arrows = 987;
     public int lives = 3;
     //public int playerScore = 0;
     private bool isGrounded = true;
@@ -223,8 +225,7 @@ public class PlayerController : MonoBehaviour
         //Bow&Arrow
         if (ShootKey())
         {
-            isGoingToShoot= true;
-            ARROW.SetActive(true);
+            StartArrowShotIfHasArrows();
         }
 
         //Sprint
@@ -235,6 +236,16 @@ public class PlayerController : MonoBehaviour
         else
         {
             isSprinting = false;
+        }
+    }
+
+    private void StartArrowShotIfHasArrows()
+    {
+        if(arrows > 0)
+        {
+            isGoingToShoot = true;
+            ARROW.SetActive(true);
+            arrows--;
         }
     }
 
@@ -253,7 +264,9 @@ public class PlayerController : MonoBehaviour
         Vector3 arrowPosition = center + arrowRotation * radius;
         ARROW.SetActive(false);
         GameObject arrow = Instantiate(arrowPrefab, arrowPosition, arrowRotation);
-        arrow.GetComponent<ArrowController>().Shoot();
+        ArrowController arrowController = arrow.GetComponent<ArrowController>();
+        arrowController.arrowDamage = arrowDamage;
+        arrowController.Shoot();
         isShooting = false;
     }
 
@@ -479,7 +492,6 @@ public class PlayerController : MonoBehaviour
         IsInDeadZone = true;
         isDead = true;
         healthManager.SetZero();
-        //RespawnOrGameOver();
         Invoke("RespawnOrGameOver", 1f);
     }
 

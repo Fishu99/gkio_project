@@ -33,6 +33,8 @@ public class PlayerStatusController : MonoBehaviour
         moneyManager.Money = gameManager.PlayerMoney;
         playerController.lives = gameManager.PlayerLives;
         swordAttack.swordDamage = gameManager.PlayerSwordDamage;
+        playerController.arrowDamage = gameManager.PlayerArrowDamage;
+        playerController.arrows = gameManager.PlayerArrows;
     }
 
     private void SetStatusInGameManager()
@@ -40,6 +42,7 @@ public class PlayerStatusController : MonoBehaviour
         gameManager.PlayerHealth = healthManager.Health;
         gameManager.PlayerMoney = moneyManager.Money;
         gameManager.PlayerLives = playerController.lives;
+        gameManager.PlayerArrows = playerController.arrows;
     }
 
     // Update is called once per frame
@@ -48,12 +51,6 @@ public class PlayerStatusController : MonoBehaviour
         if (gameManager != null)
         {
             SetStatusInGameManager();
-            /*
-            if (playerController.HasFinishedLevel && !gameManager.IsLevelFinished)
-            {
-                Debug.Log("Detected level finish");
-                gameManager.FinishLevel();
-            }*/
         }
     }
     public void FinishLevel()
