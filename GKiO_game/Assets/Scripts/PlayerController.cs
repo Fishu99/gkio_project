@@ -289,7 +289,7 @@ public class PlayerController : MonoBehaviour
     {
         float colliderRadius = playerCollider.radius;
         Vector3 colliderSphereCenter = playerCollider.bounds.min + new Vector3(colliderRadius, colliderRadius, colliderRadius);
-        int playerMask = ~(1 << 6);
+        int playerMask = ~(1 << 6 | 1 << 10 | 1 << 11);
         //Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f)
         if (Physics.CheckSphere(colliderSphereCenter, colliderRadius + 0.2f, playerMask))
         {

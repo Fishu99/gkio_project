@@ -224,7 +224,7 @@ public class GameManager : MonoBehaviour
 
     private void ResetPlayerStatus()
     {
-        PlayerMoney = 50;
+        PlayerMoney = 0;
         SwordDamageUpgrade.Reset();
         ConfigureForCurrentDifficulty();
     }
