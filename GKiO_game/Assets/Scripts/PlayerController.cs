@@ -10,38 +10,43 @@ public class PlayerController : MonoBehaviour
     //Class init
     Animator playerAnimator;
     Animator bowAnimator;
-    Rigidbody playerRigidBody;
-    CapsuleCollider playerCollider;
     AudioManager audioManager;
+    CapsuleCollider playerCollider;
+    ComboManager comboManager;
+    PlayerStatusController statusController; 
+    Rigidbody playerRigidBody;
     HealthManager healthManager;
-    PlayerStatusController statusController;
     public Camera playerCamera;
 
     //Variables and constants
-    public float horizontalInput = 0f;
     [SerializeField] private float playerSpeed = 5f;
     [SerializeField] private float playerSprintMultiplier = 2.0f;
+    [SerializeField] private float playerAttackCooldown = 0.5f;
     [SerializeField] private float jumpForce = 1000f;
-    private Vector3 startPosition;
-    private float comboTime = 0.75f;
-    private int comboNumber = 0;
     [SerializeField] private GameObject arrowPrefab;
-    public float arrowDamage = 30f;
-    private GameObject lastCheckpoint;
+        
+    
+    public float arrowDamage = 30f;    
     private float arrowOriginRadius = 1.3f;
+    private Vector3 startPosition;
+    private GameObject lastCheckpoint;
+    public float horizontalInput = 0f;
 
-    //Player states/statuses
+    //Player states & statuses
     public int arrows = 987;
     public int lives = 3;
-    //public int playerScore = 0;
     private bool isGrounded = true;
-    private bool comboStatus = false;
-    private float comboActiveTime = 0f;
     private bool isGoingToJump = false;
-    private bool didPlayerJustJumped = false;
     private bool isCrouching = false;
-    
+    private bool didPlayerJustJumped = false;
+
     public bool IsInDeadZone { get; private set; } = false;
+
+    //Combo & attacks
+    private float attackCooldown;
+    public bool comboKeyPressed = false;
+    private bool isAttackReady = true;
+    private bool isAttacking = false;
 
     //For audio
     private int stepNumber = 1;
@@ -61,12 +66,11 @@ public class PlayerController : MonoBehaviour
 
     //--- triggers
     private bool isJumping = false;
-    private bool isGoingToAttack = false;
     private bool isGoingToShoot = false;
 
+    //GameObjects
     private GameObject sword;
     private GameObject bow;
-
     private GameObject setup;
     private GameObject target;
 
@@ -81,12 +85,14 @@ public class PlayerController : MonoBehaviour
         playerCollider = GetComponent<CapsuleCollider>();
         healthManager = GetComponent<HealthManager>();
         statusController = GetComponent<PlayerStatusController>();
+        comboManager = GetComponent<ComboManager>();
         audioManager = AudioManager.instance;
         startPosition = transform.position;
         sword = GameObject.Find("Sword_1");
         bow = GameObject.Find("Wooden Bow");
 
-        ChangeWeaponToBow();
+        //ChangeWeaponToBow();
+        ChangeWeaponToSword();
 
         setup = GameObject.Find("Rig");
         var builder = FindObjectOfType<RigBuilder>();
@@ -126,20 +132,15 @@ public class PlayerController : MonoBehaviour
             var builder = FindObjectOfType<RigBuilder>();
             builder.enabled = false;
         }
-        if (comboStatus)
+        if (attackCooldown >= 0.0f)
         {
-            comboActiveTime -= Time.deltaTime;
-            if (comboActiveTime <= 0f)
-            {
-                comboActiveTime = 0f;
-                comboStatus = false;
-                comboNumber = 0;
-                isComboEnded = true;
-            }
+            attackCooldown -= Time.deltaTime;
+            if (attackCooldown < 0.0f)
+                isAttackReady = true;
         }
         horizontalInput = Input.GetAxis("Horizontal");
         CheckIfGrounded();
-        CheckPlayerStatus();        
+        CheckPlayerStatus();
         CheckInput();
     }
 
@@ -153,6 +154,7 @@ public class PlayerController : MonoBehaviour
         {
             TurnPlayer();
             CheckAndJump();
+            CheckIfIsAttacking();
             CalculateVelocity();
         }
         SetAnimationVariables();
@@ -164,14 +166,7 @@ public class PlayerController : MonoBehaviour
         {
             DieOfDeadZone();
         }
-        /*
-        if (other.gameObject.CompareTag("Collectibles"))
-        {
-            Destroy(other.gameObject);
-            playerScore++;
-            Debug.Log("Player score is: " + playerScore.ToString());
-        }*/
-        if(other.gameObject.layer == LayerMask.NameToLayer("Checkpoint"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Checkpoint"))
         {
             if (other.gameObject.CompareTag("Checkpoint"))
                 lastCheckpoint = other.gameObject;
@@ -181,6 +176,12 @@ public class PlayerController : MonoBehaviour
                 statusController.FinishLevel();
             }
         }
+    }
+
+    private void CheckIfIsAttacking()
+    {
+        AnimatorStateInfo animState = playerAnimator.GetCurrentAnimatorStateInfo(0);
+        isAttacking = animState.IsTag("Attack");
     }
 
     private void CheckInput()
@@ -197,7 +198,7 @@ public class PlayerController : MonoBehaviour
             if (!isCrouching)
             {
                 isCrouching = true;
-            }        
+            }
         }
         else
         {
@@ -208,22 +209,15 @@ public class PlayerController : MonoBehaviour
         }
 
         //Sword
-        if (AttackSwordKey())
+        if (AttackSwordKey() && isGrounded && isAttackReady)
         {
-            //AnimatorStateInfo animState = playerAnimator.GetCurrentAnimatorStateInfo(0);
-            //float middleOfAnimation = 0.5f; 
-            //if(animState.IsTag("Attack"))
-            //{
-            //    isGoingToAttack = (animState.normalizedTime >= middleOfAnimation);
-            //}
-            //else
-            //{
-                isGoingToAttack = true;
-            //}             
+            isAttackReady = false;
+            attackCooldown = playerAttackCooldown;
+            comboKeyPressed = true;
         }
 
         //Bow&Arrow
-        if (ShootKey())
+        if (ShootKey() && !isAttacking)
         {
             StartArrowShotIfHasArrows();
         }
@@ -241,7 +235,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartArrowShotIfHasArrows()
     {
-        if(arrows > 0)
+        if (arrows > 0)
         {
             isGoingToShoot = true;
             ARROW.SetActive(true);
@@ -259,7 +253,7 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         Vector3 center = playerCollider.bounds.center;
         Vector3 screenPlayerPosition = playerCamera.WorldToScreenPoint(center);
-        Quaternion arrowRotation = Quaternion.FromToRotation(Vector3.up, mousePosition-screenPlayerPosition);
+        Quaternion arrowRotation = Quaternion.FromToRotation(Vector3.up, mousePosition - screenPlayerPosition);
         Vector3 radius = Vector3.up * arrowOriginRadius;
         Vector3 arrowPosition = center + arrowRotation * radius;
         ARROW.SetActive(false);
@@ -273,16 +267,6 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         GetComponent<SwordAttack>().Attack();
-        if (comboNumber.Equals(0))
-            audioManager.Play("PlayerSwordAttack1");
-        else if (comboNumber.Equals(1))
-            audioManager.Play("PlayerSwordAttack2");
-        else if (comboNumber.Equals(2))
-            audioManager.Play("PlayerSwordAttack3");
-
-        comboNumber++;
-        if (comboNumber.Equals(3))
-            comboNumber = 0;
     }
 
     private void CheckIfGrounded()
@@ -304,37 +288,43 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateVelocity()
     {
-        float xVelocity = playerSpeed * horizontalInput;
-        if (isSprinting)
+        if (!isAttacking)
         {
-            xVelocity *= playerSprintMultiplier;
+            float xVelocity = playerSpeed * horizontalInput;
+            if (isSprinting)
+            {
+                xVelocity *= playerSprintMultiplier;
+            }
+
+            if (isCrouching && !isGrounded)
+            {
+                playerRigidBody.velocity = new Vector3(xVelocity, Vector3.up.y * Physics.gravity.y, 0);
+            }
+            else
+                playerRigidBody.velocity = new Vector3(xVelocity, playerRigidBody.velocity.y, playerRigidBody.velocity.z);
         }
-        if (isCrouching && !isGrounded)
-        {
-            playerRigidBody.velocity = new Vector3(xVelocity, Vector3.up.y * Physics.gravity.y,0);
-        }
-        else 
-            playerRigidBody.velocity = new Vector3(xVelocity, playerRigidBody.velocity.y, playerRigidBody.velocity.z);
+
     }
-    
+
     private void TurnPlayer()
     {
-        if(horizontalInput > 0)
+        if (horizontalInput > 0)
         {
             playerRigidBody.rotation = Quaternion.LookRotation(Vector3.right);
         }
-        else if(horizontalInput < 0){
+        else if (horizontalInput < 0)
+        {
             playerRigidBody.rotation = Quaternion.LookRotation(Vector3.left);
         }
     }
-    
+
     private void CheckAndJump()
     {
         if (isGoingToJump)
         {
-            if(isGrounded)
+            if (isGrounded)
             {
-                audioManager.Play("PlayerJump"); 
+                audioManager.Play("PlayerJump");
                 playerRigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 didPlayerJustJumped = true;
             }
@@ -342,31 +332,34 @@ public class PlayerController : MonoBehaviour
             isGoingToJump = false;
         }
     }
-    
+
     private void CheckPlayerStatus()
     {
         if (isGrounded)
         {
-            if (Math.Abs(horizontalInput) > 0.01f)
+            if (!isAttacking)
             {
-                isWalking = true;
-                bool itIsPlaying = audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString());
-                if (!itIsPlaying)
+                if (Math.Abs(horizontalInput) > 0.01f)
                 {
-                    audioManager.Play("Player_Step" + stepNumber.ToString());
-                    stepPreviousNumber = stepNumber;
-                    stepNumber++;
-                    if (stepNumber > 4)
-                        stepNumber = 1;
+                    isWalking = true;
+                    bool itIsPlaying = audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString());
+                    if (!itIsPlaying)
+                    {
+                        audioManager.Play("Player_Step" + stepNumber.ToString());
+                        stepPreviousNumber = stepNumber;
+                        stepNumber++;
+                        if (stepNumber > 4)
+                            stepNumber = 1;
+                    }
                 }
-            }
-            else
-            {
-                isWalking = false;
-                if (audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString()))
-                    audioManager.Stop("Player_Step" + stepPreviousNumber.ToString());
-                else if (audioManager.CheckIfIsPlaying("Player_Step" + stepNumber.ToString()))
-                    audioManager.Stop("Player_Step" + stepNumber.ToString());
+                else
+                {
+                    isWalking = false;
+                    if (audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString()))
+                        audioManager.Stop("Player_Step" + stepPreviousNumber.ToString());
+                    else if (audioManager.CheckIfIsPlaying("Player_Step" + stepNumber.ToString()))
+                        audioManager.Stop("Player_Step" + stepNumber.ToString());
+                }
             }
         }
         else
@@ -379,7 +372,7 @@ public class PlayerController : MonoBehaviour
             {
                 isFalling = false;
             }
-            
+
             if (playerRigidBody.velocity.y > 0)
             {
                 isJumping = true;
@@ -388,32 +381,33 @@ public class PlayerController : MonoBehaviour
             {
                 isJumping = false;
             }
-        } 
+        }
     }
 
     private void CheckHealth()
     {
-        if(!isDead && healthManager.Health == 0)
+        if (!isDead && healthManager.Health == 0)
         {
             audioManager.Play("PlayerDeath");
             DieOfNoHealth();
         }
     }
-    
+
     private void SetAnimationVariables()
     {
         //isAttacking
-        if (isGoingToAttack)
+        if (comboKeyPressed)
         {
             ChangeWeaponToSword();
-            playerAnimator.SetTrigger("Attack");
-            Attack();
-            isGoingToAttack = false;
-            comboActiveTime = comboTime;
-            comboStatus = true;
-            isComboEnded = false;
+            float invisibilityOfAttack = comboManager.AttackIfPossible();
+            if (comboManager.wasAttackExecuted)
+            {
+
+                Invoke("Attack", invisibilityOfAttack);
+                comboKeyPressed = false;
+                comboManager.wasAttackExecuted = false;
+            }
         }
-        //isShooting
         if (isGoingToShoot)
         {
             RotatePlayerForShooting();
@@ -456,7 +450,7 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
         Vector3 center = playerCollider.bounds.center;
         Vector3 screenPlayerPosition = playerCamera.WorldToScreenPoint(center);
-        if(mousePosition.x - screenPlayerPosition.x > 0)
+        if (mousePosition.x - screenPlayerPosition.x > 0)
         {
             playerRigidBody.rotation = Quaternion.LookRotation(Vector3.right);
         }
@@ -498,7 +492,7 @@ public class PlayerController : MonoBehaviour
     private void RespawnOrGameOver()
     {
         lives--;
-        if(lives > 0)
+        if (lives > 0)
         {
             Respawn();
         }
@@ -506,7 +500,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Game over!");
         }
-        
+
     }
 
     private void Respawn()
@@ -520,7 +514,7 @@ public class PlayerController : MonoBehaviour
 
     private void ReturnToCheckpoint()
     {
-        if(lastCheckpoint == null)
+        if (lastCheckpoint == null)
         {
             transform.position = startPosition;
         }
