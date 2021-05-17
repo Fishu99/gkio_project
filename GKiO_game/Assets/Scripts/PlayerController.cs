@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -537,7 +538,8 @@ public class PlayerController : MonoBehaviour
 
     private bool AttackSwordKey()
     {
-        return Input.GetKeyDown(KeyCode.Mouse0);
+        bool notMenu = EventSystem.current?.currentSelectedGameObject == null;
+        return notMenu && Input.GetKeyDown(KeyCode.Mouse0);
     }
 
     private bool ShootKey()
