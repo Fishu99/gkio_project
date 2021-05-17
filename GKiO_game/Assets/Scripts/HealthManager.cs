@@ -26,6 +26,8 @@ public class HealthManager : MonoBehaviour
             else health = value;
         }
     }
+
+    public bool IsProtected { get; set; } = false;
     
     
     // Start is called before the first frame update
@@ -42,9 +44,12 @@ public class HealthManager : MonoBehaviour
 
     public void Damage(float points)
     {
-        if (gameObject.CompareTag("Player"))
-            audioManager.Play("PlayerHurt");
-        Health -= points;
+        if (!IsProtected)
+        {
+            if (gameObject.CompareTag("Player"))
+                audioManager.Play("PlayerHurt");
+            Health -= points;
+        }
     }
 
     public void Restore(float points)
