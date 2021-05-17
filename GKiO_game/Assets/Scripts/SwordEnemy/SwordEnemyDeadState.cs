@@ -12,6 +12,7 @@ public class SwordEnemyDeadState : SwordEnemyState
 
     public override void Enter()
     {
+        enemyController.SetVelocityToZero();
         enemyController.StartCoroutine("DeathSequence");
     }
 
