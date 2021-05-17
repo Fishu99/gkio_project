@@ -8,10 +8,13 @@ public class PauseController : MonoBehaviour
     public bool IsPaused { get; private set; } = false;
     [SerializeField] private GameObject pauseMenu;
     private GameManager gameManager;
+    private Animator animator;
+    private readonly float animationTime = 0.4f;
     void Start()
     {
         gameManager = GameManager.instance;
         pauseMenu.SetActive(false);
+        animator = pauseMenu.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class PauseController : MonoBehaviour
 
     public void Pause()
     {
+        animator.SetTrigger("darken");
         IsPaused = true;
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
@@ -35,9 +39,11 @@ public class PauseController : MonoBehaviour
 
     public void Resume()
     {
-        IsPaused = false;
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
+        //animator.SetTrigger("lighten");
+        StartCoroutine(ResumeCoroutine());
+        //IsPaused = false;
+       // pauseMenu.SetActive(false);
+        //Time.timeScale = 1;
     }
 
     public void Quit()
@@ -46,5 +52,14 @@ public class PauseController : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
         gameManager.ReturnToMainMenu();
+    }
+
+    private IEnumerator ResumeCoroutine()
+    {
+        animator.SetTrigger("lighten");
+        yield return new WaitForSecondsRealtime(animationTime);
+        IsPaused = false;
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 }

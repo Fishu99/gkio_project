@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 6292285363240984190}
   - component: {fileID: 6292285363240984176}
   - component: {fileID: 6292285363240984177}
+  - component: {fileID: 6146800782802963229}
   m_Layer: 5
   m_Name: CurtainPanel
   m_TagString: Untagged
@@ -321,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2627451, g: 0.15686275, b: 0.09411765, a: 0.40784314}
+  m_Color: {r: 0.2627451, g: 0.15686275, b: 0.09411765, a: 0.70980394}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -338,6 +339,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &6146800782802963229
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6292285363240984191}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 990f5e8c4dc53f047819a1c7de109fba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4363819465609531354
 PrefabInstance:
   m_ObjectHideFlags: 0
