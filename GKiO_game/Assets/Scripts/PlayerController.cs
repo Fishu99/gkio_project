@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     PlayerStatusController statusController; 
     Rigidbody playerRigidBody;
     HealthManager healthManager;
+    private PauseController pauseController;
     public Camera playerCamera;
 
     //Variables and constants
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
         healthManager = GetComponent<HealthManager>();
         statusController = GetComponent<PlayerStatusController>();
         comboManager = GetComponent<ComboManager>();
+        pauseController = FindObjectOfType<PauseController>();
         audioManager = AudioManager.instance;
         startPosition = transform.position;
         sword = GameObject.Find("Sword_1");
@@ -525,10 +527,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private bool IsPaused()
+    {
+        return pauseController == null ? false : pauseController.IsPaused;
+    }
+
     //KeyBindings
     private bool JumpKey()
     {
-        return Input.GetKeyDown(KeyCode.Space);
+        return Input.GetKeyDown(KeyCode.Space) && !IsPaused();
     }
 
     private bool CrouchKey()
@@ -538,13 +545,12 @@ public class PlayerController : MonoBehaviour
 
     private bool AttackSwordKey()
     {
-        bool notMenu = EventSystem.current?.currentSelectedGameObject == null;
-        return notMenu && Input.GetKeyDown(KeyCode.Mouse0);
+        return Input.GetKeyDown(KeyCode.Mouse0) && !IsPaused();
     }
 
     private bool ShootKey()
     {
-        return Input.GetKeyDown(KeyCode.Mouse1);
+        return Input.GetKeyDown(KeyCode.Mouse1) && !IsPaused();
     }
 
     private bool SprintKey()
