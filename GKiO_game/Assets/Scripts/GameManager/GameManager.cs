@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadDifficultySelect()
     {
-        SceneManager.LoadScene("DifficultySelect");
+        LoadScene("DifficultySelect");
     }
 
     public void SelectDifficultyAndGoNext(Difficulty difficulty)
@@ -200,12 +200,12 @@ public class GameManager : MonoBehaviour
     {
         SceneData newSceneData = sceneData[currentLevel];
         ScoreCounter.NewScene(newSceneData);
-        SceneManager.LoadScene(newSceneData.SceneName);
+        LoadScene(newSceneData.SceneName);
     }
 
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu2");
+        LoadScene("MainMenu2");
     }
 
     public void LoadFirstLevel()
@@ -219,7 +219,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadWorkshop()
     {
-        SceneManager.LoadScene("Workshop");
+        LoadScene("Workshop");
     }
 
     private void ResetPlayerStatus()
@@ -231,7 +231,27 @@ public class GameManager : MonoBehaviour
 
     private void LoadWinScene()
     {
-        SceneManager.LoadScene("WinScene");
+        LoadScene("WinScene");
+    }
+
+    private void LoadScene(string name)
+    {
+        var crossfadeController = FindObjectOfType<CrossfadeController>();
+        if(crossfadeController == null)
+        {
+            SceneManager.LoadScene(name);
+        }
+        else
+        {
+            StartCoroutine(LoadSceneWithCrossfade(name, crossfadeController));
+        }
+    }
+
+    private IEnumerator LoadSceneWithCrossfade(string name, CrossfadeController crossfadeController)
+    {
+        crossfadeController.StartCrossfade();
+        yield return new WaitForSeconds(crossfadeController.CrossfadeTime);
+        SceneManager.LoadScene(name);
     }
 
     /**
