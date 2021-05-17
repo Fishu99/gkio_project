@@ -4503,10 +4503,14 @@ MonoBehaviour:
   playerNearDistance: 5
   playerNearX: 5
   playerNearY: 5
+  playerNearOffsetX: 0
+  playerNearOffsetY: 0
   waitOnEndTime: 2
   firstAttackDelay: 1.2
   attackInterval: 0.5
   attackTime: 1
+  deathAnimationTime: 3
+  fadeAfterDeathTime: 0.5
   enemyKillValue: 1
   playerMargin: 0.2
 --- !u!114 &1763585338

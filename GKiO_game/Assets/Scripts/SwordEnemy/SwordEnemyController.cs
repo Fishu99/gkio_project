@@ -21,6 +21,10 @@ public class SwordEnemyController : MonoBehaviour
     //Odleg³oœæ od gracza przy której przeciwnik zaczyna go œledziæ
     public float playerNearX = 5f;
     public float playerNearY = 5f;
+    //przesuniêcie obszaru wykrywania gracza wzglêdem œrodka przeciwnika
+    public float playerNearOffsetX = 0;
+    public float playerNearOffsetY = 0;
+
 
     //Czas jaki przeciwnik czeka na koñcu
     public float waitOnEndTime = 2f;
@@ -32,6 +36,10 @@ public class SwordEnemyController : MonoBehaviour
     public float attackInterval = 0.5f;
     //Czas trwania ataku
     public float attackTime = 1f;
+    //Czas animacji umierania
+    public float deathAnimationTime = 3f;
+    //Czas zaniakania po œmierci
+    public float fadeAfterDeathTime = 0.3f;
     //Liczba punktów za zabicie przeciwnika
     public int enemyKillValue;
 
@@ -55,6 +63,7 @@ public class SwordEnemyController : MonoBehaviour
     private HealthManager healthManager;
     private WeaponAttack enemyAttack;
     private AudioManager audioManager;
+    private Renderer[] renderers;
     //Adapter animacji
     private SwordEnemyAnimationAdapter animationAdapter;
     private GameManager gameManager;
@@ -84,6 +93,7 @@ public class SwordEnemyController : MonoBehaviour
         enemyCollider = GetComponent<CapsuleCollider>();
         enemyAttack = GetComponent<WeaponAttack>();
         animationAdapter = GetComponent<SwordEnemyAnimationAdapter>();
+        renderers = GetComponentsInChildren<Renderer>();
         audioManager = AudioManager.instance;
         gameManager = GameManager.instance;
     }
@@ -199,7 +209,8 @@ public class SwordEnemyController : MonoBehaviour
     {
         int playerMask = 1 << 6;
         Vector3 halfExtents = new Vector3(playerNearX, playerNearY, 2);
-        Collider[] colliders = Physics.OverlapBox(transform.position, halfExtents, Quaternion.identity, playerMask);
+        Vector3 center = transform.position + Vector3.up * playerNearOffsetY + transform.forward * playerNearOffsetX;
+        Collider[] colliders = Physics.OverlapBox(center, halfExtents, Quaternion.identity, playerMask);
         if (colliders.Length > 0)
         {
             IsPlayerNear = true;
@@ -254,8 +265,33 @@ public class SwordEnemyController : MonoBehaviour
         ReportKilling();
         DisablePhysics();
         animationAdapter.Die();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(deathAnimationTime);
+        yield return StartCoroutine(FadeAfterDeath());
         Destroy(gameObject);
+    }
+
+    private IEnumerator FadeAfterDeath()
+    {
+        float fadeStartTime = Time.time;
+        float fadeDuration = 0;
+        Vector3 initialScale = transform.localScale;
+        while((fadeDuration = Time.time - fadeStartTime) < fadeAfterDeathTime)
+        {
+            float alpha = 1 - fadeDuration / fadeAfterDeathTime;
+            transform.localScale = initialScale * alpha;
+            yield return null;
+        }
+        yield break;
+    }
+
+    private void SetAlphaForAllMaterials(float alpha)
+    {
+        foreach(var renderer in renderers)
+        {
+            Material material = renderer.material;
+            material.color = new Color(material.color.r, material.color.g, material.color.b, alpha);
+            Debug.Log(material.color);
+        }
     }
 
     private void DisablePhysics()
@@ -286,7 +322,8 @@ public class SwordEnemyController : MonoBehaviour
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
         Vector3 size = 2 * new Vector3(playerNearX, playerNearY, 2);
-        Gizmos.DrawWireCube(transform.position, size);
+        Vector3 center = transform.position + Vector3.up * playerNearOffsetY + transform.forward * playerNearOffsetX;
+        Gizmos.DrawWireCube(center, size);
     }
 
     private void DrawWalkRange()

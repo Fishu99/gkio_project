@@ -275,8 +275,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63421066}
-  m_LocalRotation: {x: 0.1460285, y: 0.099832386, z: 0.014814216, w: -0.9841188}
-  m_LocalPosition: {x: 186.29405, y: 23.195343, z: 74.02222}
+  m_LocalRotation: {x: -0.076688625, y: 0.03438658, z: 0.0026442178, w: 0.9964585}
+  m_LocalPosition: {x: 155.50491, y: 26.326397, z: 74.639786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1281,6 +1281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 5405744982996040073, guid: 44aa3cd6523e038499bdbeda5aafb856, type: 3}
+      propertyPath: fadeAfterDeathTime
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44aa3cd6523e038499bdbeda5aafb856, type: 3}
 --- !u!4 &1038429212 stripped
@@ -1363,7 +1367,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2090079832657171623, guid: 34b1dc5ad594da04abdb677beed2cd58, type: 3}
       propertyPath: playerNearY
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090079832657171623, guid: 34b1dc5ad594da04abdb677beed2cd58, type: 3}
+      propertyPath: playerNearOffsetX
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2090079832657171623, guid: 34b1dc5ad594da04abdb677beed2cd58, type: 3}
+      propertyPath: playerNearOffsetY
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2091288171558864631, guid: 34b1dc5ad594da04abdb677beed2cd58, type: 3}
       propertyPath: m_Name
