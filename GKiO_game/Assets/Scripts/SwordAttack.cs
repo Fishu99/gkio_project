@@ -48,11 +48,23 @@ public class SwordAttack : WeaponAttack
         if (wasHit)
         {
             if (hitinfo.transform.gameObject.CompareTag("Enemy"))
-                audioManager.Play("PlayerSwordHit");
+                HandleAudioWhenEnemyHit();
             else if (hitinfo.transform.gameObject.CompareTag("Player"))
-                audioManager.Play("PlayerHitBySword");
+                HandleAudioWhenPlayerHit();
             DamageHealth(hitinfo);
         }
+    }
+    private void HandleAudioWhenEnemyHit()
+    {
+        audioManager.Play("PlayerSwordHit");
+        audioManager.Stop("PlayerSwordAttack1");
+        audioManager.Stop("PlayerSwordAttack2");
+        audioManager.Stop("PlayerSwordAttack3");
+    }
+
+    private void HandleAudioWhenPlayerHit()
+    {
+        audioManager.Play("PlayerHitBySword");
     }
 
     //Funkcja sprawdza, czy przed obiektem w odleg³oœci swordLength znajduje siê jakiœ obiekt na atakowanej warstwie
