@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
     private bool isAttackReady = true;
     private bool isAttacking = false;
 
+    private bool isBlocking = false;
+
     //For audio
     private int stepNumber = 1;
     private int stepPreviousNumber = 4;
@@ -219,6 +221,18 @@ public class PlayerController : MonoBehaviour
             comboKeyPressed = true;
         }
 
+        if (BlockKey() && isGrounded)
+        {
+            ChangeWeaponToSword();
+            isBlocking = true;
+            healthManager.IsProtected = true;
+        }
+        else
+        {
+            isBlocking = false;
+            healthManager.IsProtected = false;
+        }
+
         //Bow&Arrow
         if (ShootKey() && !isAttacking)
         {
@@ -291,7 +305,7 @@ public class PlayerController : MonoBehaviour
 
     private void CalculateVelocity()
     {
-        if (!isAttacking)
+        if (!isAttacking && !isBlocking)
         {
             float xVelocity = playerSpeed * horizontalInput;
             if (isSprinting)
@@ -411,6 +425,10 @@ public class PlayerController : MonoBehaviour
                 comboManager.wasAttackExecuted = false;
             }
         }
+
+        //isBlocking
+        playerAnimator.SetBool("isBlocking", isBlocking);
+
         if (isGoingToShoot)
         {
             RotatePlayerForShooting();
@@ -550,7 +568,12 @@ public class PlayerController : MonoBehaviour
 
     private bool ShootKey()
     {
-        return Input.GetKeyDown(KeyCode.Mouse1) && !IsPaused();
+        return Input.GetKeyDown(KeyCode.E)  && !IsPaused();;
+    }
+
+    private bool BlockKey()
+    {
+        return Input.GetKey(KeyCode.Mouse1)  && !IsPaused();;
     }
 
     private bool SprintKey()

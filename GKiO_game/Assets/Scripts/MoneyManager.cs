@@ -34,12 +34,10 @@ public class MoneyManager : MonoBehaviour
             if (collectible.TypeOfCollectible.Equals("Coin"))
             {
                 particleMain.startColor = Color.yellow;
-                //particle.startColor = Color.yellow;
             }
             else if (collectible.TypeOfCollectible.Equals("Diamond"))
             {
                 particleMain.startColor = Color.cyan;
-                //particle.startColor = Color.cyan;
             }
             particle.Play();
             audioManager.PlayWithRandomPitch("CollectiblePickup", 20, 70);
