@@ -44,10 +44,22 @@ public class HealthManager : MonoBehaviour
 
     public void Damage(float points)
     {
-        if (!IsProtected)
+        if (gameObject.CompareTag("Player"))
         {
-            if (gameObject.CompareTag("Player"))
+            Animator playerAnimator = GetComponent<Animator>();
+            if (!IsProtected)
+            {
                 audioManager.Play("PlayerHurt");
+                playerAnimator.SetTrigger("PlayerHit");
+                Health -= points;
+            }
+            else
+            {                
+                playerAnimator.SetTrigger("BlockHit");
+            }
+        }
+        else
+        {
             Health -= points;
         }
     }
