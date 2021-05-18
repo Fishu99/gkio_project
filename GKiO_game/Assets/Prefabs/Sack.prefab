@@ -47,8 +47,8 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 0aa057141dbbde44797f4d63480389ce, type: 3}
   m_Controller: {fileID: 9100000, guid: e33066f51a4c73249ad84fe13f730e18, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 10
-  typeOfCollectible: Sa
+  typeOfCollectible: Sack
 --- !u!1 &6877752855317884258
 GameObject:
   m_ObjectHideFlags: 0

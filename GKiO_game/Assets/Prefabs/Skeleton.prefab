@@ -1330,6 +1330,7 @@ MonoBehaviour:
   fadeAfterDeathTime: 0.5
   enemyKillValue: 1
   playerMargin: 0.4
+  sack: {fileID: 6826785664505016652, guid: 2f37ffc02436a3946a26bd41d22c9983, type: 3}
 --- !u!114 &2090079832657171620
 MonoBehaviour:
   m_ObjectHideFlags: 0
