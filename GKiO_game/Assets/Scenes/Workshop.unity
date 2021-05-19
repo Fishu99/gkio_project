@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1724,6 +1724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17bfee0d798be6429fb7f477c832d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  optionsMenu: {fileID: 0}
 --- !u!114 &1488413045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2107,6 +2108,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Bow force upgrade
       objectReference: {fileID: 0}
+    - target: {fileID: 374181378005447729, guid: 34aba8bc3d26c6c409c00377c53f9841, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5c0a95e5405bb454794de940e4b684ee, type: 3}
     - target: {fileID: 374181378070030058, guid: 34aba8bc3d26c6c409c00377c53f9841, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2323,8 +2328,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 271554472}
   m_HandleRect: {fileID: 271554471}
   m_Direction: 2
-  m_Value: 0.9999996
-  m_Size: 0.8229556
+  m_Value: 1
+  m_Size: 0.8235446
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
