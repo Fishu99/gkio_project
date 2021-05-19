@@ -268,7 +268,7 @@ public class SwordEnemyController : MonoBehaviour
         DisablePhysics();
         animationAdapter.Die();
         yield return new WaitForSeconds(deathAnimationTime);
-        Instantiate(sack, transform.position + new Vector3(0,0.2f,0), Quaternion.identity);
+        Instantiate(sack, transform.position + new Vector3(0.5f,0.25f,0), Quaternion.identity);
         yield return StartCoroutine(FadeAfterDeath());
         Destroy(gameObject);
     }

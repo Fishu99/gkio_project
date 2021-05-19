@@ -35,6 +35,7 @@ public class PlayerStatusController : MonoBehaviour
         swordAttack.swordDamage = gameManager.PlayerSwordDamage;
         playerController.arrowDamage = gameManager.BowArrowDamage;
         playerController.arrows = gameManager.PlayerArrows;
+        playerController.arrowForce = gameManager.BowArrowForce;
     }
 
     private void SetStatusInGameManager()

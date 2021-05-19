@@ -40,8 +40,13 @@ public class GameManager : MonoBehaviour
     {
         get => BowDamageUpgrade.CurrentFeatureValue;
     }
+    public float BowArrowForce
+    {
+        get => BowForceUpgrade.CurrentFeatureValue;
+    }
     public FeatureUpgrade SwordDamageUpgrade;
     public FeatureUpgrade BowDamageUpgrade;
+    public FeatureUpgrade BowForceUpgrade;
 
     public ScoreCounter ScoreCounter { get; set; }
     public bool IsGameOver {
@@ -103,6 +108,15 @@ public class GameManager : MonoBehaviour
             new FeatureLevel { FeatureValue = 80, Cost = 4}
         };
         BowDamageUpgrade = new FeatureUpgrade(bowDamageUpgradeLevels);
+
+        var bowForceUpgradeLevels = new FeatureLevel[]
+        {
+            new FeatureLevel { FeatureValue = 10, Cost = 0},
+            new FeatureLevel { FeatureValue = 15, Cost = 2},
+            new FeatureLevel { FeatureValue = 20, Cost = 3},
+            new FeatureLevel { FeatureValue = 30, Cost = 4}
+        };
+        BowForceUpgrade = new FeatureUpgrade(bowForceUpgradeLevels);
     }
 
     /**
