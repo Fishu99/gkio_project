@@ -56,6 +56,7 @@ public class HealthManager : MonoBehaviour
             else
             {                
                 playerAnimator.SetTrigger("BlockHit");
+                audioManager.Play("PlayerBlockHit");
             }
         }
         else
