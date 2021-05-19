@@ -599,6 +599,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonRestart
       objectReference: {fileID: 0}
+    - target: {fileID: 2776924755694602527, guid: 49a971fb89229f849bd13425e5299a9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49a971fb89229f849bd13425e5299a9a, type: 3}
 --- !u!224 &6766261354163584912 stripped

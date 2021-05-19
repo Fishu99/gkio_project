@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -78,12 +79,30 @@ public class GameManager : MonoBehaviour
      * 
      */
     private void Initialize()
-    { 
+    {
         currentLevel = 0;
         ScoreCounter = new ScoreCounter();
         InitializeUpgrades();
         CheckFirstScene();
         ResetPlayerStatus();
+    }
+
+    private void GetSettingsFromPlayerPrefs()
+    {
+        int fullscreenPref = PlayerPrefs.GetInt("fullscreen", 1);
+        bool fullscreen = fullscreenPref != 0;
+        Resolution bestResolution = Screen.resolutions[Screen.resolutions.Length - 1];
+        int width = PlayerPrefs.GetInt("width", bestResolution.width);
+        int height = PlayerPrefs.GetInt("height", bestResolution.height);
+        if(IsValidResolution(width, height))
+        {
+            Screen.SetResolution(width, height, fullscreen);
+        }
+    }
+
+    private bool IsValidResolution(int width, int height)
+    {
+        return Array.Exists(Screen.resolutions, res => res.width == width && res.height == height);
     }
 
     /**
@@ -158,7 +177,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        GetSettingsFromPlayerPrefs();
+        Debug.Log("starting game manager");
     }
 
     
