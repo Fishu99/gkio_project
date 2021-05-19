@@ -19,10 +19,12 @@ public class WorkshopController : MonoBehaviour
             ["life"] = new WorkshopPurchase(OnBuyLife, 10),
             ["arrows"] = new WorkshopPurchase(OnBuyArrows, 4),
             ["bowDamageUpgrade"] = new WorkshopPurchase(OnBuyBowUpgrade),
-            ["swordDamageUpgrade"] = new WorkshopPurchase(OnBuySwordUpgrade)
+            ["swordDamageUpgrade"] = new WorkshopPurchase(OnBuySwordUpgrade),
+            ["bowForceUpgrade"] = new WorkshopPurchase(OnBuyBowForceUpgrade)
         };
         ConfigurePurchaseByFeature(purchases["bowDamageUpgrade"], gameManager.BowDamageUpgrade);
         ConfigurePurchaseByFeature(purchases["swordDamageUpgrade"], gameManager.SwordDamageUpgrade);
+        ConfigurePurchaseByFeature(purchases["bowForceUpgrade"], gameManager.BowForceUpgrade);
     }
 
 
@@ -53,6 +55,11 @@ public class WorkshopController : MonoBehaviour
     private void OnBuyBowUpgrade(WorkshopPurchase purchase)
     {
         OnUpgradePurchase(purchase, gameManager.BowDamageUpgrade);
+    }
+
+    private void OnBuyBowForceUpgrade(WorkshopPurchase purchase)
+    {
+        OnUpgradePurchase(purchase, gameManager.BowForceUpgrade);
     }
 
     private void OnBuySwordUpgrade(WorkshopPurchase purchase)

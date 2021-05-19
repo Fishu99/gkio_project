@@ -9,6 +9,7 @@ public class ArrowController : MonoBehaviour
     private bool isHarmful = false;
     public float arrowDamage = 30;
     public float arrowForce = 0.01f;
+    public float arrowSpeed = 100f;
     Rigidbody arrowRigidBody;
     //Warstwa, na której znajduj¹ siê atakowane obiekty
     public int layerToHit = 9;

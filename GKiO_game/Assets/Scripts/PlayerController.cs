@@ -26,9 +26,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerAttackCooldown = 0.5f;
     [SerializeField] private float jumpForce = 1000f;
     [SerializeField] private GameObject arrowPrefab;
-        
-    
-    public float arrowDamage = 30f;    
+
+
+    public float arrowDamage = 30f;
+    public float arrowForce = 0.01f;
     private float arrowOriginRadius = 1.3f;
     private Vector3 startPosition;
     private GameObject lastCheckpoint;
@@ -277,6 +278,7 @@ public class PlayerController : MonoBehaviour
         GameObject arrow = Instantiate(arrowPrefab, arrowPosition, arrowRotation);
         ArrowController arrowController = arrow.GetComponent<ArrowController>();
         arrowController.arrowDamage = arrowDamage;
+        arrowController.arrowForce = arrowForce;
         arrowController.Shoot();
         isShooting = false;
     }
