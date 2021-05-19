@@ -31,7 +31,7 @@ public class MoneyManager : MonoBehaviour
 
             int collectedMoney = collectible.Collect();
             ParticleSystem.MainModule particleMain = particle.main;
-            if (collectible.TypeOfCollectible.Equals("Coin"))
+            if (collectible.TypeOfCollectible.Equals("Coin") || collectible.TypeOfCollectible.Equals("Sack"))
             {
                 particleMain.startColor = Color.yellow;
             }

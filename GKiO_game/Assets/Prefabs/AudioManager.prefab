@@ -158,3 +158,21 @@ MonoBehaviour:
     pitch: 1.5
     loop: 0
     source: {fileID: 0}
+  - name: PlayerBlockHit
+    clip: {fileID: 8300000, guid: 51953cebfa1721d4f8257aa3278d314a, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: DungeonTheme
+    clip: {fileID: 8300000, guid: 8d49ea964bf366a4c8bcb5c57157b5da, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: LavaAmbient
+    clip: {fileID: 8300000, guid: ed46188c25a5511408936760848723b7, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
