@@ -166,15 +166,15 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: DungeonTheme
-    clip: {fileID: 8300000, guid: 8d49ea964bf366a4c8bcb5c57157b5da, type: 3}
+  - name: LavaAmbient
+    clip: {fileID: 8300000, guid: ed46188c25a5511408936760848723b7, type: 3}
     volume: 0.1
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: LavaAmbient
-    clip: {fileID: 8300000, guid: ed46188c25a5511408936760848723b7, type: 3}
-    volume: 0.1
+  - name: ClickButton
+    clip: {fileID: 8300000, guid: 83475a69d3296d647a33dc02db358f4c, type: 3}
+    volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}

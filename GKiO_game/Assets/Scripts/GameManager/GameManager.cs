@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /**
- * Poziomy trudnoœci gry
+ * Poziomy trudnoï¿½ci gry
  */
 public enum Difficulty
 {
@@ -107,13 +107,13 @@ public class GameManager : MonoBehaviour
     }
 
     /**
-     * W tej metodzie s¹ tworzone obiekty klasy FeatureUpgrade, które opisuj¹ kolejne poziomy ulepszeñ.
+     * W tej metodzie sï¿½ tworzone obiekty klasy FeatureUpgrade, ktï¿½re opisujï¿½ kolejne poziomy ulepszeï¿½.
      */
     private void InitializeUpgrades()
     {
         var swordDamageUpgradeLevels = new FeatureLevel[]
         {
-            new FeatureLevel { FeatureValue = 30, Cost = 0}, //FeatureValue pierwszego elementu to pocz¹tkowa wartoœæ swordDamage
+            new FeatureLevel { FeatureValue = 30, Cost = 0}, //FeatureValue pierwszego elementu to poczï¿½tkowa wartoï¿½ï¿½ swordDamage
             new FeatureLevel { FeatureValue = 40, Cost = 1},
             new FeatureLevel { FeatureValue = 60, Cost = 2},
             new FeatureLevel { FeatureValue = 80, Cost = 3}
@@ -140,9 +140,9 @@ public class GameManager : MonoBehaviour
     }
 
     /**
-     * Ta funkcja pozwala za³adowaæ odpowiednie wartoœci ró¿nych parametrów
-     * je¿eli gra nie zosta³a uruchomiona w menu g³ównym, ale na jakimœ z poziomów.
-     * Dziêki temu mo¿na wygodnie testowaæ poziomy
+     * Ta funkcja pozwala zaï¿½adowaï¿½ odpowiednie wartoï¿½ci rï¿½nych parametrï¿½w
+     * jeï¿½eli gra nie zostaï¿½a uruchomiona w menu gï¿½ï¿½wnym, ale na jakimï¿½ z poziomï¿½w.
+     * Dziï¿½ki temu moï¿½na wygodnie testowaï¿½ poziomy
      */
     private void CheckFirstScene()
     {
@@ -170,8 +170,8 @@ public class GameManager : MonoBehaviour
     }
 
     /**
-     * Po za³adowaniu sceny w³¹czany jest licznik czasu
-     * odmierzaj¹cy czas przejœcia poziomu
+     * Po zaï¿½adowaniu sceny wï¿½ï¿½czany jest licznik czasu
+     * odmierzajï¿½cy czas przejï¿½cia poziomu
      */
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -204,7 +204,7 @@ public class GameManager : MonoBehaviour
     }
 
     /**
-     * Czynnoœci wykonywane po tym, jak gracz dojdzie do koñca poziomu
+     * Czynnoï¿½ci wykonywane po tym, jak gracz dojdzie do koï¿½ca poziomu
      */
     public void FinishLevel()
     {
@@ -328,7 +328,7 @@ public class GameManager : MonoBehaviour
     }
 
     /**
-     * Ustawia ró¿ne parametry gracza w zale¿noœci od aktualnego poziomu trudnoœci
+     * Ustawia rï¿½ne parametry gracza w zaleï¿½noï¿½ci od aktualnego poziomu trudnoï¿½ci
      */
     private void ConfigureForCurrentDifficulty()
     {
@@ -354,7 +354,7 @@ public class GameManager : MonoBehaviour
     }
 
     /**
-     * Dodaje zebrane pieni¹dze do pieniêdzy gracza i do wyniku.
+     * Dodaje zebrane pieniï¿½dze do pieniï¿½dzy gracza i do wyniku.
      */
     public void AddCollectedMoney(int money)
     {
