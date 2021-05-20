@@ -33,7 +33,7 @@ public class LevelFinishedMenuController : MonoBehaviour
     public void NextLevel()
     {
         Time.timeScale = 1;
-        gameManager.LoadWorkshop();
+        gameManager.LoadWorkshopOrWinScene();
     }
 
     private void ShowScore()

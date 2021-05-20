@@ -194,10 +194,16 @@ public class GameManager : MonoBehaviour
         LoadScene("DifficultySelect");
     }
 
+    public void LoadIntroduction()
+    {
+        LoadScene("Introduction");
+    }
+
     public void SelectDifficultyAndGoNext(Difficulty difficulty)
     {
         CurrentDifficulty = difficulty;
-        LoadFirstLevel();
+        //LoadFirstLevel();
+        LoadIntroduction();
     }
 
     /**
@@ -249,6 +255,14 @@ public class GameManager : MonoBehaviour
         ResetPlayerStatus();
         currentLevel = 0;
         LoadCurrentLevel();
+    }
+
+    public void LoadWorkshopOrWinScene()
+    {
+        if (currentLevel + 1 < sceneData.Length)
+            LoadWorkshop();
+        else
+            LoadWinScene();
     }
 
     public void LoadWorkshop()

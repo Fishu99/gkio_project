@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Workshop.unity
     guid: 6249dbfd008f5c24cb4dabb9f2baf569
+  - enabled: 1
+    path: Assets/Scenes/Introduction.unity
+    guid: 6479f34da11546e4d94728d663215b46
   m_configObjects: {}
