@@ -155,7 +155,12 @@ public class GameManager : MonoBehaviour
             ScoreCounter.NewGame();
             ScoreCounter.CurrentDifficulty = CurrentDifficulty;
             ScoreCounter.NewScene(sceneData[index]);
+            PlayMusic(sceneData[index].MusicName);
             ResetPlayerStatus();
+        }
+        else
+        {
+            PlayMusic("MenuTheme");
         }
     }
 
@@ -195,7 +200,6 @@ public class GameManager : MonoBehaviour
     public void SelectDifficultyAndGoNext(Difficulty difficulty)
     {
         CurrentDifficulty = difficulty;
-        //LoadFirstLevel();
         LoadIntroduction();
     }
 
@@ -234,10 +238,6 @@ public class GameManager : MonoBehaviour
         SceneData newSceneData = sceneData[currentLevel];
         ScoreCounter.NewScene(newSceneData);
         LoadScene(newSceneData.SceneName, newSceneData.MusicName);
-        if(newSceneData.MusicName != null)
-        {
-            //AudioManager.instance.PlayMusicExclusive(newSceneData.MusicName);
-        }
     }
 
     public void LoadDifficultySelect()
@@ -284,8 +284,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadMenuScene(string sceneName)
     {
-        //AudioManager.instance.StopAllMusic();
-        LoadScene(sceneName);
+        LoadScene(sceneName, "MenuTheme");
     }
    
 
@@ -325,7 +324,7 @@ public class GameManager : MonoBehaviour
         if(musicName == null)
             AudioManager.instance.StopAllMusic();
         else
-            AudioManager.instance.PlayMusicExclusive(musicName);
+            AudioManager.instance.PlayMusicExclusiveIfNotPlayed(musicName);
     }
 
     /**

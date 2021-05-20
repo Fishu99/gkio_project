@@ -154,6 +154,19 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public bool IsMusicPlaying(string name)
+    {
+        return Array.Exists(music, sound => sound.name == name && sound.source.isPlaying);
+    }
+
+    public void PlayMusicExclusiveIfNotPlayed(string name)
+    {
+        if (!IsMusicPlaying(name))
+        {
+            PlayMusicExclusive(name);
+        }
+    }
+
     private void ConfigureSoundsInArray(Sound[] sounds)
     {
         foreach (Sound s in sounds)

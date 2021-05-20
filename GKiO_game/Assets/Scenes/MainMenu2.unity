@@ -868,6 +868,34 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1621419072}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateMusicVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OptionsController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5804664876738940612, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
       propertyPath: m_Name
       value: SliderMusic
@@ -2369,6 +2397,34 @@ PrefabInstance:
     - target: {fileID: 5804664876132885745, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1621419072}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateSoundVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: OptionsController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804664876738940610, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5804664876738940612, guid: ab99663b87d82ff4b841145cc6f0538b, type: 3}
       propertyPath: m_Name
