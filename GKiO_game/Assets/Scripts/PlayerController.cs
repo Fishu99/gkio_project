@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
                 isAttackReady = true;
         }
         horizontalInput = Input.GetAxis("Horizontal");
-        CheckIfGrounded();
+        //CheckIfGrounded();
         CheckPlayerStatus();
         CheckInput();
     }
@@ -562,6 +562,8 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         playerAnimator.SetBool("isDead", false);
         ResetAllTriggers();
+        isFalling = true;
+        playerAnimator.SetBool("isFalling", true);
         playerAnimator.Play("Male Fall");
         ReturnToCheckpoint();
         healthManager.SetMax();
