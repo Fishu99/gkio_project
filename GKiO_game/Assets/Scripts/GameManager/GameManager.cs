@@ -56,8 +56,10 @@ public class GameManager : MonoBehaviour
     private int currentLevel = 0;
     private SceneData[] sceneData = new SceneData[]
     {
-        new SceneData { SceneName = "DBDungeon", LevelName = "Dungeon", ExpectedTime = 120 , MusicName = "DungeonTheme"},
-        new SceneData { SceneName = "DBForest", LevelName = "Forest", ExpectedTime = 90 , MusicName = "WoodsTheme"}
+//        new SceneData { SceneName = "DBDungeon", LevelName = "Dungeon", ExpectedTime = 120 , MusicName = "DungeonTheme"},
+//        new SceneData { SceneName = "DBForest", LevelName = "Forest", ExpectedTime = 90 , MusicName = "WoodsTheme"}
+        new SceneData { SceneName = "Level1_Dungeon", LevelName = "Dungeon", ExpectedTime = 10*60 , MusicName = "DungeonTheme"},
+        new SceneData { SceneName = "Level2_Woods", LevelName = "Forest", ExpectedTime = 6*60 , MusicName = "WoodsTheme"}
     };
 
     private void Awake()
