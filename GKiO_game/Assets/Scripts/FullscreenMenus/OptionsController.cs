@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class OptionsController : MonoBehaviour
 {
     private GameManager gameManager;
+    private AudioManager audioManager;
     [SerializeField] GameObject resolutionDropdown;
     [SerializeField] GameObject fullscreenToggle;
     [SerializeField] GameObject soundSlider;
@@ -15,10 +16,11 @@ public class OptionsController : MonoBehaviour
     private Toggle fullscreenToggleComponenet;
     private Slider soundSliderComponent;
     private Slider musicSliderComponent;
-    Resolution[] resolutions;
+    private List<Resolution> resolutionList;
     void OnEnable()
     {
         gameManager = GameManager.instance;
+        audioManager = AudioManager.instance;
         GetTheComponents();
         SetupResolutions();
         SetupFullScreenToggle();
@@ -37,23 +39,41 @@ public class OptionsController : MonoBehaviour
     private void SetupResolutions()
     {
         List<string> options = new List<string>();
-        resolutions = Screen.resolutions;
+        resolutionList = new List<Resolution>();
         Resolution currentResolution = Screen.currentResolution;
         int i = 0;
         int currentIndex = 0;
-        foreach (var res in resolutions)
+        foreach (var res in Screen.resolutions)
         {
-            options.Add(res.width + " x " + res.height);
-            if(currentResolution.width == res.width && currentResolution.height == res.height)
+            if (ResolutionDifferentThenLastInList(res))
             {
-                currentIndex = i;
+                resolutionList.Add(res);
+                options.Add(res.width + " x " + res.height);
+                if (currentResolution.width == res.width && currentResolution.height == res.height)
+                {
+                    currentIndex = i;
+                }
+                i++;
             }
-            i++;
+            
         }
         resolutionDropdownComponent.ClearOptions();
         resolutionDropdownComponent.AddOptions(options);
         resolutionDropdownComponent.value = currentIndex;
         resolutionDropdownComponent.RefreshShownValue();
+    }
+
+    private bool ResolutionDifferentThenLastInList(Resolution res)
+    {
+        if(resolutionList.Count == 0)
+        {
+            return true;
+        }
+        else
+        {
+            Resolution lastResolution = resolutionList[resolutionList.Count - 1];
+            return res.width != lastResolution.width || res.height != lastResolution.height;
+        }
     }
 
     private void SetupFullScreenToggle()
@@ -79,24 +99,30 @@ public class OptionsController : MonoBehaviour
     public void Apply()
     {
         UpdateScreenResolution();
-        UpdateAudio();
+        UpdateSoundVolume();
+        UpdateMusicVolume();
         WritePlayerPrefs();
+    }
+
+    public void UpdateSoundVolume()
+    {
+        float soundVolume = soundSliderComponent.value;
+        SetSoundVolume(soundVolume);
+    }
+
+    public void UpdateMusicVolume()
+    {
+        float musicVolume = musicSliderComponent.value;
+        SetMusicVolume(musicVolume);
     }
 
     private void UpdateScreenResolution()
     {
         int resIndex = resolutionDropdownComponent.value;
-        Resolution resolution = resolutions[resIndex];
+        //Resolution resolution = resolutions[resIndex];
+        Resolution resolution = resolutionList[resIndex];
         bool fullscreen = fullscreenToggleComponenet.isOn;
         Screen.SetResolution(resolution.width, resolution.height, fullscreen);
-    }
-
-    private void UpdateAudio()
-    {
-        float musicVolume = musicSliderComponent.value;
-        float soundVolume = soundSliderComponent.value;
-        SetMusicVolume(musicVolume);
-        SetSoundVolume(soundVolume);
     }
 
     private void WritePlayerPrefs()
@@ -113,21 +139,21 @@ public class OptionsController : MonoBehaviour
 
     private float GetMusicVolume()
     {
-        return 0.7f;
+        return audioManager.MusicVolume;
     }
 
     private void SetMusicVolume(float newVolume)
     {
-        
+        audioManager.MusicVolume = newVolume;
     }
 
     private float GetSoundVolume()
     {
-        return 0.7f;
+        return audioManager.SoundVolume;
     }
 
     private void SetSoundVolume(float newVolume)
     {
-
+        audioManager.SoundVolume = newVolume;
     }
 }

@@ -21,6 +21,6 @@ public class WinSceneController : MonoBehaviour
 
     public void MenuClick()
     {
-        gameManager.ReturnToMainMenu();
+        gameManager.LoadMainMenu();
     }
 }

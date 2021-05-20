@@ -51,7 +51,7 @@ public class PauseController : MonoBehaviour
         IsPaused = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
-        gameManager.ReturnToMainMenu();
+        gameManager.LoadMainMenu();
     }
 
     private IEnumerator ResumeCoroutine()

@@ -18,7 +18,6 @@ public enum Difficulty
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
     private Difficulty currentDifficulty = Difficulty.Hard;
     public Difficulty CurrentDifficulty {
         get => currentDifficulty;
@@ -57,8 +56,8 @@ public class GameManager : MonoBehaviour
     private int currentLevel = 0;
     private SceneData[] sceneData = new SceneData[]
     {
-        new SceneData { SceneName = "DBDungeon", LevelName = "Dungeon", ExpectedTime = 120 },
-        new SceneData { SceneName = "DBForest", LevelName = "Forest", ExpectedTime = 90 }
+        new SceneData { SceneName = "DBDungeon", LevelName = "Dungeon", ExpectedTime = 120 , MusicName = "DungeonTheme"},
+        new SceneData { SceneName = "DBForest", LevelName = "Forest", ExpectedTime = 90 , MusicName = "WoodsTheme"}
     };
 
     private void Awake()
@@ -98,6 +97,8 @@ public class GameManager : MonoBehaviour
         {
             Screen.SetResolution(width, height, fullscreen);
         }
+        AudioManager.instance.MusicVolume = PlayerPrefs.GetFloat("musicVolume", 1);
+        AudioManager.instance.SoundVolume = PlayerPrefs.GetFloat("soundVolume", 1);
     }
 
     private bool IsValidResolution(int width, int height)
@@ -154,7 +155,12 @@ public class GameManager : MonoBehaviour
             ScoreCounter.NewGame();
             ScoreCounter.CurrentDifficulty = CurrentDifficulty;
             ScoreCounter.NewScene(sceneData[index]);
+            PlayMusic(sceneData[index].MusicName);
             ResetPlayerStatus();
+        }
+        else
+        {
+            PlayMusic("MenuTheme");
         }
     }
 
@@ -189,20 +195,11 @@ public class GameManager : MonoBehaviour
 
     
 
-    public void LoadDifficultySelect()
-    {
-        LoadScene("DifficultySelect");
-    }
-
-    public void LoadIntroduction()
-    {
-        LoadScene("Introduction");
-    }
+    
 
     public void SelectDifficultyAndGoNext(Difficulty difficulty)
     {
         CurrentDifficulty = difficulty;
-        //LoadFirstLevel();
         LoadIntroduction();
     }
 
@@ -240,12 +237,32 @@ public class GameManager : MonoBehaviour
     {
         SceneData newSceneData = sceneData[currentLevel];
         ScoreCounter.NewScene(newSceneData);
-        LoadScene(newSceneData.SceneName);
+        LoadScene(newSceneData.SceneName, newSceneData.MusicName);
     }
 
-    public void ReturnToMainMenu()
+    public void LoadDifficultySelect()
     {
-        LoadScene("MainMenu2");
+        LoadMenuScene("DifficultySelect");
+    }
+
+    public void LoadIntroduction()
+    {
+        LoadMenuScene("Introduction");
+    }
+
+    public void LoadMainMenu()
+    {
+        LoadMenuScene("MainMenu2");
+    }
+
+    public void LoadWorkshop()
+    {
+        LoadMenuScene("Workshop");
+    }
+
+    private void LoadWinScene()
+    {
+        LoadMenuScene("WinScene");
     }
 
     public void LoadFirstLevel()
@@ -265,10 +282,11 @@ public class GameManager : MonoBehaviour
             LoadWinScene();
     }
 
-    public void LoadWorkshop()
+    private void LoadMenuScene(string sceneName)
     {
-        LoadScene("Workshop");
+        LoadScene(sceneName, "MenuTheme");
     }
+   
 
     private void ResetPlayerStatus()
     {
@@ -277,29 +295,36 @@ public class GameManager : MonoBehaviour
         ConfigureForCurrentDifficulty();
     }
 
-    private void LoadWinScene()
-    {
-        LoadScene("WinScene");
-    }
+    
 
-    private void LoadScene(string name)
+    private void LoadScene(string name, string musicName = null)
     {
         var crossfadeController = FindObjectOfType<CrossfadeController>();
         if(crossfadeController == null)
         {
             SceneManager.LoadScene(name);
+            PlayMusic(musicName);
         }
         else
         {
-            StartCoroutine(LoadSceneWithCrossfade(name, crossfadeController));
+            StartCoroutine(LoadSceneWithCrossfade(name, crossfadeController, musicName));
         }
     }
 
-    private IEnumerator LoadSceneWithCrossfade(string name, CrossfadeController crossfadeController)
+    private IEnumerator LoadSceneWithCrossfade(string name, CrossfadeController crossfadeController, string musicName)
     {
         crossfadeController.StartCrossfade();
         yield return new WaitForSeconds(crossfadeController.CrossfadeTime);
         SceneManager.LoadScene(name);
+        PlayMusic(musicName);
+    }
+
+    private void PlayMusic(string musicName)
+    {
+        if(musicName == null)
+            AudioManager.instance.StopAllMusic();
+        else
+            AudioManager.instance.PlayMusicExclusiveIfNotPlayed(musicName);
     }
 
     /**

@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f80e96c6fe43c46a725fc76ea002e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundVolume: 1
+  musicVolume: 1
   sounds:
   - name: PlayerDeath
     clip: {fileID: 8300000, guid: ad6d56fac74005c4c89d1c89d9b7e4df, type: 3}
@@ -175,4 +177,23 @@ MonoBehaviour:
     volume: 0.1
     pitch: 1
     loop: 0
+    source: {fileID: 0}
+  music:
+  - name: DungeonTheme
+    clip: {fileID: 8300000, guid: 8d49ea964bf366a4c8bcb5c57157b5da, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: WoodsTheme
+    clip: {fileID: 8300000, guid: a7082df160665844d890a9cde81bbe0b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: MenuTheme
+    clip: {fileID: 8300000, guid: 2e662aabc71b51d4192898060be75853, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
     source: {fileID: 0}
