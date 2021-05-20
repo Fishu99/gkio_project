@@ -5,15 +5,10 @@ using UnityEngine;
 public class MainMenuController : MonoBehaviour
 {
     private GameManager gameManager;
+    [SerializeField] GameObject optionsMenu;
     void Start()
     {
         gameManager = GameManager.instance;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Play()
@@ -23,7 +18,7 @@ public class MainMenuController : MonoBehaviour
 
     public void Options()
     {
-
+        optionsMenu.SetActive(true);
     }
 
     public void Quit()
