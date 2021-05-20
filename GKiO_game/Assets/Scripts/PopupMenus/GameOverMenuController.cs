@@ -36,6 +36,6 @@ public class GameOverMenuController : MonoBehaviour
 
     public void BackToMenu()
     {
-        gameManager.ReturnToMainMenu();
+        gameManager.LoadMainMenu();
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class OptionsController : MonoBehaviour
 {
     private GameManager gameManager;
+    private AudioManager audioManager;
     [SerializeField] GameObject resolutionDropdown;
     [SerializeField] GameObject fullscreenToggle;
     [SerializeField] GameObject soundSlider;
@@ -15,10 +16,11 @@ public class OptionsController : MonoBehaviour
     private Toggle fullscreenToggleComponenet;
     private Slider soundSliderComponent;
     private Slider musicSliderComponent;
-    Resolution[] resolutions;
+    private Resolution[] resolutions;
     void OnEnable()
     {
         gameManager = GameManager.instance;
+        audioManager = AudioManager.instance;
         GetTheComponents();
         SetupResolutions();
         SetupFullScreenToggle();
@@ -113,21 +115,21 @@ public class OptionsController : MonoBehaviour
 
     private float GetMusicVolume()
     {
-        return 0.7f;
+        return audioManager.MusicVolume;
     }
 
     private void SetMusicVolume(float newVolume)
     {
-        
+        audioManager.MusicVolume = newVolume;
     }
 
     private float GetSoundVolume()
     {
-        return 0.7f;
+        return audioManager.SoundVolume;
     }
 
     private void SetSoundVolume(float newVolume)
     {
-
+        audioManager.SoundVolume = newVolume;
     }
 }

@@ -18,7 +18,7 @@ public enum Difficulty
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    private AudioManager audioManager;
     private Difficulty currentDifficulty = Difficulty.Hard;
     public Difficulty CurrentDifficulty {
         get => currentDifficulty;
@@ -161,6 +161,7 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        audioManager = AudioManager.instance;
     }
 
     /**
@@ -189,15 +190,7 @@ public class GameManager : MonoBehaviour
 
     
 
-    public void LoadDifficultySelect()
-    {
-        LoadScene("DifficultySelect");
-    }
-
-    public void LoadIntroduction()
-    {
-        LoadScene("Introduction");
-    }
+    
 
     public void SelectDifficultyAndGoNext(Difficulty difficulty)
     {
@@ -241,11 +234,35 @@ public class GameManager : MonoBehaviour
         SceneData newSceneData = sceneData[currentLevel];
         ScoreCounter.NewScene(newSceneData);
         LoadScene(newSceneData.SceneName);
+        if(newSceneData.MusicName != null)
+        {
+            audioManager.PlayMusicExclusive(newSceneData.MusicName);
+        }
     }
 
-    public void ReturnToMainMenu()
+    public void LoadDifficultySelect()
     {
-        LoadScene("MainMenu2");
+        LoadMenuScene("DifficultySelect");
+    }
+
+    public void LoadIntroduction()
+    {
+        LoadMenuScene("Introduction");
+    }
+
+    public void LoadMainMenu()
+    {
+        LoadMenuScene("MainMenu2");
+    }
+
+    public void LoadWorkshop()
+    {
+        LoadMenuScene("Workshop");
+    }
+
+    private void LoadWinScene()
+    {
+        LoadMenuScene("WinScene");
     }
 
     public void LoadFirstLevel()
@@ -265,10 +282,12 @@ public class GameManager : MonoBehaviour
             LoadWinScene();
     }
 
-    public void LoadWorkshop()
+    private void LoadMenuScene(string sceneName)
     {
-        LoadScene("Workshop");
+        audioManager.StopAllMusic();
+        LoadScene(sceneName);
     }
+   
 
     private void ResetPlayerStatus()
     {
@@ -277,10 +296,7 @@ public class GameManager : MonoBehaviour
         ConfigureForCurrentDifficulty();
     }
 
-    private void LoadWinScene()
-    {
-        LoadScene("WinScene");
-    }
+    
 
     private void LoadScene(string name)
     {

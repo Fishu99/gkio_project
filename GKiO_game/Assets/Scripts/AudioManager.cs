@@ -5,6 +5,27 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+    public Sound[] music;
+    [SerializeField] private float soundVolume = 1f;
+    public float SoundVolume
+    {
+        get => soundVolume;
+        set
+        {
+            soundVolume = value;
+            UpdateSoundVolume();
+        }
+    }
+    [SerializeField] private float musicVolume = 1f;
+    public float MusicVolume
+    {
+        get => musicVolume;
+        set
+        {
+            musicVolume = value;
+            UpdateMusicVolume();
+        }
+    }
     public static AudioManager instance;
 
     private void Awake()
@@ -18,14 +39,10 @@ public class AudioManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        foreach(Sound s in sounds)
-        {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-        }
+        ConfigureSoundsInArray(sounds);
+        ConfigureSoundsInArray(music);
+        UpdateMusicVolume();
+        UpdateSoundVolume();
     }
     
     public void Play (string name)
@@ -108,5 +125,58 @@ public class AudioManager : MonoBehaviour
 
         s.pitch = pitchValueGenerated;
         s.source.Play();
+    }
+
+    public void PlayMusic(string name)
+    {
+        Sound s = Array.Find(music, sound => sound.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("Music: " + name + " not found!");
+            return;
+        }
+        s.source.Play();
+    }
+
+    public void PlayMusicExclusive(string name)
+    {
+        StopAllMusic();
+        PlayMusic(name);
+    }
+
+    public void StopAllMusic()
+    {
+        foreach(Sound m in music)
+        {
+            m.source.Stop();
+        }
+    }
+
+    private void ConfigureSoundsInArray(Sound[] sounds)
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+        }
+    }
+
+    private void UpdateSoundVolume()
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.volume = s.volume*soundVolume;
+        }
+    }
+
+    private void UpdateMusicVolume()
+    {
+        foreach (Sound s in music)
+        {
+            s.source.volume = s.volume * musicVolume;
+        }
     }
 }
