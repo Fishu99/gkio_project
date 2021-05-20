@@ -162,8 +162,10 @@ public class PlayerController : MonoBehaviour
             CheckAndJump();
             CheckIfIsAttacking();
             CalculateVelocity();
+            CheckIfGrounded();
+            SetAnimationVariables();
         }
-        SetAnimationVariables();
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -292,7 +294,7 @@ public class PlayerController : MonoBehaviour
     {
         float colliderRadius = playerCollider.radius;
         Vector3 colliderSphereCenter = playerCollider.bounds.min + new Vector3(colliderRadius, colliderRadius, colliderRadius);
-        int playerMask = ~(1 << 6 | 1 << 10 | 1 << 11);
+        int playerMask = ~(1 << 6 | 1 << 8 | 1 << 10 | 1 << 11);
         //Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f)
         if (Physics.CheckSphere(colliderSphereCenter, colliderRadius + 0.2f, playerMask))
         {
@@ -468,6 +470,17 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isShooting", isShooting);
     }
 
+    private void ResetAllTriggers()
+    {
+        foreach(var param in playerAnimator.parameters)
+        {
+            if(param.type == AnimatorControllerParameterType.Trigger)
+            {
+                playerAnimator.ResetTrigger(param.name);
+            }
+        }
+    }
+
     private void RotatePlayerForShooting()
     {
         Vector3 mousePosition = Input.mousePosition;
@@ -497,19 +510,35 @@ public class PlayerController : MonoBehaviour
 
     private void DieOfNoHealth()
     {
-        playerAnimator.SetTrigger("Die");
+        SetDieAnimation();
         isDead = true;
         Invoke("RespawnOrGameOver", 3);
     }
 
     private void DieOfDeadZone()
     {
-        playerAnimator.SetTrigger("Die");
+        SetDieAnimation();
         audioManager.Play("PlayerDeath");
         IsInDeadZone = true;
         isDead = true;
         healthManager.SetZero();
         Invoke("RespawnOrGameOver", 1f);
+    }
+
+    private void SetDieAnimation()
+    {
+        playerAnimator.SetTrigger("Die");
+        playerAnimator.SetBool("isDead", true);
+        ResetAnimatorVariablesAfterDeath();
+    }
+
+    private void ResetAnimatorVariablesAfterDeath()
+    {
+        playerAnimator.SetBool("isFalling", false);
+        playerAnimator.SetBool("isGrounded", false);
+        playerAnimator.SetBool("isWalking", false);
+        playerAnimator.SetBool("isSprinting", false);
+        playerAnimator.SetBool("isBlocking", false);
     }
 
     private void RespawnOrGameOver()
@@ -530,7 +559,10 @@ public class PlayerController : MonoBehaviour
     {
         isDead = false;
         IsInDeadZone = false;
-        playerAnimator.SetTrigger("Respawn");
+        isGrounded = false;
+        playerAnimator.SetBool("isDead", false);
+        ResetAllTriggers();
+        playerAnimator.Play("Male Fall");
         ReturnToCheckpoint();
         healthManager.SetMax();
     }
