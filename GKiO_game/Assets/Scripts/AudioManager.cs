@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
-    public Sound[] music;
+    
     [SerializeField] private float soundVolume = 1f;
     public float SoundVolume
     {
@@ -26,6 +25,8 @@ public class AudioManager : MonoBehaviour
             UpdateMusicVolume();
         }
     }
+    public Sound[] sounds;
+    public Sound[] music;
     public static AudioManager instance;
 
     private void Awake()
@@ -135,6 +136,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Music: " + name + " not found!");
             return;
         }
+        Debug.Log(name);
         s.source.Play();
     }
 
