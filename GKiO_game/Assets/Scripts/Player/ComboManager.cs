@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 enum Attack
@@ -11,6 +9,9 @@ enum Attack
     AfterThird
 }
 
+/// <summary>
+/// A class for controlling the atack combos.
+/// </summary>
 public class ComboManager : MonoBehaviour
 {
     Animator playerAnimator;
@@ -23,18 +24,11 @@ public class ComboManager : MonoBehaviour
     [SerializeField] private float timeOfInvisibility2 = 0.0f;
     [SerializeField] private float timeOfInvisibility3 = 0.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerController = GetComponent<PlayerController>();
         playerAnimator = GetComponent<Animator>();
         audioManager = AudioManager.instance;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public float AttackIfPossible()

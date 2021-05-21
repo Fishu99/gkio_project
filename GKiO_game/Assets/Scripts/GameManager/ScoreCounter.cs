@@ -1,15 +1,20 @@
 using UnityEngine;
 
+/// <summary>
+/// Class for counting player's score.
+/// </summary>
 public class ScoreCounter
 {
-    public float MoneyCoefficient { get; set; } = 1f;
-    public float EnemyCoefficient { get; set; } = 1f;
-    public Difficulty CurrentDifficulty { get; set; } = Difficulty.Easy;
-    public SceneData CurrentSceneData { get; set; }
+
     private int enemiesKilled = 0;
     private int moneyCollected = 0;
     private float? startTime;
     private float? stopTime;
+
+    public float MoneyCoefficient { get; set; } = 1f;
+    public float EnemyCoefficient { get; set; } = 1f;
+    public Difficulty CurrentDifficulty { get; set; } = Difficulty.Easy;
+    public SceneData CurrentSceneData { get; set; }
 
     public float TotalSceneTime
     {

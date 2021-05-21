@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The class to control the movement of objects such as moving platforms along complex paths.
+/// </summary>
 public class MoveAlongPathController : MonoBehaviour
 {
     private int currentPathIndex = 0;
@@ -28,7 +29,6 @@ public class MoveAlongPathController : MonoBehaviour
     {
         if (setPaths.Length != setWaitTimes.Length)
         {
-            //Debug.LogError(transform.name.ToString() + ": Invalid lengths of setPaths and setWaitTimes - should be equal to themselves!");
             Debug.LogWarning("Array of Paths and WaitTimes for assigned points should have the same elements!");
             isGoodPrepared = false;
         }
@@ -45,13 +45,6 @@ public class MoveAlongPathController : MonoBehaviour
             
     }
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (!isWaiting && isGoodPrepared)

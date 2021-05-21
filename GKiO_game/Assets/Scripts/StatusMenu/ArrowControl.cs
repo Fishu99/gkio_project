@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Scirpt for displaying the number of arrows.
+/// </summary>
 public class ArrowControl : MonoBehaviour
 {
     private TMP_Text textMesh;

@@ -1,9 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+/// <summary>
+/// A script controlling options menu.
+/// It sets the resolution of the screen and volume of music and sounds.
+/// </summary>
 public class OptionsController : MonoBehaviour
 {
     private GameManager gameManager;
@@ -119,7 +122,6 @@ public class OptionsController : MonoBehaviour
     private void UpdateScreenResolution()
     {
         int resIndex = resolutionDropdownComponent.value;
-        //Resolution resolution = resolutions[resIndex];
         Resolution resolution = resolutionList[resIndex];
         bool fullscreen = fullscreenToggleComponenet.isOn;
         Screen.SetResolution(resolution.width, resolution.height, fullscreen);

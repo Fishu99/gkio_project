@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Script for displaying the number of player lives.
+/// </summary>
 public class LivesNumberController : MonoBehaviour
 {
     private TMP_Text textMesh;

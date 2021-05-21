@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
@@ -20,11 +18,19 @@ public class PlayerController : MonoBehaviour
     private PauseController pauseController;
     public Camera playerCamera;
 
-    //Variables and constants
+    [Tooltip("Walking speed of the player")]
     [SerializeField] private float playerSpeed = 5f;
+
+    [Tooltip("How many times faster the player sprints than walks")]
     [SerializeField] private float playerSprintMultiplier = 2.0f;
+
+    [Tooltip("Describes the cooldown time after attack")]
     [SerializeField] private float playerAttackCooldown = 0.5f;
+
+    [Tooltip("The force with which the player jumps")]
     [SerializeField] private float jumpForce = 1000f;
+
+    [Tooltip("The prefab of the released arrow")]
     [SerializeField] private GameObject arrowPrefab;
 
 
@@ -82,7 +88,6 @@ public class PlayerController : MonoBehaviour
     GameObject ARROW;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         playerRigidBody = GetComponent<Rigidbody>();

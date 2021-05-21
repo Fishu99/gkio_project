@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
- * Skrypt dla kamery, ¿eby pod¹¿a³a za graczem.
- * Kamera znajduje siê ca³y czas w takim po³o¿eniu wzglêdem gracza, w jakim jest ustawion a na pocz¹tku
- */
+/// <summary>
+/// A script for the camera which makes it follow player.
+/// The camera maintains the same distance from the player as at the beginning.
+/// The only exception is when player falls into water or lava:
+/// it stays in a fixed place and rotates to follow the player.
+/// </summary>
 public class FollowPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     private PlayerController playerController;
     private Vector3 cameraOffset;
-    // Start is called before the first frame update
+
     void Start()
     {
         cameraOffset = transform.position - player.transform.position;
@@ -22,7 +24,6 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.position = player.transform.position + cameraOffset;
         if (playerController.IsInDeadZone)
         {
             RotateToLookAtPlayer();

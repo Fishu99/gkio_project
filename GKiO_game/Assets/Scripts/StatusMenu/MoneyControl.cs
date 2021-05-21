@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Script for displaying player money in StatusMenu
+/// </summary>
 public class MoneyControl : MonoBehaviour
 {
     private TMP_Text textMesh;

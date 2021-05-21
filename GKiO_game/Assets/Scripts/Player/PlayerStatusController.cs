@@ -1,8 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// The script reads the player status from the GameManager at the beginning of each level
+/// and updates the status in GameManager during game.
+/// </summary>
 public class PlayerStatusController : MonoBehaviour
 {
-
     GameManager gameManager;
     PlayerController playerController;
     HealthManager healthManager;
@@ -15,6 +18,20 @@ public class PlayerStatusController : MonoBehaviour
         {
             GetStatusFromGameManager();
         }
+    }
+
+    void Update()
+    {
+        if (gameManager != null)
+        {
+            SetStatusInGameManager();
+        }
+    }
+
+    public void FinishLevel()
+    {
+        Debug.Log("Detected level finish");
+        gameManager.FinishLevel();
     }
 
     private void GetComponents()
@@ -44,19 +61,5 @@ public class PlayerStatusController : MonoBehaviour
         gameManager.PlayerMoney = moneyManager.Money;
         gameManager.PlayerLives = playerController.lives;
         gameManager.PlayerArrows = playerController.arrows;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (gameManager != null)
-        {
-            SetStatusInGameManager();
-        }
-    }
-    public void FinishLevel()
-    {
-        Debug.Log("Detected level finish");
-        gameManager.FinishLevel();
     }
 }

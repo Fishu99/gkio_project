@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+/// <summary>
+/// A class for managing upgrades of particular feature such as sword damage or bow force.
+/// </summary>
 public class FeatureUpgrade
 {
     private FeatureLevel[] levels;

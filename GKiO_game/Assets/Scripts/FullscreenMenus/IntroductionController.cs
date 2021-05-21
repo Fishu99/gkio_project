@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A script controlling the Introduction scene.
+/// </summary>
 public class IntroductionController : MonoBehaviour
 {
     private int storyPartIndex = 1;
@@ -19,12 +20,6 @@ public class IntroductionController : MonoBehaviour
         storyPart3.SetActive(false);
         storyPanel.SetActive(true);
         controlsPanel.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void NextClick()

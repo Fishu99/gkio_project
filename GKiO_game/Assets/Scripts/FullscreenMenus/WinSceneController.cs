@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// A script controlling the scene shown after player wins the game.
+/// </summary>
 public class WinSceneController : MonoBehaviour
 {
     [SerializeField] private GameObject scoreObject;
@@ -11,12 +12,6 @@ public class WinSceneController : MonoBehaviour
     {
         gameManager = GameManager.instance;
         scoreObject.GetComponent<TMP_Text>().text = gameManager.ScoreCounter.TotalGameScore.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void MenuClick()

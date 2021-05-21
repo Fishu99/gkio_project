@@ -1,6 +1,8 @@
 using System;
-using UnityEngine;
 
+/// <summary>
+/// A class representing an item in the Workshop scene.
+/// </summary>
 public class WorkshopPurchase 
 {
     public int Price { get; set; }

@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// A script for controlling the "Level finished" window.
+/// </summary>
 public class LevelFinishedMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject levelFinishedPanel;
@@ -18,7 +19,6 @@ public class LevelFinishedMenuController : MonoBehaviour
         active = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!active && gameManager.IsLevelFinished)

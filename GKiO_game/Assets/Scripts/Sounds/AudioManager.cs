@@ -1,10 +1,16 @@
-using UnityEngine.Audio;
 using System;
 using UnityEngine;
 
+/// <summary>
+/// The class for playing sound in the game.
+/// It is a singleton object which is persisted between scenes via DontDestroyOnLoad.
+/// The sound is divided into two cattegories: sounds and music.
+/// Sounds or sound effects are short clips such as footsteps, sword crash, etc.
+/// Music is played in the background.
+/// </summary>
 public class AudioManager : MonoBehaviour
 {
-    
+    [Tooltip("The master volume for all sound effects in the game")]
     [SerializeField] private float soundVolume = 1f;
     public float SoundVolume
     {
@@ -15,6 +21,8 @@ public class AudioManager : MonoBehaviour
             UpdateSoundVolume();
         }
     }
+
+    [Tooltip("The master volume for all the music played in the game")]
     [SerializeField] private float musicVolume = 1f;
     public float MusicVolume
     {
@@ -25,8 +33,12 @@ public class AudioManager : MonoBehaviour
             UpdateMusicVolume();
         }
     }
+
+    [Tooltip("Array of sound effects used in the game")]
     public Sound[] sounds;
+    [Tooltip("Array of music played in the game")]
     public Sound[] music;
+
     public static AudioManager instance;
 
     private void Awake()
@@ -136,7 +148,6 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Music: " + name + " not found!");
             return;
         }
-        Debug.Log(name);
         s.source.Play();
     }
 

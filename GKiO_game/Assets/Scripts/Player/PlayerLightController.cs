@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A script for a light following the player.
+/// </summary>
 public class PlayerLightController : MonoBehaviour
 {
     [SerializeField] private GameObject player;

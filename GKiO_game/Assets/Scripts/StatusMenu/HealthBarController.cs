@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Script for displaying player's health on a health bar.
+/// </summary>
 public class HealthBarController : MonoBehaviour
 {
     private Slider slider;

@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A script allowing cheating for testing purposes.
+/// It allows to finish level by pressing End key.
+/// </summary>
 public class CheatController : MonoBehaviour
 {
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.End))

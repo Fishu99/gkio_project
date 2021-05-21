@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A script controlling the MainMenu scene
+/// </summary>
 public class MainMenuController : MonoBehaviour
 {
     private GameManager gameManager;

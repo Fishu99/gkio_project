@@ -1,15 +1,32 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A script controlling the Workshop scene.
+/// It creates the WorkshopPurchase objects which are used SimpleWorkshopItemControllers.
+/// </summary>
 public class WorkshopController : MonoBehaviour
 {
     private GameManager gameManager;
     private Dictionary<string, WorkshopPurchase> purchases;
+
     void Start()
     {
         gameManager = GameManager.instance;
         CreatePurchases();
+    }
+
+    public void Next()
+    {
+        gameManager.LoadNextLevel();
+    }
+
+    public WorkshopPurchase GetPurchaseByName(string name)
+    {
+        gameManager = GameManager.instance;
+        if (purchases == null)
+            CreatePurchases();
+        return purchases[name];
     }
 
     private void CreatePurchases()
@@ -26,21 +43,6 @@ public class WorkshopController : MonoBehaviour
         ConfigurePurchaseByFeature(purchases["swordDamageUpgrade"], gameManager.SwordDamageUpgrade);
         ConfigurePurchaseByFeature(purchases["bowForceUpgrade"], gameManager.BowForceUpgrade);
     }
-
-
-    public void Next()
-    {
-        gameManager.LoadNextLevel();
-    }
-
-    public WorkshopPurchase GetPurchaseByName(string name)
-    {
-        gameManager = GameManager.instance;
-        if (purchases == null)
-            CreatePurchases();
-        return purchases[name];
-    }
-
 
     private void OnBuyLife(WorkshopPurchase purchase)
     {

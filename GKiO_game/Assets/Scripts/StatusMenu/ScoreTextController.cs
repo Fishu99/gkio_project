@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Script for displaying current level score
+/// </summary>
 public class ScoreTextController : MonoBehaviour
 {
     private TMP_Text textMesh;

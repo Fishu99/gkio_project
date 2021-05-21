@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+/// <summary>
+/// A script for controlling the Pause menu.
+/// </summary>
 public class PauseController : MonoBehaviour
 {
     public bool IsPaused { get; private set; } = false;
@@ -17,7 +19,6 @@ public class PauseController : MonoBehaviour
         animator = pauseMenu.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -39,11 +40,7 @@ public class PauseController : MonoBehaviour
 
     public void Resume()
     {
-        //animator.SetTrigger("lighten");
         StartCoroutine(ResumeCoroutine());
-        //IsPaused = false;
-       // pauseMenu.SetActive(false);
-        //Time.timeScale = 1;
     }
 
     public void Quit()

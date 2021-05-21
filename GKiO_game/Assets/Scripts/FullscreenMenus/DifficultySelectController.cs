@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A script for the DifficultySelect scene
+/// </summary>
 public class DifficultySelectController : MonoBehaviour
 {
     private GameManager gameManager;

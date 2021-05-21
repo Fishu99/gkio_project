@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script for moving platforms.
+/// It makes the player move along with the platform.
+/// </summary>
 public class MovingPlatform : MonoBehaviour
 {
     public GameObject Player;

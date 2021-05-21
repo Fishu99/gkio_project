@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A class which allows player to collect valuable objects, such as coins and diamonds.
+/// </summary>
 public class MoneyManager : MonoBehaviour
 {
     public int Money { get; set; } = 0;
@@ -15,12 +16,6 @@ public class MoneyManager : MonoBehaviour
         audioManager = AudioManager.instance;
         particle = GetComponent<ParticleSystem>();
         particle.Stop();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter(Collider other)

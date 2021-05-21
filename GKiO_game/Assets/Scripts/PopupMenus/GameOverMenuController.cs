@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A script controlling the "Game Over" window.
+/// </summary>
 public class GameOverMenuController : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverPanel;
@@ -14,7 +15,6 @@ public class GameOverMenuController : MonoBehaviour
         active = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(!active && gameManager.IsGameOver)

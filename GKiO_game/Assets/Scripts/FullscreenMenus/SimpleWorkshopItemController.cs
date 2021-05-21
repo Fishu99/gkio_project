@@ -1,9 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+/// <summary>
+/// A script controlling a single item in Workshop.
+/// It uses data from WorkshopPurchase which is taken from WorkshopController.
+/// </summary>
 public class SimpleWorkshopItemController : MonoBehaviour
 {
     private GameManager gameManager;
@@ -17,6 +19,7 @@ public class SimpleWorkshopItemController : MonoBehaviour
     [SerializeField] private string purchaseName;
     private WorkshopPurchase purchase;
     private int previousMoney;
+
     void Start()
     {
         gameManager = GameManager.instance;
@@ -34,6 +37,12 @@ public class SimpleWorkshopItemController : MonoBehaviour
             previousMoney = gameManager.PlayerMoney;
             RefreshItem();
         }
+    }
+
+    public void BuyItem()
+    {
+        purchase.Buy();
+        RefreshItem();
     }
 
     private void RefreshItem()
@@ -77,10 +86,5 @@ public class SimpleWorkshopItemController : MonoBehaviour
         buyButton.SetActive(false);
     }
 
-    public void BuyItem()
-    {
-        Debug.Log("Buy!");
-        purchase.Buy();
-        RefreshItem();
-    }
+    
 }
