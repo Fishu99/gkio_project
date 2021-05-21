@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        LoadMenuScene("MainMenu2");
+        LoadMenuScene("MainMenu");
     }
 
     public void LoadWorkshop()
