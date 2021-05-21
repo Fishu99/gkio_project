@@ -2,53 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
- * Kontroler do przeciwnika, który patroluje i atakuje przy u¿yciu miecza lub innej broni bia³ej
- */
+/// <summary>
+/// A controller for all enemies.
+/// It uses a state machine to manage different states of the enemy.
+/// </summary>
 public class SwordEnemyController : MonoBehaviour
 {
+    [Tooltip("A string describing the type of enemy")]
     [SerializeField] private string typeOfEnemy;
 
-    //Prêdkoœæ chodzenia przeciwnika
+    [Tooltip("Walking speed of the enemy")]
     public float walkSpeed = 4f;
 
-    //Zakres poruszanie siê przeciwnika (najwiêksza odleg³oœæ w osi x od pocz¹tkowego po³o¿enia)
+    [Tooltip("Patrolling range of the enemy. It is displayed in scene view as yellow line")]
     public float walkRange = 10f;
 
-    //Odleg³oœæ od gracza przy której przeciwnik zaczyna go œledziæ
-    public float playerNearDistance = 5f;
-
-    //Odleg³oœæ od gracza przy której przeciwnik zaczyna go œledziæ
+    [Tooltip("The distance of player from the enemy in x-axis when the enemy starts to pursue player")]
     public float playerNearX = 5f;
+    [Tooltip("The distance of player from the enemy in y-axis when the enemy starts to pursue player")]
     public float playerNearY = 5f;
-    //przesuniêcie obszaru wykrywania gracza wzglêdem œrodka przeciwnika
+    [Tooltip("The distance in x-axis from enemy's transform.position to the point from which playerNearX is calculated")]
     public float playerNearOffsetX = 0;
+    [Tooltip("The distance in y-axis from enemy's transform.position to the point from which playerNearY is calculated")]
     public float playerNearOffsetY = 0;
 
 
-    //Czas jaki przeciwnik czeka na koñcu
+    [Tooltip("Describes how long the enemy waits on the end of its patrol range")]
     public float waitOnEndTime = 2f;
-    //Czas pomiêdzy wejœciem gracza w obszar ataku, a rozpoczêciem pierwszego ataku
+
     [Tooltip("The time between the player enetring attack range and the first attack made by the enemy")]
     public float firstAttackDelay = 0.3f;
-    //Odstêp pomiêdzy kolejnymi atakami je¿eli gracz ca³y czas znajduje siê w polu ataku
+
     [Tooltip("The interval between the attacks if player stays within attack range")]
     public float attackInterval = 0.5f;
-    //Czas trwania ataku
+
+    [Tooltip("Length of the attack")]
     public float attackTime = 1f;
-    //Czas animacji umierania
+    [Tooltip("Length of the death animation. The enemy starts to disappear after that time")]
     public float deathAnimationTime = 3f;
-    //Czas zaniakania po œmierci
+    [Tooltip("Length of the enemy shinking after its death")]
     public float fadeAfterDeathTime = 0.3f;
-    //Liczba punktów za zabicie przeciwnika
+    [Tooltip("Points awarded to the user for killing the enemy")]
     public int enemyKillValue;
 
-    //Odleg³oœæ pomiêdzy colliderami gracza i przeciwnika, przy której przciwnik nie podchodzi ju¿ wiêcej do gracza.
-    //Jest to po to, aby zapobiegaæ przypadkowemu przesuwaniu gracza przez przciwnika.
+    [Tooltip("Distance between enemy and player for which the enemy stops approaching the player.\n" +
+        "It prevents the enemy from pushing the player")]
     public float playerMargin = 0.2f;
 
-
-    //Pocz¹tkowa pozycja przeciwnika. Jest pobierana na starcie na podstawie po³o¿enia na scenie
     private Vector3 startPosition;
     
     private Vector3 velocity = Vector3.zero;
@@ -57,18 +57,17 @@ public class SwordEnemyController : MonoBehaviour
     public bool IsPlayerNear { get; private set; }
     private GameObject attackedPlayer = null;
 
-    //Komponenty
+    //Components
     private Rigidbody enemyRigidBody;
     private CapsuleCollider enemyCollider;
     private HealthManager healthManager;
     private WeaponAttack enemyAttack;
     private AudioManager audioManager;
     private Renderer[] renderers;
-    //Adapter animacji
     private SwordEnemyAnimationAdapter animationAdapter;
     private GameManager gameManager;
 
-    //Stany
+    //States for the state machine
     private SwordEnemyState currentState;
     public SwordEnemyPatrolWalkState PatrolWalkState { get; private set; }
     public SwordEnemyPatrolEndState PatrolEndState { get; private set; }
@@ -77,6 +76,7 @@ public class SwordEnemyController : MonoBehaviour
     public SwordEnemyPlayerAttackState PlayerAttackState { get; private set; }
     public SwordEnemyDeadState DeadState { get; private set; }
 
+    [Tooltip("The sack which falls out of the enemy after its death.")]
     [SerializeField] private GameObject sack;
 
     void Start()
@@ -126,11 +126,6 @@ public class SwordEnemyController : MonoBehaviour
         currentState.FixedUpdate();
     }
 
-    private void SetAnimationVariables()
-    {
-        
-    }
-
     private void Walk()
     {
         transform.Translate(velocity * Time.deltaTime, Space.World);
@@ -169,7 +164,6 @@ public class SwordEnemyController : MonoBehaviour
         direction *= -1;
     }
 
-    
     public bool WalkedToLeftEnd()
     {
         return direction < 0 && transform.position.x < startPosition.x;
@@ -318,8 +312,6 @@ public class SwordEnemyController : MonoBehaviour
         DrawPlayerNearDistanceSphere();
         DrawWalkRange();
     }
-
-    
 
     private void DrawPlayerNearDistanceSphere()
     {

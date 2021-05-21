@@ -1,8 +1,8 @@
 using UnityEngine;
 
-/**
- * Stan, w którym przeciwnik jest martwy
- */
+/// <summary>
+/// State whe the enemy is dead.
+/// </summary>
 public class SwordEnemyDeadState : SwordEnemyState
 {
     public SwordEnemyDeadState(SwordEnemyController goblinController) : base(goblinController)

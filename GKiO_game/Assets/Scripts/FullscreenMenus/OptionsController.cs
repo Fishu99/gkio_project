@@ -128,8 +128,9 @@ public class OptionsController : MonoBehaviour
     private void WritePlayerPrefs()
     {
         Resolution currentResolution = Screen.currentResolution;
-        PlayerPrefs.SetInt("width", currentResolution.width);
-        PlayerPrefs.SetInt("height", currentResolution.height);
+        PlayerPrefs.SetInt("swidth", Screen.width);
+        PlayerPrefs.SetInt("sheight", Screen.height);
+        Debug.Log(Screen.width);
         int fullscreenPref = Screen.fullScreen ? 1 : 0;
         PlayerPrefs.SetInt("fullscreen", fullscreenPref);
         PlayerPrefs.SetFloat("musicVolume", GetMusicVolume());

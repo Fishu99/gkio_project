@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/**
- * Poziomy trudno�ci gry
- */
+/// <summary>
+/// Difficulty levels of the game.
+/// </summary>
 public enum Difficulty
 {
     Easy,
@@ -14,12 +14,30 @@ public enum Difficulty
     Hard
 }
 
-
+/// <summary>
+/// The class for managing information between scenes.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private Difficulty currentDifficulty = Difficulty.Hard;
-    public Difficulty CurrentDifficulty {
+    public FeatureUpgrade SwordDamageUpgrade;
+    public FeatureUpgrade BowDamageUpgrade;
+    public FeatureUpgrade BowForceUpgrade;
+    private int currentLevel = 0;
+    private SceneData[] sceneData = new SceneData[]
+    {
+        new SceneData { SceneName = "Level1_Dungeon", LevelName = "Dungeon", ExpectedTime = 10*60 , MusicName = "DungeonTheme"},
+        new SceneData { SceneName = "Level2_Woods", LevelName = "Forest", ExpectedTime = 6*60 , MusicName = "WoodsTheme"}
+    };
+
+    public float PlayerHealth { get; set; }
+    public float PlayerMaxHealth { get; private set; }
+    public int PlayerLives { get; set; }
+    public int PlayerMoney { get; set; }
+    public int PlayerArrows { get; set; }
+    public Difficulty CurrentDifficulty
+    {
         get => currentDifficulty;
         set
         {
@@ -27,11 +45,6 @@ public class GameManager : MonoBehaviour
             ConfigureForCurrentDifficulty();
         }
     }
-    public float PlayerHealth { get; set; }
-    public float PlayerMaxHealth { get; private set; }
-    public int PlayerLives { get; set; }
-    public int PlayerMoney { get; set; }
-    public int PlayerArrows { get; set; }
     public float PlayerSwordDamage
     {
         get => SwordDamageUpgrade.CurrentFeatureValue;
@@ -44,23 +57,14 @@ public class GameManager : MonoBehaviour
     {
         get => BowForceUpgrade.CurrentFeatureValue;
     }
-    public FeatureUpgrade SwordDamageUpgrade;
-    public FeatureUpgrade BowDamageUpgrade;
-    public FeatureUpgrade BowForceUpgrade;
 
     public ScoreCounter ScoreCounter { get; set; }
-    public bool IsGameOver {
+    public bool IsGameOver
+    {
         get => PlayerLives == 0;
     }
     public bool IsLevelFinished { get; private set; } = false;
-    private int currentLevel = 0;
-    private SceneData[] sceneData = new SceneData[]
-    {
-//        new SceneData { SceneName = "DBDungeon", LevelName = "Dungeon", ExpectedTime = 120 , MusicName = "DungeonTheme"},
-//        new SceneData { SceneName = "DBForest", LevelName = "Forest", ExpectedTime = 90 , MusicName = "WoodsTheme"}
-        new SceneData { SceneName = "Level1_Dungeon", LevelName = "Dungeon", ExpectedTime = 10*60 , MusicName = "DungeonTheme"},
-        new SceneData { SceneName = "Level2_Woods", LevelName = "Forest", ExpectedTime = 6*60 , MusicName = "WoodsTheme"}
-    };
+
 
     private void Awake()
     {
@@ -75,10 +79,120 @@ public class GameManager : MonoBehaviour
         Initialize();
     }
 
-    /**
-     * Inicjalizacja gameManagera po uruchomieniu
-     * 
-     */
+    
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (Array.Exists(sceneData, s => s.SceneName == scene.name))
+        {
+            ScoreCounter.StartTimeCount();
+        }
+    }
+
+    void Start()
+    {
+        GetSettingsFromPlayerPrefs();
+    }
+
+    
+    public void SelectDifficultyAndGoNext(Difficulty difficulty)
+    {
+        CurrentDifficulty = difficulty;
+        LoadIntroduction();
+    }
+
+    public void FinishLevel()
+    {
+        if (!IsLevelFinished)
+        {
+            ScoreCounter.StopTimeCount();
+            ScoreCounter.AddSceneScoreToTotalScore();
+            IsLevelFinished = true;
+            Debug.Log("Level finished");
+            
+        }
+    }
+
+    public void LoadNextLevel()
+    {
+        
+        currentLevel++;
+        if(currentLevel < sceneData.Length)
+        {
+            LoadCurrentLevel();
+        }
+        else
+        {
+            LoadWinScene();
+        }
+        IsLevelFinished = false;
+    }
+
+    public void LoadCurrentLevel()
+    {
+        SceneData newSceneData = sceneData[currentLevel];
+        ScoreCounter.NewScene(newSceneData);
+        LoadScene(newSceneData.SceneName, newSceneData.MusicName);
+    }
+
+    public void LoadDifficultySelect()
+    {
+        LoadMenuScene("DifficultySelect");
+    }
+
+    public void LoadIntroduction()
+    {
+        LoadMenuScene("Introduction");
+    }
+
+    public void LoadMainMenu()
+    {
+        LoadMenuScene("MainMenu2");
+    }
+
+    public void LoadWorkshop()
+    {
+        LoadMenuScene("Workshop");
+    }
+
+    public void LoadWinScene()
+    {
+        LoadMenuScene("WinScene");
+    }
+
+    public void LoadFirstLevel()
+    {
+        ScoreCounter.NewGame();
+        ScoreCounter.CurrentDifficulty = CurrentDifficulty;
+        ResetPlayerStatus();
+        currentLevel = 0;
+        LoadCurrentLevel();
+    }
+
+    public void LoadWorkshopOrWinScene()
+    {
+        if (currentLevel + 1 < sceneData.Length)
+            LoadWorkshop();
+        else
+            LoadWinScene();
+    }
+
+    public void AddCollectedMoney(int money)
+    {
+        PlayerMoney += money;
+        ScoreCounter.AddCollectedMoney(money);
+    }
+
+    public void AddKilledEnemy(int enemyValue = 1)
+    {
+        ScoreCounter.AddKilledEnemy(enemyValue);
+    }
+
     private void Initialize()
     {
         currentLevel = 0;
@@ -93,9 +207,9 @@ public class GameManager : MonoBehaviour
         int fullscreenPref = PlayerPrefs.GetInt("fullscreen", 1);
         bool fullscreen = fullscreenPref != 0;
         Resolution bestResolution = Screen.resolutions[Screen.resolutions.Length - 1];
-        int width = PlayerPrefs.GetInt("width", bestResolution.width);
-        int height = PlayerPrefs.GetInt("height", bestResolution.height);
-        if(IsValidResolution(width, height))
+        int width = PlayerPrefs.GetInt("swidth", bestResolution.width);
+        int height = PlayerPrefs.GetInt("sheight", bestResolution.height);
+        if (IsValidResolution(width, height))
         {
             Screen.SetResolution(width, height, fullscreen);
         }
@@ -108,9 +222,6 @@ public class GameManager : MonoBehaviour
         return Array.Exists(Screen.resolutions, res => res.width == width && res.height == height);
     }
 
-    /**
-     * W tej metodzie s� tworzone obiekty klasy FeatureUpgrade, kt�re opisuj� kolejne poziomy ulepsze�.
-     */
     private void InitializeUpgrades()
     {
         var swordDamageUpgradeLevels = new FeatureLevel[]
@@ -141,15 +252,10 @@ public class GameManager : MonoBehaviour
         BowForceUpgrade = new FeatureUpgrade(bowForceUpgradeLevels);
     }
 
-    /**
-     * Ta funkcja pozwala za�adowa� odpowiednie warto�ci r�nych parametr�w
-     * je�eli gra nie zosta�a uruchomiona w menu g��wnym, ale na jakim� z poziom�w.
-     * Dzi�ki temu mo�na wygodnie testowa� poziomy
-     */
     private void CheckFirstScene()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        int index = System.Array.FindIndex(sceneData, s => s.SceneName == sceneName);
+        int index = Array.FindIndex(sceneData, s => s.SceneName == sceneName);
         if (index != -1)
         {
             currentLevel = index;
@@ -166,124 +272,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    /**
-     * Po za�adowaniu sceny w��czany jest licznik czasu
-     * odmierzaj�cy czas przej�cia poziomu
-     */
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (System.Array.Exists(sceneData, s => s.SceneName == scene.name))
-        {
-            ScoreCounter.StartTimeCount();
-        }
-    }
-
-    void Start()
-    {
-        GetSettingsFromPlayerPrefs();
-        Debug.Log("starting game manager");
-    }
-
-    
-    void Update()
-    {
-        
-    }
-
-    
-
-    
-
-    public void SelectDifficultyAndGoNext(Difficulty difficulty)
-    {
-        CurrentDifficulty = difficulty;
-        LoadIntroduction();
-    }
-
-    /**
-     * Czynno�ci wykonywane po tym, jak gracz dojdzie do ko�ca poziomu
-     */
-    public void FinishLevel()
-    {
-        if (!IsLevelFinished)
-        {
-            ScoreCounter.StopTimeCount();
-            ScoreCounter.AddSceneScoreToTotalScore();
-            IsLevelFinished = true;
-            Debug.Log("Level finished");
-            
-        }
-    }
-
-    public void LoadNextLevel()
-    {
-        
-        currentLevel++;
-        if(currentLevel < sceneData.Length)
-        {
-            LoadCurrentLevel();
-        }
-        else
-        {
-            LoadWinScene();
-        }
-        IsLevelFinished = false;
-    }
-
-    private void LoadCurrentLevel()
-    {
-        SceneData newSceneData = sceneData[currentLevel];
-        ScoreCounter.NewScene(newSceneData);
-        LoadScene(newSceneData.SceneName, newSceneData.MusicName);
-    }
-
-    public void LoadDifficultySelect()
-    {
-        LoadMenuScene("DifficultySelect");
-    }
-
-    public void LoadIntroduction()
-    {
-        LoadMenuScene("Introduction");
-    }
-
-    public void LoadMainMenu()
-    {
-        LoadMenuScene("MainMenu2");
-    }
-
-    public void LoadWorkshop()
-    {
-        LoadMenuScene("Workshop");
-    }
-
-    private void LoadWinScene()
-    {
-        LoadMenuScene("WinScene");
-    }
-
-    public void LoadFirstLevel()
-    {
-        ScoreCounter.NewGame();
-        ScoreCounter.CurrentDifficulty = CurrentDifficulty;
-        ResetPlayerStatus();
-        currentLevel = 0;
-        LoadCurrentLevel();
-    }
-
-    public void LoadWorkshopOrWinScene()
-    {
-        if (currentLevel + 1 < sceneData.Length)
-            LoadWorkshop();
-        else
-            LoadWinScene();
-    }
-
     private void LoadMenuScene(string sceneName)
     {
         LoadScene(sceneName, "MenuTheme");
@@ -296,8 +284,6 @@ public class GameManager : MonoBehaviour
         SwordDamageUpgrade.Reset();
         ConfigureForCurrentDifficulty();
     }
-
-    
 
     private void LoadScene(string name, string musicName = null)
     {
@@ -329,9 +315,6 @@ public class GameManager : MonoBehaviour
             AudioManager.instance.PlayMusicExclusiveIfNotPlayed(musicName);
     }
 
-    /**
-     * Ustawia r�ne parametry gracza w zale�no�ci od aktualnego poziomu trudno�ci
-     */
     private void ConfigureForCurrentDifficulty()
     {
         switch (currentDifficulty)
@@ -355,21 +338,6 @@ public class GameManager : MonoBehaviour
         PlayerHealth = PlayerMaxHealth;
     }
 
-    /**
-     * Dodaje zebrane pieni�dze do pieni�dzy gracza i do wyniku.
-     */
-    public void AddCollectedMoney(int money)
-    {
-        PlayerMoney += money;
-        ScoreCounter.AddCollectedMoney(money);
-    }
-
-    /**
-     * Dodaje zabitego gracza do wyniku.
-     */
-    public void AddKilledEnemy(int enemyValue = 1)
-    {
-        ScoreCounter.AddKilledEnemy(enemyValue);
-    }
+    
 
 }

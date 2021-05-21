@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Base class for enemy states.
+/// </summary>
 public abstract class SwordEnemyState
 {
     protected SwordEnemyController enemyController;

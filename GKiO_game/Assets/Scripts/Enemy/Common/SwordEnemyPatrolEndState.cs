@@ -1,9 +1,9 @@
 using UnityEngine;
 
-/** 
- * Stan, kiedy przeciwnik patroluje teren i jest na koñcu patrolowanego obszaru. 
- * Przeciwnik czeka czeka wtedy czas okreœlony w timeToWait, po czym zawraca.
- */
+/// <summary>
+/// The state in which the enemy is waiting at the end of its patrolling range.
+/// The enemy stays in this state for enemyController.waitOnEndTime.
+/// </summary>
 public class SwordEnemyPatrolEndState : SwordEnemyState
 {
     private float timeWhenStartedWaiting;
@@ -42,7 +42,6 @@ public class SwordEnemyPatrolEndState : SwordEnemyState
             enemyController.TurnBack();
             enemyController.ChangeState(enemyController.PatrolWalkState);
         }
-
     }
 
     private bool IsTimeToTurnBack()

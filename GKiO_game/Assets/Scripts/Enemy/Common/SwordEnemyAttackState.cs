@@ -1,10 +1,10 @@
 using UnityEngine;
 
-/**
- * Stan, w którym przeciwnik atakuje gracza.
- * Przeciwnik w tym czasie stoi w miejscu i wykonuje animacjê ataku.
- * Po zakoñczeniu ataku przeciwnik powraca do SwordEnemyPlayerNoticedState
- */
+/// <summary>
+/// The state when the enemy is attacking.
+/// In this state the enemy doesn't walk, the attack animation is played and attack is performed.
+/// Enemy exits this state after enemyController.attackTime.
+/// </summary>
 public class SwordEnemyPlayerAttackState : SwordEnemyState
 {
     private float timeWhenStartedAttacking;

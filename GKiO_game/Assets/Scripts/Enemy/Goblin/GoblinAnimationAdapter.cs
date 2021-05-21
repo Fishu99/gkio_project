@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/**
- * Adapter animacji dla goblina.
- */
+/// <summary>
+/// Animation adapter for goblin.
+/// </summary>
 public class GoblinAnimationAdapter : SwordEnemyAnimationAdapter
 {
     private Animator goblinAnimator;
     private SwordEnemyController enemyController;
-    //Szybkoœæ poruszania siê goblina, dla której animacja wygl¹da naturalnie
+    //Walk speed for which the animation looks natural, ie. it doesn't slip.
     private readonly float walkAnimationSpeed = 0.8f;
     private readonly float attackAnimationLength = 1f;
     void Start()
@@ -20,7 +20,7 @@ public class GoblinAnimationAdapter : SwordEnemyAnimationAdapter
 
     void Update()
     {
-        //Obliczamy ile razy trzeba przyspieszyæ animacjê chodzenia, aby wygl¹da³a naturalnie
+        //The multiplier is computed to adjust animation speed to actual walking speed.
         float walkSpeedMultiplier = enemyController.walkSpeed / walkAnimationSpeed;
         goblinAnimator.SetFloat("walkSpeedMultiplier", walkSpeedMultiplier);
         goblinAnimator.SetBool("isWalking", enemyController.IsWalking);

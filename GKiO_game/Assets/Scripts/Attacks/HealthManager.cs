@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class for managing health of player and enemies.
+/// Weapons such as swords, daggers and arrows check if they hit an object with a HealthManager.
+/// If so, they reduce the health by using Damage method.
+/// </summary>
 public class HealthManager : MonoBehaviour
 {
     private AudioManager audioManager;
@@ -28,18 +33,10 @@ public class HealthManager : MonoBehaviour
     }
 
     public bool IsProtected { get; set; } = false;
-    
-    
-    // Start is called before the first frame update
+
     void Start()
     {
         audioManager = AudioManager.instance;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Damage(float points)
@@ -84,4 +81,5 @@ public class HealthManager : MonoBehaviour
     {
         return health > 0;
     }
+
 }

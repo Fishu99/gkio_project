@@ -1,29 +1,22 @@
 using UnityEngine;
 
+/// <summary>
+/// Script for controlling arrows released by the player.
+/// It rotates arrow along its velocity, handles collisions with terrain and enemies.
+/// </summary>
 public class ArrowController : MonoBehaviour
 {
     private AudioManager audioManager;
-
-    //Informuje o tym, czy strza³a jest niebezpieczna. 
-    //Strza³a jest niebezpieczna od wywo³ania funkcji Shoot do trafienia strza³y w dowoln¹ przeszkodê
     private bool isHarmful = false;
     public float arrowDamage = 30;
     public float arrowForce = 0.01f;
-    public float arrowSpeed = 100f;
     Rigidbody arrowRigidBody;
-    //Warstwa, na której znajduj¹ siê atakowane obiekty
     public int layerToHit = 9;
     
     void Start()
     {
         audioManager = AudioManager.instance;
         arrowRigidBody = GetComponent<Rigidbody>();
-    }
-
-    
-    void Update()
-    {
-        
     }
 
     private void FixedUpdate()
@@ -34,6 +27,13 @@ public class ArrowController : MonoBehaviour
         }
     }
 
+    public void Shoot()
+    {
+        arrowRigidBody = GetComponent<Rigidbody>();
+        isHarmful = true;
+        arrowRigidBody.AddForce(transform.up * arrowForce, ForceMode.Impulse);
+    }
+
     private void RotateByVelocity()
     {
         if(arrowRigidBody.velocity.magnitude > 0)
@@ -42,7 +42,6 @@ public class ArrowController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Arrow collision!");
         if (isHarmful)
         {
             DamageHealth(collision);
@@ -51,14 +50,6 @@ public class ArrowController : MonoBehaviour
         isHarmful = false;
         Invoke("DestroyAfterCollision", 0.5f);
     }
-
-    public void Shoot()
-    {
-        arrowRigidBody = GetComponent<Rigidbody>();
-        isHarmful = true;
-        arrowRigidBody.AddForce(transform.up * arrowForce, ForceMode.Impulse);
-    }
-
 
     private void DamageHealth(Collision collision)
     {

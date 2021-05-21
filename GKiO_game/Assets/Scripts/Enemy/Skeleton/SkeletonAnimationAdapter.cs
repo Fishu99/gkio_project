@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Animation adapter for skeleton with a sword.
+/// </summary>
 public class SkeletonAnimationAdapter : SwordEnemyAnimationAdapter
 {
     private Animator skeletonAnimator;
@@ -8,6 +11,7 @@ public class SkeletonAnimationAdapter : SwordEnemyAnimationAdapter
     private float maxSpeedh;
     private float endAcceleration = 2f;
     private readonly float attackAnimationLength = 1.333f;
+
     void Start()
     {
         skeletonAnimator = GetComponent<Animator>();

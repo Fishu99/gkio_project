@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Animation adapter for skeleton with a dagger.
+/// </summary>
 public class SkeletonDaggerAnimationAdapter : SwordEnemyAnimationAdapter
 {
     private Animator skeletonAnimator;
@@ -27,7 +30,6 @@ public class SkeletonDaggerAnimationAdapter : SwordEnemyAnimationAdapter
         enemyController = GetComponent<SwordEnemyController>();
     }
 
-
     void Update()
     {
         SetSpeedh();
@@ -46,8 +48,6 @@ public class SkeletonDaggerAnimationAdapter : SwordEnemyAnimationAdapter
             speedh = 0;
         skeletonAnimator.SetFloat("speedh", speedh);
     }
-
-    
 
     public override void Attack()
     {

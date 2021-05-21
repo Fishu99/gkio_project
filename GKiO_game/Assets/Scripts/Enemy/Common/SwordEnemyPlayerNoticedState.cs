@@ -1,11 +1,9 @@
-using System.Collections;
 using UnityEngine;
 
-/**
- * Stan, w którym przeciwnik pod¹¿a za zauwa¿onym graczem
- * Przeciwnik pozostaje w tym stanie czas timeWhenAttack, po czym przechodzi do stanu ataku
- * Oznacza to, ¿e przeciwnik atakuje na oœlep co okreœlony czas bez sprawdzenia, czy gracz jest w zasiêgu ataku.
- */
+/// <summary>
+/// The state when player is close to the enemy (the enemy notices the player).
+/// In this state the enemy follows player and checks if the player is within attack range.
+/// </summary>
 public class SwordEnemyPlayerNoticedState : SwordEnemyState
 {
     public SwordEnemyPlayerNoticedState(SwordEnemyController goblinController) : base(goblinController) { }
@@ -42,9 +40,5 @@ public class SwordEnemyPlayerNoticedState : SwordEnemyState
         {
             enemyController.ChangeState(enemyController.PatrolWalkState);
         }
-
     }
-
-
-
 }

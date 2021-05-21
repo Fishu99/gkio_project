@@ -1,17 +1,19 @@
 using UnityEngine;
 
+/// <summary>
+/// Class for controlling a dagger.
+/// It includes methods for computing the correct angle of throw so as to hit the aim.
+/// </summary>
 public class DaggerController : MonoBehaviour
 {
     private AudioManager audioManager;
-    //Informuje o tym, czy sztylet jest niebezpieczny. 
-    //Strza³a jest niebezpieczna od wywo³ania funkcji Shoot do trafienia strza³y w dowoln¹ przeszkodê
     private bool isHarmful = false;
     public float damage = 30;
     public float initialSpeed = 6f;
     public float rotationSpeed = 6f;
     Rigidbody daggerRigidBody;
-    //Warstwa, na której znajduj¹ siê atakowane obiekty
     public int layerToHit = 6;
+
     private void Awake()
     {
         audioManager = AudioManager.instance;
@@ -19,15 +21,16 @@ public class DaggerController : MonoBehaviour
         DisablePhysics();
     }
 
-    void Start()
+    public void Throw(Vector3 aim)
     {
-
-    }
-
-
-    void Update()
-    {
-
+        Vector3 velocity = FindVelocity(aim);
+        if (velocity != Vector3.zero)
+        {
+            EnablePhysics();
+            daggerRigidBody.velocity = velocity;
+            daggerRigidBody.angularVelocity = transform.up * rotationSpeed;
+            isHarmful = true;
+        }
     }
 
     private void DisablePhysics()
@@ -42,7 +45,6 @@ public class DaggerController : MonoBehaviour
         daggerRigidBody.detectCollisions = true;
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
         if (isHarmful)
@@ -56,22 +58,6 @@ public class DaggerController : MonoBehaviour
         Invoke("DestroyAfterCollision", 0.5f);
     }
 
-    public void Throw(Vector3 aim)
-    {
-        
-        Vector3 velocity = FindVelocity(aim);
-        if (velocity != Vector3.zero)
-        {
-            EnablePhysics();
-            daggerRigidBody.velocity = velocity;
-            daggerRigidBody.angularVelocity = transform.up * rotationSpeed;
-            isHarmful = true;
-        }
-    }
-
-    /**
-     * Znajduje taki k¹t aby trafiæ w gracza z uwzglêdnieniem grawitacji.
-     */
     private float FindThrowAngle(Vector3 aim)
     {
         Vector3 origin = transform.position;
@@ -87,10 +73,6 @@ public class DaggerController : MonoBehaviour
         return Mathf.Rad2Deg*angle;
     }
 
-    /**
-     * Znajduje taki k¹t, aby po rzucie sztylet lecia³ prosto w gracza.
-     * Ze wzglêdu na dzia³anie grawitacji prawdopodobnie sztylet nie trafi dok³adnie w grzacza.
-     */
     private float FindDirectAngle(Vector3 aim)
     {
         Vector3 origin = transform.position;

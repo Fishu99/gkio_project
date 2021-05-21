@@ -1,9 +1,6 @@
-using UnityEngine;
-
-/**
- * Stan, kiedy przeciwnik chodzi i patroluje teren.
- * Przeciwnik idzie naprzód a¿ dojdzie do koñca swojego terenu
- */
+/// <summary>
+/// The state in which the enemy is patrolling and walking
+/// </summary>
 public class SwordEnemyPatrolWalkState : SwordEnemyState
 {
     public SwordEnemyPatrolWalkState(SwordEnemyController goblinController) : base(goblinController)

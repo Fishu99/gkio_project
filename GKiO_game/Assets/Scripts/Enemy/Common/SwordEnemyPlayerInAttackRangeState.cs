@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The state when the player is within attack range of the enemy.
+/// In this state the enemy follows the player and attacks him periodically.
+/// </summary>
 public class SwordEnemyPlayerInAttackRangeState : SwordEnemyState
 {
     private float timeEntered;
