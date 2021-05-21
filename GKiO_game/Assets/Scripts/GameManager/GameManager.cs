@@ -116,27 +116,27 @@ public class GameManager : MonoBehaviour
         var swordDamageUpgradeLevels = new FeatureLevel[]
         {
             new FeatureLevel { FeatureValue = 30, Cost = 0}, //FeatureValue pierwszego elementu to pocz�tkowa warto�� swordDamage
-            new FeatureLevel { FeatureValue = 40, Cost = 1},
-            new FeatureLevel { FeatureValue = 60, Cost = 2},
-            new FeatureLevel { FeatureValue = 80, Cost = 3}
+            new FeatureLevel { FeatureValue = 40, Cost = 10},
+            new FeatureLevel { FeatureValue = 60, Cost = 15},
+            new FeatureLevel { FeatureValue = 80, Cost = 20}
         };
         SwordDamageUpgrade = new FeatureUpgrade(swordDamageUpgradeLevels);
 
         var bowDamageUpgradeLevels = new FeatureLevel[]
         {
             new FeatureLevel { FeatureValue = 30, Cost = 0},
-            new FeatureLevel { FeatureValue = 45, Cost = 2},
-            new FeatureLevel { FeatureValue = 60, Cost = 3},
-            new FeatureLevel { FeatureValue = 80, Cost = 4}
+            new FeatureLevel { FeatureValue = 45, Cost = 10},
+            new FeatureLevel { FeatureValue = 60, Cost = 15},
+            new FeatureLevel { FeatureValue = 80, Cost = 20}
         };
         BowDamageUpgrade = new FeatureUpgrade(bowDamageUpgradeLevels);
 
         var bowForceUpgradeLevels = new FeatureLevel[]
         {
             new FeatureLevel { FeatureValue = 10, Cost = 0},
-            new FeatureLevel { FeatureValue = 15, Cost = 2},
-            new FeatureLevel { FeatureValue = 20, Cost = 3},
-            new FeatureLevel { FeatureValue = 30, Cost = 4}
+            new FeatureLevel { FeatureValue = 15, Cost = 10},
+            new FeatureLevel { FeatureValue = 20, Cost = 15},
+            new FeatureLevel { FeatureValue = 30, Cost = 20}
         };
         BowForceUpgrade = new FeatureUpgrade(bowForceUpgradeLevels);
     }

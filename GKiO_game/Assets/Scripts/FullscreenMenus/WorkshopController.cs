@@ -16,8 +16,8 @@ public class WorkshopController : MonoBehaviour
     {
         purchases = new Dictionary<string, WorkshopPurchase>
         {
-            ["life"] = new WorkshopPurchase(OnBuyLife, 10),
-            ["arrows"] = new WorkshopPurchase(OnBuyArrows, 4),
+            ["life"] = new WorkshopPurchase(OnBuyLife, 30),
+            ["arrows"] = new WorkshopPurchase(OnBuyArrows, 10),
             ["bowDamageUpgrade"] = new WorkshopPurchase(OnBuyBowUpgrade),
             ["swordDamageUpgrade"] = new WorkshopPurchase(OnBuySwordUpgrade),
             ["bowForceUpgrade"] = new WorkshopPurchase(OnBuyBowForceUpgrade)
