@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     PlayerStatusController statusController; 
     Rigidbody playerRigidBody;
     HealthManager healthManager;
+    RigBuilder rigBuilder;
     private PauseController pauseController;
     public Camera playerCamera;
 
@@ -85,74 +86,24 @@ public class PlayerController : MonoBehaviour
     private GameObject setup;
     private GameObject target;
 
-    GameObject ARROW;
+    GameObject arrowForAnimation;
 
 
     void Start()
     {
-        playerRigidBody = GetComponent<Rigidbody>();
-        playerAnimator = GetComponent<Animator>();
-        playerCollider = GetComponent<CapsuleCollider>();
-        healthManager = GetComponent<HealthManager>();
-        statusController = GetComponent<PlayerStatusController>();
-        comboManager = GetComponent<ComboManager>();
-        pauseController = FindObjectOfType<PauseController>();
-        audioManager = AudioManager.instance;
         startPosition = transform.position;
-        sword = GameObject.Find("Sword_1");
-        bow = GameObject.Find("Wooden Bow");
-
-        //ChangeWeaponToBow();
+        GetTheComponents();
+        GetAnimatedChildObjects();
         ChangeWeaponToSword();
-
-        setup = GameObject.Find("Rig");
-        var builder = FindObjectOfType<RigBuilder>();
-        builder.enabled = false;
-
-        target = GameObject.Find("Target");
-
-        ARROW = GameObject.Find("Arrow");
-        ARROW.SetActive(false);
-
-        bowAnimator = bow.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         CheckHealth();
-        if (isDead)
-            return;
-
-        if (isShooting)
+        if (!isDead)
         {
-            Vector3 mousePosition = Input.mousePosition;
-            Vector3 center = playerCollider.bounds.center + Vector3.up / 2;
-            Vector3 screenPlayerPosition = playerCamera.WorldToScreenPoint(center);
-            Quaternion rotation = Quaternion.FromToRotation(Vector3.up, mousePosition - screenPlayerPosition);
-            Vector3 radius = Vector3.up * arrowOriginRadius;
-            Vector3 position = center + rotation * radius;
-            target.transform.SetPositionAndRotation(position, rotation);
-            var rig = setup.GetComponent<Rig>();
-            rig.weight = 0.9f;
-            var builder = FindObjectOfType<RigBuilder>();
-            builder.enabled = true;
+            UpdateWhenAlive();
         }
-        else
-        {
-            var builder = FindObjectOfType<RigBuilder>();
-            builder.enabled = false;
-        }
-        if (attackCooldown >= 0.0f)
-        {
-            attackCooldown -= Time.deltaTime;
-            if (attackCooldown < 0.0f)
-                isAttackReady = true;
-        }
-        horizontalInput = Input.GetAxis("Horizontal");
-        //CheckIfGrounded();
-        CheckPlayerStatus();
-        CheckInput();
     }
 
     private void FixedUpdate()
@@ -170,7 +121,6 @@ public class PlayerController : MonoBehaviour
             CheckIfGrounded();
             SetAnimationVariables();
         }
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -191,6 +141,72 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void GetTheComponents()
+    {
+        playerRigidBody = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
+        playerCollider = GetComponent<CapsuleCollider>();
+        healthManager = GetComponent<HealthManager>();
+        statusController = GetComponent<PlayerStatusController>();
+        comboManager = GetComponent<ComboManager>();
+        pauseController = FindObjectOfType<PauseController>();
+        audioManager = AudioManager.instance;
+        rigBuilder = GetComponentInChildren<RigBuilder>();
+        rigBuilder.enabled = false;
+    }
+
+    private void GetAnimatedChildObjects()
+    {
+        sword = FindChildRecursive("Sword_1", transform);
+        bow = FindChildRecursive("Wooden Bow", transform);
+        ChangeWeaponToSword();
+        setup = FindChildRecursive("Rig", transform);
+        target = FindChildRecursive("Target", transform);
+        arrowForAnimation = FindChildRecursive("Arrow", transform);
+        arrowForAnimation.SetActive(false);
+        bowAnimator = bow.GetComponent<Animator>();
+    }
+
+    private void UpdateWhenAlive()
+    {
+        ConfigureRigBuilder();
+        CheckAttackCooldown();
+        //CheckIfGrounded();
+        CheckPlayerStatus();
+        CheckInput();
+    }
+
+    private void ConfigureRigBuilder()
+    {
+        if (isShooting)
+        {
+            Vector3 mousePosition = Input.mousePosition;
+            Vector3 center = playerCollider.bounds.center + Vector3.up / 2;
+            Vector3 screenPlayerPosition = playerCamera.WorldToScreenPoint(center);
+            Quaternion rotation = Quaternion.FromToRotation(Vector3.up, mousePosition - screenPlayerPosition);
+            Vector3 radius = Vector3.up * arrowOriginRadius;
+            Vector3 position = center + rotation * radius;
+            target.transform.SetPositionAndRotation(position, rotation);
+            var rig = setup.GetComponent<Rig>();
+            rig.weight = 0.9f;
+            rigBuilder.enabled = true;
+        }
+        else
+        {
+            rigBuilder.enabled = false;
+        }
+    }
+
+    private void CheckAttackCooldown()
+    {
+        if (attackCooldown >= 0.0f)
+        {
+            attackCooldown -= Time.deltaTime;
+            if (attackCooldown < 0.0f)
+                isAttackReady = true;
+        }
+    }
+
     private void CheckIfIsAttacking()
     {
         AnimatorStateInfo animState = playerAnimator.GetCurrentAnimatorStateInfo(0);
@@ -199,6 +215,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckInput()
     {
+        horizontalInput = Input.GetAxis("Horizontal");
         //Jump
         if (JumpKey() && isGrounded)
         {
@@ -263,7 +280,7 @@ public class PlayerController : MonoBehaviour
         if (arrows > 0)
         {
             isGoingToShoot = true;
-            ARROW.SetActive(true);
+            arrowForAnimation.SetActive(true);
             arrows--;
         }
     }
@@ -281,7 +298,7 @@ public class PlayerController : MonoBehaviour
         Quaternion arrowRotation = Quaternion.FromToRotation(Vector3.up, mousePosition - screenPlayerPosition);
         Vector3 radius = Vector3.up * arrowOriginRadius;
         Vector3 arrowPosition = center + arrowRotation * radius;
-        ARROW.SetActive(false);
+        arrowForAnimation.SetActive(false);
         GameObject arrow = Instantiate(arrowPrefab, arrowPosition, arrowRotation);
         ArrowController arrowController = arrow.GetComponent<ArrowController>();
         arrowController.arrowDamage = arrowDamage;
@@ -300,7 +317,6 @@ public class PlayerController : MonoBehaviour
         float colliderRadius = playerCollider.radius;
         Vector3 colliderSphereCenter = playerCollider.bounds.min + new Vector3(colliderRadius, colliderRadius, colliderRadius);
         int playerMask = ~(1 << 6 | 1 << 8 | 1 << 10 | 1 << 11);
-        //Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f)
         if (Physics.CheckSphere(colliderSphereCenter, colliderRadius + 0.2f, playerMask))
         {
             isGrounded = true;
@@ -361,31 +377,17 @@ public class PlayerController : MonoBehaviour
 
     private void CheckPlayerStatus()
     {
-        if (isGrounded)
+        if (isGrounded && !isAttacking)
         {
-            if (!isAttacking)
+            if (Math.Abs(horizontalInput) > 0.01f)
             {
-                if (Math.Abs(horizontalInput) > 0.01f)
-                {
-                    isWalking = true;
-                    bool itIsPlaying = audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString());
-                    if (!itIsPlaying)
-                    {
-                        audioManager.Play("Player_Step" + stepNumber.ToString());
-                        stepPreviousNumber = stepNumber;
-                        stepNumber++;
-                        if (stepNumber > 4)
-                            stepNumber = 1;
-                    }
-                }
-                else
-                {
-                    isWalking = false;
-                    if (audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString()))
-                        audioManager.Stop("Player_Step" + stepPreviousNumber.ToString());
-                    else if (audioManager.CheckIfIsPlaying("Player_Step" + stepNumber.ToString()))
-                        audioManager.Stop("Player_Step" + stepNumber.ToString());
-                }
+                isWalking = true;
+                PlayWalkSounds();
+            }
+            else
+            {
+                isWalking = false;
+                StopWalkSounds();
             }
         }
         else
@@ -408,6 +410,27 @@ public class PlayerController : MonoBehaviour
                 isJumping = false;
             }
         }
+    }
+
+    private void PlayWalkSounds()
+    {
+        bool itIsPlaying = audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString());
+        if (!itIsPlaying)
+        {
+            audioManager.Play("Player_Step" + stepNumber.ToString());
+            stepPreviousNumber = stepNumber;
+            stepNumber++;
+            if (stepNumber > 4)
+                stepNumber = 1;
+        }
+    }
+
+    private void StopWalkSounds()
+    {
+        if (audioManager.CheckIfIsPlaying("Player_Step" + stepPreviousNumber.ToString()))
+            audioManager.Stop("Player_Step" + stepPreviousNumber.ToString());
+        else if (audioManager.CheckIfIsPlaying("Player_Step" + stepNumber.ToString()))
+            audioManager.Stop("Player_Step" + stepNumber.ToString());
     }
 
     private void CheckHealth()
@@ -609,16 +632,29 @@ public class PlayerController : MonoBehaviour
 
     private bool ShootKey()
     {
-        return Input.GetKeyDown(KeyCode.E)  && !IsPaused();;
+        return Input.GetKeyDown(KeyCode.E)  && !IsPaused();
     }
 
     private bool BlockKey()
     {
-        return Input.GetKey(KeyCode.Mouse1)  && !IsPaused();;
+        return Input.GetKey(KeyCode.Mouse1)  && !IsPaused();
     }
 
     private bool SprintKey()
     {
         return Input.GetKey(KeyCode.LeftShift);
+    }
+
+    private GameObject FindChildRecursive(string name, Transform parent)
+    {
+        if (parent.name == name)
+            return parent.gameObject;
+        foreach(Transform child in parent)
+        {
+            GameObject found = FindChildRecursive(name, child);
+            if (found != null)
+                return found;
+        }
+        return null;
     }
 }
