@@ -38,6 +38,4 @@ public class ArrowControl : MonoBehaviour
         textMesh.text = displayedArrows.ToString();
     }
 
-
-
 }

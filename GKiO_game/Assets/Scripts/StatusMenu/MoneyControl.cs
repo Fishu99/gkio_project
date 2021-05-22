@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// Script for displaying player money in StatusMenu
+/// Script for displaying player money in StatusMenu.
 /// </summary>
 public class MoneyControl : MonoBehaviour
 {

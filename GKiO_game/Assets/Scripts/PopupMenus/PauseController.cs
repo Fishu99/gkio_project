@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public class PauseController : MonoBehaviour
 {
+    /// <summary>
+    /// Tells if the game is paused.
+    /// </summary>
     public bool IsPaused { get; private set; } = false;
     [SerializeField] private GameObject pauseMenu;
     private GameManager gameManager;
@@ -30,6 +33,9 @@ public class PauseController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pauses the game.
+    /// </summary>
     public void Pause()
     {
         animator.SetTrigger("darken");
@@ -38,11 +44,17 @@ public class PauseController : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    /// <summary>
+    /// Resumes the game.
+    /// </summary>
     public void Resume()
     {
         StartCoroutine(ResumeCoroutine());
     }
 
+    /// <summary>
+    /// Quits the level and returns to main menu.
+    /// </summary>
     public void Quit()
     {
         IsPaused = false;

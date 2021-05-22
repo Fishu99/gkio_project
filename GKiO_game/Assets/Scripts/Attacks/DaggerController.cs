@@ -6,13 +6,27 @@ using UnityEngine;
 /// </summary>
 public class DaggerController : MonoBehaviour
 {
+    /// <summary>
+    /// Damage caused by the dagger.
+    /// </summary>
+    public float damage = 30;
+    /// <summary>
+    /// Initial speed of the dagger
+    /// </summary>
+    public float initialSpeed = 6f;
+    /// <summary>
+    /// Angular speed of the dagger.
+    /// </summary>
+    public float rotationSpeed = 6f;
+    /// <summary>
+    /// The layer on wich affected characters are placed.
+    /// </summary>
+    public int layerToHit = 6;
+
     private AudioManager audioManager;
     private bool isHarmful = false;
-    public float damage = 30;
-    public float initialSpeed = 6f;
-    public float rotationSpeed = 6f;
-    Rigidbody daggerRigidBody;
-    public int layerToHit = 6;
+    private Rigidbody daggerRigidBody;
+    
 
     private void Awake()
     {
@@ -21,6 +35,12 @@ public class DaggerController : MonoBehaviour
         DisablePhysics();
     }
 
+    /// <summary>
+    /// Releases the dagger. The dagger will move from its current position with initial speed equal to initialSpeed.
+    /// If it's possible to hit the target, the angle is computed so as to hit the aim specified in the argument.
+    /// If it's impossible to hit the target the dagger will be thrown directly in the direction of the aim.
+    /// </summary>
+    /// <param name="aim">The point which should be hit by the dagger.</param>
     public void Throw(Vector3 aim)
     {
         Vector3 velocity = FindVelocity(aim);
@@ -98,8 +118,6 @@ public class DaggerController : MonoBehaviour
         Vector3 velocity = velocityUnitVector.normalized * initialSpeed;
         return velocity;
     }
-
-    
 
     private void DamageHealth(Collision collision)
     {

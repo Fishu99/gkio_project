@@ -30,6 +30,9 @@ public class LevelFinishedMenuController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts next level.
+    /// </summary>
     public void NextLevel()
     {
         Time.timeScale = 1;

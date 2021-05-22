@@ -10,6 +10,9 @@ using UnityEngine;
 /// </summary>
 public class AudioManager : MonoBehaviour
 {
+    /// <summary>
+    /// The master volume for all sound effects in the game
+    /// </summary>
     [Tooltip("The master volume for all sound effects in the game")]
     [SerializeField] private float soundVolume = 1f;
     public float SoundVolume
@@ -22,6 +25,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The master volume for all the music played in the game
+    /// </summary>
     [Tooltip("The master volume for all the music played in the game")]
     [SerializeField] private float musicVolume = 1f;
     public float MusicVolume
@@ -34,11 +40,21 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Array of sound effects used in the game
+    /// </summary>
     [Tooltip("Array of sound effects used in the game")]
     public Sound[] sounds;
+
+    /// <summary>
+    /// Array of music used in the game
+    /// </summary>
     [Tooltip("Array of music played in the game")]
     public Sound[] music;
 
+    /// <summary>
+    /// The singleton instance of the object.
+    /// </summary>
     public static AudioManager instance;
 
     private void Awake()
@@ -58,6 +74,10 @@ public class AudioManager : MonoBehaviour
         UpdateSoundVolume();
     }
     
+    /// <summary>
+    /// Plays a sound.
+    /// </summary>
+    /// <param name="name">Name of the sound</param>
     public void Play (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -69,6 +89,11 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    /// <summary>
+    /// Plays a sound if it's not playing.
+    /// </summary>
+    /// <param name="name">The sound to be played.</param>
+    /// <returns>true if the sound was playing.</returns>
     public bool PlayIfNotPlayed (string name)
     {
         bool itIsPlaying = false;
@@ -89,6 +114,11 @@ public class AudioManager : MonoBehaviour
         return itIsPlaying;
     }
 
+    /// <summary>
+    /// Checks if a sound is playing. 
+    /// </summary>
+    /// <param name="name">Name of the sound</param>
+    /// <returns>true if a sound is playing.</returns>
     public bool CheckIfIsPlaying (string name)
     {
         bool isPlaying = false;
@@ -104,6 +134,10 @@ public class AudioManager : MonoBehaviour
         return isPlaying;
     }
 
+    /// <summary>
+    /// Stops playing a sound
+    /// </summary>
+    /// <param name="name">The name of the sound.</param>
     public void Stop (string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -115,6 +149,12 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
+    /// <summary>
+    /// Plays a sound with random pitch
+    /// </summary>
+    /// <param name="name">name of the sound</param>
+    /// <param name="minRange">min value of the pitch</param>
+    /// <param name="maxRange">max value of the pitch</param>
     public void PlayWithRandomPitch(string name, int minRange, int maxRange)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -140,6 +180,10 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    /// <summary>
+    /// Plays a music.
+    /// </summary>
+    /// <param name="name">Name of the music</param>
     public void PlayMusic(string name)
     {
         Sound s = Array.Find(music, sound => sound.name == name);
@@ -151,12 +195,19 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    /// <summary>
+    /// Stops all playing music and starts playing new music.
+    /// </summary>
+    /// <param name="name">Name of the music to be played.</param>
     public void PlayMusicExclusive(string name)
     {
         StopAllMusic();
         PlayMusic(name);
     }
 
+    /// <summary>
+    /// Stops all playing music.
+    /// </summary>
     public void StopAllMusic()
     {
         foreach(Sound m in music)
@@ -165,11 +216,22 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the music is playing.
+    /// </summary>
+    /// <param name="name">Name of the music.</param>
+    /// <returns>true if the music is playing.</returns>
     public bool IsMusicPlaying(string name)
     {
         return Array.Exists(music, sound => sound.name == name && sound.source.isPlaying);
     }
 
+    /// <summary>
+    /// Checks if the music from the perameter is playing.
+    /// If it's playing, the method does nothing.
+    /// If it's not playing, the method stops all other music and starts playing the music specified in the parameter.
+    /// </summary>
+    /// <param name="name">Name of the music to play</param>
     public void PlayMusicExclusiveIfNotPlayed(string name)
     {
         if (!IsMusicPlaying(name))

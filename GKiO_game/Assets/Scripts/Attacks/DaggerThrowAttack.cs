@@ -8,16 +8,34 @@ using UnityEngine;
 /// </summary>
 public class DaggerThrowAttack : WeaponAttack
 {
+    /// <summary>
+    /// Speed with which the dagger is thrown.
+    /// </summary>
+    public float throwSpeed = 6f;
+    /// <summary>
+    /// Health damage caused by the dagger.
+    /// </summary>
+    public float damage = 30;
+    /// <summary>
+    /// Angular velocity of the dagger.
+    /// </summary>
+    public float rotationSpeed = 6f;
+    /// <summary>
+    /// The layer where objects to hit are placed
+    /// </summary>
+    public int layerToHit = 6;
+    /// <summary>
+    /// Time when the dagger is released after Attack call.
+    /// </summary>
+    public float daggerReleaseTime = 0.5f;
+    /// <summary>
+    /// Time when another dagger appears in skeleton's hand after Attack call.
+    /// </summary>
+    public float daggerReplaceTime = 1.5f;
     public GameObject dagger;
     private GameObject releasedDagger;
     private bool isAttacking = false;
-    public float throwSpeed = 6f;
-    public float damage = 30;
-    public float rotationSpeed = 6f;
-    public int layerToHit = 6;
-    public float daggerReleaseTime = 0.5f;
-    public float daggerReplaceTime = 1.5f;
-    
+
     void Start()
     {
         ConfigureDagger();

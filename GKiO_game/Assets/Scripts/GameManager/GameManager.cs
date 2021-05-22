@@ -19,23 +19,49 @@ public enum Difficulty
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+    /// <summary>
+    /// The singleton instance of the object.
+    /// </summary>
     public static GameManager instance;
+    /// <summary>
+    /// Current difficulty of the game.
+    /// </summary>
     private Difficulty currentDifficulty = Difficulty.Hard;
-    public FeatureUpgrade SwordDamageUpgrade;
-    public FeatureUpgrade BowDamageUpgrade;
-    public FeatureUpgrade BowForceUpgrade;
+    /// <summary>
+    /// Current level index
+    /// </summary>
     private int currentLevel = 0;
+    /// <summary>
+    /// Information about all levels.
+    /// </summary>
     private SceneData[] sceneData = new SceneData[]
     {
         new SceneData { SceneName = "Level1_Dungeon", LevelName = "Dungeon", ExpectedTime = 10*60 , MusicName = "DungeonTheme"},
         new SceneData { SceneName = "Level2_Woods", LevelName = "Forest", ExpectedTime = 6*60 , MusicName = "WoodsTheme"}
     };
-
+    /// <summary>
+    /// Current player health.
+    /// </summary>
     public float PlayerHealth { get; set; }
+    /// <summary>
+    /// Max player health.
+    /// </summary>
     public float PlayerMaxHealth { get; private set; }
+    /// <summary>
+    /// Number of lives of the player
+    /// </summary>
     public int PlayerLives { get; set; }
+    /// <summary>
+    /// Player's money.
+    /// </summary>
     public int PlayerMoney { get; set; }
+    /// <summary>
+    /// Number of player's arrows.
+    /// </summary>
     public int PlayerArrows { get; set; }
+    /// <summary>
+    /// Current difficulty of the game.
+    /// </summary>
     public Difficulty CurrentDifficulty
     {
         get => currentDifficulty;
@@ -45,26 +71,54 @@ public class GameManager : MonoBehaviour
             ConfigureForCurrentDifficulty();
         }
     }
+    /// <summary>
+    /// Current sword damage of the player.
+    /// </summary>
     public float PlayerSwordDamage
     {
         get => SwordDamageUpgrade.CurrentFeatureValue;
     }
+    /// <summary>
+    /// Current bow damage of the player.
+    /// </summary>
     public float BowArrowDamage
     {
         get => BowDamageUpgrade.CurrentFeatureValue;
     }
+    /// <summary>
+    /// Current force of player's bow.
+    /// </summary>
     public float BowArrowForce
     {
         get => BowForceUpgrade.CurrentFeatureValue;
     }
-
+    /// <summary>
+    /// Object for counting score.
+    /// </summary>
     public ScoreCounter ScoreCounter { get; set; }
+    /// <summary>
+    /// Is true when the game is over. I happens when the player has 0 lives.
+    /// </summary>
     public bool IsGameOver
     {
         get => PlayerLives == 0;
     }
+    /// <summary>
+    /// Returns true if a level was finished and a new one hasn't been loaded.
+    /// </summary>
     public bool IsLevelFinished { get; private set; } = false;
-
+    /// <summary>
+    /// Object managing sword damage upgrades.
+    /// </summary>
+    public FeatureUpgrade SwordDamageUpgrade { get; private set; }
+    /// <summary>
+    /// Object managing bow damage upgrades.
+    /// </summary>
+    public FeatureUpgrade BowDamageUpgrade { get; private set; }
+    /// <summary>
+    /// Object managing bow force upgrades.
+    /// </summary>
+    public FeatureUpgrade BowForceUpgrade { get; private set; }
 
     private void Awake()
     {
@@ -78,8 +132,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         Initialize();
     }
-
-    
 
     void OnEnable()
     {
@@ -99,13 +151,19 @@ public class GameManager : MonoBehaviour
         GetSettingsFromPlayerPrefs();
     }
 
-    
+    /// <summary>
+    /// Sets the difficulty and loads the scene which should pe displayed next.
+    /// </summary>
+    /// <param name="difficulty">Selected difficulty of the game</param>
     public void SelectDifficultyAndGoNext(Difficulty difficulty)
     {
         CurrentDifficulty = difficulty;
         LoadIntroduction();
     }
 
+    /// <summary>
+    /// Finishes the level. It is intended to be called when player reaches the end of the level.
+    /// </summary>
     public void FinishLevel()
     {
         if (!IsLevelFinished)
@@ -118,6 +176,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads next level.
+    /// </summary>
     public void LoadNextLevel()
     {
         
@@ -133,6 +194,9 @@ public class GameManager : MonoBehaviour
         IsLevelFinished = false;
     }
 
+    /// <summary>
+    /// Loads the current level.
+    /// </summary>
     public void LoadCurrentLevel()
     {
         SceneData newSceneData = sceneData[currentLevel];
@@ -140,31 +204,49 @@ public class GameManager : MonoBehaviour
         LoadScene(newSceneData.SceneName, newSceneData.MusicName);
     }
 
+    /// <summary>
+    /// Loads the scene with difficulty select.
+    /// </summary>
     public void LoadDifficultySelect()
     {
         LoadMenuScene("DifficultySelect");
     }
 
+    /// <summary>
+    /// Loads Introduction scene.
+    /// </summary>
     public void LoadIntroduction()
     {
         LoadMenuScene("Introduction");
     }
 
+    /// <summary>
+    /// Loads MainMenu scene.
+    /// </summary>
     public void LoadMainMenu()
     {
         LoadMenuScene("MainMenu");
     }
 
+    /// <summary>
+    /// Loads Workshop scene.
+    /// </summary>
     public void LoadWorkshop()
     {
         LoadMenuScene("Workshop");
     }
 
+    /// <summary>
+    /// Loads WinScene.
+    /// </summary>
     public void LoadWinScene()
     {
         LoadMenuScene("WinScene");
     }
 
+    /// <summary>
+    /// Loads the first level and resets all player status.
+    /// </summary>
     public void LoadFirstLevel()
     {
         ScoreCounter.NewGame();
@@ -174,6 +256,11 @@ public class GameManager : MonoBehaviour
         LoadCurrentLevel();
     }
 
+    /// <summary>
+    /// Loads the scene which should be displayed after finishing level.
+    /// It is either Workshop if there are more levels
+    /// or WinScene if there are no more levels.
+    /// </summary>
     public void LoadWorkshopOrWinScene()
     {
         if (currentLevel + 1 < sceneData.Length)
@@ -182,12 +269,20 @@ public class GameManager : MonoBehaviour
             LoadWinScene();
     }
 
+    /// <summary>
+    /// Adds collected money to game score.
+    /// </summary>
+    /// <param name="money"></param>
     public void AddCollectedMoney(int money)
     {
         PlayerMoney += money;
         ScoreCounter.AddCollectedMoney(money);
     }
 
+    /// <summary>
+    /// Adds killed enemy to game score.
+    /// </summary>
+    /// <param name="enemyValue"></param>
     public void AddKilledEnemy(int enemyValue = 1)
     {
         ScoreCounter.AddKilledEnemy(enemyValue);

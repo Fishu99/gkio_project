@@ -6,6 +6,9 @@ using UnityEngine;
 public class CrossfadeController : MonoBehaviour
 {
     private Animator animator;
+    /// <summary>
+    /// Duration of the crossfade animation.
+    /// </summary>
     public float CrossfadeTime { get; private set; } = 1f;
 
     void Start()
@@ -13,6 +16,9 @@ public class CrossfadeController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Starts the crossfade animation.
+    /// </summary>
     public void StartCrossfade()
     {
         animator.SetTrigger("start");

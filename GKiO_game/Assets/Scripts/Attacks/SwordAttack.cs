@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -10,12 +8,24 @@ using UnityEngine;
 /// </summary>
 public class SwordAttack : WeaponAttack
 {
+    /// <summary>
+    /// Distance from attacker's front in which attacked object will be hit.
+    /// </summary>
+    public float swordLength = 0.5f;
+    /// <summary>
+    /// Health loss caused by the attack.
+    /// </summary>
+    public float swordDamage = 30;
+    /// <summary>
+    /// The time between Attack call and actual hit.
+    /// </summary>
+    public float swordDelay = 0.5f;
+    /// <summary>
+    /// The layer where objects to hit are placed
+    /// </summary>
+    public int layerToHit = 9;
     private AudioManager audioManager;
     private Collider objectCollider;
-    public float swordLength = 0.5f;
-    public float swordDamage = 30;
-    public float swordDelay = 0.5f;
-    public int layerToHit = 9;
     private bool isAttacking = false;
 
     void Start()
@@ -32,6 +42,7 @@ public class SwordAttack : WeaponAttack
             Invoke("HitAndDamage", swordDelay);
         }
     }
+
     public override bool IsAimInAttackRange()
     {
         return checkHit(out RaycastHit hitinfo);

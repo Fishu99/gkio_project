@@ -6,12 +6,22 @@ using UnityEngine;
 /// </summary>
 public class ArrowController : MonoBehaviour
 {
+    /// <summary>
+    /// Health damage causeb by the arrow.
+    /// </summary>
+    public float arrowDamage = 30;
+    /// <summary>
+    /// The force which is added to the arrow when Shoot is called.
+    /// </summary>
+    public float arrowForce = 0.01f;
+    /// <summary>
+    /// The layer on wich affected characters are placed.
+    /// </summary>
+    public int layerToHit = 9;
+
     private AudioManager audioManager;
     private bool isHarmful = false;
-    public float arrowDamage = 30;
-    public float arrowForce = 0.01f;
-    Rigidbody arrowRigidBody;
-    public int layerToHit = 9;
+    private Rigidbody arrowRigidBody;
     
     void Start()
     {
@@ -27,6 +37,10 @@ public class ArrowController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shoots the arrow.
+    /// The arrow will move in the direction specified by arrow's rotation.
+    /// </summary>
     public void Shoot()
     {
         arrowRigidBody = GetComponent<Rigidbody>();

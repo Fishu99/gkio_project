@@ -88,6 +88,154 @@ public class SwordEnemyController : MonoBehaviour
         ChangeState(PatrolWalkState);
     }
 
+    void Update()
+    {
+        currentState.Update();
+        Walk();
+    }
+
+    private void FixedUpdate()
+    {
+        currentState.FixedUpdate();
+    }
+    
+    /// <summary>
+    /// Changes the current state of the enemy.
+    /// </summary>
+    /// <param name="newState"></param>
+    public void ChangeState(SwordEnemyState newState)
+    {
+        if(currentState != null)
+            currentState.Exit();
+        currentState = newState;
+        currentState.Enter();
+    }
+
+    /// <summary>
+    /// Makes the enemy walk in its current direction.
+    /// </summary>
+    public void WalkInCurrentDirection()
+    {
+        SetVelocityByDirection();
+        RotateByDirection();
+    }
+
+    /// <summary>
+    /// Makes the enemy rotated according to its current direction.
+    /// </summary>
+    public void RotateByDirection()
+    {
+        if(direction > 0)
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.right);
+        }
+        else if(direction < 0)
+        {
+            transform.rotation = Quaternion.LookRotation(Vector3.left);
+        }
+    }
+
+    /// <summary>
+    /// Reverses the direction of the enemy
+    /// </summary>
+    public void TurnBack()
+    {
+        direction *= -1;
+    }
+
+    /// <summary>
+    /// Tells if the enemy walked to left end of its patrolling range.
+    /// </summary>
+    /// <returns>true if the enemy walked to left end of its patrolling range</returns>
+    public bool WalkedToLeftEnd()
+    {
+        return direction < 0 && transform.position.x < startPosition.x;
+    }
+
+    /// <summary>
+    /// Tells if the enemy walked to right end of its patrolling range.
+    /// </summary>
+    /// <returns>true if the enemy walked to right end of its patrolling range</returns>
+    public bool WalkedToRightEnd()
+    {
+        return direction > 0 && transform.position.x > startPosition.x + walkRange;
+    }
+
+    /// <summary>
+    /// Tells if the enemy walked to either end of its patrolling range.
+    /// </summary>
+    /// <returns>true if the enemy walked to either end of its patrolling range</returns>
+    public bool WalkedToEnd()
+    {
+        return WalkedToLeftEnd() || WalkedToRightEnd();
+    }
+
+    /// <summary>
+    /// Sets the velocity so that the enemy will move with its walk speed in its curent direction.
+    /// </summary>
+    public void SetVelocityByDirection()
+    {
+        float xVelocity = walkSpeed * direction;
+        velocity = new Vector3(xVelocity, 0, 0);
+        IsWalking = true;
+    }
+
+    /// <summary>
+    /// Sets the enemy velocity to 0.
+    /// </summary>
+    public void SetVelocityToZero()
+    {
+        velocity = Vector3.zero;
+        IsWalking = false;
+    }
+
+    /// <summary>
+    /// Calculates the enemy velocity, so that it will follow player.
+    /// </summary>
+    public void CalculateVelocityToFollowPlayer()
+    {
+        
+        Collider playerCollider = attackedPlayer.GetComponent<Collider>();
+        if(playerCollider.bounds.min.x > enemyCollider.bounds.max.x + playerMargin)
+        {
+            direction = 1;
+            WalkInCurrentDirection();
+        }
+        else if (enemyCollider.bounds.min.x > playerCollider.bounds.max.x + playerMargin)
+        {
+            direction = -1;
+            WalkInCurrentDirection();
+        }
+        else
+        {
+            SetVelocityToZero();
+        }
+
+        if (WalkedToEnd())
+        {
+            SetVelocityToZero();
+        }
+    }
+
+    /// <summary>
+    /// Tells if the player is within attack range of the enemy.
+    /// </summary>
+    /// <returns>true if the player is within attack range</returns>
+    public bool IsPlayerInAttackRange()
+    {
+        return enemyAttack.IsAimInAttackRange();
+    }
+
+    /// <summary>
+    /// Begins the attack.
+    /// </summary>
+    public void Attack()
+    {
+        enemyAttack.Aim = attackedPlayer;
+        enemyAttack.Attack();
+        animationAdapter.Attack();
+    }
+
     private void GetTheComponents()
     {
         enemyRigidBody = GetComponent<Rigidbody>();
@@ -115,81 +263,10 @@ public class SwordEnemyController : MonoBehaviour
         DeadState = new SwordEnemyDeadState(this);
     }
 
-    void Update()
-    {
-        currentState.Update();
-        Walk();
-    }
-
-    private void FixedUpdate()
-    {
-        currentState.FixedUpdate();
-    }
-
     private void Walk()
     {
         transform.Translate(velocity * Time.deltaTime, Space.World);
         transform.position = new Vector3(transform.position.x, startPosition.y, startPosition.z);
-    }
-    
-
-    public void ChangeState(SwordEnemyState newState)
-    {
-        if(currentState != null)
-            currentState.Exit();
-        currentState = newState;
-        currentState.Enter();
-    }
-
-    public void WalkInCurrentDirection()
-    {
-        SetVelocityByDirection();
-        RotateByDirection();
-    }
-
-    public void RotateByDirection()
-    {
-        if(direction > 0)
-        {
-            transform.rotation = Quaternion.LookRotation(Vector3.right);
-        }
-        else if(direction < 0)
-        {
-            transform.rotation = Quaternion.LookRotation(Vector3.left);
-        }
-    }
-
-    public void TurnBack()
-    {
-        direction *= -1;
-    }
-
-    public bool WalkedToLeftEnd()
-    {
-        return direction < 0 && transform.position.x < startPosition.x;
-    }
-
-    public bool WalkedToRightEnd()
-    {
-        return direction > 0 && transform.position.x > startPosition.x + walkRange;
-    }
-
-    public bool WalkedToEnd()
-    {
-        return WalkedToLeftEnd() || WalkedToRightEnd();
-    }
-
-    public void SetVelocityByDirection()
-    {
-        float xVelocity = walkSpeed * direction;
-        velocity = new Vector3(xVelocity, 0, 0);
-        IsWalking = true;
-    }
-
-    public void SetVelocityToZero()
-    {
-        velocity = Vector3.zero;
-        IsWalking = false;
     }
 
     private IEnumerator InvokeCheckIfPlayerIsNear()
@@ -216,43 +293,6 @@ public class SwordEnemyController : MonoBehaviour
         {
             IsPlayerNear = false;
         }
-    }
-
-    public void CalculateVelocityToFollowPlayer()
-    {
-        
-        Collider playerCollider = attackedPlayer.GetComponent<Collider>();
-        if(playerCollider.bounds.min.x > enemyCollider.bounds.max.x + playerMargin)
-        {
-            direction = 1;
-            WalkInCurrentDirection();
-        }
-        else if (enemyCollider.bounds.min.x > playerCollider.bounds.max.x + playerMargin)
-        {
-            direction = -1;
-            WalkInCurrentDirection();
-        }
-        else
-        {
-            SetVelocityToZero();
-        }
-
-        if (WalkedToEnd())
-        {
-            SetVelocityToZero();
-        }
-    }
-
-    public bool IsPlayerInAttackRange()
-    {
-        return enemyAttack.IsAimInAttackRange();
-    }
-
-    public void Attack()
-    {
-        enemyAttack.Aim = attackedPlayer;
-        enemyAttack.Attack();
-        animationAdapter.Attack();
     }
 
     private IEnumerator DeathSequence()
