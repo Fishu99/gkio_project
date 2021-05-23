@@ -4,56 +4,92 @@ using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Script for controlling player's behavior.
+/// It controls player's movement and animation.
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
-    //Class init
-    Animator playerAnimator;
-    Animator bowAnimator;
-    AudioManager audioManager;
-    CapsuleCollider playerCollider;
-    ComboManager comboManager;
-    PlayerStatusController statusController; 
-    Rigidbody playerRigidBody;
-    HealthManager healthManager;
-    RigBuilder rigBuilder;
-    private PauseController pauseController;
-    public Camera playerCamera;
-
+    /// <summary>
+    /// Walking speed of the player
+    /// </summary>
     [Tooltip("Walking speed of the player")]
     [SerializeField] private float playerSpeed = 5f;
 
+    /// <summary>
+    /// How many times faster the player sprints than walks.
+    /// </summary>
     [Tooltip("How many times faster the player sprints than walks")]
     [SerializeField] private float playerSprintMultiplier = 2.0f;
 
+    /// <summary>
+    /// The cooldown time after attack
+    /// </summary>
     [Tooltip("Describes the cooldown time after attack")]
     [SerializeField] private float playerAttackCooldown = 0.5f;
 
+    /// <summary>
+    /// The force with which the player jumps
+    /// </summary>
     [Tooltip("The force with which the player jumps")]
     [SerializeField] private float jumpForce = 1000f;
 
+    /// <summary>
+    /// The prefab of the released arrow
+    /// </summary>
     [Tooltip("The prefab of the released arrow")]
     [SerializeField] private GameObject arrowPrefab;
 
-
+    /// <summary>
+    /// Damage caused by released arrows.
+    /// </summary>
     public float arrowDamage = 30f;
+
+    /// <summary>
+    /// Force with wchich the arrows are released.
+    /// </summary>
     public float arrowForce = 0.01f;
+    /// <summary>
+    /// Radius of the circle around the players where arrows emerge.
+    /// </summary>
     private float arrowOriginRadius = 1.3f;
+    /// <summary>
+    /// Initial position of the player.
+    /// </summary>
     private Vector3 startPosition;
+    /// <summary>
+    /// Last checkpoint visited by the player
+    /// </summary>
     private GameObject lastCheckpoint;
-    public float horizontalInput = 0f;
+    /// <summary>
+    /// Input in horizontal axis, ie the A-D or left-right keys.
+    /// </summary>
+    private float horizontalInput = 0f;
 
     //Player states & statuses
-    public int arrows = 987;
+    /// <summary>
+    /// Number of player's arrows
+    /// </summary>
+    public int arrows;
+    /// <summary>
+    /// Number of player's lives.
+    /// </summary>
     public int lives = 3;
     private bool isGrounded = true;
     private bool isGoingToJump = false;
     private bool isCrouching = false;
     private bool didPlayerJustJumped = false;
 
+    /// <summary>
+    /// True if the player is in dead zone.
+    /// </summary>
     public bool IsInDeadZone { get; private set; } = false;
 
     //Combo & attacks
     private float attackCooldown;
+    /// <summary>
+    /// true when combo key was pressed.
+    /// </summary>
     public bool comboKeyPressed = false;
     private bool isAttackReady = true;
     private bool isAttacking = false;
@@ -80,12 +116,28 @@ public class PlayerController : MonoBehaviour
     private bool isJumping = false;
     private bool isGoingToShoot = false;
 
+    //Components
+
+    Animator playerAnimator;
+    Animator bowAnimator;
+    AudioManager audioManager;
+    CapsuleCollider playerCollider;
+    ComboManager comboManager;
+    PlayerStatusController statusController;
+    Rigidbody playerRigidBody;
+    HealthManager healthManager;
+    RigBuilder rigBuilder;
+    private PauseController pauseController;
+    /// <summary>
+    /// The camera following the player.
+    /// </summary>
+    public Camera playerCamera;
+
     //GameObjects
     private GameObject sword;
     private GameObject bow;
     private GameObject setup;
     private GameObject target;
-
     GameObject arrowForAnimation;
 
 
