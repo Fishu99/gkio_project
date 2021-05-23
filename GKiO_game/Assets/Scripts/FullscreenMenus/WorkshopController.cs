@@ -16,6 +16,9 @@ public class WorkshopController : MonoBehaviour
         CreatePurchases();
     }
 
+    /// <summary>
+    /// Loads next level.
+    /// </summary>
     public void Next()
     {
         gameManager.LoadNextLevel();

@@ -12,16 +12,25 @@ public class MainMenuController : MonoBehaviour
         gameManager = GameManager.instance;
     }
 
+    /// <summary>
+    /// Starts new game
+    /// </summary>
     public void Play()
     {
         gameManager.LoadDifficultySelect();
     }
 
+    /// <summary>
+    /// Shows options menu.
+    /// </summary>
     public void Options()
     {
         optionsMenu.SetActive(true);
     }
 
+    /// <summary>
+    /// Quits the game.
+    /// </summary>
     public void Quit()
     {
         Application.Quit();

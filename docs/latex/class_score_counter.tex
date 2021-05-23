@@ -1,0 +1,248 @@
+\hypertarget{class_score_counter}{}\doxysection{Score\+Counter Class Reference}
+\label{class_score_counter}\index{ScoreCounter@{ScoreCounter}}
+
+
+Class for counting player\textquotesingle{}s score.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_score_counter_a371c023e867bf40ce71ce8ba46531bf3}{New\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Starts a new game \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_score_counter_add21a2726c0f12f69656de79343636e8}{New\+Scene}} (\mbox{\hyperlink{class_scene_data}{Scene\+Data}} new\+Scene\+Data)
+\begin{DoxyCompactList}\small\item\em Starts a new level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_score_counter_a9d9cd46f57292b53d2b5fc8e2282b43b}{Start\+Time\+Count}} ()
+\begin{DoxyCompactList}\small\item\em Begins time count for current level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_score_counter_ac70235a5adc3f153a692f195673c6f75}{Stop\+Time\+Count}} ()
+\begin{DoxyCompactList}\small\item\em Stops the time count for current level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_score_counter_aa0cb42a8b4cc281c2376e7ac65c76230}{Add\+Killed\+Enemy}} (int enemy\+Value)
+\begin{DoxyCompactList}\small\item\em Adds killed enemy to current score. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_score_counter_a8d7dca9a9c4b8861e3da5a9f41988904}{Add\+Collected\+Money}} (int money)
+\begin{DoxyCompactList}\small\item\em Adds collected money to current score. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_score_counter_a491d7fcee96ebf36bc2c3709dab4dfb6}{Add\+Scene\+Score\+To\+Total\+Score}} ()
+\begin{DoxyCompactList}\small\item\em Adds total scene score to total game score. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_score_counter_ac82e17ada0159f10d3c73cc039b66541}{Money\+Coefficient}} = 1f\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The coefficient which tells how collected money affects the score. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_score_counter_a27c9f1e85aaf57eb1d67f3ba170451c2}{Enemy\+Coefficient}} = 1f\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The coefficient which tells how killed affects the score. \end{DoxyCompactList}\item 
+Difficulty \mbox{\hyperlink{class_score_counter_ae339ca0336522664205433630351ddc2}{Current\+Difficulty}} = Difficulty.\+Easy\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Difficulty of the game. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_scene_data}{Scene\+Data}} \mbox{\hyperlink{class_score_counter_a17ec25bc8cf2743bd4ca0cb119293e95}{Current\+Scene\+Data}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Information about current level \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_score_counter_a756bed98caa26081abf757ec980c0ac9}{Total\+Scene\+Time}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The time between Start\+Time\+Count and Stop\+Time\+Count calls. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_score_counter_a360ef528783a4b9944f323ab64cbc928}{Difficulty\+Multiplier}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns the value of difficulty multiplier for Current\+Difficulty. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_score_counter_a6efe079ff21e258ebd0371270e6bae0d}{Time\+Coefficient}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns the time bonus by which the Current\+Scene\+Score will be multiplied. It depends on Total\+Scene\+Time and Current\+Scene\+Data.\+Expected\+Time. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_score_counter_a2b1396b8f7e6e65e96d692450c3539af}{Current\+Scene\+Score}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns the score to be displayed inside the level. It includes colleced money and killed enemies. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_score_counter_a8f4c4539600c14db1eaacd6dd22fa896}{Total\+Scene\+Score}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns the final score of current level. It is equal to Current\+Scene\+Score multiplied by Time\+Coefficient and Difficulty\+Multiplier. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_score_counter_a824e4ea49a3a5c6fc11a005b8691b12c}{Total\+Game\+Score}} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns the total game score. It is a sum of scores from all levels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for counting player\textquotesingle{}s score. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_score_counter_a8d7dca9a9c4b8861e3da5a9f41988904}\label{class_score_counter_a8d7dca9a9c4b8861e3da5a9f41988904}} 
+\index{ScoreCounter@{ScoreCounter}!AddCollectedMoney@{AddCollectedMoney}}
+\index{AddCollectedMoney@{AddCollectedMoney}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{AddCollectedMoney()}{AddCollectedMoney()}}
+{\footnotesize\ttfamily void Score\+Counter.\+Add\+Collected\+Money (\begin{DoxyParamCaption}\item[{int}]{money }\end{DoxyParamCaption})}
+
+
+
+Adds collected money to current score. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em money} & Collected money value.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_score_counter_aa0cb42a8b4cc281c2376e7ac65c76230}\label{class_score_counter_aa0cb42a8b4cc281c2376e7ac65c76230}} 
+\index{ScoreCounter@{ScoreCounter}!AddKilledEnemy@{AddKilledEnemy}}
+\index{AddKilledEnemy@{AddKilledEnemy}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{AddKilledEnemy()}{AddKilledEnemy()}}
+{\footnotesize\ttfamily void Score\+Counter.\+Add\+Killed\+Enemy (\begin{DoxyParamCaption}\item[{int}]{enemy\+Value }\end{DoxyParamCaption})}
+
+
+
+Adds killed enemy to current score. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em enemy\+Value} & The value of the enemy.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_score_counter_a491d7fcee96ebf36bc2c3709dab4dfb6}\label{class_score_counter_a491d7fcee96ebf36bc2c3709dab4dfb6}} 
+\index{ScoreCounter@{ScoreCounter}!AddSceneScoreToTotalScore@{AddSceneScoreToTotalScore}}
+\index{AddSceneScoreToTotalScore@{AddSceneScoreToTotalScore}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{AddSceneScoreToTotalScore()}{AddSceneScoreToTotalScore()}}
+{\footnotesize\ttfamily void Score\+Counter.\+Add\+Scene\+Score\+To\+Total\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Adds total scene score to total game score. 
+
+\mbox{\Hypertarget{class_score_counter_a371c023e867bf40ce71ce8ba46531bf3}\label{class_score_counter_a371c023e867bf40ce71ce8ba46531bf3}} 
+\index{ScoreCounter@{ScoreCounter}!NewGame@{NewGame}}
+\index{NewGame@{NewGame}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{NewGame()}{NewGame()}}
+{\footnotesize\ttfamily void Score\+Counter.\+New\+Game (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Starts a new game 
+
+\mbox{\Hypertarget{class_score_counter_add21a2726c0f12f69656de79343636e8}\label{class_score_counter_add21a2726c0f12f69656de79343636e8}} 
+\index{ScoreCounter@{ScoreCounter}!NewScene@{NewScene}}
+\index{NewScene@{NewScene}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{NewScene()}{NewScene()}}
+{\footnotesize\ttfamily void Score\+Counter.\+New\+Scene (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_scene_data}{Scene\+Data}}}]{new\+Scene\+Data }\end{DoxyParamCaption})}
+
+
+
+Starts a new level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Scene\+Data} & Information about new level.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_score_counter_a9d9cd46f57292b53d2b5fc8e2282b43b}\label{class_score_counter_a9d9cd46f57292b53d2b5fc8e2282b43b}} 
+\index{ScoreCounter@{ScoreCounter}!StartTimeCount@{StartTimeCount}}
+\index{StartTimeCount@{StartTimeCount}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{StartTimeCount()}{StartTimeCount()}}
+{\footnotesize\ttfamily void Score\+Counter.\+Start\+Time\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Begins time count for current level. 
+
+\mbox{\Hypertarget{class_score_counter_ac70235a5adc3f153a692f195673c6f75}\label{class_score_counter_ac70235a5adc3f153a692f195673c6f75}} 
+\index{ScoreCounter@{ScoreCounter}!StopTimeCount@{StopTimeCount}}
+\index{StopTimeCount@{StopTimeCount}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{StopTimeCount()}{StopTimeCount()}}
+{\footnotesize\ttfamily void Score\+Counter.\+Stop\+Time\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Stops the time count for current level. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_score_counter_ae339ca0336522664205433630351ddc2}\label{class_score_counter_ae339ca0336522664205433630351ddc2}} 
+\index{ScoreCounter@{ScoreCounter}!CurrentDifficulty@{CurrentDifficulty}}
+\index{CurrentDifficulty@{CurrentDifficulty}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{CurrentDifficulty}{CurrentDifficulty}}
+{\footnotesize\ttfamily Difficulty Score\+Counter.\+Current\+Difficulty = Difficulty.\+Easy\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Difficulty of the game. 
+
+\mbox{\Hypertarget{class_score_counter_a17ec25bc8cf2743bd4ca0cb119293e95}\label{class_score_counter_a17ec25bc8cf2743bd4ca0cb119293e95}} 
+\index{ScoreCounter@{ScoreCounter}!CurrentSceneData@{CurrentSceneData}}
+\index{CurrentSceneData@{CurrentSceneData}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{CurrentSceneData}{CurrentSceneData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_scene_data}{Scene\+Data}} Score\+Counter.\+Current\+Scene\+Data\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Information about current level 
+
+\mbox{\Hypertarget{class_score_counter_a2b1396b8f7e6e65e96d692450c3539af}\label{class_score_counter_a2b1396b8f7e6e65e96d692450c3539af}} 
+\index{ScoreCounter@{ScoreCounter}!CurrentSceneScore@{CurrentSceneScore}}
+\index{CurrentSceneScore@{CurrentSceneScore}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{CurrentSceneScore}{CurrentSceneScore}}
+{\footnotesize\ttfamily int Score\+Counter.\+Current\+Scene\+Score\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns the score to be displayed inside the level. It includes colleced money and killed enemies. 
+
+\mbox{\Hypertarget{class_score_counter_a360ef528783a4b9944f323ab64cbc928}\label{class_score_counter_a360ef528783a4b9944f323ab64cbc928}} 
+\index{ScoreCounter@{ScoreCounter}!DifficultyMultiplier@{DifficultyMultiplier}}
+\index{DifficultyMultiplier@{DifficultyMultiplier}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{DifficultyMultiplier}{DifficultyMultiplier}}
+{\footnotesize\ttfamily float Score\+Counter.\+Difficulty\+Multiplier\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns the value of difficulty multiplier for Current\+Difficulty. 
+
+\mbox{\Hypertarget{class_score_counter_a27c9f1e85aaf57eb1d67f3ba170451c2}\label{class_score_counter_a27c9f1e85aaf57eb1d67f3ba170451c2}} 
+\index{ScoreCounter@{ScoreCounter}!EnemyCoefficient@{EnemyCoefficient}}
+\index{EnemyCoefficient@{EnemyCoefficient}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{EnemyCoefficient}{EnemyCoefficient}}
+{\footnotesize\ttfamily float Score\+Counter.\+Enemy\+Coefficient = 1f\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The coefficient which tells how killed affects the score. 
+
+\mbox{\Hypertarget{class_score_counter_ac82e17ada0159f10d3c73cc039b66541}\label{class_score_counter_ac82e17ada0159f10d3c73cc039b66541}} 
+\index{ScoreCounter@{ScoreCounter}!MoneyCoefficient@{MoneyCoefficient}}
+\index{MoneyCoefficient@{MoneyCoefficient}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{MoneyCoefficient}{MoneyCoefficient}}
+{\footnotesize\ttfamily float Score\+Counter.\+Money\+Coefficient = 1f\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The coefficient which tells how collected money affects the score. 
+
+\mbox{\Hypertarget{class_score_counter_a6efe079ff21e258ebd0371270e6bae0d}\label{class_score_counter_a6efe079ff21e258ebd0371270e6bae0d}} 
+\index{ScoreCounter@{ScoreCounter}!TimeCoefficient@{TimeCoefficient}}
+\index{TimeCoefficient@{TimeCoefficient}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{TimeCoefficient}{TimeCoefficient}}
+{\footnotesize\ttfamily float Score\+Counter.\+Time\+Coefficient\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns the time bonus by which the Current\+Scene\+Score will be multiplied. It depends on Total\+Scene\+Time and Current\+Scene\+Data.\+Expected\+Time. 
+
+\mbox{\Hypertarget{class_score_counter_a824e4ea49a3a5c6fc11a005b8691b12c}\label{class_score_counter_a824e4ea49a3a5c6fc11a005b8691b12c}} 
+\index{ScoreCounter@{ScoreCounter}!TotalGameScore@{TotalGameScore}}
+\index{TotalGameScore@{TotalGameScore}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{TotalGameScore}{TotalGameScore}}
+{\footnotesize\ttfamily int Score\+Counter.\+Total\+Game\+Score = 0\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns the total game score. It is a sum of scores from all levels. 
+
+\mbox{\Hypertarget{class_score_counter_a8f4c4539600c14db1eaacd6dd22fa896}\label{class_score_counter_a8f4c4539600c14db1eaacd6dd22fa896}} 
+\index{ScoreCounter@{ScoreCounter}!TotalSceneScore@{TotalSceneScore}}
+\index{TotalSceneScore@{TotalSceneScore}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{TotalSceneScore}{TotalSceneScore}}
+{\footnotesize\ttfamily int Score\+Counter.\+Total\+Scene\+Score\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns the final score of current level. It is equal to Current\+Scene\+Score multiplied by Time\+Coefficient and Difficulty\+Multiplier. 
+
+\mbox{\Hypertarget{class_score_counter_a756bed98caa26081abf757ec980c0ac9}\label{class_score_counter_a756bed98caa26081abf757ec980c0ac9}} 
+\index{ScoreCounter@{ScoreCounter}!TotalSceneTime@{TotalSceneTime}}
+\index{TotalSceneTime@{TotalSceneTime}!ScoreCounter@{ScoreCounter}}
+\doxysubsubsection{\texorpdfstring{TotalSceneTime}{TotalSceneTime}}
+{\footnotesize\ttfamily float Score\+Counter.\+Total\+Scene\+Time\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The time between Start\+Time\+Count and Stop\+Time\+Count calls. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Manager/Score\+Counter.\+cs\end{DoxyCompactItemize}

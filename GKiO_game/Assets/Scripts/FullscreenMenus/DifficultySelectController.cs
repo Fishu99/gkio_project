@@ -12,21 +12,25 @@ public class DifficultySelectController : MonoBehaviour
         gameManager = GameManager.instance;
     }
 
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Selects the easy mode and moves on to next scene.
+    /// </summary>
     public void SelectEasy()
     {
         gameManager.SelectDifficultyAndGoNext(Difficulty.Easy);
     }
 
+    /// <summary>
+    /// Selects the medium mode and moves on to next scene.
+    /// </summary>
     public void SelectMedium()
     {
         gameManager.SelectDifficultyAndGoNext(Difficulty.Medium);
     }
 
+    /// <summary>
+    /// Selects the hard mode and moves on to next scene.
+    /// </summary>
     public void SelectHard()
     {
         gameManager.SelectDifficultyAndGoNext(Difficulty.Hard);

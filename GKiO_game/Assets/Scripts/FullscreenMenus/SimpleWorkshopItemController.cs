@@ -39,6 +39,9 @@ public class SimpleWorkshopItemController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Buys the item.
+    /// </summary>
     public void BuyItem()
     {
         purchase.Buy();

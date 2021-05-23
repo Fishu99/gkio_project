@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -21,7 +19,6 @@ public class FollowPlayer : MonoBehaviour
         playerController.playerCamera = GetComponent<Camera>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (playerController.IsInDeadZone)
@@ -34,13 +31,13 @@ public class FollowPlayer : MonoBehaviour
         }
     }
 
-    void FollowFromSide()
+    private void FollowFromSide()
     {
         transform.position = player.transform.position + cameraOffset;
         transform.rotation = Quaternion.LookRotation(Vector3.forward);
     }
 
-    void RotateToLookAtPlayer()
+    private void RotateToLookAtPlayer()
     {
         Vector3 playerFollowedPoint = player.transform.position + new Vector3(cameraOffset.x, cameraOffset.y, 0);
         Vector3 playerDirection = playerFollowedPoint - transform.position;

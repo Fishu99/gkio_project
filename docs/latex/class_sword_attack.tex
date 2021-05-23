@@ -1,0 +1,119 @@
+\hypertarget{class_sword_attack}{}\doxysection{Sword\+Attack Class Reference}
+\label{class_sword_attack}\index{SwordAttack@{SwordAttack}}
+
+
+The behaviour for performing attack with a sword. After calling Attack method the script checks if any object on layer layer\+To\+Hit is within sword\+Length distance from the attacker. If such object is detected, sword\+Damage is subtracted from its \mbox{\hyperlink{class_health_manager}{Health\+Manager}}.  
+
+
+Inheritance diagram for Sword\+Attack\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_sword_attack}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_sword_attack_a62f30812be8914ed73e6e2917f74f349}{Attack}} ()
+\begin{DoxyCompactList}\small\item\em Starts the attack. It is intended to be called when the attack animation starts. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_sword_attack_a63a011a580cc83d5dc8b01da93345374}{Is\+Aim\+In\+Attack\+Range}} ()
+\begin{DoxyCompactList}\small\item\em Tells if the script considers Aim to be within object\textquotesingle{}s attack range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_sword_attack_a30b7b06ecc129346cf782cb09353a83c}{sword\+Length}} = 0.\+5f
+\begin{DoxyCompactList}\small\item\em Distance from attacker\textquotesingle{}s front in which attacked object will be hit. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_attack_a4f0c2255478dd19773b6bb4890e3f645}{sword\+Damage}} = 30
+\begin{DoxyCompactList}\small\item\em Health loss caused by the attack. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_attack_ac3f5c058320023723437480514e065b3}{sword\+Delay}} = 0.\+5f
+\begin{DoxyCompactList}\small\item\em The time between Attack call and actual hit. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_sword_attack_a2e7ca7de6461cf2ca8a7f80fec075b53}{layer\+To\+Hit}} = 9
+\begin{DoxyCompactList}\small\item\em The layer where objects to hit are placed \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+The behaviour for performing attack with a sword. After calling Attack method the script checks if any object on layer layer\+To\+Hit is within sword\+Length distance from the attacker. If such object is detected, sword\+Damage is subtracted from its \mbox{\hyperlink{class_health_manager}{Health\+Manager}}. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sword_attack_a62f30812be8914ed73e6e2917f74f349}\label{class_sword_attack_a62f30812be8914ed73e6e2917f74f349}} 
+\index{SwordAttack@{SwordAttack}!Attack@{Attack}}
+\index{Attack@{Attack}!SwordAttack@{SwordAttack}}
+\doxysubsubsection{\texorpdfstring{Attack()}{Attack()}}
+{\footnotesize\ttfamily override void Sword\+Attack.\+Attack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Starts the attack. It is intended to be called when the attack animation starts. 
+
+
+
+Implements \mbox{\hyperlink{class_weapon_attack_a0a2db338e39bc72e027f0c670d6ba293}{Weapon\+Attack}}.
+
+\mbox{\Hypertarget{class_sword_attack_a63a011a580cc83d5dc8b01da93345374}\label{class_sword_attack_a63a011a580cc83d5dc8b01da93345374}} 
+\index{SwordAttack@{SwordAttack}!IsAimInAttackRange@{IsAimInAttackRange}}
+\index{IsAimInAttackRange@{IsAimInAttackRange}!SwordAttack@{SwordAttack}}
+\doxysubsubsection{\texorpdfstring{IsAimInAttackRange()}{IsAimInAttackRange()}}
+{\footnotesize\ttfamily override bool Sword\+Attack.\+Is\+Aim\+In\+Attack\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Tells if the script considers Aim to be within object\textquotesingle{}s attack range. 
+
+\begin{DoxyReturn}{Returns}
+true if the aim is considered to be within attack range.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_weapon_attack_ae79e5ad0f3c5c87e373bff644963e431}{Weapon\+Attack}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_sword_attack_a2e7ca7de6461cf2ca8a7f80fec075b53}\label{class_sword_attack_a2e7ca7de6461cf2ca8a7f80fec075b53}} 
+\index{SwordAttack@{SwordAttack}!layerToHit@{layerToHit}}
+\index{layerToHit@{layerToHit}!SwordAttack@{SwordAttack}}
+\doxysubsubsection{\texorpdfstring{layerToHit}{layerToHit}}
+{\footnotesize\ttfamily int Sword\+Attack.\+layer\+To\+Hit = 9}
+
+
+
+The layer where objects to hit are placed 
+
+\mbox{\Hypertarget{class_sword_attack_a4f0c2255478dd19773b6bb4890e3f645}\label{class_sword_attack_a4f0c2255478dd19773b6bb4890e3f645}} 
+\index{SwordAttack@{SwordAttack}!swordDamage@{swordDamage}}
+\index{swordDamage@{swordDamage}!SwordAttack@{SwordAttack}}
+\doxysubsubsection{\texorpdfstring{swordDamage}{swordDamage}}
+{\footnotesize\ttfamily float Sword\+Attack.\+sword\+Damage = 30}
+
+
+
+Health loss caused by the attack. 
+
+\mbox{\Hypertarget{class_sword_attack_ac3f5c058320023723437480514e065b3}\label{class_sword_attack_ac3f5c058320023723437480514e065b3}} 
+\index{SwordAttack@{SwordAttack}!swordDelay@{swordDelay}}
+\index{swordDelay@{swordDelay}!SwordAttack@{SwordAttack}}
+\doxysubsubsection{\texorpdfstring{swordDelay}{swordDelay}}
+{\footnotesize\ttfamily float Sword\+Attack.\+sword\+Delay = 0.\+5f}
+
+
+
+The time between Attack call and actual hit. 
+
+\mbox{\Hypertarget{class_sword_attack_a30b7b06ecc129346cf782cb09353a83c}\label{class_sword_attack_a30b7b06ecc129346cf782cb09353a83c}} 
+\index{SwordAttack@{SwordAttack}!swordLength@{swordLength}}
+\index{swordLength@{swordLength}!SwordAttack@{SwordAttack}}
+\doxysubsubsection{\texorpdfstring{swordLength}{swordLength}}
+{\footnotesize\ttfamily float Sword\+Attack.\+sword\+Length = 0.\+5f}
+
+
+
+Distance from attacker\textquotesingle{}s front in which attacked object will be hit. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Attacks/Sword\+Attack.\+cs\end{DoxyCompactItemize}

@@ -14,6 +14,9 @@ public class WinSceneController : MonoBehaviour
         scoreObject.GetComponent<TMP_Text>().text = gameManager.ScoreCounter.TotalGameScore.ToString();
     }
 
+    /// <summary>
+    /// Returns to main menu.
+    /// </summary>
     public void MenuClick()
     {
         gameManager.LoadMainMenu();

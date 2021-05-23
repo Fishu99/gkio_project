@@ -1,0 +1,146 @@
+\hypertarget{class_dagger_throw_attack}{}\doxysection{Dagger\+Throw\+Attack Class Reference}
+\label{class_dagger_throw_attack}\index{DaggerThrowAttack@{DaggerThrowAttack}}
+
+
+The script for skeletons performing attacks with a dagger. The script instatiates the dagger at correct time a distance from the skeleton so as to match the skeleton\textquotesingle{}s throwing animation. The motion of the dagger itself is controlled by the \mbox{\hyperlink{class_dagger_controller}{Dagger\+Controller}} script.  
+
+
+Inheritance diagram for Dagger\+Throw\+Attack\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_dagger_throw_attack}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_dagger_throw_attack_a13833fd136d4ba0708bd9f95b34f2783}{Attack}} ()
+\begin{DoxyCompactList}\small\item\em Starts the attack. It is intended to be called when the attack animation starts. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{class_dagger_throw_attack_acfc717d3ea82f8334e33f18b40258a4b}{Is\+Aim\+In\+Attack\+Range}} ()
+\begin{DoxyCompactList}\small\item\em Tells if the script considers Aim to be within object\textquotesingle{}s attack range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_dagger_throw_attack_a065b1484396fec8e06e68235859bdff1}{throw\+Speed}} = 6f
+\begin{DoxyCompactList}\small\item\em Speed with which the dagger is thrown. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_dagger_throw_attack_aaab4a628cad76a77917dc221ba700964}{damage}} = 30
+\begin{DoxyCompactList}\small\item\em Health damage caused by the dagger. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_dagger_throw_attack_a779a2842b7cfb45fe7a2228242b5f359}{rotation\+Speed}} = 6f
+\begin{DoxyCompactList}\small\item\em Angular velocity of the dagger. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_dagger_throw_attack_a4a28e6ca42a1cccbf7693538c19489a7}{layer\+To\+Hit}} = 6
+\begin{DoxyCompactList}\small\item\em The layer where objects to hit are placed \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_dagger_throw_attack_a1e8ae64a9a569b0ddb44785316fdc378}{dagger\+Release\+Time}} = 0.\+5f
+\begin{DoxyCompactList}\small\item\em Time when the dagger is released after Attack call. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_dagger_throw_attack_a8179d936b33df33e3e043a1e10a47723}{dagger\+Replace\+Time}} = 1.\+5f
+\begin{DoxyCompactList}\small\item\em Time when another dagger appears in skeleton\textquotesingle{}s hand after Attack call. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_dagger_throw_attack_ac635b1dab099c66e68f30d6d5630870e}\label{class_dagger_throw_attack_ac635b1dab099c66e68f30d6d5630870e}} 
+Game\+Object {\bfseries dagger}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+The script for skeletons performing attacks with a dagger. The script instatiates the dagger at correct time a distance from the skeleton so as to match the skeleton\textquotesingle{}s throwing animation. The motion of the dagger itself is controlled by the \mbox{\hyperlink{class_dagger_controller}{Dagger\+Controller}} script. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dagger_throw_attack_a13833fd136d4ba0708bd9f95b34f2783}\label{class_dagger_throw_attack_a13833fd136d4ba0708bd9f95b34f2783}} 
+\index{DaggerThrowAttack@{DaggerThrowAttack}!Attack@{Attack}}
+\index{Attack@{Attack}!DaggerThrowAttack@{DaggerThrowAttack}}
+\doxysubsubsection{\texorpdfstring{Attack()}{Attack()}}
+{\footnotesize\ttfamily override void Dagger\+Throw\+Attack.\+Attack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Starts the attack. It is intended to be called when the attack animation starts. 
+
+
+
+Implements \mbox{\hyperlink{class_weapon_attack_a0a2db338e39bc72e027f0c670d6ba293}{Weapon\+Attack}}.
+
+\mbox{\Hypertarget{class_dagger_throw_attack_acfc717d3ea82f8334e33f18b40258a4b}\label{class_dagger_throw_attack_acfc717d3ea82f8334e33f18b40258a4b}} 
+\index{DaggerThrowAttack@{DaggerThrowAttack}!IsAimInAttackRange@{IsAimInAttackRange}}
+\index{IsAimInAttackRange@{IsAimInAttackRange}!DaggerThrowAttack@{DaggerThrowAttack}}
+\doxysubsubsection{\texorpdfstring{IsAimInAttackRange()}{IsAimInAttackRange()}}
+{\footnotesize\ttfamily override bool Dagger\+Throw\+Attack.\+Is\+Aim\+In\+Attack\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Tells if the script considers Aim to be within object\textquotesingle{}s attack range. 
+
+\begin{DoxyReturn}{Returns}
+true if the aim is considered to be within attack range.
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_weapon_attack_ae79e5ad0f3c5c87e373bff644963e431}{Weapon\+Attack}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_dagger_throw_attack_a1e8ae64a9a569b0ddb44785316fdc378}\label{class_dagger_throw_attack_a1e8ae64a9a569b0ddb44785316fdc378}} 
+\index{DaggerThrowAttack@{DaggerThrowAttack}!daggerReleaseTime@{daggerReleaseTime}}
+\index{daggerReleaseTime@{daggerReleaseTime}!DaggerThrowAttack@{DaggerThrowAttack}}
+\doxysubsubsection{\texorpdfstring{daggerReleaseTime}{daggerReleaseTime}}
+{\footnotesize\ttfamily float Dagger\+Throw\+Attack.\+dagger\+Release\+Time = 0.\+5f}
+
+
+
+Time when the dagger is released after Attack call. 
+
+\mbox{\Hypertarget{class_dagger_throw_attack_a8179d936b33df33e3e043a1e10a47723}\label{class_dagger_throw_attack_a8179d936b33df33e3e043a1e10a47723}} 
+\index{DaggerThrowAttack@{DaggerThrowAttack}!daggerReplaceTime@{daggerReplaceTime}}
+\index{daggerReplaceTime@{daggerReplaceTime}!DaggerThrowAttack@{DaggerThrowAttack}}
+\doxysubsubsection{\texorpdfstring{daggerReplaceTime}{daggerReplaceTime}}
+{\footnotesize\ttfamily float Dagger\+Throw\+Attack.\+dagger\+Replace\+Time = 1.\+5f}
+
+
+
+Time when another dagger appears in skeleton\textquotesingle{}s hand after Attack call. 
+
+\mbox{\Hypertarget{class_dagger_throw_attack_aaab4a628cad76a77917dc221ba700964}\label{class_dagger_throw_attack_aaab4a628cad76a77917dc221ba700964}} 
+\index{DaggerThrowAttack@{DaggerThrowAttack}!damage@{damage}}
+\index{damage@{damage}!DaggerThrowAttack@{DaggerThrowAttack}}
+\doxysubsubsection{\texorpdfstring{damage}{damage}}
+{\footnotesize\ttfamily float Dagger\+Throw\+Attack.\+damage = 30}
+
+
+
+Health damage caused by the dagger. 
+
+\mbox{\Hypertarget{class_dagger_throw_attack_a4a28e6ca42a1cccbf7693538c19489a7}\label{class_dagger_throw_attack_a4a28e6ca42a1cccbf7693538c19489a7}} 
+\index{DaggerThrowAttack@{DaggerThrowAttack}!layerToHit@{layerToHit}}
+\index{layerToHit@{layerToHit}!DaggerThrowAttack@{DaggerThrowAttack}}
+\doxysubsubsection{\texorpdfstring{layerToHit}{layerToHit}}
+{\footnotesize\ttfamily int Dagger\+Throw\+Attack.\+layer\+To\+Hit = 6}
+
+
+
+The layer where objects to hit are placed 
+
+\mbox{\Hypertarget{class_dagger_throw_attack_a779a2842b7cfb45fe7a2228242b5f359}\label{class_dagger_throw_attack_a779a2842b7cfb45fe7a2228242b5f359}} 
+\index{DaggerThrowAttack@{DaggerThrowAttack}!rotationSpeed@{rotationSpeed}}
+\index{rotationSpeed@{rotationSpeed}!DaggerThrowAttack@{DaggerThrowAttack}}
+\doxysubsubsection{\texorpdfstring{rotationSpeed}{rotationSpeed}}
+{\footnotesize\ttfamily float Dagger\+Throw\+Attack.\+rotation\+Speed = 6f}
+
+
+
+Angular velocity of the dagger. 
+
+\mbox{\Hypertarget{class_dagger_throw_attack_a065b1484396fec8e06e68235859bdff1}\label{class_dagger_throw_attack_a065b1484396fec8e06e68235859bdff1}} 
+\index{DaggerThrowAttack@{DaggerThrowAttack}!throwSpeed@{throwSpeed}}
+\index{throwSpeed@{throwSpeed}!DaggerThrowAttack@{DaggerThrowAttack}}
+\doxysubsubsection{\texorpdfstring{throwSpeed}{throwSpeed}}
+{\footnotesize\ttfamily float Dagger\+Throw\+Attack.\+throw\+Speed = 6f}
+
+
+
+Speed with which the dagger is thrown. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Attacks/Dagger\+Throw\+Attack.\+cs\end{DoxyCompactItemize}

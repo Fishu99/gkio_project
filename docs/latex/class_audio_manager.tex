@@ -1,0 +1,261 @@
+\hypertarget{class_audio_manager}{}\doxysection{Audio\+Manager Class Reference}
+\label{class_audio_manager}\index{AudioManager@{AudioManager}}
+
+
+The class for playing sound in the game. It is a singleton object which is persisted between scenes via Dont\+Destroy\+On\+Load. The sound is divided into two cattegories\+: sounds and music. Sounds or sound effects are short clips such as footsteps, sword crash, etc. Music is played in the background.  
+
+
+Inheritance diagram for Audio\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_audio_manager}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_audio_manager_a51d560f729b1fd4d6b5ce83ca558deb2}{Play}} (string name)
+\begin{DoxyCompactList}\small\item\em Plays a sound. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_audio_manager_a5b41c45957cb14168706fdbb4c68bc87}{Play\+If\+Not\+Played}} (string name)
+\begin{DoxyCompactList}\small\item\em Plays a sound if it\textquotesingle{}s not playing. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_audio_manager_a1a5145d9c51b3b9aea536191495335dd}{Check\+If\+Is\+Playing}} (string name)
+\begin{DoxyCompactList}\small\item\em Checks if a sound is playing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_audio_manager_aa3064d8fc46bf488ddf6c43742830f54}{Stop}} (string name)
+\begin{DoxyCompactList}\small\item\em Stops playing a sound \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_audio_manager_a76e7d137de78b858be1ffcfcea1f4735}{Play\+With\+Random\+Pitch}} (string name, int min\+Range, int max\+Range)
+\begin{DoxyCompactList}\small\item\em Plays a sound with random pitch \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_audio_manager_abed72b570e0a4491a807125b56f5f6de}{Play\+Music}} (string name)
+\begin{DoxyCompactList}\small\item\em Plays a music. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_audio_manager_a2b52c0beba30a937b24cc3c3790351f9}{Play\+Music\+Exclusive}} (string name)
+\begin{DoxyCompactList}\small\item\em Stops all playing music and starts playing new music. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_audio_manager_a233e8b2466877d90b7744a868732ac5b}{Stop\+All\+Music}} ()
+\begin{DoxyCompactList}\small\item\em Stops all playing music. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_audio_manager_aae0e77aa1f6a90c5fea2784fde7431d1}{Is\+Music\+Playing}} (string name)
+\begin{DoxyCompactList}\small\item\em Checks if the music is playing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_audio_manager_a41957f5ed623c046e25b650fb7246288}{Play\+Music\+Exclusive\+If\+Not\+Played}} (string name)
+\begin{DoxyCompactList}\small\item\em Checks if the music from the perameter is playing. If it\textquotesingle{}s playing, the method does nothing. If it\textquotesingle{}s not playing, the method stops all other music and starts playing the music specified in the parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sound}{Sound}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_audio_manager_a66e04092f8cca2c8432893159a08ea56}{sounds}}
+\begin{DoxyCompactList}\small\item\em Array of sound effects used in the game \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sound}{Sound}}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{class_audio_manager_ad990bd8c34aedf44f54782fe67a70bf9}{music}}
+\begin{DoxyCompactList}\small\item\em Array of music used in the game \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}} \mbox{\hyperlink{class_audio_manager_a22b1b1a94ee423ccb2b142b4f5a70ad4}{instance}}
+\begin{DoxyCompactList}\small\item\em The singleton instance of the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_audio_manager_ad9b8e541273fdaef3b56e095c6ef725e}\label{class_audio_manager_ad9b8e541273fdaef3b56e095c6ef725e}} 
+float {\bfseries Sound\+Volume}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_audio_manager_a312e502a26002f6e36a8da7d881709df}\label{class_audio_manager_a312e502a26002f6e36a8da7d881709df}} 
+float {\bfseries Music\+Volume}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The class for playing sound in the game. It is a singleton object which is persisted between scenes via Dont\+Destroy\+On\+Load. The sound is divided into two cattegories\+: sounds and music. Sounds or sound effects are short clips such as footsteps, sword crash, etc. Music is played in the background. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_audio_manager_a1a5145d9c51b3b9aea536191495335dd}\label{class_audio_manager_a1a5145d9c51b3b9aea536191495335dd}} 
+\index{AudioManager@{AudioManager}!CheckIfIsPlaying@{CheckIfIsPlaying}}
+\index{CheckIfIsPlaying@{CheckIfIsPlaying}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{CheckIfIsPlaying()}{CheckIfIsPlaying()}}
+{\footnotesize\ttfamily bool Audio\+Manager.\+Check\+If\+Is\+Playing (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Checks if a sound is playing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the sound\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if a sound is playing.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_audio_manager_aae0e77aa1f6a90c5fea2784fde7431d1}\label{class_audio_manager_aae0e77aa1f6a90c5fea2784fde7431d1}} 
+\index{AudioManager@{AudioManager}!IsMusicPlaying@{IsMusicPlaying}}
+\index{IsMusicPlaying@{IsMusicPlaying}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{IsMusicPlaying()}{IsMusicPlaying()}}
+{\footnotesize\ttfamily bool Audio\+Manager.\+Is\+Music\+Playing (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Checks if the music is playing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the music.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the music is playing.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_audio_manager_a51d560f729b1fd4d6b5ce83ca558deb2}\label{class_audio_manager_a51d560f729b1fd4d6b5ce83ca558deb2}} 
+\index{AudioManager@{AudioManager}!Play@{Play}}
+\index{Play@{Play}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{Play()}{Play()}}
+{\footnotesize\ttfamily void Audio\+Manager.\+Play (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Plays a sound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the sound\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_audio_manager_a5b41c45957cb14168706fdbb4c68bc87}\label{class_audio_manager_a5b41c45957cb14168706fdbb4c68bc87}} 
+\index{AudioManager@{AudioManager}!PlayIfNotPlayed@{PlayIfNotPlayed}}
+\index{PlayIfNotPlayed@{PlayIfNotPlayed}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{PlayIfNotPlayed()}{PlayIfNotPlayed()}}
+{\footnotesize\ttfamily bool Audio\+Manager.\+Play\+If\+Not\+Played (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Plays a sound if it\textquotesingle{}s not playing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The sound to be played.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the sound was playing.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_audio_manager_abed72b570e0a4491a807125b56f5f6de}\label{class_audio_manager_abed72b570e0a4491a807125b56f5f6de}} 
+\index{AudioManager@{AudioManager}!PlayMusic@{PlayMusic}}
+\index{PlayMusic@{PlayMusic}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{PlayMusic()}{PlayMusic()}}
+{\footnotesize\ttfamily void Audio\+Manager.\+Play\+Music (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Plays a music. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the music\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_audio_manager_a2b52c0beba30a937b24cc3c3790351f9}\label{class_audio_manager_a2b52c0beba30a937b24cc3c3790351f9}} 
+\index{AudioManager@{AudioManager}!PlayMusicExclusive@{PlayMusicExclusive}}
+\index{PlayMusicExclusive@{PlayMusicExclusive}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{PlayMusicExclusive()}{PlayMusicExclusive()}}
+{\footnotesize\ttfamily void Audio\+Manager.\+Play\+Music\+Exclusive (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Stops all playing music and starts playing new music. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the music to be played.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_audio_manager_a41957f5ed623c046e25b650fb7246288}\label{class_audio_manager_a41957f5ed623c046e25b650fb7246288}} 
+\index{AudioManager@{AudioManager}!PlayMusicExclusiveIfNotPlayed@{PlayMusicExclusiveIfNotPlayed}}
+\index{PlayMusicExclusiveIfNotPlayed@{PlayMusicExclusiveIfNotPlayed}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{PlayMusicExclusiveIfNotPlayed()}{PlayMusicExclusiveIfNotPlayed()}}
+{\footnotesize\ttfamily void Audio\+Manager.\+Play\+Music\+Exclusive\+If\+Not\+Played (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Checks if the music from the perameter is playing. If it\textquotesingle{}s playing, the method does nothing. If it\textquotesingle{}s not playing, the method stops all other music and starts playing the music specified in the parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the music to play\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_audio_manager_a76e7d137de78b858be1ffcfcea1f4735}\label{class_audio_manager_a76e7d137de78b858be1ffcfcea1f4735}} 
+\index{AudioManager@{AudioManager}!PlayWithRandomPitch@{PlayWithRandomPitch}}
+\index{PlayWithRandomPitch@{PlayWithRandomPitch}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{PlayWithRandomPitch()}{PlayWithRandomPitch()}}
+{\footnotesize\ttfamily void Audio\+Manager.\+Play\+With\+Random\+Pitch (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{int}]{min\+Range,  }\item[{int}]{max\+Range }\end{DoxyParamCaption})}
+
+
+
+Plays a sound with random pitch 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the sound\\
+\hline
+{\em min\+Range} & min value of the pitch\\
+\hline
+{\em max\+Range} & max value of the pitch\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_audio_manager_aa3064d8fc46bf488ddf6c43742830f54}\label{class_audio_manager_aa3064d8fc46bf488ddf6c43742830f54}} 
+\index{AudioManager@{AudioManager}!Stop@{Stop}}
+\index{Stop@{Stop}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily void Audio\+Manager.\+Stop (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Stops playing a sound 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the sound.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_audio_manager_a233e8b2466877d90b7744a868732ac5b}\label{class_audio_manager_a233e8b2466877d90b7744a868732ac5b}} 
+\index{AudioManager@{AudioManager}!StopAllMusic@{StopAllMusic}}
+\index{StopAllMusic@{StopAllMusic}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{StopAllMusic()}{StopAllMusic()}}
+{\footnotesize\ttfamily void Audio\+Manager.\+Stop\+All\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Stops all playing music. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_audio_manager_a22b1b1a94ee423ccb2b142b4f5a70ad4}\label{class_audio_manager_a22b1b1a94ee423ccb2b142b4f5a70ad4}} 
+\index{AudioManager@{AudioManager}!instance@{instance}}
+\index{instance@{instance}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_audio_manager}{Audio\+Manager}} Audio\+Manager.\+instance\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The singleton instance of the object. 
+
+\mbox{\Hypertarget{class_audio_manager_ad990bd8c34aedf44f54782fe67a70bf9}\label{class_audio_manager_ad990bd8c34aedf44f54782fe67a70bf9}} 
+\index{AudioManager@{AudioManager}!music@{music}}
+\index{music@{music}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{music}{music}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sound}{Sound}} \mbox{[}$\,$\mbox{]} Audio\+Manager.\+music}
+
+
+
+Array of music used in the game 
+
+\mbox{\Hypertarget{class_audio_manager_a66e04092f8cca2c8432893159a08ea56}\label{class_audio_manager_a66e04092f8cca2c8432893159a08ea56}} 
+\index{AudioManager@{AudioManager}!sounds@{sounds}}
+\index{sounds@{sounds}!AudioManager@{AudioManager}}
+\doxysubsubsection{\texorpdfstring{sounds}{sounds}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sound}{Sound}} \mbox{[}$\,$\mbox{]} Audio\+Manager.\+sounds}
+
+
+
+Array of sound effects used in the game 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Sounds/Audio\+Manager.\+cs\end{DoxyCompactItemize}

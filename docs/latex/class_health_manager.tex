@@ -1,0 +1,144 @@
+\hypertarget{class_health_manager}{}\doxysection{Health\+Manager Class Reference}
+\label{class_health_manager}\index{HealthManager@{HealthManager}}
+
+
+Class for managing health of player and enemies. Weapons such as swords, daggers and arrows check if they hit an object with a \mbox{\hyperlink{class_health_manager}{Health\+Manager}}. If so, they reduce the health by using Damage method.  
+
+
+Inheritance diagram for Health\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_health_manager}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_health_manager_a2da1cc383db1cc4297fb45bf9ac45022}{Damage}} (float points)
+\begin{DoxyCompactList}\small\item\em Reduces character\textquotesingle{}s health. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_health_manager_abef4052ba5afb04ddbb61820bc766741}{Restore}} (float points)
+\begin{DoxyCompactList}\small\item\em Increases character health. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_health_manager_af790bf8f7c4703bfef90d46f3d373c21}{Set\+Max}} ()
+\begin{DoxyCompactList}\small\item\em Sets Health to Max\+Health. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_health_manager_ac796eb5fdaf0d3ddfbf7cb6a34b6f34c}{Set\+Zero}} ()
+\begin{DoxyCompactList}\small\item\em Sets Health to 0. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_health_manager_a77ccca664db5a3f192c6c566ee6be4b2}{Is\+Alive}} ()
+\begin{DoxyCompactList}\small\item\em Returns if the character is alive. Character is considered alive if Health is more than 0. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_health_manager_a2373e11069255cc823b2e57c60afd6de}{Max\+Health}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Max health value if the character. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_health_manager_a14c172691ceadc97d5f436dc5c70f7fd}{Health}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Current health of the character. The health is always between 0 and Max\+Health. If a value outside this range is set, it will be clamped. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_health_manager_a5b176f94a39e1ff42bf8fdffbe9e9a22}{Is\+Protected}} = false\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Allows to turn on protection of the player. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for managing health of player and enemies. Weapons such as swords, daggers and arrows check if they hit an object with a \mbox{\hyperlink{class_health_manager}{Health\+Manager}}. If so, they reduce the health by using Damage method. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_health_manager_a2da1cc383db1cc4297fb45bf9ac45022}\label{class_health_manager_a2da1cc383db1cc4297fb45bf9ac45022}} 
+\index{HealthManager@{HealthManager}!Damage@{Damage}}
+\index{Damage@{Damage}!HealthManager@{HealthManager}}
+\doxysubsubsection{\texorpdfstring{Damage()}{Damage()}}
+{\footnotesize\ttfamily void Health\+Manager.\+Damage (\begin{DoxyParamCaption}\item[{float}]{points }\end{DoxyParamCaption})}
+
+
+
+Reduces character\textquotesingle{}s health. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em points} & Number of health points to be subtracted from current Health value\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_health_manager_a77ccca664db5a3f192c6c566ee6be4b2}\label{class_health_manager_a77ccca664db5a3f192c6c566ee6be4b2}} 
+\index{HealthManager@{HealthManager}!IsAlive@{IsAlive}}
+\index{IsAlive@{IsAlive}!HealthManager@{HealthManager}}
+\doxysubsubsection{\texorpdfstring{IsAlive()}{IsAlive()}}
+{\footnotesize\ttfamily bool Health\+Manager.\+Is\+Alive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns if the character is alive. Character is considered alive if Health is more than 0. 
+
+\begin{DoxyReturn}{Returns}
+true ih Health is greater than 0
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_health_manager_abef4052ba5afb04ddbb61820bc766741}\label{class_health_manager_abef4052ba5afb04ddbb61820bc766741}} 
+\index{HealthManager@{HealthManager}!Restore@{Restore}}
+\index{Restore@{Restore}!HealthManager@{HealthManager}}
+\doxysubsubsection{\texorpdfstring{Restore()}{Restore()}}
+{\footnotesize\ttfamily void Health\+Manager.\+Restore (\begin{DoxyParamCaption}\item[{float}]{points }\end{DoxyParamCaption})}
+
+
+
+Increases character health. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em points} & Number of health points to be added to current Health value\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_health_manager_af790bf8f7c4703bfef90d46f3d373c21}\label{class_health_manager_af790bf8f7c4703bfef90d46f3d373c21}} 
+\index{HealthManager@{HealthManager}!SetMax@{SetMax}}
+\index{SetMax@{SetMax}!HealthManager@{HealthManager}}
+\doxysubsubsection{\texorpdfstring{SetMax()}{SetMax()}}
+{\footnotesize\ttfamily void Health\+Manager.\+Set\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets Health to Max\+Health. 
+
+\mbox{\Hypertarget{class_health_manager_ac796eb5fdaf0d3ddfbf7cb6a34b6f34c}\label{class_health_manager_ac796eb5fdaf0d3ddfbf7cb6a34b6f34c}} 
+\index{HealthManager@{HealthManager}!SetZero@{SetZero}}
+\index{SetZero@{SetZero}!HealthManager@{HealthManager}}
+\doxysubsubsection{\texorpdfstring{SetZero()}{SetZero()}}
+{\footnotesize\ttfamily void Health\+Manager.\+Set\+Zero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets Health to 0. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_health_manager_a14c172691ceadc97d5f436dc5c70f7fd}\label{class_health_manager_a14c172691ceadc97d5f436dc5c70f7fd}} 
+\index{HealthManager@{HealthManager}!Health@{Health}}
+\index{Health@{Health}!HealthManager@{HealthManager}}
+\doxysubsubsection{\texorpdfstring{Health}{Health}}
+{\footnotesize\ttfamily float Health\+Manager.\+Health\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Current health of the character. The health is always between 0 and Max\+Health. If a value outside this range is set, it will be clamped. 
+
+\mbox{\Hypertarget{class_health_manager_a5b176f94a39e1ff42bf8fdffbe9e9a22}\label{class_health_manager_a5b176f94a39e1ff42bf8fdffbe9e9a22}} 
+\index{HealthManager@{HealthManager}!IsProtected@{IsProtected}}
+\index{IsProtected@{IsProtected}!HealthManager@{HealthManager}}
+\doxysubsubsection{\texorpdfstring{IsProtected}{IsProtected}}
+{\footnotesize\ttfamily bool Health\+Manager.\+Is\+Protected = false\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Allows to turn on protection of the player. 
+
+\mbox{\Hypertarget{class_health_manager_a2373e11069255cc823b2e57c60afd6de}\label{class_health_manager_a2373e11069255cc823b2e57c60afd6de}} 
+\index{HealthManager@{HealthManager}!MaxHealth@{MaxHealth}}
+\index{MaxHealth@{MaxHealth}!HealthManager@{HealthManager}}
+\doxysubsubsection{\texorpdfstring{MaxHealth}{MaxHealth}}
+{\footnotesize\ttfamily float Health\+Manager.\+Max\+Health\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Max health value if the character. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Attacks/Health\+Manager.\+cs\end{DoxyCompactItemize}

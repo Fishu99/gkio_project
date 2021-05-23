@@ -1,9 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Class for playing button sounds.
+/// </summary>
 public class ButtonController : MonoBehaviour
-{    public void PlayButtonClickSound() {
+{
+    /// <summary>
+    /// Plays button click sound.
+    /// </summary>
+    public void PlayButtonClickSound() {
         AudioManager.instance.Play("ClickButton");
     }
 }

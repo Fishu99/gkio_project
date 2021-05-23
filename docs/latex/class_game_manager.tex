@@ -1,0 +1,404 @@
+\hypertarget{class_game_manager}{}\doxysection{Game\+Manager Class Reference}
+\label{class_game_manager}\index{GameManager@{GameManager}}
+
+
+The class for managing information between scenes.  
+
+
+Inheritance diagram for Game\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_manager}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_manager_a7a14b6729275c8251533cafd523f6170}{Select\+Difficulty\+And\+Go\+Next}} (Difficulty difficulty)
+\begin{DoxyCompactList}\small\item\em Sets the difficulty and loads the scene which should pe displayed next. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_a493e961411d1e6bf1b35750915e86d73}{Finish\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Finishes the level. It is intended to be called when player reaches the end of the level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_a4b9d57ca37d41b1e4e328e233938d38b}{Load\+Next\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Loads next level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_a7113ee6c09bce533f7235cc97eec0a55}{Load\+Current\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Loads the current level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_a4391444bea0228a00c91f66634109f35}{Load\+Difficulty\+Select}} ()
+\begin{DoxyCompactList}\small\item\em Loads the scene with difficulty select. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_a65671bbb3fdc8d630346cefe024e3139}{Load\+Introduction}} ()
+\begin{DoxyCompactList}\small\item\em Loads Introduction scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_acc5bf2b58e880874333d37213a346d6a}{Load\+Main\+Menu}} ()
+\begin{DoxyCompactList}\small\item\em Loads Main\+Menu scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_a6c000a3f9be1c2db30832eea7ebf6f5a}{Load\+Workshop}} ()
+\begin{DoxyCompactList}\small\item\em Loads Workshop scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_ae9f4b0bf0e379ce7048fcbf249a919dd}{Load\+Win\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em Loads Win\+Scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_a3126fcd9438c8206aace09981b9e866d}{Load\+First\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Loads the first level and resets all player status. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_a121fc691c99cd64d6aa163678baa2dc0}{Load\+Workshop\+Or\+Win\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em Loads the scene which should be displayed after finishing level. It is either Workshop if there are more levels or Win\+Scene if there are no more levels. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_ac5279b8c9dfeb67cea2949da89990beb}{Add\+Collected\+Money}} (int money)
+\begin{DoxyCompactList}\small\item\em Adds collected money to game score. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_manager_a9f6e9439652dee13bcf82ce8f9a98aa1}{Add\+Killed\+Enemy}} (int enemy\+Value=1)
+\begin{DoxyCompactList}\small\item\em Adds killed enemy to game score. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_game_manager}{Game\+Manager}} \mbox{\hyperlink{class_game_manager_a7666e8468dac197b9eb32dd32128524f}{instance}}
+\begin{DoxyCompactList}\small\item\em The singleton instance of the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_game_manager_ab6f7aa1bd51cb49f1be3a6d213a3870a}{Player\+Health}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Current player health. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_manager_ac3ef9bee8ca61b36cccca628bbb3c011}{Player\+Max\+Health}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Max player health. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_manager_a638354d140159f85316530a7f28076e4}{Player\+Lives}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Number of lives of the player \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_manager_aedb8d4a4c26ce5ca6d4ae7df26bf72fe}{Player\+Money}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Player\textquotesingle{}s money. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_manager_a3d83227e1dce0f07359741fbe43b29f9}{Player\+Arrows}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Number of player\textquotesingle{}s arrows. \end{DoxyCompactList}\item 
+Difficulty \mbox{\hyperlink{class_game_manager_aaf510820757ee5662030419d344ac5d7}{Current\+Difficulty}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Current difficulty of the game. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_manager_ad52cf77f5b1636403f8ca0a31d8f8562}{Player\+Sword\+Damage}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Current sword damage of the player. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_manager_afe1a11ec5453bc660a2ff915f3e93405}{Bow\+Arrow\+Damage}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Current bow damage of the player. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_game_manager_a626010f49851458817834cde7cf49ebf}{Bow\+Arrow\+Force}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Current force of player\textquotesingle{}s bow. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_score_counter}{Score\+Counter}} \mbox{\hyperlink{class_game_manager_ae16d80b246d2c834485eef2dbb465dfd}{Score\+Counter}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Object for counting score. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_game_manager_a68a1e11ec54b95e435b500f8228f2a95}{Is\+Game\+Over}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Is true when the game is over. I happens when the player has 0 lives. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_game_manager_a0ba7e9caebdde8bdebc5cb7380b6eef9}{Is\+Level\+Finished}} = false\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Returns true if a level was finished and a new one hasn\textquotesingle{}t been loaded. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_feature_upgrade}{Feature\+Upgrade}} \mbox{\hyperlink{class_game_manager_a21aeee90c5ef7ce3542b7e65a25c4547}{Sword\+Damage\+Upgrade}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Object managing sword damage upgrades. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_feature_upgrade}{Feature\+Upgrade}} \mbox{\hyperlink{class_game_manager_a21e48f02600ffc60cc29def4ced9fa52}{Bow\+Damage\+Upgrade}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Object managing bow damage upgrades. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_feature_upgrade}{Feature\+Upgrade}} \mbox{\hyperlink{class_game_manager_a03bf9f27cdf72941895689cd1876de62}{Bow\+Force\+Upgrade}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Object managing bow force upgrades. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The class for managing information between scenes. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_manager_ac5279b8c9dfeb67cea2949da89990beb}\label{class_game_manager_ac5279b8c9dfeb67cea2949da89990beb}} 
+\index{GameManager@{GameManager}!AddCollectedMoney@{AddCollectedMoney}}
+\index{AddCollectedMoney@{AddCollectedMoney}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{AddCollectedMoney()}{AddCollectedMoney()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Add\+Collected\+Money (\begin{DoxyParamCaption}\item[{int}]{money }\end{DoxyParamCaption})}
+
+
+
+Adds collected money to game score. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em money} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_manager_a9f6e9439652dee13bcf82ce8f9a98aa1}\label{class_game_manager_a9f6e9439652dee13bcf82ce8f9a98aa1}} 
+\index{GameManager@{GameManager}!AddKilledEnemy@{AddKilledEnemy}}
+\index{AddKilledEnemy@{AddKilledEnemy}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{AddKilledEnemy()}{AddKilledEnemy()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Add\+Killed\+Enemy (\begin{DoxyParamCaption}\item[{int}]{enemy\+Value = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Adds killed enemy to game score. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em enemy\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_manager_a493e961411d1e6bf1b35750915e86d73}\label{class_game_manager_a493e961411d1e6bf1b35750915e86d73}} 
+\index{GameManager@{GameManager}!FinishLevel@{FinishLevel}}
+\index{FinishLevel@{FinishLevel}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{FinishLevel()}{FinishLevel()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Finish\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finishes the level. It is intended to be called when player reaches the end of the level. 
+
+\mbox{\Hypertarget{class_game_manager_a7113ee6c09bce533f7235cc97eec0a55}\label{class_game_manager_a7113ee6c09bce533f7235cc97eec0a55}} 
+\index{GameManager@{GameManager}!LoadCurrentLevel@{LoadCurrentLevel}}
+\index{LoadCurrentLevel@{LoadCurrentLevel}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{LoadCurrentLevel()}{LoadCurrentLevel()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Load\+Current\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads the current level. 
+
+\mbox{\Hypertarget{class_game_manager_a4391444bea0228a00c91f66634109f35}\label{class_game_manager_a4391444bea0228a00c91f66634109f35}} 
+\index{GameManager@{GameManager}!LoadDifficultySelect@{LoadDifficultySelect}}
+\index{LoadDifficultySelect@{LoadDifficultySelect}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{LoadDifficultySelect()}{LoadDifficultySelect()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Load\+Difficulty\+Select (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads the scene with difficulty select. 
+
+\mbox{\Hypertarget{class_game_manager_a3126fcd9438c8206aace09981b9e866d}\label{class_game_manager_a3126fcd9438c8206aace09981b9e866d}} 
+\index{GameManager@{GameManager}!LoadFirstLevel@{LoadFirstLevel}}
+\index{LoadFirstLevel@{LoadFirstLevel}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{LoadFirstLevel()}{LoadFirstLevel()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Load\+First\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads the first level and resets all player status. 
+
+\mbox{\Hypertarget{class_game_manager_a65671bbb3fdc8d630346cefe024e3139}\label{class_game_manager_a65671bbb3fdc8d630346cefe024e3139}} 
+\index{GameManager@{GameManager}!LoadIntroduction@{LoadIntroduction}}
+\index{LoadIntroduction@{LoadIntroduction}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{LoadIntroduction()}{LoadIntroduction()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Load\+Introduction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads Introduction scene. 
+
+\mbox{\Hypertarget{class_game_manager_acc5bf2b58e880874333d37213a346d6a}\label{class_game_manager_acc5bf2b58e880874333d37213a346d6a}} 
+\index{GameManager@{GameManager}!LoadMainMenu@{LoadMainMenu}}
+\index{LoadMainMenu@{LoadMainMenu}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{LoadMainMenu()}{LoadMainMenu()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Load\+Main\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads Main\+Menu scene. 
+
+\mbox{\Hypertarget{class_game_manager_a4b9d57ca37d41b1e4e328e233938d38b}\label{class_game_manager_a4b9d57ca37d41b1e4e328e233938d38b}} 
+\index{GameManager@{GameManager}!LoadNextLevel@{LoadNextLevel}}
+\index{LoadNextLevel@{LoadNextLevel}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{LoadNextLevel()}{LoadNextLevel()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Load\+Next\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads next level. 
+
+\mbox{\Hypertarget{class_game_manager_ae9f4b0bf0e379ce7048fcbf249a919dd}\label{class_game_manager_ae9f4b0bf0e379ce7048fcbf249a919dd}} 
+\index{GameManager@{GameManager}!LoadWinScene@{LoadWinScene}}
+\index{LoadWinScene@{LoadWinScene}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{LoadWinScene()}{LoadWinScene()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Load\+Win\+Scene (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads Win\+Scene. 
+
+\mbox{\Hypertarget{class_game_manager_a6c000a3f9be1c2db30832eea7ebf6f5a}\label{class_game_manager_a6c000a3f9be1c2db30832eea7ebf6f5a}} 
+\index{GameManager@{GameManager}!LoadWorkshop@{LoadWorkshop}}
+\index{LoadWorkshop@{LoadWorkshop}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{LoadWorkshop()}{LoadWorkshop()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Load\+Workshop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads Workshop scene. 
+
+\mbox{\Hypertarget{class_game_manager_a121fc691c99cd64d6aa163678baa2dc0}\label{class_game_manager_a121fc691c99cd64d6aa163678baa2dc0}} 
+\index{GameManager@{GameManager}!LoadWorkshopOrWinScene@{LoadWorkshopOrWinScene}}
+\index{LoadWorkshopOrWinScene@{LoadWorkshopOrWinScene}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{LoadWorkshopOrWinScene()}{LoadWorkshopOrWinScene()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Load\+Workshop\+Or\+Win\+Scene (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads the scene which should be displayed after finishing level. It is either Workshop if there are more levels or Win\+Scene if there are no more levels. 
+
+\mbox{\Hypertarget{class_game_manager_a7a14b6729275c8251533cafd523f6170}\label{class_game_manager_a7a14b6729275c8251533cafd523f6170}} 
+\index{GameManager@{GameManager}!SelectDifficultyAndGoNext@{SelectDifficultyAndGoNext}}
+\index{SelectDifficultyAndGoNext@{SelectDifficultyAndGoNext}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{SelectDifficultyAndGoNext()}{SelectDifficultyAndGoNext()}}
+{\footnotesize\ttfamily void Game\+Manager.\+Select\+Difficulty\+And\+Go\+Next (\begin{DoxyParamCaption}\item[{Difficulty}]{difficulty }\end{DoxyParamCaption})}
+
+
+
+Sets the difficulty and loads the scene which should pe displayed next. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em difficulty} & Selected difficulty of the game\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_game_manager_a7666e8468dac197b9eb32dd32128524f}\label{class_game_manager_a7666e8468dac197b9eb32dd32128524f}} 
+\index{GameManager@{GameManager}!instance@{instance}}
+\index{instance@{instance}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{instance}{instance}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_game_manager}{Game\+Manager}} Game\+Manager.\+instance\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The singleton instance of the object. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_game_manager_afe1a11ec5453bc660a2ff915f3e93405}\label{class_game_manager_afe1a11ec5453bc660a2ff915f3e93405}} 
+\index{GameManager@{GameManager}!BowArrowDamage@{BowArrowDamage}}
+\index{BowArrowDamage@{BowArrowDamage}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{BowArrowDamage}{BowArrowDamage}}
+{\footnotesize\ttfamily float Game\+Manager.\+Bow\+Arrow\+Damage\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Current bow damage of the player. 
+
+\mbox{\Hypertarget{class_game_manager_a626010f49851458817834cde7cf49ebf}\label{class_game_manager_a626010f49851458817834cde7cf49ebf}} 
+\index{GameManager@{GameManager}!BowArrowForce@{BowArrowForce}}
+\index{BowArrowForce@{BowArrowForce}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{BowArrowForce}{BowArrowForce}}
+{\footnotesize\ttfamily float Game\+Manager.\+Bow\+Arrow\+Force\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Current force of player\textquotesingle{}s bow. 
+
+\mbox{\Hypertarget{class_game_manager_a21e48f02600ffc60cc29def4ced9fa52}\label{class_game_manager_a21e48f02600ffc60cc29def4ced9fa52}} 
+\index{GameManager@{GameManager}!BowDamageUpgrade@{BowDamageUpgrade}}
+\index{BowDamageUpgrade@{BowDamageUpgrade}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{BowDamageUpgrade}{BowDamageUpgrade}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_feature_upgrade}{Feature\+Upgrade}} Game\+Manager.\+Bow\+Damage\+Upgrade\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Object managing bow damage upgrades. 
+
+\mbox{\Hypertarget{class_game_manager_a03bf9f27cdf72941895689cd1876de62}\label{class_game_manager_a03bf9f27cdf72941895689cd1876de62}} 
+\index{GameManager@{GameManager}!BowForceUpgrade@{BowForceUpgrade}}
+\index{BowForceUpgrade@{BowForceUpgrade}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{BowForceUpgrade}{BowForceUpgrade}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_feature_upgrade}{Feature\+Upgrade}} Game\+Manager.\+Bow\+Force\+Upgrade\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Object managing bow force upgrades. 
+
+\mbox{\Hypertarget{class_game_manager_aaf510820757ee5662030419d344ac5d7}\label{class_game_manager_aaf510820757ee5662030419d344ac5d7}} 
+\index{GameManager@{GameManager}!CurrentDifficulty@{CurrentDifficulty}}
+\index{CurrentDifficulty@{CurrentDifficulty}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{CurrentDifficulty}{CurrentDifficulty}}
+{\footnotesize\ttfamily Difficulty Game\+Manager.\+Current\+Difficulty\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Current difficulty of the game. 
+
+\mbox{\Hypertarget{class_game_manager_a68a1e11ec54b95e435b500f8228f2a95}\label{class_game_manager_a68a1e11ec54b95e435b500f8228f2a95}} 
+\index{GameManager@{GameManager}!IsGameOver@{IsGameOver}}
+\index{IsGameOver@{IsGameOver}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{IsGameOver}{IsGameOver}}
+{\footnotesize\ttfamily bool Game\+Manager.\+Is\+Game\+Over\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Is true when the game is over. I happens when the player has 0 lives. 
+
+\mbox{\Hypertarget{class_game_manager_a0ba7e9caebdde8bdebc5cb7380b6eef9}\label{class_game_manager_a0ba7e9caebdde8bdebc5cb7380b6eef9}} 
+\index{GameManager@{GameManager}!IsLevelFinished@{IsLevelFinished}}
+\index{IsLevelFinished@{IsLevelFinished}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{IsLevelFinished}{IsLevelFinished}}
+{\footnotesize\ttfamily bool Game\+Manager.\+Is\+Level\+Finished = false\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Returns true if a level was finished and a new one hasn\textquotesingle{}t been loaded. 
+
+\mbox{\Hypertarget{class_game_manager_a3d83227e1dce0f07359741fbe43b29f9}\label{class_game_manager_a3d83227e1dce0f07359741fbe43b29f9}} 
+\index{GameManager@{GameManager}!PlayerArrows@{PlayerArrows}}
+\index{PlayerArrows@{PlayerArrows}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{PlayerArrows}{PlayerArrows}}
+{\footnotesize\ttfamily int Game\+Manager.\+Player\+Arrows\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Number of player\textquotesingle{}s arrows. 
+
+\mbox{\Hypertarget{class_game_manager_ab6f7aa1bd51cb49f1be3a6d213a3870a}\label{class_game_manager_ab6f7aa1bd51cb49f1be3a6d213a3870a}} 
+\index{GameManager@{GameManager}!PlayerHealth@{PlayerHealth}}
+\index{PlayerHealth@{PlayerHealth}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{PlayerHealth}{PlayerHealth}}
+{\footnotesize\ttfamily float Game\+Manager.\+Player\+Health\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Current player health. 
+
+\mbox{\Hypertarget{class_game_manager_a638354d140159f85316530a7f28076e4}\label{class_game_manager_a638354d140159f85316530a7f28076e4}} 
+\index{GameManager@{GameManager}!PlayerLives@{PlayerLives}}
+\index{PlayerLives@{PlayerLives}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{PlayerLives}{PlayerLives}}
+{\footnotesize\ttfamily int Game\+Manager.\+Player\+Lives\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Number of lives of the player 
+
+\mbox{\Hypertarget{class_game_manager_ac3ef9bee8ca61b36cccca628bbb3c011}\label{class_game_manager_ac3ef9bee8ca61b36cccca628bbb3c011}} 
+\index{GameManager@{GameManager}!PlayerMaxHealth@{PlayerMaxHealth}}
+\index{PlayerMaxHealth@{PlayerMaxHealth}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{PlayerMaxHealth}{PlayerMaxHealth}}
+{\footnotesize\ttfamily float Game\+Manager.\+Player\+Max\+Health\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Max player health. 
+
+\mbox{\Hypertarget{class_game_manager_aedb8d4a4c26ce5ca6d4ae7df26bf72fe}\label{class_game_manager_aedb8d4a4c26ce5ca6d4ae7df26bf72fe}} 
+\index{GameManager@{GameManager}!PlayerMoney@{PlayerMoney}}
+\index{PlayerMoney@{PlayerMoney}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{PlayerMoney}{PlayerMoney}}
+{\footnotesize\ttfamily int Game\+Manager.\+Player\+Money\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Player\textquotesingle{}s money. 
+
+\mbox{\Hypertarget{class_game_manager_ad52cf77f5b1636403f8ca0a31d8f8562}\label{class_game_manager_ad52cf77f5b1636403f8ca0a31d8f8562}} 
+\index{GameManager@{GameManager}!PlayerSwordDamage@{PlayerSwordDamage}}
+\index{PlayerSwordDamage@{PlayerSwordDamage}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{PlayerSwordDamage}{PlayerSwordDamage}}
+{\footnotesize\ttfamily float Game\+Manager.\+Player\+Sword\+Damage\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Current sword damage of the player. 
+
+\mbox{\Hypertarget{class_game_manager_ae16d80b246d2c834485eef2dbb465dfd}\label{class_game_manager_ae16d80b246d2c834485eef2dbb465dfd}} 
+\index{GameManager@{GameManager}!ScoreCounter@{ScoreCounter}}
+\index{ScoreCounter@{ScoreCounter}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{ScoreCounter}{ScoreCounter}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_score_counter}{Score\+Counter}} Game\+Manager.\+Score\+Counter\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Object for counting score. 
+
+\mbox{\Hypertarget{class_game_manager_a21aeee90c5ef7ce3542b7e65a25c4547}\label{class_game_manager_a21aeee90c5ef7ce3542b7e65a25c4547}} 
+\index{GameManager@{GameManager}!SwordDamageUpgrade@{SwordDamageUpgrade}}
+\index{SwordDamageUpgrade@{SwordDamageUpgrade}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{SwordDamageUpgrade}{SwordDamageUpgrade}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_feature_upgrade}{Feature\+Upgrade}} Game\+Manager.\+Sword\+Damage\+Upgrade\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Object managing sword damage upgrades. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Manager/Game\+Manager.\+cs\end{DoxyCompactItemize}

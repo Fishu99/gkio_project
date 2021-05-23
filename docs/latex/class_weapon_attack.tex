@@ -1,0 +1,82 @@
+\hypertarget{class_weapon_attack}{}\doxysection{Weapon\+Attack Class Reference}
+\label{class_weapon_attack}\index{WeaponAttack@{WeaponAttack}}
+
+
+Base class for various types of attacks performed by player and enemies.  
+
+
+Inheritance diagram for Weapon\+Attack\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_weapon_attack}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract void \mbox{\hyperlink{class_weapon_attack_a0a2db338e39bc72e027f0c670d6ba293}{Attack}} ()
+\begin{DoxyCompactList}\small\item\em Starts the attack. It is intended to be called when the attack animation starts. \end{DoxyCompactList}\item 
+abstract bool \mbox{\hyperlink{class_weapon_attack_ae79e5ad0f3c5c87e373bff644963e431}{Is\+Aim\+In\+Attack\+Range}} ()
+\begin{DoxyCompactList}\small\item\em Tells if the script considers Aim to be within object\textquotesingle{}s attack range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+Game\+Object \mbox{\hyperlink{class_weapon_attack_a287d9ca4b22bfcc719990f756cd9b2cd}{Aim}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The aim of the attack. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for various types of attacks performed by player and enemies. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_weapon_attack_a0a2db338e39bc72e027f0c670d6ba293}\label{class_weapon_attack_a0a2db338e39bc72e027f0c670d6ba293}} 
+\index{WeaponAttack@{WeaponAttack}!Attack@{Attack}}
+\index{Attack@{Attack}!WeaponAttack@{WeaponAttack}}
+\doxysubsubsection{\texorpdfstring{Attack()}{Attack()}}
+{\footnotesize\ttfamily abstract void Weapon\+Attack.\+Attack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Starts the attack. It is intended to be called when the attack animation starts. 
+
+
+
+Implemented in \mbox{\hyperlink{class_sword_attack_a62f30812be8914ed73e6e2917f74f349}{Sword\+Attack}}, and \mbox{\hyperlink{class_dagger_throw_attack_a13833fd136d4ba0708bd9f95b34f2783}{Dagger\+Throw\+Attack}}.
+
+\mbox{\Hypertarget{class_weapon_attack_ae79e5ad0f3c5c87e373bff644963e431}\label{class_weapon_attack_ae79e5ad0f3c5c87e373bff644963e431}} 
+\index{WeaponAttack@{WeaponAttack}!IsAimInAttackRange@{IsAimInAttackRange}}
+\index{IsAimInAttackRange@{IsAimInAttackRange}!WeaponAttack@{WeaponAttack}}
+\doxysubsubsection{\texorpdfstring{IsAimInAttackRange()}{IsAimInAttackRange()}}
+{\footnotesize\ttfamily abstract bool Weapon\+Attack.\+Is\+Aim\+In\+Attack\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Tells if the script considers Aim to be within object\textquotesingle{}s attack range. 
+
+\begin{DoxyReturn}{Returns}
+true if the aim is considered to be within attack range.
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_sword_attack_a63a011a580cc83d5dc8b01da93345374}{Sword\+Attack}}, and \mbox{\hyperlink{class_dagger_throw_attack_acfc717d3ea82f8334e33f18b40258a4b}{Dagger\+Throw\+Attack}}.
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_weapon_attack_a287d9ca4b22bfcc719990f756cd9b2cd}\label{class_weapon_attack_a287d9ca4b22bfcc719990f756cd9b2cd}} 
+\index{WeaponAttack@{WeaponAttack}!Aim@{Aim}}
+\index{Aim@{Aim}!WeaponAttack@{WeaponAttack}}
+\doxysubsubsection{\texorpdfstring{Aim}{Aim}}
+{\footnotesize\ttfamily Game\+Object Weapon\+Attack.\+Aim\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The aim of the attack. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Attacks/Weapon\+Attack.\+cs\end{DoxyCompactItemize}

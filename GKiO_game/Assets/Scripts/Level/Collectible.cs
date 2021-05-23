@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -12,15 +10,25 @@ public class Collectible : MonoBehaviour
     [Tooltip("Type of the item")]
     [SerializeField] private string typeOfCollectible;
 
+    /// <summary>
+    /// Returns the value of the collectible item.
+    /// </summary>
     public int Value {
         get => value;
     }
 
+    /// <summary>
+    /// Returns type of the collectible.
+    /// </summary>
     public string TypeOfCollectible
     {
         get => typeOfCollectible;
     }
 
+    /// <summary>
+    /// Collects the item. It makes the item disappear.
+    /// </summary>
+    /// <returns>Value of the item.</returns>
     public int Collect()
     {
         Destroy(gameObject);

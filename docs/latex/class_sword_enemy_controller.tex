@@ -1,0 +1,466 @@
+\hypertarget{class_sword_enemy_controller}{}\doxysection{Sword\+Enemy\+Controller Class Reference}
+\label{class_sword_enemy_controller}\index{SwordEnemyController@{SwordEnemyController}}
+
+
+A controller for all enemies. It uses a state machine to manage different states of the enemy.  
+
+
+Inheritance diagram for Sword\+Enemy\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sword_enemy_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_sword_enemy_controller_a308c53bc09990a5a1327065aade5ab70}{Change\+State}} (\mbox{\hyperlink{class_sword_enemy_state}{Sword\+Enemy\+State}} new\+State)
+\begin{DoxyCompactList}\small\item\em Changes the current state of the enemy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sword_enemy_controller_a8b5853504233e23881ea1dfa52a42a4d}{Walk\+In\+Current\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em Makes the enemy walk in its current direction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sword_enemy_controller_a53e803874413871df4e43517d3e8ca21}{Rotate\+By\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em Makes the enemy rotated according to its current direction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sword_enemy_controller_a6226f962a920811df9bbc974360ade8a}{Turn\+Back}} ()
+\begin{DoxyCompactList}\small\item\em Reverses the direction of the enemy \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_sword_enemy_controller_add43a804453a2c39061caa3d82d89193}{Walked\+To\+Left\+End}} ()
+\begin{DoxyCompactList}\small\item\em Tells if the enemy walked to left end of its patrolling range. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_sword_enemy_controller_ae4fc6985a2cfcf5b619b23f156f2d0c3}{Walked\+To\+Right\+End}} ()
+\begin{DoxyCompactList}\small\item\em Tells if the enemy walked to right end of its patrolling range. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_sword_enemy_controller_a40c497d2e4352c15274a1ea64df59913}{Walked\+To\+End}} ()
+\begin{DoxyCompactList}\small\item\em Tells if the enemy walked to either end of its patrolling range. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sword_enemy_controller_adae7798315a0aa20afa50b2c64412464}{Set\+Velocity\+By\+Direction}} ()
+\begin{DoxyCompactList}\small\item\em Sets the velocity so that the enemy will move with its walk speed in its curent direction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sword_enemy_controller_a63bf45d4aa7715f5c0b7c046a49d77f7}{Set\+Velocity\+To\+Zero}} ()
+\begin{DoxyCompactList}\small\item\em Sets the enemy velocity to 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sword_enemy_controller_acf063e5ad402dc7d93eec1e6b117f308}{Calculate\+Velocity\+To\+Follow\+Player}} ()
+\begin{DoxyCompactList}\small\item\em Calculates the enemy velocity, so that it will follow player. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_sword_enemy_controller_ab625ba9f71756b0021439e9a53d84d3c}{Is\+Player\+In\+Attack\+Range}} ()
+\begin{DoxyCompactList}\small\item\em Tells if the player is within attack range of the enemy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sword_enemy_controller_a246ed20d109c0e892d400b97fb562bc5}{Attack}} ()
+\begin{DoxyCompactList}\small\item\em Begins the attack. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_a188edd259e799b6307728c3db9e0536c}{walk\+Speed}} = 4f
+\begin{DoxyCompactList}\small\item\em Walking speed of the enemy \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_ae4dd4c59d7e4d8317cceaa8d97e91e79}{walk\+Range}} = 10f
+\begin{DoxyCompactList}\small\item\em Patrolling range of the enemy. It is displayed in scene view as yellow line. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_ae88d233568d1c657fe750f3fd67ea060}{player\+NearX}} = 5f
+\begin{DoxyCompactList}\small\item\em The distance of player from the enemy in x-\/axis when the enemy starts to pursue player \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_a54297c1ee5d8662e1c958da9062a65e8}{player\+NearY}} = 5f
+\begin{DoxyCompactList}\small\item\em The distance of player from the enemy in y-\/axis when the enemy starts to pursue player \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_a14b6b0bcce7d26ab5403c046273bba46}{player\+Near\+OffsetX}} = 0
+\begin{DoxyCompactList}\small\item\em The distance in x-\/axis from enemy\textquotesingle{}s transform.\+position to the point from which player\+NearX is calculated \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_af063bb69c90931ca593e04a59d3effe4}{player\+Near\+OffsetY}} = 0
+\begin{DoxyCompactList}\small\item\em The distance in y-\/axis from enemy\textquotesingle{}s transform.\+position to the point from which player\+NearY is calculated \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_a8f7b28b817c557d771546cf6dfc34be4}{wait\+On\+End\+Time}} = 2f
+\begin{DoxyCompactList}\small\item\em Describes how long the enemy waits on the end of its patrol range. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_ac6f2d85d1890e6e0cf5bcf280cfcba7a}{first\+Attack\+Delay}} = 0.\+3f
+\begin{DoxyCompactList}\small\item\em The time between the player enetring attack range and the first attack made by the enemy. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_afb149f4968089a8fb55256c50f6920da}{attack\+Interval}} = 0.\+5f
+\begin{DoxyCompactList}\small\item\em The interval between the attacks if player stays within attack range \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_aebee2796cab60efc5465c1a67c4d7d38}{attack\+Time}} = 1f
+\begin{DoxyCompactList}\small\item\em Length of the attack \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_acd4747832cabc3b4ccc2f2ddd5d6041d}{death\+Animation\+Time}} = 3f
+\begin{DoxyCompactList}\small\item\em Length of the death animation. The enemy starts to disappear after that time \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_a2129640d49305e897682e6d2080d35ae}{fade\+After\+Death\+Time}} = 0.\+3f
+\begin{DoxyCompactList}\small\item\em Length of the enemy shrinking after its death \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_sword_enemy_controller_a06eb734104157771d2da52044381630a}{enemy\+Kill\+Value}}
+\begin{DoxyCompactList}\small\item\em Points awarded to the user for killing the enemy \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_sword_enemy_controller_afbf6d58197907ee8d4314cb4e3756cf7}{player\+Margin}} = 0.\+2f
+\begin{DoxyCompactList}\small\item\em Distance between enemy and player for which the enemy stops approaching the player. It prevents the enemy from pushing the player. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_sword_enemy_controller_a7db52c65ad03a2843cde5bcaa40b3917}{Is\+Walking}} = false\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em True if the enemy is walking. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_sword_enemy_controller_ad83bab23f809a3b145a814ffe14bf0dd}{Is\+Player\+Near}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em True if the player is near. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sword_enemy_patrol_walk_state}{Sword\+Enemy\+Patrol\+Walk\+State}} \mbox{\hyperlink{class_sword_enemy_controller_ad1313a25e5fafc50f629531534efb3a5}{Patrol\+Walk\+State}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to Patrol\+Walk\+State of the enemy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sword_enemy_patrol_end_state}{Sword\+Enemy\+Patrol\+End\+State}} \mbox{\hyperlink{class_sword_enemy_controller_accff2608a88b9866754a9ce1b773a7c2}{Patrol\+End\+State}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to Patrol\+End\+State of the enemy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sword_enemy_player_noticed_state}{Sword\+Enemy\+Player\+Noticed\+State}} \mbox{\hyperlink{class_sword_enemy_controller_a3987330249243a9dbe8108b5a376c3c2}{Player\+Noticed\+State}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to Player\+Noticed\+State of the enemy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sword_enemy_player_in_attack_range_state}{Sword\+Enemy\+Player\+In\+Attack\+Range\+State}} \mbox{\hyperlink{class_sword_enemy_controller_ac9f77871e07208b39c28be9934ded946}{Player\+In\+Attack\+Range\+State}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to Player\+In\+Attack\+Range\+State of the enemy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sword_enemy_player_attack_state}{Sword\+Enemy\+Player\+Attack\+State}} \mbox{\hyperlink{class_sword_enemy_controller_ac5c294d7832ce39c867010392fe226b2}{Player\+Attack\+State}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to Player\+Attack\+State of the enemy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_sword_enemy_dead_state}{Sword\+Enemy\+Dead\+State}} \mbox{\hyperlink{class_sword_enemy_controller_a8704bace71ff4f283ae43b0124270e74}{Dead\+State}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Reference to Dead\+State of the enemy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A controller for all enemies. It uses a state machine to manage different states of the enemy. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sword_enemy_controller_a246ed20d109c0e892d400b97fb562bc5}\label{class_sword_enemy_controller_a246ed20d109c0e892d400b97fb562bc5}} 
+\index{SwordEnemyController@{SwordEnemyController}!Attack@{Attack}}
+\index{Attack@{Attack}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{Attack()}{Attack()}}
+{\footnotesize\ttfamily void Sword\+Enemy\+Controller.\+Attack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Begins the attack. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_acf063e5ad402dc7d93eec1e6b117f308}\label{class_sword_enemy_controller_acf063e5ad402dc7d93eec1e6b117f308}} 
+\index{SwordEnemyController@{SwordEnemyController}!CalculateVelocityToFollowPlayer@{CalculateVelocityToFollowPlayer}}
+\index{CalculateVelocityToFollowPlayer@{CalculateVelocityToFollowPlayer}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{CalculateVelocityToFollowPlayer()}{CalculateVelocityToFollowPlayer()}}
+{\footnotesize\ttfamily void Sword\+Enemy\+Controller.\+Calculate\+Velocity\+To\+Follow\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Calculates the enemy velocity, so that it will follow player. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a308c53bc09990a5a1327065aade5ab70}\label{class_sword_enemy_controller_a308c53bc09990a5a1327065aade5ab70}} 
+\index{SwordEnemyController@{SwordEnemyController}!ChangeState@{ChangeState}}
+\index{ChangeState@{ChangeState}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{ChangeState()}{ChangeState()}}
+{\footnotesize\ttfamily void Sword\+Enemy\+Controller.\+Change\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sword_enemy_state}{Sword\+Enemy\+State}}}]{new\+State }\end{DoxyParamCaption})}
+
+
+
+Changes the current state of the enemy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+State} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_sword_enemy_controller_ab625ba9f71756b0021439e9a53d84d3c}\label{class_sword_enemy_controller_ab625ba9f71756b0021439e9a53d84d3c}} 
+\index{SwordEnemyController@{SwordEnemyController}!IsPlayerInAttackRange@{IsPlayerInAttackRange}}
+\index{IsPlayerInAttackRange@{IsPlayerInAttackRange}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{IsPlayerInAttackRange()}{IsPlayerInAttackRange()}}
+{\footnotesize\ttfamily bool Sword\+Enemy\+Controller.\+Is\+Player\+In\+Attack\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells if the player is within attack range of the enemy. 
+
+\begin{DoxyReturn}{Returns}
+true if the player is within attack range
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sword_enemy_controller_a53e803874413871df4e43517d3e8ca21}\label{class_sword_enemy_controller_a53e803874413871df4e43517d3e8ca21}} 
+\index{SwordEnemyController@{SwordEnemyController}!RotateByDirection@{RotateByDirection}}
+\index{RotateByDirection@{RotateByDirection}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{RotateByDirection()}{RotateByDirection()}}
+{\footnotesize\ttfamily void Sword\+Enemy\+Controller.\+Rotate\+By\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Makes the enemy rotated according to its current direction. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_adae7798315a0aa20afa50b2c64412464}\label{class_sword_enemy_controller_adae7798315a0aa20afa50b2c64412464}} 
+\index{SwordEnemyController@{SwordEnemyController}!SetVelocityByDirection@{SetVelocityByDirection}}
+\index{SetVelocityByDirection@{SetVelocityByDirection}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{SetVelocityByDirection()}{SetVelocityByDirection()}}
+{\footnotesize\ttfamily void Sword\+Enemy\+Controller.\+Set\+Velocity\+By\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets the velocity so that the enemy will move with its walk speed in its curent direction. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a63bf45d4aa7715f5c0b7c046a49d77f7}\label{class_sword_enemy_controller_a63bf45d4aa7715f5c0b7c046a49d77f7}} 
+\index{SwordEnemyController@{SwordEnemyController}!SetVelocityToZero@{SetVelocityToZero}}
+\index{SetVelocityToZero@{SetVelocityToZero}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{SetVelocityToZero()}{SetVelocityToZero()}}
+{\footnotesize\ttfamily void Sword\+Enemy\+Controller.\+Set\+Velocity\+To\+Zero (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sets the enemy velocity to 0. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a6226f962a920811df9bbc974360ade8a}\label{class_sword_enemy_controller_a6226f962a920811df9bbc974360ade8a}} 
+\index{SwordEnemyController@{SwordEnemyController}!TurnBack@{TurnBack}}
+\index{TurnBack@{TurnBack}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{TurnBack()}{TurnBack()}}
+{\footnotesize\ttfamily void Sword\+Enemy\+Controller.\+Turn\+Back (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reverses the direction of the enemy 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a40c497d2e4352c15274a1ea64df59913}\label{class_sword_enemy_controller_a40c497d2e4352c15274a1ea64df59913}} 
+\index{SwordEnemyController@{SwordEnemyController}!WalkedToEnd@{WalkedToEnd}}
+\index{WalkedToEnd@{WalkedToEnd}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{WalkedToEnd()}{WalkedToEnd()}}
+{\footnotesize\ttfamily bool Sword\+Enemy\+Controller.\+Walked\+To\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells if the enemy walked to either end of its patrolling range. 
+
+\begin{DoxyReturn}{Returns}
+true if the enemy walked to either end of its patrolling range
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sword_enemy_controller_add43a804453a2c39061caa3d82d89193}\label{class_sword_enemy_controller_add43a804453a2c39061caa3d82d89193}} 
+\index{SwordEnemyController@{SwordEnemyController}!WalkedToLeftEnd@{WalkedToLeftEnd}}
+\index{WalkedToLeftEnd@{WalkedToLeftEnd}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{WalkedToLeftEnd()}{WalkedToLeftEnd()}}
+{\footnotesize\ttfamily bool Sword\+Enemy\+Controller.\+Walked\+To\+Left\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells if the enemy walked to left end of its patrolling range. 
+
+\begin{DoxyReturn}{Returns}
+true if the enemy walked to left end of its patrolling range
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sword_enemy_controller_ae4fc6985a2cfcf5b619b23f156f2d0c3}\label{class_sword_enemy_controller_ae4fc6985a2cfcf5b619b23f156f2d0c3}} 
+\index{SwordEnemyController@{SwordEnemyController}!WalkedToRightEnd@{WalkedToRightEnd}}
+\index{WalkedToRightEnd@{WalkedToRightEnd}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{WalkedToRightEnd()}{WalkedToRightEnd()}}
+{\footnotesize\ttfamily bool Sword\+Enemy\+Controller.\+Walked\+To\+Right\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tells if the enemy walked to right end of its patrolling range. 
+
+\begin{DoxyReturn}{Returns}
+true if the enemy walked to right end of its patrolling range
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sword_enemy_controller_a8b5853504233e23881ea1dfa52a42a4d}\label{class_sword_enemy_controller_a8b5853504233e23881ea1dfa52a42a4d}} 
+\index{SwordEnemyController@{SwordEnemyController}!WalkInCurrentDirection@{WalkInCurrentDirection}}
+\index{WalkInCurrentDirection@{WalkInCurrentDirection}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{WalkInCurrentDirection()}{WalkInCurrentDirection()}}
+{\footnotesize\ttfamily void Sword\+Enemy\+Controller.\+Walk\+In\+Current\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Makes the enemy walk in its current direction. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_sword_enemy_controller_afb149f4968089a8fb55256c50f6920da}\label{class_sword_enemy_controller_afb149f4968089a8fb55256c50f6920da}} 
+\index{SwordEnemyController@{SwordEnemyController}!attackInterval@{attackInterval}}
+\index{attackInterval@{attackInterval}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{attackInterval}{attackInterval}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+attack\+Interval = 0.\+5f}
+
+
+
+The interval between the attacks if player stays within attack range 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_aebee2796cab60efc5465c1a67c4d7d38}\label{class_sword_enemy_controller_aebee2796cab60efc5465c1a67c4d7d38}} 
+\index{SwordEnemyController@{SwordEnemyController}!attackTime@{attackTime}}
+\index{attackTime@{attackTime}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{attackTime}{attackTime}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+attack\+Time = 1f}
+
+
+
+Length of the attack 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_acd4747832cabc3b4ccc2f2ddd5d6041d}\label{class_sword_enemy_controller_acd4747832cabc3b4ccc2f2ddd5d6041d}} 
+\index{SwordEnemyController@{SwordEnemyController}!deathAnimationTime@{deathAnimationTime}}
+\index{deathAnimationTime@{deathAnimationTime}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{deathAnimationTime}{deathAnimationTime}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+death\+Animation\+Time = 3f}
+
+
+
+Length of the death animation. The enemy starts to disappear after that time 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a06eb734104157771d2da52044381630a}\label{class_sword_enemy_controller_a06eb734104157771d2da52044381630a}} 
+\index{SwordEnemyController@{SwordEnemyController}!enemyKillValue@{enemyKillValue}}
+\index{enemyKillValue@{enemyKillValue}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{enemyKillValue}{enemyKillValue}}
+{\footnotesize\ttfamily int Sword\+Enemy\+Controller.\+enemy\+Kill\+Value}
+
+
+
+Points awarded to the user for killing the enemy 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a2129640d49305e897682e6d2080d35ae}\label{class_sword_enemy_controller_a2129640d49305e897682e6d2080d35ae}} 
+\index{SwordEnemyController@{SwordEnemyController}!fadeAfterDeathTime@{fadeAfterDeathTime}}
+\index{fadeAfterDeathTime@{fadeAfterDeathTime}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{fadeAfterDeathTime}{fadeAfterDeathTime}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+fade\+After\+Death\+Time = 0.\+3f}
+
+
+
+Length of the enemy shrinking after its death 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_ac6f2d85d1890e6e0cf5bcf280cfcba7a}\label{class_sword_enemy_controller_ac6f2d85d1890e6e0cf5bcf280cfcba7a}} 
+\index{SwordEnemyController@{SwordEnemyController}!firstAttackDelay@{firstAttackDelay}}
+\index{firstAttackDelay@{firstAttackDelay}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{firstAttackDelay}{firstAttackDelay}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+first\+Attack\+Delay = 0.\+3f}
+
+
+
+The time between the player enetring attack range and the first attack made by the enemy. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_afbf6d58197907ee8d4314cb4e3756cf7}\label{class_sword_enemy_controller_afbf6d58197907ee8d4314cb4e3756cf7}} 
+\index{SwordEnemyController@{SwordEnemyController}!playerMargin@{playerMargin}}
+\index{playerMargin@{playerMargin}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{playerMargin}{playerMargin}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+player\+Margin = 0.\+2f}
+
+
+
+Distance between enemy and player for which the enemy stops approaching the player. It prevents the enemy from pushing the player. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a14b6b0bcce7d26ab5403c046273bba46}\label{class_sword_enemy_controller_a14b6b0bcce7d26ab5403c046273bba46}} 
+\index{SwordEnemyController@{SwordEnemyController}!playerNearOffsetX@{playerNearOffsetX}}
+\index{playerNearOffsetX@{playerNearOffsetX}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{playerNearOffsetX}{playerNearOffsetX}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+player\+Near\+OffsetX = 0}
+
+
+
+The distance in x-\/axis from enemy\textquotesingle{}s transform.\+position to the point from which player\+NearX is calculated 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_af063bb69c90931ca593e04a59d3effe4}\label{class_sword_enemy_controller_af063bb69c90931ca593e04a59d3effe4}} 
+\index{SwordEnemyController@{SwordEnemyController}!playerNearOffsetY@{playerNearOffsetY}}
+\index{playerNearOffsetY@{playerNearOffsetY}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{playerNearOffsetY}{playerNearOffsetY}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+player\+Near\+OffsetY = 0}
+
+
+
+The distance in y-\/axis from enemy\textquotesingle{}s transform.\+position to the point from which player\+NearY is calculated 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_ae88d233568d1c657fe750f3fd67ea060}\label{class_sword_enemy_controller_ae88d233568d1c657fe750f3fd67ea060}} 
+\index{SwordEnemyController@{SwordEnemyController}!playerNearX@{playerNearX}}
+\index{playerNearX@{playerNearX}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{playerNearX}{playerNearX}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+player\+NearX = 5f}
+
+
+
+The distance of player from the enemy in x-\/axis when the enemy starts to pursue player 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a54297c1ee5d8662e1c958da9062a65e8}\label{class_sword_enemy_controller_a54297c1ee5d8662e1c958da9062a65e8}} 
+\index{SwordEnemyController@{SwordEnemyController}!playerNearY@{playerNearY}}
+\index{playerNearY@{playerNearY}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{playerNearY}{playerNearY}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+player\+NearY = 5f}
+
+
+
+The distance of player from the enemy in y-\/axis when the enemy starts to pursue player 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a8f7b28b817c557d771546cf6dfc34be4}\label{class_sword_enemy_controller_a8f7b28b817c557d771546cf6dfc34be4}} 
+\index{SwordEnemyController@{SwordEnemyController}!waitOnEndTime@{waitOnEndTime}}
+\index{waitOnEndTime@{waitOnEndTime}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{waitOnEndTime}{waitOnEndTime}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+wait\+On\+End\+Time = 2f}
+
+
+
+Describes how long the enemy waits on the end of its patrol range. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_ae4dd4c59d7e4d8317cceaa8d97e91e79}\label{class_sword_enemy_controller_ae4dd4c59d7e4d8317cceaa8d97e91e79}} 
+\index{SwordEnemyController@{SwordEnemyController}!walkRange@{walkRange}}
+\index{walkRange@{walkRange}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{walkRange}{walkRange}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+walk\+Range = 10f}
+
+
+
+Patrolling range of the enemy. It is displayed in scene view as yellow line. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a188edd259e799b6307728c3db9e0536c}\label{class_sword_enemy_controller_a188edd259e799b6307728c3db9e0536c}} 
+\index{SwordEnemyController@{SwordEnemyController}!walkSpeed@{walkSpeed}}
+\index{walkSpeed@{walkSpeed}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{walkSpeed}{walkSpeed}}
+{\footnotesize\ttfamily float Sword\+Enemy\+Controller.\+walk\+Speed = 4f}
+
+
+
+Walking speed of the enemy 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_sword_enemy_controller_a8704bace71ff4f283ae43b0124270e74}\label{class_sword_enemy_controller_a8704bace71ff4f283ae43b0124270e74}} 
+\index{SwordEnemyController@{SwordEnemyController}!DeadState@{DeadState}}
+\index{DeadState@{DeadState}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{DeadState}{DeadState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sword_enemy_dead_state}{Sword\+Enemy\+Dead\+State}} Sword\+Enemy\+Controller.\+Dead\+State\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Reference to Dead\+State of the enemy. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_ad83bab23f809a3b145a814ffe14bf0dd}\label{class_sword_enemy_controller_ad83bab23f809a3b145a814ffe14bf0dd}} 
+\index{SwordEnemyController@{SwordEnemyController}!IsPlayerNear@{IsPlayerNear}}
+\index{IsPlayerNear@{IsPlayerNear}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{IsPlayerNear}{IsPlayerNear}}
+{\footnotesize\ttfamily bool Sword\+Enemy\+Controller.\+Is\+Player\+Near\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+True if the player is near. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a7db52c65ad03a2843cde5bcaa40b3917}\label{class_sword_enemy_controller_a7db52c65ad03a2843cde5bcaa40b3917}} 
+\index{SwordEnemyController@{SwordEnemyController}!IsWalking@{IsWalking}}
+\index{IsWalking@{IsWalking}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{IsWalking}{IsWalking}}
+{\footnotesize\ttfamily bool Sword\+Enemy\+Controller.\+Is\+Walking = false\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+True if the enemy is walking. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_accff2608a88b9866754a9ce1b773a7c2}\label{class_sword_enemy_controller_accff2608a88b9866754a9ce1b773a7c2}} 
+\index{SwordEnemyController@{SwordEnemyController}!PatrolEndState@{PatrolEndState}}
+\index{PatrolEndState@{PatrolEndState}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{PatrolEndState}{PatrolEndState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sword_enemy_patrol_end_state}{Sword\+Enemy\+Patrol\+End\+State}} Sword\+Enemy\+Controller.\+Patrol\+End\+State\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Reference to Patrol\+End\+State of the enemy. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_ad1313a25e5fafc50f629531534efb3a5}\label{class_sword_enemy_controller_ad1313a25e5fafc50f629531534efb3a5}} 
+\index{SwordEnemyController@{SwordEnemyController}!PatrolWalkState@{PatrolWalkState}}
+\index{PatrolWalkState@{PatrolWalkState}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{PatrolWalkState}{PatrolWalkState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sword_enemy_patrol_walk_state}{Sword\+Enemy\+Patrol\+Walk\+State}} Sword\+Enemy\+Controller.\+Patrol\+Walk\+State\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Reference to Patrol\+Walk\+State of the enemy. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_ac5c294d7832ce39c867010392fe226b2}\label{class_sword_enemy_controller_ac5c294d7832ce39c867010392fe226b2}} 
+\index{SwordEnemyController@{SwordEnemyController}!PlayerAttackState@{PlayerAttackState}}
+\index{PlayerAttackState@{PlayerAttackState}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{PlayerAttackState}{PlayerAttackState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sword_enemy_player_attack_state}{Sword\+Enemy\+Player\+Attack\+State}} Sword\+Enemy\+Controller.\+Player\+Attack\+State\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Reference to Player\+Attack\+State of the enemy. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_ac9f77871e07208b39c28be9934ded946}\label{class_sword_enemy_controller_ac9f77871e07208b39c28be9934ded946}} 
+\index{SwordEnemyController@{SwordEnemyController}!PlayerInAttackRangeState@{PlayerInAttackRangeState}}
+\index{PlayerInAttackRangeState@{PlayerInAttackRangeState}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{PlayerInAttackRangeState}{PlayerInAttackRangeState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sword_enemy_player_in_attack_range_state}{Sword\+Enemy\+Player\+In\+Attack\+Range\+State}} Sword\+Enemy\+Controller.\+Player\+In\+Attack\+Range\+State\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Reference to Player\+In\+Attack\+Range\+State of the enemy. 
+
+\mbox{\Hypertarget{class_sword_enemy_controller_a3987330249243a9dbe8108b5a376c3c2}\label{class_sword_enemy_controller_a3987330249243a9dbe8108b5a376c3c2}} 
+\index{SwordEnemyController@{SwordEnemyController}!PlayerNoticedState@{PlayerNoticedState}}
+\index{PlayerNoticedState@{PlayerNoticedState}!SwordEnemyController@{SwordEnemyController}}
+\doxysubsubsection{\texorpdfstring{PlayerNoticedState}{PlayerNoticedState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sword_enemy_player_noticed_state}{Sword\+Enemy\+Player\+Noticed\+State}} Sword\+Enemy\+Controller.\+Player\+Noticed\+State\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Reference to Player\+Noticed\+State of the enemy. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Enemy/\+Common/Sword\+Enemy\+Controller.\+cs\end{DoxyCompactItemize}

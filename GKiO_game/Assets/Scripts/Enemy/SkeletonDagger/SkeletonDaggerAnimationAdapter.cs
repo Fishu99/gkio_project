@@ -12,12 +12,17 @@ public class SkeletonDaggerAnimationAdapter : SwordEnemyAnimationAdapter
     private float endAcceleration = 2f;
     private readonly float throwAnimationLength = 1.333f;
     private readonly float daggerReleaseTime = 0.57f;
-
+    /// <summary>
+    /// Resturns the time after Attack call when the dagger should be released.
+    /// </summary>
     public float ActualReleaseTime
     {
         get => enemyController.attackTime / throwAnimationLength * daggerReleaseTime;
     }
 
+    /// <summary>
+    /// Resturns the time after Attack call when the dagger should be replaced.
+    /// </summary>
     public float ActualReplaceTime
     {
         get => enemyController.attackTime / throwAnimationLength * throwAnimationLength;

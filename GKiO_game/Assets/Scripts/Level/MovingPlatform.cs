@@ -6,6 +6,9 @@ using UnityEngine;
 /// </summary>
 public class MovingPlatform : MonoBehaviour
 {
+    /// <summary>
+    /// The player.
+    /// </summary>
     public GameObject Player;
 
     private void OnTriggerEnter(Collider other)

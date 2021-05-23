@@ -1,0 +1,143 @@
+\hypertarget{class_sword_enemy_state}{}\doxysection{Sword\+Enemy\+State Class Reference}
+\label{class_sword_enemy_state}\index{SwordEnemyState@{SwordEnemyState}}
+
+
+Base class for enemy states.  
+
+
+Inheritance diagram for Sword\+Enemy\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.777778cm]{class_sword_enemy_state}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sword_enemy_state_a76887c68dca24b4d9ea6e13fd094b687}{Sword\+Enemy\+State}} (\mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} \mbox{\hyperlink{class_sword_enemy_state_a2648bed80a0e5a11ccbb1847f83fa762}{enemy\+Controller}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sword_enemy_state_ab5c475684d47ee2dedcb82ea80b102a7}{Enter}} ()
+\begin{DoxyCompactList}\small\item\em The Enter method is called when state machine transitions to the state. \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sword_enemy_state_aed761d7f37890515702f0e4bb7b2b540}{Update}} ()
+\begin{DoxyCompactList}\small\item\em Update is called in every frame of the state. \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sword_enemy_state_aded433bfbe26feca4b159bb4425569f1}{Fixed\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Update for physics calculations. \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sword_enemy_state_a6f0d7b2ccc9c888de6685e2f72c95255}{Exit}} ()
+\begin{DoxyCompactList}\small\item\em The Enter method is called when state machine leaves the state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} \mbox{\hyperlink{class_sword_enemy_state_a2648bed80a0e5a11ccbb1847f83fa762}{enemy\+Controller}}
+\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} component of the enemy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_health_manager}{Health\+Manager}} \mbox{\hyperlink{class_sword_enemy_state_a7aed0e9e596a5abe9d11fee4bf402349}{health\+Manager}}
+\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} component of the enemy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for enemy states. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sword_enemy_state_a76887c68dca24b4d9ea6e13fd094b687}\label{class_sword_enemy_state_a76887c68dca24b4d9ea6e13fd094b687}} 
+\index{SwordEnemyState@{SwordEnemyState}!SwordEnemyState@{SwordEnemyState}}
+\index{SwordEnemyState@{SwordEnemyState}!SwordEnemyState@{SwordEnemyState}}
+\doxysubsubsection{\texorpdfstring{SwordEnemyState()}{SwordEnemyState()}}
+{\footnotesize\ttfamily Sword\+Enemy\+State.\+Sword\+Enemy\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}}}]{enemy\+Controller }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em enemy\+Controller} & The \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} component of the enemy.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sword_enemy_state_ab5c475684d47ee2dedcb82ea80b102a7}\label{class_sword_enemy_state_ab5c475684d47ee2dedcb82ea80b102a7}} 
+\index{SwordEnemyState@{SwordEnemyState}!Enter@{Enter}}
+\index{Enter@{Enter}!SwordEnemyState@{SwordEnemyState}}
+\doxysubsubsection{\texorpdfstring{Enter()}{Enter()}}
+{\footnotesize\ttfamily abstract void Sword\+Enemy\+State.\+Enter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The Enter method is called when state machine transitions to the state. 
+
+
+
+Implemented in \mbox{\hyperlink{class_sword_enemy_patrol_walk_state_acdc5eb5e01f651b3b1ce077b12f0c8d1}{Sword\+Enemy\+Patrol\+Walk\+State}}, \mbox{\hyperlink{class_sword_enemy_player_noticed_state_ac56fa550cf8b27b841c00cec88e2aa06}{Sword\+Enemy\+Player\+Noticed\+State}}, \mbox{\hyperlink{class_sword_enemy_player_in_attack_range_state_af837b665ca8971c312ffaab7308de90d}{Sword\+Enemy\+Player\+In\+Attack\+Range\+State}}, \mbox{\hyperlink{class_sword_enemy_patrol_end_state_a45ddd48613a0ed543199de64a25bd3d0}{Sword\+Enemy\+Patrol\+End\+State}}, \mbox{\hyperlink{class_sword_enemy_dead_state_afd296019ff956423fa84c4038559ee95}{Sword\+Enemy\+Dead\+State}}, and \mbox{\hyperlink{class_sword_enemy_player_attack_state_ab1ed4a2e4073c509b55f8e108e9de163}{Sword\+Enemy\+Player\+Attack\+State}}.
+
+\mbox{\Hypertarget{class_sword_enemy_state_a6f0d7b2ccc9c888de6685e2f72c95255}\label{class_sword_enemy_state_a6f0d7b2ccc9c888de6685e2f72c95255}} 
+\index{SwordEnemyState@{SwordEnemyState}!Exit@{Exit}}
+\index{Exit@{Exit}!SwordEnemyState@{SwordEnemyState}}
+\doxysubsubsection{\texorpdfstring{Exit()}{Exit()}}
+{\footnotesize\ttfamily abstract void Sword\+Enemy\+State.\+Exit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+The Enter method is called when state machine leaves the state. 
+
+
+
+Implemented in \mbox{\hyperlink{class_sword_enemy_patrol_walk_state_add7df463bca250058c14a94088feb6c0}{Sword\+Enemy\+Patrol\+Walk\+State}}, \mbox{\hyperlink{class_sword_enemy_player_noticed_state_a9665a34defd85f3066a789765045061b}{Sword\+Enemy\+Player\+Noticed\+State}}, \mbox{\hyperlink{class_sword_enemy_player_in_attack_range_state_ae51ad6eec863894d11f44e821d6abfff}{Sword\+Enemy\+Player\+In\+Attack\+Range\+State}}, \mbox{\hyperlink{class_sword_enemy_patrol_end_state_a495dfbf845e53e8a4672915961a3ad0a}{Sword\+Enemy\+Patrol\+End\+State}}, \mbox{\hyperlink{class_sword_enemy_dead_state_a5a5505ac0f12f0da7744962279a03d94}{Sword\+Enemy\+Dead\+State}}, and \mbox{\hyperlink{class_sword_enemy_player_attack_state_a08ec44b08b3b2309b4c288432b2d2e49}{Sword\+Enemy\+Player\+Attack\+State}}.
+
+\mbox{\Hypertarget{class_sword_enemy_state_aded433bfbe26feca4b159bb4425569f1}\label{class_sword_enemy_state_aded433bfbe26feca4b159bb4425569f1}} 
+\index{SwordEnemyState@{SwordEnemyState}!FixedUpdate@{FixedUpdate}}
+\index{FixedUpdate@{FixedUpdate}!SwordEnemyState@{SwordEnemyState}}
+\doxysubsubsection{\texorpdfstring{FixedUpdate()}{FixedUpdate()}}
+{\footnotesize\ttfamily abstract void Sword\+Enemy\+State.\+Fixed\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Update for physics calculations. 
+
+
+
+Implemented in \mbox{\hyperlink{class_sword_enemy_patrol_walk_state_a95fb34628bc1822e25f687dd84e124dd}{Sword\+Enemy\+Patrol\+Walk\+State}}, \mbox{\hyperlink{class_sword_enemy_player_noticed_state_adfe1a53f0ed87b878bdada82bdb3ed1c}{Sword\+Enemy\+Player\+Noticed\+State}}, \mbox{\hyperlink{class_sword_enemy_player_in_attack_range_state_a43446e3978ddc5c2e953080bb9700711}{Sword\+Enemy\+Player\+In\+Attack\+Range\+State}}, \mbox{\hyperlink{class_sword_enemy_patrol_end_state_af7103b0be79066edd6d0dacd10c84789}{Sword\+Enemy\+Patrol\+End\+State}}, \mbox{\hyperlink{class_sword_enemy_dead_state_a6a4aee0da483df5d822f412e50b1b40d}{Sword\+Enemy\+Dead\+State}}, and \mbox{\hyperlink{class_sword_enemy_player_attack_state_abc39908fdef9d78805347ea7c2e4e885}{Sword\+Enemy\+Player\+Attack\+State}}.
+
+\mbox{\Hypertarget{class_sword_enemy_state_aed761d7f37890515702f0e4bb7b2b540}\label{class_sword_enemy_state_aed761d7f37890515702f0e4bb7b2b540}} 
+\index{SwordEnemyState@{SwordEnemyState}!Update@{Update}}
+\index{Update@{Update}!SwordEnemyState@{SwordEnemyState}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily abstract void Sword\+Enemy\+State.\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Update is called in every frame of the state. 
+
+
+
+Implemented in \mbox{\hyperlink{class_sword_enemy_patrol_walk_state_aa6f38a7b46279c6fe01824448810aece}{Sword\+Enemy\+Patrol\+Walk\+State}}, \mbox{\hyperlink{class_sword_enemy_player_noticed_state_affe2166e0c654289178086a1588ffbe2}{Sword\+Enemy\+Player\+Noticed\+State}}, \mbox{\hyperlink{class_sword_enemy_player_in_attack_range_state_a00c744ba493c2146a295bb6e45847e0e}{Sword\+Enemy\+Player\+In\+Attack\+Range\+State}}, \mbox{\hyperlink{class_sword_enemy_patrol_end_state_ab314814e0d794d7e464e480ef48f424e}{Sword\+Enemy\+Patrol\+End\+State}}, \mbox{\hyperlink{class_sword_enemy_dead_state_a5a2af354d603464ed875ce39d69a87dd}{Sword\+Enemy\+Dead\+State}}, and \mbox{\hyperlink{class_sword_enemy_player_attack_state_ab5e26eb6eeabca1a20e32f63176bc874}{Sword\+Enemy\+Player\+Attack\+State}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_sword_enemy_state_a2648bed80a0e5a11ccbb1847f83fa762}\label{class_sword_enemy_state_a2648bed80a0e5a11ccbb1847f83fa762}} 
+\index{SwordEnemyState@{SwordEnemyState}!enemyController@{enemyController}}
+\index{enemyController@{enemyController}!SwordEnemyState@{SwordEnemyState}}
+\doxysubsubsection{\texorpdfstring{enemyController}{enemyController}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} Sword\+Enemy\+State.\+enemy\+Controller\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} component of the enemy. 
+
+\mbox{\Hypertarget{class_sword_enemy_state_a7aed0e9e596a5abe9d11fee4bf402349}\label{class_sword_enemy_state_a7aed0e9e596a5abe9d11fee4bf402349}} 
+\index{SwordEnemyState@{SwordEnemyState}!healthManager@{healthManager}}
+\index{healthManager@{healthManager}!SwordEnemyState@{SwordEnemyState}}
+\doxysubsubsection{\texorpdfstring{healthManager}{healthManager}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_health_manager}{Health\+Manager}} Sword\+Enemy\+State.\+health\+Manager\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} component of the enemy. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Enemy/\+Common/Sword\+Enemy\+State.\+cs\end{DoxyCompactItemize}

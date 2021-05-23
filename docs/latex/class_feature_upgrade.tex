@@ -1,0 +1,121 @@
+\hypertarget{class_feature_upgrade}{}\doxysection{Feature\+Upgrade Class Reference}
+\label{class_feature_upgrade}\index{FeatureUpgrade@{FeatureUpgrade}}
+
+
+A class for managing upgrades of particular feature such as sword damage or bow force.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_feature_upgrade_a25388052b45dc05f9ea8a3c20d9201a4}{Feature\+Upgrade}} (\mbox{\hyperlink{class_feature_level}{Feature\+Level}}\mbox{[}$\,$\mbox{]} levels)
+\begin{DoxyCompactList}\small\item\em Construtor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_feature_upgrade_a0f80b745c45606b83264d70d39b13b73}{Upgrade}} ()
+\begin{DoxyCompactList}\small\item\em Upgrades the feature. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_feature_upgrade_a15dd613e960942b115678a0ef6f28ac9}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Resets the upgrade level to its initial value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_feature_upgrade_a60afdf29944cfe0b3da43ad16d7852dd}{Current\+Feature\+Value}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Current value of the feature. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_feature_upgrade_adb0ffdb70783122899a37eda8b7ee924}{Next\+Feature\+Value}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The next value of the feature. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_feature_upgrade_a4dc723ce84ade6756b12dc064a76221b}{Upgrade\+Cost}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Cost of the next upgrade \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_feature_upgrade_a85559eafed8d9fda297cd38ba9c457ab}{Is\+Upgrade\+Possible}}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Is true if an upgrade is possible, ie. the feature hasn\textquotesingle{}t been fully upgraded yet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for managing upgrades of particular feature such as sword damage or bow force. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_feature_upgrade_a25388052b45dc05f9ea8a3c20d9201a4}\label{class_feature_upgrade_a25388052b45dc05f9ea8a3c20d9201a4}} 
+\index{FeatureUpgrade@{FeatureUpgrade}!FeatureUpgrade@{FeatureUpgrade}}
+\index{FeatureUpgrade@{FeatureUpgrade}!FeatureUpgrade@{FeatureUpgrade}}
+\doxysubsubsection{\texorpdfstring{FeatureUpgrade()}{FeatureUpgrade()}}
+{\footnotesize\ttfamily Feature\+Upgrade.\+Feature\+Upgrade (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_feature_level}{Feature\+Level}}\mbox{[}$\,$\mbox{]}}]{levels }\end{DoxyParamCaption})}
+
+
+
+Construtor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em levels} & Feature levels with their cost.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_feature_upgrade_a15dd613e960942b115678a0ef6f28ac9}\label{class_feature_upgrade_a15dd613e960942b115678a0ef6f28ac9}} 
+\index{FeatureUpgrade@{FeatureUpgrade}!Reset@{Reset}}
+\index{Reset@{Reset}!FeatureUpgrade@{FeatureUpgrade}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily void Feature\+Upgrade.\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Resets the upgrade level to its initial value. 
+
+\mbox{\Hypertarget{class_feature_upgrade_a0f80b745c45606b83264d70d39b13b73}\label{class_feature_upgrade_a0f80b745c45606b83264d70d39b13b73}} 
+\index{FeatureUpgrade@{FeatureUpgrade}!Upgrade@{Upgrade}}
+\index{Upgrade@{Upgrade}!FeatureUpgrade@{FeatureUpgrade}}
+\doxysubsubsection{\texorpdfstring{Upgrade()}{Upgrade()}}
+{\footnotesize\ttfamily void Feature\+Upgrade.\+Upgrade (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Upgrades the feature. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_feature_upgrade_a60afdf29944cfe0b3da43ad16d7852dd}\label{class_feature_upgrade_a60afdf29944cfe0b3da43ad16d7852dd}} 
+\index{FeatureUpgrade@{FeatureUpgrade}!CurrentFeatureValue@{CurrentFeatureValue}}
+\index{CurrentFeatureValue@{CurrentFeatureValue}!FeatureUpgrade@{FeatureUpgrade}}
+\doxysubsubsection{\texorpdfstring{CurrentFeatureValue}{CurrentFeatureValue}}
+{\footnotesize\ttfamily float Feature\+Upgrade.\+Current\+Feature\+Value\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Current value of the feature. 
+
+\mbox{\Hypertarget{class_feature_upgrade_a85559eafed8d9fda297cd38ba9c457ab}\label{class_feature_upgrade_a85559eafed8d9fda297cd38ba9c457ab}} 
+\index{FeatureUpgrade@{FeatureUpgrade}!IsUpgradePossible@{IsUpgradePossible}}
+\index{IsUpgradePossible@{IsUpgradePossible}!FeatureUpgrade@{FeatureUpgrade}}
+\doxysubsubsection{\texorpdfstring{IsUpgradePossible}{IsUpgradePossible}}
+{\footnotesize\ttfamily bool Feature\+Upgrade.\+Is\+Upgrade\+Possible\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Is true if an upgrade is possible, ie. the feature hasn\textquotesingle{}t been fully upgraded yet. 
+
+\mbox{\Hypertarget{class_feature_upgrade_adb0ffdb70783122899a37eda8b7ee924}\label{class_feature_upgrade_adb0ffdb70783122899a37eda8b7ee924}} 
+\index{FeatureUpgrade@{FeatureUpgrade}!NextFeatureValue@{NextFeatureValue}}
+\index{NextFeatureValue@{NextFeatureValue}!FeatureUpgrade@{FeatureUpgrade}}
+\doxysubsubsection{\texorpdfstring{NextFeatureValue}{NextFeatureValue}}
+{\footnotesize\ttfamily float Feature\+Upgrade.\+Next\+Feature\+Value\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+The next value of the feature. 
+
+\mbox{\Hypertarget{class_feature_upgrade_a4dc723ce84ade6756b12dc064a76221b}\label{class_feature_upgrade_a4dc723ce84ade6756b12dc064a76221b}} 
+\index{FeatureUpgrade@{FeatureUpgrade}!UpgradeCost@{UpgradeCost}}
+\index{UpgradeCost@{UpgradeCost}!FeatureUpgrade@{FeatureUpgrade}}
+\doxysubsubsection{\texorpdfstring{UpgradeCost}{UpgradeCost}}
+{\footnotesize\ttfamily int Feature\+Upgrade.\+Upgrade\+Cost\hspace{0.3cm}{\ttfamily [get]}}
+
+
+
+Cost of the next upgrade 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Manager/Feature\+Upgrade.\+cs\end{DoxyCompactItemize}

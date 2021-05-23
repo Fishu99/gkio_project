@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Enum of possible attacks.
+/// </summary>
 enum Attack
 {
     None,
@@ -30,7 +33,10 @@ public class ComboManager : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
         audioManager = AudioManager.instance;
     }
-
+    /// <summary>
+    /// Performs an attack if it's possible to attack.
+    /// </summary>
+    /// <returns>The time of invisibility.</returns>
     public float AttackIfPossible()
     {
         bool canPlayerAttack = CanPlayerAttack();

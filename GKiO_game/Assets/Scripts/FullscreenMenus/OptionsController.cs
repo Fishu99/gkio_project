@@ -20,6 +20,7 @@ public class OptionsController : MonoBehaviour
     private Slider soundSliderComponent;
     private Slider musicSliderComponent;
     private List<Resolution> resolutionList;
+
     void OnEnable()
     {
         gameManager = GameManager.instance;
@@ -29,6 +30,43 @@ public class OptionsController : MonoBehaviour
         SetupFullScreenToggle();
         SetupSoundSlider();
         SetupMusicSlider();
+    }
+
+    /// <summary>
+    /// Goes back to main menu.
+    /// </summary>
+    public void Back()
+    {
+        gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// Applies the changes.
+    /// </summary>
+    public void Apply()
+    {
+        UpdateScreenResolution();
+        UpdateSoundVolume();
+        UpdateMusicVolume();
+        WritePlayerPrefs();
+    }
+
+    /// <summary>
+    /// Updates sound volume.
+    /// </summary>
+    public void UpdateSoundVolume()
+    {
+        float soundVolume = soundSliderComponent.value;
+        SetSoundVolume(soundVolume);
+    }
+
+    /// <summary>
+    /// Updates music volume.
+    /// </summary>
+    public void UpdateMusicVolume()
+    {
+        float musicVolume = musicSliderComponent.value;
+        SetMusicVolume(musicVolume);
     }
 
     private void GetTheComponents()
@@ -94,30 +132,7 @@ public class OptionsController : MonoBehaviour
         musicSliderComponent.value = GetMusicVolume();
     }
 
-    public void Back()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void Apply()
-    {
-        UpdateScreenResolution();
-        UpdateSoundVolume();
-        UpdateMusicVolume();
-        WritePlayerPrefs();
-    }
-
-    public void UpdateSoundVolume()
-    {
-        float soundVolume = soundSliderComponent.value;
-        SetSoundVolume(soundVolume);
-    }
-
-    public void UpdateMusicVolume()
-    {
-        float musicVolume = musicSliderComponent.value;
-        SetMusicVolume(musicVolume);
-    }
+    
 
     private void UpdateScreenResolution()
     {
@@ -132,7 +147,6 @@ public class OptionsController : MonoBehaviour
         Resolution currentResolution = Screen.currentResolution;
         PlayerPrefs.SetInt("swidth", Screen.width);
         PlayerPrefs.SetInt("sheight", Screen.height);
-        Debug.Log(Screen.width);
         int fullscreenPref = Screen.fullScreen ? 1 : 0;
         PlayerPrefs.SetInt("fullscreen", fullscreenPref);
         PlayerPrefs.SetFloat("musicVolume", GetMusicVolume());

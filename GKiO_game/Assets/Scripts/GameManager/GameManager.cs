@@ -171,7 +171,6 @@ public class GameManager : MonoBehaviour
             ScoreCounter.StopTimeCount();
             ScoreCounter.AddSceneScoreToTotalScore();
             IsLevelFinished = true;
-            Debug.Log("Level finished");
             
         }
     }

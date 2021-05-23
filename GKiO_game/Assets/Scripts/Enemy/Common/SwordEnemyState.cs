@@ -14,7 +14,7 @@ public abstract class SwordEnemyState
     /// </summary>
     protected HealthManager healthManager;
     /// <summary>
-    /// Constructor
+    /// Constructor.
     /// </summary>
     /// <param name="enemyController">The SwordEnemyController component of the enemy.</param>
     public SwordEnemyState(SwordEnemyController enemyController)

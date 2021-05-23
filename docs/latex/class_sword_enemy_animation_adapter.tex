@@ -1,0 +1,61 @@
+\hypertarget{class_sword_enemy_animation_adapter}{}\doxysection{Sword\+Enemy\+Animation\+Adapter Class Reference}
+\label{class_sword_enemy_animation_adapter}\index{SwordEnemyAnimationAdapter@{SwordEnemyAnimationAdapter}}
+
+
+Base class for animation adapters for the enemies. Different enemies such as skeleton or goblin use the \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} script for patrolling and attacking but they have different animations. The adapter provides an interface for controlling different animations from the \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} scripts. Each enemy has its own implementation of this class.  
+
+
+Inheritance diagram for Sword\+Enemy\+Animation\+Adapter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.666667cm]{class_sword_enemy_animation_adapter}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract void \mbox{\hyperlink{class_sword_enemy_animation_adapter_a91f8932d569d9d96c2c65415b5bab898}{Attack}} ()
+\begin{DoxyCompactList}\small\item\em Perform the animation of attacking. \end{DoxyCompactList}\item 
+abstract void \mbox{\hyperlink{class_sword_enemy_animation_adapter_a45be687208a71e885d39b4983dab322f}{Die}} ()
+\begin{DoxyCompactList}\small\item\em Perform the animation of dying. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for animation adapters for the enemies. Different enemies such as skeleton or goblin use the \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} script for patrolling and attacking but they have different animations. The adapter provides an interface for controlling different animations from the \mbox{\hyperlink{class_sword_enemy_controller}{Sword\+Enemy\+Controller}} scripts. Each enemy has its own implementation of this class. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sword_enemy_animation_adapter_a91f8932d569d9d96c2c65415b5bab898}\label{class_sword_enemy_animation_adapter_a91f8932d569d9d96c2c65415b5bab898}} 
+\index{SwordEnemyAnimationAdapter@{SwordEnemyAnimationAdapter}!Attack@{Attack}}
+\index{Attack@{Attack}!SwordEnemyAnimationAdapter@{SwordEnemyAnimationAdapter}}
+\doxysubsubsection{\texorpdfstring{Attack()}{Attack()}}
+{\footnotesize\ttfamily abstract void Sword\+Enemy\+Animation\+Adapter.\+Attack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Perform the animation of attacking. 
+
+
+
+Implemented in \mbox{\hyperlink{class_skeleton_dagger_animation_adapter_a8d6b9f16e6ca3e634661f7205a425dd3}{Skeleton\+Dagger\+Animation\+Adapter}}, \mbox{\hyperlink{class_skeleton_animation_adapter_aee280eac8ea2c02a3e8844f13777af71}{Skeleton\+Animation\+Adapter}}, and \mbox{\hyperlink{class_goblin_animation_adapter_a1e11b8403df18cd07dec75bab2cd1b20}{Goblin\+Animation\+Adapter}}.
+
+\mbox{\Hypertarget{class_sword_enemy_animation_adapter_a45be687208a71e885d39b4983dab322f}\label{class_sword_enemy_animation_adapter_a45be687208a71e885d39b4983dab322f}} 
+\index{SwordEnemyAnimationAdapter@{SwordEnemyAnimationAdapter}!Die@{Die}}
+\index{Die@{Die}!SwordEnemyAnimationAdapter@{SwordEnemyAnimationAdapter}}
+\doxysubsubsection{\texorpdfstring{Die()}{Die()}}
+{\footnotesize\ttfamily abstract void Sword\+Enemy\+Animation\+Adapter.\+Die (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Perform the animation of dying. 
+
+
+
+Implemented in \mbox{\hyperlink{class_skeleton_dagger_animation_adapter_adfca816ddf2c619e81ac21ff2958b30b}{Skeleton\+Dagger\+Animation\+Adapter}}, \mbox{\hyperlink{class_skeleton_animation_adapter_a6f9c922c75269b8659856ca58eccfdf1}{Skeleton\+Animation\+Adapter}}, and \mbox{\hyperlink{class_goblin_animation_adapter_a3fbbe153ae33b18e2dbbf0c11e1d19c6}{Goblin\+Animation\+Adapter}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Enemy/\+Common/Sword\+Enemy\+Animation\+Adapter.\+cs\end{DoxyCompactItemize}

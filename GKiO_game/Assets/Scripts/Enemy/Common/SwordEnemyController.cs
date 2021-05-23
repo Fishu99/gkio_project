@@ -11,40 +11,88 @@ public class SwordEnemyController : MonoBehaviour
     [Tooltip("A string describing the type of enemy")]
     [SerializeField] private string typeOfEnemy;
 
+    /// <summary>
+    /// Walking speed of the enemy
+    /// </summary>
     [Tooltip("Walking speed of the enemy")]
     public float walkSpeed = 4f;
 
+    /// <summary>
+    /// Patrolling range of the enemy. It is displayed in scene view as yellow line.
+    /// </summary>
     [Tooltip("Patrolling range of the enemy. It is displayed in scene view as yellow line")]
     public float walkRange = 10f;
 
+    /// <summary>
+    /// The distance of player from the enemy in x-axis when the enemy starts to pursue player
+    /// </summary>
     [Tooltip("The distance of player from the enemy in x-axis when the enemy starts to pursue player")]
     public float playerNearX = 5f;
+
+    /// <summary>
+    /// The distance of player from the enemy in y-axis when the enemy starts to pursue player
+    /// </summary>
     [Tooltip("The distance of player from the enemy in y-axis when the enemy starts to pursue player")]
     public float playerNearY = 5f;
+
+    /// <summary>
+    /// The distance in x-axis from enemy's transform.position to the point from which playerNearX is calculated
+    /// </summary>
     [Tooltip("The distance in x-axis from enemy's transform.position to the point from which playerNearX is calculated")]
     public float playerNearOffsetX = 0;
+
+    /// <summary>
+    /// The distance in y-axis from enemy's transform.position to the point from which playerNearY is calculated
+    /// </summary>
     [Tooltip("The distance in y-axis from enemy's transform.position to the point from which playerNearY is calculated")]
     public float playerNearOffsetY = 0;
 
-
+    /// <summary>
+    /// Describes how long the enemy waits on the end of its patrol range.
+    /// </summary>
     [Tooltip("Describes how long the enemy waits on the end of its patrol range")]
     public float waitOnEndTime = 2f;
 
+    /// <summary>
+    /// The time between the player enetring attack range and the first attack made by the enemy.
+    /// </summary>
     [Tooltip("The time between the player enetring attack range and the first attack made by the enemy")]
     public float firstAttackDelay = 0.3f;
 
+    /// <summary>
+    /// The interval between the attacks if player stays within attack range
+    /// </summary>
     [Tooltip("The interval between the attacks if player stays within attack range")]
     public float attackInterval = 0.5f;
 
+    /// <summary>
+    /// Length of the attack
+    /// </summary>
     [Tooltip("Length of the attack")]
     public float attackTime = 1f;
+
+    /// <summary>
+    /// Length of the death animation. The enemy starts to disappear after that time
+    /// </summary>
     [Tooltip("Length of the death animation. The enemy starts to disappear after that time")]
     public float deathAnimationTime = 3f;
-    [Tooltip("Length of the enemy shinking after its death")]
+
+    /// <summary>
+    /// Length of the enemy shrinking after its death
+    /// </summary>
+    [Tooltip("Length of the enemy shrinking after its death")]
     public float fadeAfterDeathTime = 0.3f;
+
+    /// <summary>
+    /// Points awarded to the user for killing the enemy
+    /// </summary>
     [Tooltip("Points awarded to the user for killing the enemy")]
     public int enemyKillValue;
 
+    /// <summary>
+    /// Distance between enemy and player for which the enemy stops approaching the player.
+    /// It prevents the enemy from pushing the player.
+    /// </summary>
     [Tooltip("Distance between enemy and player for which the enemy stops approaching the player.\n" +
         "It prevents the enemy from pushing the player")]
     public float playerMargin = 0.2f;
@@ -53,7 +101,13 @@ public class SwordEnemyController : MonoBehaviour
     
     private Vector3 velocity = Vector3.zero;
     private float direction = 1f;
+    /// <summary>
+    /// True if the enemy is walking.
+    /// </summary>
     public bool IsWalking { get; private set; } = false;
+    /// <summary>
+    /// True if the player is near.
+    /// </summary>
     public bool IsPlayerNear { get; private set; }
     private GameObject attackedPlayer = null;
 
@@ -69,11 +123,29 @@ public class SwordEnemyController : MonoBehaviour
 
     //States for the state machine
     private SwordEnemyState currentState;
+    /// <summary>
+    /// Reference to PatrolWalkState of the enemy.
+    /// </summary>
     public SwordEnemyPatrolWalkState PatrolWalkState { get; private set; }
+    /// <summary>
+    /// Reference to PatrolEndState of the enemy.
+    /// </summary>
     public SwordEnemyPatrolEndState PatrolEndState { get; private set; }
+    /// <summary>
+    /// Reference to PlayerNoticedState of the enemy.
+    /// </summary>
     public SwordEnemyPlayerNoticedState PlayerNoticedState { get; private set; }
+    /// <summary>
+    /// Reference to PlayerInAttackRangeState of the enemy.
+    /// </summary>
     public SwordEnemyPlayerInAttackRangeState PlayerInAttackRangeState { get; private set; }
+    /// <summary>
+    /// Reference to PlayerAttackState of the enemy.
+    /// </summary>
     public SwordEnemyPlayerAttackState PlayerAttackState { get; private set; }
+    /// <summary>
+    /// Reference to DeadState of the enemy.
+    /// </summary>
     public SwordEnemyDeadState DeadState { get; private set; }
 
     [Tooltip("The sack which falls out of the enemy after its death.")]

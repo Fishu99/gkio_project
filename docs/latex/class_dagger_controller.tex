@@ -1,0 +1,100 @@
+\hypertarget{class_dagger_controller}{}\doxysection{Dagger\+Controller Class Reference}
+\label{class_dagger_controller}\index{DaggerController@{DaggerController}}
+
+
+Class for controlling a dagger. It includes methods for computing the correct angle of throw so as to hit the aim.  
+
+
+Inheritance diagram for Dagger\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_dagger_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_dagger_controller_acc2c5ce2b948fe6e7015cf3b7729c9b1}{Throw}} (Vector3 aim)
+\begin{DoxyCompactList}\small\item\em Releases the dagger. The dagger will move from its current position with initial speed equal to initial\+Speed. If it\textquotesingle{}s possible to hit the target, the angle is computed so as to hit the aim specified in the argument. If it\textquotesingle{}s impossible to hit the target the dagger will be thrown directly in the direction of the aim. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_dagger_controller_a350c4db31c1f8e7ff329c2d22369b367}{damage}} = 30
+\begin{DoxyCompactList}\small\item\em Damage caused by the dagger. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_dagger_controller_a51d3ca2b219ce3027b366d69c14d0a58}{initial\+Speed}} = 6f
+\begin{DoxyCompactList}\small\item\em Initial speed of the dagger \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_dagger_controller_ad0064b9a77b72b4a505174266e4866ee}{rotation\+Speed}} = 6f
+\begin{DoxyCompactList}\small\item\em Angular speed of the dagger. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_dagger_controller_a0461586a05175b978eeeb9d5a4a58377}{layer\+To\+Hit}} = 6
+\begin{DoxyCompactList}\small\item\em The layer on wich affected characters are placed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for controlling a dagger. It includes methods for computing the correct angle of throw so as to hit the aim. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_dagger_controller_acc2c5ce2b948fe6e7015cf3b7729c9b1}\label{class_dagger_controller_acc2c5ce2b948fe6e7015cf3b7729c9b1}} 
+\index{DaggerController@{DaggerController}!Throw@{Throw}}
+\index{Throw@{Throw}!DaggerController@{DaggerController}}
+\doxysubsubsection{\texorpdfstring{Throw()}{Throw()}}
+{\footnotesize\ttfamily void Dagger\+Controller.\+Throw (\begin{DoxyParamCaption}\item[{Vector3}]{aim }\end{DoxyParamCaption})}
+
+
+
+Releases the dagger. The dagger will move from its current position with initial speed equal to initial\+Speed. If it\textquotesingle{}s possible to hit the target, the angle is computed so as to hit the aim specified in the argument. If it\textquotesingle{}s impossible to hit the target the dagger will be thrown directly in the direction of the aim. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aim} & The point which should be hit by the dagger.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_dagger_controller_a350c4db31c1f8e7ff329c2d22369b367}\label{class_dagger_controller_a350c4db31c1f8e7ff329c2d22369b367}} 
+\index{DaggerController@{DaggerController}!damage@{damage}}
+\index{damage@{damage}!DaggerController@{DaggerController}}
+\doxysubsubsection{\texorpdfstring{damage}{damage}}
+{\footnotesize\ttfamily float Dagger\+Controller.\+damage = 30}
+
+
+
+Damage caused by the dagger. 
+
+\mbox{\Hypertarget{class_dagger_controller_a51d3ca2b219ce3027b366d69c14d0a58}\label{class_dagger_controller_a51d3ca2b219ce3027b366d69c14d0a58}} 
+\index{DaggerController@{DaggerController}!initialSpeed@{initialSpeed}}
+\index{initialSpeed@{initialSpeed}!DaggerController@{DaggerController}}
+\doxysubsubsection{\texorpdfstring{initialSpeed}{initialSpeed}}
+{\footnotesize\ttfamily float Dagger\+Controller.\+initial\+Speed = 6f}
+
+
+
+Initial speed of the dagger 
+
+\mbox{\Hypertarget{class_dagger_controller_a0461586a05175b978eeeb9d5a4a58377}\label{class_dagger_controller_a0461586a05175b978eeeb9d5a4a58377}} 
+\index{DaggerController@{DaggerController}!layerToHit@{layerToHit}}
+\index{layerToHit@{layerToHit}!DaggerController@{DaggerController}}
+\doxysubsubsection{\texorpdfstring{layerToHit}{layerToHit}}
+{\footnotesize\ttfamily int Dagger\+Controller.\+layer\+To\+Hit = 6}
+
+
+
+The layer on wich affected characters are placed. 
+
+\mbox{\Hypertarget{class_dagger_controller_ad0064b9a77b72b4a505174266e4866ee}\label{class_dagger_controller_ad0064b9a77b72b4a505174266e4866ee}} 
+\index{DaggerController@{DaggerController}!rotationSpeed@{rotationSpeed}}
+\index{rotationSpeed@{rotationSpeed}!DaggerController@{DaggerController}}
+\doxysubsubsection{\texorpdfstring{rotationSpeed}{rotationSpeed}}
+{\footnotesize\ttfamily float Dagger\+Controller.\+rotation\+Speed = 6f}
+
+
+
+Angular speed of the dagger. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Attacks/Dagger\+Controller.\+cs\end{DoxyCompactItemize}

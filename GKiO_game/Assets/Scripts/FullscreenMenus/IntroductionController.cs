@@ -12,6 +12,7 @@ public class IntroductionController : MonoBehaviour
     [SerializeField] private GameObject storyPart1;
     [SerializeField] private GameObject storyPart2;
     [SerializeField] private GameObject storyPart3;
+
     void Start()
     {
         gameManager = GameManager.instance;
@@ -22,6 +23,9 @@ public class IntroductionController : MonoBehaviour
         controlsPanel.SetActive(false);
     }
 
+    /// <summary>
+    /// Shows nex part of the story or loads the Controls panel.
+    /// </summary>
     public void NextClick()
     {
         storyPartIndex++;
@@ -40,12 +44,17 @@ public class IntroductionController : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Skips all the story and controls and loads next scene.
+    /// </summary>
     public void SkipClick()
     {
         LoadNextScene();
     }
 
+    /// <summary>
+    /// Loads next scene (the first level).
+    /// </summary>
     public void PlayClick()
     {
         LoadNextScene();
