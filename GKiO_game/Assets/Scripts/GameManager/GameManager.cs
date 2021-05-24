@@ -252,6 +252,7 @@ public class GameManager : MonoBehaviour
         ScoreCounter.CurrentDifficulty = CurrentDifficulty;
         ResetPlayerStatus();
         currentLevel = 0;
+        IsLevelFinished = false;
         LoadCurrentLevel();
     }
 

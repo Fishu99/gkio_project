@@ -5,37 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MainMenu.unity
+  - enabled: 1
+    path: Assets/Scenes/Menus/MainMenu.unity
     guid: 184d538739ab49d4dbe36ebdadbb9a8c
   - enabled: 1
-    path: Assets/Scenes/MainMenu2.unity
-    guid: 8dc2c63c59c2c7242bae67e4f14ce36b
-  - enabled: 1
-    path: Assets/Scenes/DifficultySelect.unity
+    path: Assets/Scenes/Menus/DifficultySelect.unity
     guid: bc71e7e49ba382546afd3fa07878b76c
   - enabled: 1
-    path: Assets/Scenes/Mirandhill/Level1_Dungeon.unity
+    path: Assets/Scenes/Levels/Level1_Dungeon.unity
     guid: 7f857aa72333e9744a7f293888b58bfb
   - enabled: 1
-    path: Assets/Scenes/Mirandhill/Level2_Woods.unity
+    path: Assets/Scenes/Levels/Level2_Woods.unity
     guid: 17c3b41e8b4319343bc759bfde4e7c5c
-  - enabled: 0
-    path: Assets/Scenes/LevelsProject/Dungeon2.unity
-    guid: 5f55e13e37daf5d4aa57c393dd565e71
-  - enabled: 0
-    path: Assets/Scenes/DBTests/DBDungeon.unity
-    guid: 077dd6bebde88ca4ba22afba204ec136
-  - enabled: 0
-    path: Assets/Scenes/DBTests/DBForest.unity
-    guid: 6e377fcaa094f5c44814f8730a97b03d
   - enabled: 1
-    path: Assets/Scenes/DBTests/WinScene.unity
+    path: Assets/Scenes/Menus/WinScene.unity
     guid: 33896d05e4431ba478bb8d0075e5c76a
   - enabled: 1
-    path: Assets/Scenes/Workshop.unity
+    path: Assets/Scenes/Menus/Workshop.unity
     guid: 6249dbfd008f5c24cb4dabb9f2baf569
   - enabled: 1
-    path: Assets/Scenes/Introduction.unity
+    path: Assets/Scenes/Menus/Introduction.unity
     guid: 6479f34da11546e4d94728d663215b46
   m_configObjects: {}
